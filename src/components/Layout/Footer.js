@@ -21,21 +21,21 @@ class Footer extends Component {
     super(props);
     this.state = {
       grid1: [
-        { title: "About us", link: "/page-aboutus" },
-        { title: "Services", link: "/page-services" },
-        { title: "Team", link: "/page-team" },
-        { title: "Pricing", link: "/page-pricing" },
-        { title: "Project", link: "/page-work" },
-        { title: "Careers", link: "/page-jobs" },
-        { title: "Blog", link: "/page-blog" },
-        { title: "Login", link: "/page-cover-login" },
+      //   { title: "About us", link: "/page-aboutus" },
+      //   { title: "Services", link: "/page-services" },
+      //   { title: "Team", link: "/page-team" },
+      //   { title: "Pricing", link: "/page-pricing" },
+      //   { title: "Project", link: "/page-work" },
+      //   { title: "Careers", link: "/page-jobs" },
+      //   { title: "Blog", link: "/page-blog" },
+      //   { title: "Login", link: "/page-cover-login" },
       ],
       grid2: [
-        { title: "Terms of Services", link: "/page-terms" },
-        { title: "Privacy Policy", link: "/page-privacy" },
-        { title: "Documentation", link: "/documentation" },
-        { title: "Changelog", link: "/changelog" },
-        { title: "Components", link: "/components" },
+        // { title: "Terms of Services", link: "/page-terms" },
+        // { title: "Privacy Policy", link: "/page-privacy" },
+        // { title: "Documentation", link: "/documentation" },
+        // { title: "Changelog", link: "/changelog" },
+        // { title: "Components", link: "/components" },
       ],
     };
   }
@@ -53,15 +53,15 @@ class Footer extends Component {
                 name="footercolumn"
               >
                 <Link to="#" className="logo-footer">
-                  <img
+                  Code Explain App
+                  {/* <img
                     src={this.props.isLight ? logodark : logolight}
                     height="24"
                     alt=""
-                  />
+                  /> */}
                 </Link>
                 <p className={this.props.isLight ? "mt-4 text-muted" : "mt-4"}>
-                  Start working with Landrick that can provide everything you
-                  need to generate awareness, drive traffic, connect.
+                 Use GPT-3 to understand unfamiliar code. Accelerate the rate og getting up to speed with new code.
                 </p>
                 <ul className={this.props.isLight ? "list-unstyled social-icon social mb-0 m t-4" : "list-unstyled social-icon foot-social-icon mb-0 mt-4"}>
                   <li className="list-inline-item me-1">
@@ -113,7 +113,7 @@ class Footer extends Component {
                       : "text-light footer-head"
                   }
                 >
-                  Company
+                  {this.state.grid1.length !== 0 ? "Company": ""}
                 </h5>
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid1.map((grid, key) => (
@@ -146,7 +146,7 @@ class Footer extends Component {
                       : "text-light footer-head"
                   }
                 >
-                  Usefull Links
+                  {this.state.grid2.length !== 0 ? "Usefull Links": ""}
                 </h5>
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid2.map((grid, key) => (
@@ -165,7 +165,7 @@ class Footer extends Component {
                 </ul>
               </Col>
 
-              <Col
+              {/* <Col
                 lg="3"
                 md="4"
                 xs="12"
@@ -234,7 +234,7 @@ class Footer extends Component {
                     </Col>
                   </Row>
                 </Form>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </footer>
@@ -244,8 +244,8 @@ class Footer extends Component {
               <Col sm="6">
                 <div className="text-sm-start">
                   <p className="mb-0">
-                    © 2020-21 Landrick. Develop by{" "}
-                    <i className="mdi mdi-heart text-danger"></i>{" "}
+                    © 2021 Tenably Labs, Inc. {/*Develop by{" "}
+                     <i className="mdi mdi-heart text-danger"></i>{" "}
                     <a
                       href="https://themesbrand.com/"
                       target="_blank"
@@ -254,12 +254,12 @@ class Footer extends Component {
                     >
                       Themesbrand
                     </a>
-                    .
+                    . */}
                   </p>
                 </div>
               </Col>
 
-              <Col sm="6" className="mt-4 mt-sm-0 pt-2 pt-sm-0">
+              {/* <Col sm="6" className="mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <ul className="list-unstyled text-sm-end mb-0">
                   <li className="list-inline-item me-1">
                     <Link to="">
@@ -312,7 +312,7 @@ class Footer extends Component {
                     </Link>
                   </li>
                 </ul>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </footer>

@@ -509,7 +509,7 @@ const routes = [
 
   //Index root
 
-  { path: "/", component: Root, isWithoutLayout: true, exact: true },
+  { path: "/", component: Developer, isWithoutLayout: false, exact: true, isTopbarDark: false },
   { component: PageError, isWithoutLayout: true, exact: false },
 ];
 

@@ -121,8 +121,9 @@ class Layout extends Component {
           </ScrollUpButton>
           {/* </div> */}
 
-          {/* theme switcher */}
+          {/* theme switcher 
           <ThemeSwitcher />
+          */}
         </Suspense>
       </React.Fragment>
     );
