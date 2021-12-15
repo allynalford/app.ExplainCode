@@ -8,16 +8,35 @@ import {
   NavItem,
   TabPane,
   NavLink,
+  Button
 } from "reactstrap";
 import classnames from "classnames";
+import { highlight, languages } from 'prismjs/components/prism-core';
+
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-markup-templating';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-php'
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-liquid';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-scss';
+import "prismjs/themes/prism.css";
+import './styles.css';
 
 export default class Quick extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeTab: "1",
+      codeLanguage: languages.js,
+      codeLanguageID: "js"
     };
     this.toggleTab = this.toggleTab.bind(this);
+    this.hightlightWithLineNumbers = this.hightlightWithLineNumbers.bind(this);
+    this.WithoutLineNumbers = this.WithoutLineNumbers.bind(this);
   }
   toggleTab(tab) {
     if (this.state.activeTab !== tab) {
@@ -26,22 +45,44 @@ export default class Quick extends Component {
       });
     }
   }
+
+  hightlightWithLineNumbers = (input, language) => {
+    highlight(input, language)
+    .split("\n")
+    .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+    .join("\n");
+  }
+
+  WithLineNumbers = (input, language) => {
+    const Prism = require('prismjs');
+    Prism.highlight(input, language)
+    .split("\n")
+    .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+    .join("\n");
+  }
+
+  WithoutLineNumbers = (input, language) => {
+    const Prism = require('prismjs');
+    return Prism.highlight(input, Prism.languages.javascript, 'javascript');
+  }
+  
+
+
+
+   
+
   render() {
+   
     return (
       <React.Fragment>
         <Container className="mt-100 mt-60">
           <Row className="row justify-content-center">
             <Col xs={12}>
               <div className="section-title text-center mb-4 pb-2">
-                <h6 className="text-primary">Quickstart</h6>
-                <h4 className="title mb-4">Awesome isn't it? Let's dive in!</h4>
+                <h2 className="text-primary">How Explain Code App works</h2>
+                <h3 className="title mb-4">Let's dive in!</h3>
                 <p className="para-desc mx-auto text-muted mb-0">
-                  Start working with{" "}
-                  <span className="text-primary fw-bold">
-                    Landrick
-                  </span>{" "}
-                  that can provide everything you need to generate awareness,
-                  drive traffic, connect.
+                  Check out some samples
                 </p>
               </div>
             </Col>
@@ -65,9 +106,9 @@ export default class Quick extends Component {
                           }}
                         >
                           <div className="text-center">
-                            <h5 className="title font-weight-normal mb-0">
-                              npm
-                            </h5>
+                            <h4 className="title font-weight-normal mb-0">
+                              NodeJS
+                            </h4>
                           </div>
                         </NavLink>
                       </NavItem>
@@ -84,9 +125,9 @@ export default class Quick extends Component {
                           }}
                         >
                           <div className="text-center">
-                            <h5 className="title font-weight-normal mb-0">
-                              nuget
-                            </h5>
+                            <h4 className="title font-weight-normal mb-0">
+                              Python
+                            </h4>
                           </div>
                         </NavLink>
                       </NavItem>
@@ -104,7 +145,7 @@ export default class Quick extends Component {
                         >
                           <div className="text-center">
                             <h5 className="title font-weight-normal mb-0">
-                              spm
+                              SQL
                             </h5>
                           </div>
                         </NavLink>
@@ -138,16 +179,17 @@ export default class Quick extends Component {
                       tabId="1"
                         className="fade show"
                       >
-                        <p className="text-muted fw-bold mb-0">
-                          <span className="text-success">$</span> npm install{" "}
-                          <span className="text-success">-g</span> claps.js
-                        </p>
+                        <pre><code class="language-javascript">
+                            {"var http = require('http');\nhttp.createServer(function (req, res) {\n    res.writeHead(200, {'Content-Type': 'text/plain'});\n    res.end('Hello Node.js World!');\n}).listen(8080);"}
+                            </code></pre>
+                            <Button className="btn btn-primary">Explain Code</Button>
                       </TabPane>
 
                       <TabPane className="fade show" tabId="2">
-                        <p className="text-muted fw-bold mb-0">
-                          coming soon ...
-                        </p>
+                           {/* {Prism.highlight("import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)", Prism.languages.python, 'python')}     */}
+                           <pre><code class="language-python">
+                            {"import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)"}
+                            </code></pre>
                       </TabPane>
 
                       <TabPane className="fade show" tabId="3">
@@ -166,14 +208,14 @@ export default class Quick extends Component {
                 </Row>
               </div>
 
-              <ul className="list-unstyled text-muted mb-0 mt-3">
-                <li className="list-inline-item me-lg-5 me-4">
+              <ul className="list-unstyled text mb-0 mt-3">
+                <li className="list-item me-lg-5 me-4">
                   <span className="text-success h5 me-2">
                     <i className="uil uil-check-circle align-middle"></i>
                   </span>
                   Organize your data
                 </li>
-                <li className="list-inline-item me-lg-5 me-4">
+                <li className="list-item me-lg-5 me-4">
                   <span className="text-success h5 me-2">
                     <i className="uil uil-check-circle align-middle"></i>
                   </span>

@@ -1,0 +1,11 @@
+curl https://api.openai.com/v1/engines/davinci-instruct-beta/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+  "prompt": "write a 125 character or less description of an image based on these keywords describe\n\nSkateboard, Car, Automobile, Vehicle, Transportation, Person, Human, Pedestrian, Sport, Sports, Road, Wheel, Machine, Path\n\nDescription:\n\nA skateboarder is shown riding on a street in front of a car.",
+  "temperature": 0.3,
+  "max_tokens": 125,
+  "top_p": 1,
+  "frequency_penalty": 0,
+  "presence_penalty": 0
+}'

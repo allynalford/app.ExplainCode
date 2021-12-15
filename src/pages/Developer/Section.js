@@ -15,28 +15,23 @@ export default class index extends Component {
               <Col md={6} xs={12}>
                 <div className="title-heading">
                   <span className="badge rounded-pill bg-soft-primary">
-                    Development
+                    Beta
                   </span>
                   <h1 className="fw-bold mt-2 mb-3">
-                    A Complete <br /> Developer Toolset
+                    Understand code <br /> like never before.
                   </h1>
-                  <p className="para-desc text-muted">
-                    Launch your campaign and benefit from our expertise on
-                    designing and managing conversion centered bootstrap v5 html
-                    page.
+                  <p className="para-desc text">
+                  Blast through the code with easy-to-understand explanations.
                   </p>
                   <div className="mt-4 pt-2">
-                    <Link to="#" className="btn btn-primary me-2">
-                      Get Started
-                    </Link>
                     <Link
                       to="#"
                       className="btn btn-outline-primary"
                     >
-                      Documentation
+                      Join the Waitlist
                     </Link>
                   </div>
-                  <p className="text-muted mb-0 mt-3">Current Version: v3.1</p>
+                  {/* <p className="text-muted mb-0 mt-3">Current Version: v3.1</p> */}
                 </div>
               </Col>
 

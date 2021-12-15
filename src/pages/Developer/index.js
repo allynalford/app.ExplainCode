@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import Documention from "./Documention";
-import KeyFeatures from "./KeyFeatures";
-import LandrickTeam from "./LandrickTeam";
-import Partners from "./Partners";
 import Quick from "./Quick";
 import Section from "./Section";
 
@@ -33,8 +29,9 @@ export default class index extends Component {
         {/* Section */}
         <Section />
 
-        {/* Partner */}
+        {/* Partner 
         <Partners />
+        */}
         <div className="position-relative">
             <div className="shape overflow-hidden text-white">
                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,10 +40,10 @@ export default class index extends Component {
             </div>
         </div>
         <section className="section">
-            <KeyFeatures />
+            {/* <KeyFeatures /> */}
             <Quick />
-            <Documention />
-            <LandrickTeam />
+            {/* <Documention /> */}
+            {/* <LandrickTeam /> */}
         </section>
       </React.Fragment>
     );

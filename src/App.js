@@ -10,8 +10,8 @@ import {
 // Import Css
 import "./assets/css/materialdesignicons.min.css";
 import "./Apps.scss";
-
 import "./assets/css/colors/default.css";
+
 
 // Include Routes
 import routes from "./routes";
