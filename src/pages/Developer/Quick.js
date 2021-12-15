@@ -312,8 +312,8 @@ export default class Quick extends Component {
 
               {this.state.NodeJsExplanation === true ? (
                 <div>
+                  <h5>NodeJS Code GPT-3 Explanation</h5>
                   <ul className="list-unstyled text mb-0 mt-3">
-                    <h5>NodeJS Code Explanation</h5>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
@@ -372,8 +372,8 @@ export default class Quick extends Component {
 
               {this.state.PythonExplanation === true ? (
                 <div>
+                  <h5>Python Code GPT-3 Explanation</h5>
                   <ul className="list-unstyled text mb-0 mt-4">
-                    <h5>Python Code Explanation</h5>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
@@ -440,29 +440,20 @@ export default class Quick extends Component {
 
               {this.state.SQLExplanation === true ? (
                 <div>
+                  <h5>SQL Code GPT-3 Explanation</h5>
                   <ul className="list-unstyled text mb-0 mt-4">
-                    <h5>SQL Code Explanation</h5>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
                       </span>
-                      The first line of the code is deleting all rows from the
-                      table STATS that have a month value of 7 or have an ID
-                      within STATION with longitude value less than 90.
+                      First, we delete all the rows from the STATS table that have a month value of 7 or have an ID
+                      within the table STATION with longitude value less than 90.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
                       </span>
-                      The second line of the code is deleting all rows from the
-                      table STATION that have a longitude value less than 90.
-                    </li>
-                    <li className="list-item me-lg-5 me-4">
-                      <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
-                      </span>
-                      The third line of the code is committing the changes to
-                      the database.
+                      Next, we delete all the rows from the STATION table that have a longitude value less than 90.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
