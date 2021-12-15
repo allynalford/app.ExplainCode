@@ -475,6 +475,14 @@ export default class Quick extends Component {
               ) : (
                 ''
               )}
+              <div className="buy-button" style={{marginTop: "15px"}}>
+                    <a
+                      href="#emailAddress"
+                      className="btn btn-pills btn-primary"
+                    >
+                      Join Waitlist
+                    </a>
+                  </div>
             </Col>
           </Row>
         </Container>

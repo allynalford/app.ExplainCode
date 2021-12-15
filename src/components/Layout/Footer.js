@@ -75,7 +75,6 @@ class Footer extends Component {
                         icon="twitter"
                         className="fea icon-sm fea-social"
                         alt="Explain Code App Twitter"
-                        titl
                       />
                     </a>
                   </li>
@@ -237,7 +236,7 @@ class Footer extends Component {
               <Col sm="6">
                 <div className="text-sm-start">
                   <p className="mb-0">
-                    © 2021 Tenably Labs, Inc. {/*Develop by{" "}
+                    Made by the Team @ Tenably Labs, Inc. {/*Develop by{" "}
                      <i className="mdi mdi-heart text-danger"></i>{" "}
                     <a
                       href="https://themesbrand.com/"

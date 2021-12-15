@@ -1009,6 +1009,7 @@ class Topbar extends Component {
             <div className="menu-extras">
               <div className="menu-item">
                 <Link
+                  alt={this.state.isOpen ? "Menu Open" : "Menu Close"}
                   to="#"
                   onClick={this.toggleLine}
                   className={
