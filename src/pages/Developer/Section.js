@@ -42,38 +42,37 @@ export default class index extends Component {
       console.log("Invalid Email Address")
     }else{
       this.updateSlackChannel();
-      
-      console.log("email",this.state.email)
-      //Continue processing
+     //Continue processing
       //const client = require("drip-nodejs");
       //client.token = process.env.REACT_APP_DRIP
       //client.accountId = process.env.REACT_APP_DRIP_ID
      
      
-      const data = {
-        subscribers: [{
-          email: this.state.email,
-          custom_fields: {
-            waitlist: true,
-            waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
-          }
-        }]
-      };
+      // const data = {
+      //   subscribers: [{
+      //     email: this.state.email,
+      //     custom_fields: {
+      //       waitlist: true,
+      //       waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
+      //     }
+      //   }]
+      // };
 
-      var config = {
-        method: 'post',
-        url: `https://api.getdrip.com/v2/${process.env.REACT_APP_DRIP_ID}/subscribers/`,
-        headers: { 
-          //'User-Agent': 'www.explaincode.app',
-          'Content-Type': 'application/json'
-        },
-        data,
-        auth: {
-          username: process.env.REACT_APP_DRIP,
-          password: ""
-        }
-      };
-      console.log(config)
+      // var config = {
+      //   method: 'post',
+      //   url: `https://api.getdrip.com/v2/${process.env.REACT_APP_DRIP_ID}/subscribers/`,
+      //   headers: { 
+      //     'User-Agent': 'www.explaincode.app',
+      //     'Content-Type': 'application/json',
+      //     'Accept': '*/*'
+      //   },
+      //   data,
+      //   auth: {
+      //     username: process.env.REACT_APP_DRIP,
+      //     password: ""
+      //   }
+      // };
+      //console.log(config)
       
       // const resp = axios(config).then(function (response) {
       //   console.log(JSON.stringify(response.data));
@@ -83,14 +82,14 @@ export default class index extends Component {
       //   this.setState({inputsstatus: false});
       // });
 
-      try{
-        const resp = await axios(config);
-        console.log(resp)
-        this.setState({inputsstatus: false});
-      }catch(e){
-        console.error(e)
-        this.setState({inputsstatus: false});
-      }
+      // try{
+      //   const resp = await axios(config);
+      //   console.log(resp)
+      //   this.setState({inputsstatus: false});
+      // }catch(e){
+      //   console.error(e)
+      //   this.setState({inputsstatus: false});
+      // }
     }
 }
 
