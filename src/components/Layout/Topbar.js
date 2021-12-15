@@ -13,8 +13,9 @@ import {
 } from "reactstrap";
 
 //Import images
-import logodark from "../../assets/images/logo.png";
-import logolight from "../../assets/images/logo.png";
+//import logodark from "../../assets/images/logo.png";
+//import logolight from "../../assets/images/logo.png";
+import logoIcon from "../../assets/images/coding.png"
 import shop1 from "../../assets/images/shop/product/s-1.jpg";
 import shop2 from "../../assets/images/shop/product/s-2.jpg";
 import shop3 from "../../assets/images/shop/product/s-3.jpg";
@@ -588,9 +589,13 @@ class Topbar extends Component {
 
         <header id="topnav" className="defaultscroll sticky">
           <Container>
-            <div>
-
-              {this.props.hasDarkTopBar ? (
+            <div style={{fontSize: "24px", fontWeight: "800"}}>
+            <img
+                    src={logoIcon}
+                    height="48"
+                    alt=""
+                  />Explain Code App
+              {/* {this.props.hasDarkTopBar ? (
                 <a className="logo" href="index.html" alt="Explain Code App Home">
                   <img src={logodark} height="48" className="logo-light-mode" alt="Explain Code App logo" />
                   <img src={logolight} height="48" className="logo-dark-mode" alt="Explain Code App logo" />
@@ -603,7 +608,7 @@ class Topbar extends Component {
                   </span>
                   <img src={logolight} height="24" className="logo-dark-mode" alt="Explain Code App logo" />
                 </a>
-              }
+              } */}
             </div>
             {(() => {
               if (this.props.location.pathname === "/index-developer") {
@@ -979,27 +984,23 @@ class Topbar extends Component {
               } else if (this.props.location.pathname === "/index-seo-agency") {
                 return (
                   <div className="buy-button">
-                    <Link
-                      to="//1.envato.market/landrickreactjs"
-                      target="_blank"
+                    <a
+                      href="#emailAddress"
                       className="btn btn-pills btn-primary"
                     >
                       Join Waitlist
-                    </Link>
+                    </a>
                   </div>
                 );
               } else {
                 return (
                   <div className="buy-button">
-                    <Link
-                      to="//1.envato.market/landrickreactjs"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id="buyButton"
-                      className="btn btn-primary"
+                     <a
+                      href="#emailAddress"
+                      className="btn btn-pills btn-primary"
                     >
                       Join Waitlist
-                    </Link>
+                    </a>
                   </div>
                 );
               }
@@ -1237,14 +1238,12 @@ class Topbar extends Component {
                 )}
               </ul>
               <div className="buy-menu-btn d-none">
-                <Link
-                  to="https://1.envato.market/landrickreactjs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
+              <a
+                      href="#emailAddress"
+                      className="btn btn-pills btn-primary"
+                    >
                   Join Waitlist
-                </Link>
+                </a>
               </div>
             </div>
           </Container>

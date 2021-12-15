@@ -1,3 +1,27 @@
+.screenreader-text {
+  position: absolute;
+  left: -999px;
+  width:1px;
+  height: 1px;
+  top: auto;
+
+  &:focus {
+    color: 'white';
+    display: inline-block;
+    height: auto;
+    width: auto;
+    position: static;
+    margin: auto;
+  }
+}
+
+
+:focus {
+  outline: 2px dotted #d71ef7;
+  box-shadow: 0 0 0 2px hsla(210, 100%, 50%, 0.5);
+}
+
+
 .Typist {
   display: inline;
 }

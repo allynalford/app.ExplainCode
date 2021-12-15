@@ -1,49 +1,97 @@
 import React, { Component } from "react";
-import { Container, Row, Col , Button, Form, FormGroup} from "reactstrap";
+import { Container, Row, Col , Button, InputGroupAddon, Input, InputGroup} from "reactstrap";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 //import Images
 import bgimg from "../../assets/images/digital/about.png";
 import { Event } from '../../common/gaUtils.js';
 import axios from "axios";
-var dateFormat = require('dateformat');
+import dateFormat from "dateformat";
+const requestPromise = require('request-promise');
 export default class index extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      email: ''
+      email: '',
+      inputsstatus: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateSlackChannel = this.updateSlackChannel.bind(this);
   }
 
+
+  request(requestOptions, callback) {
+    if (callback) {
+      return requestPromise(requestOptions).then((response) => {
+        const { body } = response;
+        callback(null, response, body);
+      }).catch((error) => {
+        callback(error, null, null);
+      });
+    }
+    return requestPromise(requestOptions);
+  }
   async handleSubmit(event) {
     event.preventDefault();
-    const client = require('drip-nodejs')(
-      {
-        token: process.env.REACT_APP_DRIP,
-        accountId: process.env.REACT_APP_DRIP_ID
-      }
-    );
+    this.setState({inputsstatus: true});
+    var validator = require("email-validator");
+    var emailValid = validator.validate(this.state.email); 
 
-    const payload = {
-      subscribers: [{
-        email: this.state.email,
-        custom_fields: {
-          waitlist: "true",
-          waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
+    if(emailValid !== true){
+      console.log("Invalid Email Address")
+    }else{
+      this.updateSlackChannel();
+      
+      console.log("email",this.state.email)
+      //Continue processing
+      //const client = require("drip-nodejs");
+      //client.token = process.env.REACT_APP_DRIP
+      //client.accountId = process.env.REACT_APP_DRIP_ID
+     
+     
+      const data = {
+        subscribers: [{
+          email: this.state.email,
+          custom_fields: {
+            waitlist: true,
+            waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
+          }
+        }]
+      };
+
+      var config = {
+        method: 'post',
+        url: `https://api.getdrip.com/v2/${process.env.REACT_APP_DRIP_ID}/subscribers/`,
+        headers: { 
+          //'User-Agent': 'www.explaincode.app',
+          'Content-Type': 'application/json'
+        },
+        data,
+        auth: {
+          username: process.env.REACT_APP_DRIP,
+          password: ""
         }
-      }]
-    };
-    
-    client.createUpdateSubscriber(payload)
-      .then((response) => {
-        // Handle `response.body`
-      })
-      .catch((error) => {
-        // Handle errors
-      });
- 
+      };
+      console.log(config)
+      
+      // const resp = axios(config).then(function (response) {
+      //   console.log(JSON.stringify(response.data));
+      //   this.setState({inputsstatus: false});
+      // }).catch(function (error) {
+      //   console.log(error);
+      //   this.setState({inputsstatus: false});
+      // });
+
+      try{
+        const resp = await axios(config);
+        console.log(resp)
+        this.setState({inputsstatus: false});
+      }catch(e){
+        console.error(e)
+        this.setState({inputsstatus: false});
+      }
+    }
 }
 
 
@@ -54,7 +102,7 @@ export default class index extends Component {
 
     //process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK
     let res = await axios.post(process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK, JSON.stringify({
-        "text": `Name: ${this.state.name} \n Email Address: ${this.state.email}`,
+        "text": `Email Address: ${this.state.email}`,
     }), {
         withCredentials: false,
         transformRequest: [(data, headers) => {
@@ -90,12 +138,37 @@ export default class index extends Component {
                   Blast through the code with easy-to-understand explanations.
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
-                          <Form className="ms-0">
+                    <InputGroup>
+                      <Input
+                        type="email"
+                        name="emailAddress"
+                        id="emailAddress"
+                        onChange={e => this.setState({ email: e.target.value })}
+                        value={this.state.email}
+                        disabled={this.state.inputsstatus}
+                        placeholder="Enter your Email Address"
+                        requiredtxt="A Valid Email Address is required"
+                        required
+                      />
+                      <InputGroupAddon addonType="append">
+                        <Button disabled={this.state.inputsstatus} onClick={this.handleSubmit} className="btn btn-primary" type="submit">
+                          Join the Waitlist{" "}
+                          <i>
+                            <FeatherIcon
+                              icon="user-plus"
+                              className="fea icon-sm"
+                            />
+                          </i>
+                        </Button>
+                      </InputGroupAddon>
+                    </InputGroup>
+                          {/* <Form className="ms-0">
                             <FormGroup>
-                              <input
+                              <Input
                                 type="text"
                                 id="course"
                                 name="emailaddress"
+                                onChange={ e => this.setState({email: e.target.value})}
                                 className="rounded"
                                 placeholder="Enter your Email Address"
                               />
@@ -109,7 +182,7 @@ export default class index extends Component {
                                 </i>
                               </Button>
                             </FormGroup>
-                          </Form>
+                          </Form> */}
                         </div>
                   {/* <div className="mt-4 pt-2">
                     <Link
