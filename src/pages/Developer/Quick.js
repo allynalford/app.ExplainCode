@@ -22,8 +22,8 @@ import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-plsql';
 import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-scss';
 import 'prismjs/themes/prism.css';
 import './styles.css';
@@ -38,10 +38,11 @@ export default class Quick extends Component {
       NodeJsExplanation: false,
       PythonExplanation: false,
       SQLExplanation: false,
-      LiquidExplanation: false,
+      GoExplanation: false,
       NodeJsCode: '',
       PythonCode: '',
       SqlCode: '',
+      GoCode: '',
     };
     this.toggleTab = this.toggleTab.bind(this);
     this.hightlightWithLineNumbers = this.hightlightWithLineNumbers.bind(this);
@@ -113,14 +114,14 @@ export default class Quick extends Component {
           });
         }
         break;
-      case 'liquid':
-        if (this.state.LiquidExplanation !== true) {
+      case 'go':
+        if (this.state.GoExplanation !== true) {
           this.setState({
-            LiquidExplanation: true,
+            GoExplanation: true,
           });
         } else {
           this.setState({
-            LiquidExplanation: false,
+            GoExplanation: false,
           });
         }
         break;
@@ -161,10 +162,21 @@ export default class Quick extends Component {
       )
       .join('\n');
 
+    var GoCode = highlight(
+      "package main\n\nimport (\n    \"bufio\"\n    \"fmt\"\n    \"net/http\"\n)\n\nfunc main() {\n\n    resp, err := http.Get(\"http://gobyexample.com\")\n    if err != nil {\n        panic(err)\n    }\n    defer resp.Body.Close()\n\n    fmt.Println(\"Response status:\", resp.Status)\n\n    scanner := bufio.NewScanner(resp.Body)\n    for i := 0; scanner.Scan() && i < 5; i++ {\n        fmt.Println(scanner.Text())\n    }\n\n    if err := scanner.Err(); err != nil {\n        panic(err)\n    }\n}",
+      languages.go,
+    )
+      .split('\n')
+      .map(
+        (line, i) =>
+          `<span class='editorLineNumber'>${i + 1}</span>${line}<br />`,
+      )
+      .join('\n');
     this.setState({
       NodeJsCode: parse(NodeJsCode),
       PythonCode: parse(PythonCode),
       SqlCode: parse(SqlCode),
+      GoCode: parse(GoCode)
     });
   };
 
@@ -265,7 +277,7 @@ export default class Quick extends Component {
                         </NavLink>
                       </NavItem>
 
-                      {/* <NavItem className="hover-border">
+                      <NavItem className="hover-border">
                         <NavLink
                           className={classnames(
                             { active: this.state.activeTab === '4' },
@@ -277,11 +289,11 @@ export default class Quick extends Component {
                         >
                           <div className="text-center">
                             <h5 className="title font-weight-normal mb-0">
-                              Liquid
+                              GO
                             </h5>
                           </div>
                         </NavLink>
-                      </NavItem> */}
+                      </NavItem>
                     </Nav>
                   </Col>
                 </Row>
@@ -338,11 +350,21 @@ export default class Quick extends Component {
                       </TabPane>
 
                       <TabPane className="fade show" tabId="4">
-                        <p className="text-muted fw-bold mb-0">
-                          coming soon ...
-                        </p>
+                        <div className="text fw-bold mb-0">
+                          <div className="container__editor editor">
+                            {this.state.GoCode}
+                          </div>
+                        </div>
+                        <Button
+                          name="go"
+                          onClick={(e) => this.toggleExplanation(e.target.name)}
+                          className="btn btn-primary"
+                          style={{ marginTop: '10px' }}
+                        >
+                          Explain GO Code
+                        </Button>
                       </TabPane>
-                    </TabContent>
+                      </TabContent>
                   </Col>
                 </Row>
               </div>
@@ -350,6 +372,7 @@ export default class Quick extends Component {
               {this.state.NodeJsExplanation === true ? (
                 <div>
                   <h5>NodeJS Code GPT-3 Explanation</h5>
+                  <div style={{fontSize: "1.25rem"}}>
                   <ul className="list-unstyled text mb-0 mt-3">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
@@ -402,6 +425,7 @@ export default class Quick extends Component {
                       The server is started.
                     </li>
                   </ul>
+                  </div>
                 </div>
               ) : (
                 ''
@@ -410,6 +434,7 @@ export default class Quick extends Component {
               {this.state.PythonExplanation === true ? (
                 <div>
                   <h5>Python Code GPT-3 Explanation</h5>
+                  <div style={{fontSize: "1.25rem"}}>
                   <ul className="list-unstyled text mb-0 mt-4">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
@@ -470,6 +495,7 @@ export default class Quick extends Component {
                       print("stop") function call displays "stop" on the screen.
                     </li>
                   </ul>
+                  </div>
                 </div>
               ) : (
                 ''
@@ -478,6 +504,7 @@ export default class Quick extends Component {
               {this.state.SQLExplanation === true ? (
                 <div>
                   <h5>SQL Code GPT-3 Explanation</h5>
+                  <div style={{fontSize: "1.25rem"}}>
                   <ul className="list-unstyled text mb-0 mt-4">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
@@ -502,6 +529,66 @@ export default class Quick extends Component {
                     </li>
                   </ul>
                 </div>
+                  </div>
+              ) : (
+                ''
+              )}
+               {this.state.GoExplanation === true ? (
+                 <div>
+                   <h5>GO Code GPT-3 Explanation</h5>
+                <div style={{fontSize: "1.25rem"}}>
+                  <ul className="list-unstyled text mb-0 mt-4">
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Get the http.Response object from the http.Get call.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Check if there was an error in the http.Get call.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Defer the closing of the http.Response Body.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Print the response status.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Create a new Scanner for the http.Response Body.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Loop through the scanner and print the first 5 lines.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      Check for errors from the scanner.
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-check-circle align-middle"></i>
+                      </span>
+                      The http.Response Body is closed.
+                    </li>
+                  </ul>
+                </div>
+                 </div>
               ) : (
                 ''
               )}
