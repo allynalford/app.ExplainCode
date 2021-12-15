@@ -151,7 +151,7 @@ export default class Quick extends Component {
               <div className="section-title text-center mb-4 pb-2">
                 <h2 className="text-primary">How Explain Code App works</h2>
                 <h3 className="title mb-4">Let's dive in!</h3>
-                <p className="para-desc mx-auto text-muted mb-0">
+                <p className="para-desc mx-auto text mb-0">
                   Check out some samples
                 </p>
               </div>

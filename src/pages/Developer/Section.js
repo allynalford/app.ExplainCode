@@ -1,12 +1,77 @@
 import React, { Component } from "react";
 import { Container, Row, Col , Button, Form, FormGroup} from "reactstrap";
-import { Link } from "react-router-dom";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 //import Images
 import bgimg from "../../assets/images/digital/about.png";
-
+import { Event } from '../../common/gaUtils.js';
+import axios from "axios";
+var dateFormat = require('dateformat');
 export default class index extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ''
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const client = require('drip-nodejs')(
+      {
+        token: process.env.REACT_APP_DRIP,
+        accountId: process.env.REACT_APP_DRIP_ID
+      }
+    );
+
+    const payload = {
+      subscribers: [{
+        email: this.state.email,
+        custom_fields: {
+          waitlist: "true",
+          waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
+        }
+      }]
+    };
+    
+    client.createUpdateSubscriber(payload)
+      .then((response) => {
+        // Handle `response.body`
+      })
+      .catch((error) => {
+        // Handle errors
+      });
+ 
+}
+
+
+  async updateSlackChannel() {
+
+   
+    Event("Waitlist", "New Waitlist User", this.state.email)
+
+    //process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK
+    let res = await axios.post(process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK, JSON.stringify({
+        "text": `Name: ${this.state.name} \n Email Address: ${this.state.email}`,
+    }), {
+        withCredentials: false,
+        transformRequest: [(data, headers) => {
+            delete headers.post["Content-Type"]
+            return data
+        }]
+    })
+
+    if (res.status === 200) {
+        //clear state so text boxes clear
+        this.setState({ name: '', email: '', subject: '', comments: '', update: true })
+    } else {
+        alert("There was an error.  Please try again later.")
+    }
+}
+
+
   render() {
     return (
       <React.Fragment>

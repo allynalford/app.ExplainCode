@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Quick from "./Quick";
 import Section from "./Section";
-
+import { PageView, initGA} from '../../common/gaUtils.js';
 export default class index extends Component {
   componentDidMount() {
     document.body.classList = "";
     window.addEventListener("scroll", this.scrollNavigation, true);
+    initGA();
+    PageView();
   }
 
   // Make sure to remove the DOM listener when the component is unmounted.
