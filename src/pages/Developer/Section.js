@@ -77,7 +77,7 @@ export default class index extends Component {
      
       Event("Waitlist", "New Waitlist User", this.state.email);
 
-      if (process.env.NODE_ENV === 'production') {
+      if (process.env.REACT_APP_STAGE === 'production') {
         this.updateSlackChannel();
       };
 
