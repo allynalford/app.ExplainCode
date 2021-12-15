@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col , Button, Form, FormGroup} from "reactstrap";
 import { Link } from "react-router-dom";
-
+//Import Icons
+import FeatherIcon from "feather-icons-react";
 //import Images
 import bgimg from "../../assets/images/digital/about.png";
 
@@ -23,20 +24,42 @@ export default class index extends Component {
                   <p className="para-desc text">
                   Blast through the code with easy-to-understand explanations.
                   </p>
-                  <div className="mt-4 pt-2">
+                  <div className="subcribe-form mt-4 pt-2">
+                          <Form className="ms-0">
+                            <FormGroup>
+                              <input
+                                type="text"
+                                id="course"
+                                name="emailaddress"
+                                className="rounded"
+                                placeholder="Enter your Email Address"
+                              />
+                              <Button className="btn btn-primary" type="submit">
+                              Join the Waitlist{" "}
+                                <i>
+                                  <FeatherIcon
+                                    icon="user-plus"
+                                    className="fea icon-sm"
+                                  />
+                                </i>
+                              </Button>
+                            </FormGroup>
+                          </Form>
+                        </div>
+                  {/* <div className="mt-4 pt-2">
                     <Link
                       to="#"
                       className="btn btn-outline-primary"
                     >
                       Join the Waitlist
                     </Link>
-                  </div>
+                  </div> */}
                   {/* <p className="text-muted mb-0 mt-3">Current Version: v3.1</p> */}
                 </div>
               </Col>
 
               <div className="col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                <img src={bgimg} className="img-fluid d-block mx-auto" alt="" />
+                <img src={bgimg} className="img-fluid d-block mx-auto" alt="Let Explain Code App teach you how to create code with ease and excitement!" />
               </div>
             </Row>
           </Container>

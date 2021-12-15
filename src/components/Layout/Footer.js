@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col} from "reactstrap";
-
+import logoIcon from "../../assets/images/coding.png"
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 
@@ -43,49 +43,48 @@ class Footer extends Component {
                 name="footercolumn"
               >
                 <Link to="#" className="logo-footer">
-                  Code Explain App
-                  {/* <img
-                    src={this.props.isLight ? logodark : logolight}
-                    height="24"
+                  <img
+                    src={logoIcon}
+                    height="48"
                     alt=""
-                  /> */}
+                  />Explain Code App
                 </Link>
                 <p className={this.props.isLight ? "mt-4 text-muted" : "mt-4"}>
                  Use GPT-3 to understand unfamiliar code. Accelerate the rate og getting up to speed with new code.
                 </p>
                 <ul className={this.props.isLight ? "list-unstyled social-icon social mb-0 m t-4" : "list-unstyled social-icon foot-social-icon mb-0 mt-4"}>
-                  <li className="list-inline-item me-1">
+                  {/* <li className="list-inline-item me-1">
                     <Link to="" className="rounded">
                       <FeatherIcon
                         icon="facebook"
                         className="fea icon-sm fea-social"
                       />
                     </Link>
-                  </li>
-                  <li className="list-inline-item me-1">
+                  </li> */}
+                  {/* <li className="list-inline-item me-1">
                     <Link to="" className="rounded">
                       <FeatherIcon
                         icon="instagram"
                         className="fea icon-sm fea-social"
                       />
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="list-inline-item me-1">
-                    <Link to="" className="rounded">
+                    <a href="https://www.twitter.com/ExplainCodeApp" target={"_new"} className="rounded" alt="Explain Code App Twitter">
                       <FeatherIcon
                         icon="twitter"
                         className="fea icon-sm fea-social"
                       />
-                    </Link>
+                    </a>
                   </li>
-                  <li className="list-inline-item me-1">
+                  {/* <li className="list-inline-item me-1">
                     <Link to="" className="rounded">
                       <FeatherIcon
                         icon="linkedin"
                         className="fea icon-sm fea-social"
                       />
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </Col>
 
