@@ -50,7 +50,7 @@ class Footer extends Component {
                   />Explain Code App
                 </Link>
                 <p className={this.props.isLight ? "mt-4 text-muted" : "mt-4"}>
-                 Use GPT-3 to understand unfamiliar code. Accelerate the rate og getting up to speed with new code.
+                 Use GPT-3 to understand unfamiliar code. Accelerate the rate of getting up to speed with new code.
                 </p>
                 <ul className={this.props.isLight ? "list-unstyled social-icon social mb-0 m t-4" : "list-unstyled social-icon foot-social-icon mb-0 mt-4"}>
                   {/* <li className="list-inline-item me-1">

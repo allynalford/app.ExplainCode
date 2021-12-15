@@ -203,11 +203,10 @@ export default class Quick extends Component {
           <Row className="row justify-content-center">
             <Col xs={12}>
               <div className="section-title text-center mb-4 pb-2">
-                <h2 className="text-primary">How Explain Code App works</h2>
+                <h2 className="text-primary">How Explain Code App Works</h2>
                 <h3 className="title mb-4">Let's dive in!</h3>
                 <p className="para-desc mx-auto text mb-0">
-                  Explain Code app uses GPT-3 (ai) to explain your the code you
-                  provide. <br />
+                  Explain Code app uses GPT-3 (ai) to explain your the code. <br />
                   Check out some samples
                 </p>
               </div>

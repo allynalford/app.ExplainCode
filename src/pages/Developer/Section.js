@@ -134,7 +134,7 @@ export default class index extends Component {
                     Understand code <br /> like never before.
                   </h1>
                   <p className="para-desc text">
-                  Blast through the code with easy-to-understand explanations.
+                  Blast through code with easy-to-understand explanations.
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
                     <InputGroup>
