@@ -123,9 +123,11 @@ export const generateApiClient = (url, region, path, method) => {
 
     export const _get = (path) => {
         try {
-            //return _getSigned(path);
-            return _getApiClient(path);
-            //return axios.get(path);
+             if (process.env.NODE_ENV === 'production') {
+                return _getApiClient(path);
+              }else{
+                return _getExternal(path);
+              }
         } catch (e) {
             console.log(e.message);
             return {error: true, message: e.message, e: e};
@@ -140,12 +142,20 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+/**
+ * Event - POST a request to a AWS auth URL
+ * @param {string} path 
+ * @param {Array} req 
+ */
     export const _post = (path, req) => {
         try {
             //return _postSigned(path, req);
             //return axios.post(path, req);
-            return _postApiClient(path, req);
+            if (process.env.NODE_ENV === 'production') {
+                return _postApiClient(path, req);
+              }else{
+                return _postExternal(path, req);
+              }
         } catch (e) {
             return {error: true, message: e.message, e: e};
         }

@@ -6,8 +6,10 @@ import FeatherIcon from "feather-icons-react";
 import bgimg from "../../assets/images/digital/about.png";
 import { Event } from '../../common/gaUtils.js';
 import axios from "axios";
-import dateFormat from "dateformat";
 const requestPromise = require('request-promise');
+const endpoint = require("../../common/endpoint.js");
+const config = require("../../common/config.js");
+var Swal = require("sweetalert2");
 export default class index extends Component {
 
   constructor(props) {
@@ -18,7 +20,29 @@ export default class index extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSlackChannel = this.updateSlackChannel.bind(this);
+    this.Toast = this.Toast.bind(this);
+    this.SwalToast = this.SwalToast.bind(this);
   }
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: false,
+    timer: 6500,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+      SwalToast(title, text, icon) {
+        this.Toast.fire({
+          icon,
+          title,
+          text
+        });
+      };
 
 
   request(requestOptions, callback) {
@@ -39,57 +63,20 @@ export default class index extends Component {
     var emailValid = validator.validate(this.state.email); 
 
     if(emailValid !== true){
-      console.log("Invalid Email Address")
+      console.log("Invalid Email Address");
+      this.SwalToast("Error","Invalid Email Address", 'error');
+      this.setState({inputsstatus: false});
     }else{
+      try{
+        const addUser = await endpoint._post(config.getDrip().addSubscriberApiUrl, {email: this.state.email});
+        console.log("Add User", addUser);
+      }catch(e){
+        console.error("Add User", e);
+      }
+     
+      Event("Waitlist", "New Waitlist User", this.state.email);
       this.updateSlackChannel();
-     //Continue processing
-      //const client = require("drip-nodejs");
-      //client.token = process.env.REACT_APP_DRIP
-      //client.accountId = process.env.REACT_APP_DRIP_ID
-     
-     
-      // const data = {
-      //   subscribers: [{
-      //     email: this.state.email,
-      //     custom_fields: {
-      //       waitlist: true,
-      //       waitlist_date_time: dateFormat(new Date(), "isoUtcDateTime")
-      //     }
-      //   }]
-      // };
-
-      // var config = {
-      //   method: 'post',
-      //   url: `https://api.getdrip.com/v2/${process.env.REACT_APP_DRIP_ID}/subscribers/`,
-      //   headers: { 
-      //     'User-Agent': 'www.explaincode.app',
-      //     'Content-Type': 'application/json',
-      //     'Accept': '*/*'
-      //   },
-      //   data,
-      //   auth: {
-      //     username: process.env.REACT_APP_DRIP,
-      //     password: ""
-      //   }
-      // };
-      //console.log(config)
-      
-      // const resp = axios(config).then(function (response) {
-      //   console.log(JSON.stringify(response.data));
-      //   this.setState({inputsstatus: false});
-      // }).catch(function (error) {
-      //   console.log(error);
-      //   this.setState({inputsstatus: false});
-      // });
-
-      // try{
-      //   const resp = await axios(config);
-      //   console.log(resp)
-      //   this.setState({inputsstatus: false});
-      // }catch(e){
-      //   console.error(e)
-      //   this.setState({inputsstatus: false});
-      // }
+      this.setState({inputsstatus: false});
     }
 }
 
@@ -112,7 +99,8 @@ export default class index extends Component {
 
     if (res.status === 200) {
         //clear state so text boxes clear
-        this.setState({ name: '', email: '', subject: '', comments: '', update: true })
+        this.SwalToast("You've Joined","Thank You for Joining", 'info');
+        this.setState({ email: ''});
     } else {
         alert("There was an error.  Please try again later.")
     }
