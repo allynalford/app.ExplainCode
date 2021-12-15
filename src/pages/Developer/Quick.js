@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import { highlight, languages } from 'prismjs/components/prism-core';
-
+import parse from "html-react-parser";
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-markup-templating';
 import 'prismjs/components/prism-clike';
@@ -20,8 +20,10 @@ import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-php';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-liquid';
+import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-plsql';
+import 'prismjs/components/prism-sql';
 import 'prismjs/components/prism-scss';
 import 'prismjs/themes/prism.css';
 import './styles.css';
@@ -37,6 +39,9 @@ export default class Quick extends Component {
       PythonExplanation: false,
       SQLExplanation: false,
       LiquidExplanation: false,
+      NodeJsCode: '',
+      PythonCode: '',
+      SqlCode: '',
     };
     this.toggleTab = this.toggleTab.bind(this);
     this.hightlightWithLineNumbers = this.hightlightWithLineNumbers.bind(this);
@@ -44,7 +49,9 @@ export default class Quick extends Component {
     this.toggleExplanation = this.toggleExplanation.bind(this);
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    this.hightlightWithLineNumbers();
+  }
 
   shouldComponentUpdate(nextProps, nextState) {
     //console.log('Instance shouldComponentUpdate lifecycle');
@@ -55,7 +62,7 @@ export default class Quick extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) { }
+  componentDidUpdate(prevProps, prevState) {}
 
   toggleTab(tab) {
     this.setState({
@@ -122,18 +129,53 @@ export default class Quick extends Component {
     }
   }
 
-  hightlightWithLineNumbers = (input, language) => {
-    highlight(input, language)
+  hightlightWithLineNumbers = (input, language, codeType) => {
+    var NodeJsCode = highlight(
+      "var http = require('http');\nhttp.createServer(function (req, res) {\n    res.writeHead(200, {'Content-Type': 'text/plain'});\n    res.end('Hello Node.js World!');\n}).listen(8080);",
+      languages.js,
+    )
       .split('\n')
-      .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+      .map(
+        (line, i) =>
+          `<span class='editorLineNumber'>${i + 1}</span>${line}<br />`,
+      )
       .join('\n');
+    var PythonCode = highlight(
+      "import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)",
+      languages.python,
+    )
+      .split('\n')
+      .map(
+        (line, i) =>
+          `<span class='editorLineNumber'>${i + 1}</span>${line}<br />`,
+      )
+      .join('\n');
+    var SqlCode = highlight(
+      'DELETE FROM STATS\nWHERE MONTH = 7\nOR ID IN (SELECT ID FROM STATION\nWHERE LONG_W < 90);\n\nDELETE FROM STATION WHERE LONG_W < 90;\n\nCOMMIT WORK;',
+      languages.sql,
+    )
+      .split('\n')
+      .map(
+        (line, i) =>
+          `<span class='editorLineNumber'>${i + 1}</span>${line}<br />`,
+      )
+      .join('\n');
+
+    this.setState({
+      NodeJsCode: parse(NodeJsCode),
+      PythonCode: parse(PythonCode),
+      SqlCode: parse(SqlCode),
+    });
   };
 
   WithLineNumbers = (input, language) => {
     const Prism = require('prismjs');
     Prism.highlight(input, language)
       .split('\n')
-      .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+      .map(
+        (line, i) =>
+          `<span class='editorLineNumber'>${i + 1}</span>${line}<br />`,
+      )
       .join('\n');
   };
 
@@ -152,7 +194,9 @@ export default class Quick extends Component {
                 <h2 className="text-primary">How Explain Code App works</h2>
                 <h3 className="title mb-4">Let's dive in!</h3>
                 <p className="para-desc mx-auto text mb-0">
-                  Explain Code app uses GPT-3 (ai) to explain your the code you provide. <br />Check out some samples
+                  Explain Code app uses GPT-3 (ai) to explain your the code you
+                  provide. <br />
+                  Check out some samples
                 </p>
               </div>
             </Col>
@@ -246,55 +290,48 @@ export default class Quick extends Component {
                   <Col xs={12}>
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1" className="fade show">
-                        <pre className="text fw-bold mb-0">
-                          <code className="language-javascript">
-                            {
-                              "var http = require('http');\nhttp.createServer(function (req, res) {\n    res.writeHead(200, {'Content-Type': 'text/plain'});\n    res.end('Hello Node.js World!');\n}).listen(8080);"
-                            }
-                          </code>
-                        </pre>
+                        <div className="text fw-bold mb-0">
+                          <div className="container__editor editor">
+                            {this.state.NodeJsCode}
+                          </div>
+                        </div>
                         <Button
                           name="nodejs"
                           onClick={(e) => this.toggleExplanation(e.target.name)}
                           className="btn btn-primary"
-                          style={{marginTop: "10px"}}
+                          style={{ marginTop: '10px' }}
                         >
                           Explain NodeJS Code
                         </Button>
                       </TabPane>
-
                       <TabPane className="fade show" tabId="2">
                         {/* {Prism.highlight("import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)", Prism.languages.python, 'python')}     */}
-                        <pre className="text fw-bold mb-0">
-                          <code className="language-python">
-                            {
-                              "import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)"
-                            }
-                          </code>
-                        </pre>
+                        <div className="text fw-bold mb-0">
+                          <div className="container__editor editor">
+                            {this.state.PythonCode}
+                          </div>
+                        </div>
                         <Button
                           name="python"
                           onClick={(e) => this.toggleExplanation(e.target.name)}
                           className="btn btn-primary"
-                          style={{marginTop: "10px"}}
+                          style={{ marginTop: '10px' }}
                         >
                           Explain Python Code
                         </Button>
                       </TabPane>
 
                       <TabPane className="fade show" tabId="3">
-                        <pre className="text fw-bold mb-0">
-                          <code className="language-plsql">
-                            {
-                              'DELETE FROM STATS\nWHERE MONTH = 7\nOR ID IN (SELECT ID FROM STATION\nWHERE LONG_W < 90);\n\nDELETE FROM STATION WHERE LONG_W < 90;\n\nCOMMIT WORK;'
-                            }
-                          </code>
-                        </pre>
+                        <div className="text fw-bold mb-0">
+                          <div className="container__editor editor">
+                            {this.state.SqlCode}
+                          </div>
+                        </div>
                         <Button
                           name="SQL"
                           onClick={(e) => this.toggleExplanation(e.target.name)}
                           className="btn btn-primary"
-                          style={{marginTop: "10px"}}
+                          style={{ marginTop: '10px' }}
                         >
                           Explain SQL Code
                         </Button>
@@ -446,14 +483,16 @@ export default class Quick extends Component {
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
                       </span>
-                      First, we delete all the rows from the STATS table that have a month value of 7 or have an ID
-                      within the table STATION with longitude value less than 90.
+                      First, we delete all the rows from the STATS table that
+                      have a month value of 7 or have an ID within the table
+                      STATION with longitude value less than 90.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
                       </span>
-                      Next, we delete all the rows from the STATION table that have a longitude value less than 90.
+                      Next, we delete all the rows from the STATION table that
+                      have a longitude value less than 90.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
@@ -466,14 +505,11 @@ export default class Quick extends Component {
               ) : (
                 ''
               )}
-              <div className="buy-button" style={{marginTop: "15px"}}>
-                    <a
-                      href="#emailAddress"
-                      className="btn btn-pills btn-primary"
-                    >
-                      Join Waitlist
-                    </a>
-                  </div>
+              <div className="buy-button" style={{ marginTop: '15px' }}>
+                <a href="#emailAddress" className="btn btn-pills btn-primary">
+                  Join Waitlist
+                </a>
+              </div>
             </Col>
           </Row>
         </Container>

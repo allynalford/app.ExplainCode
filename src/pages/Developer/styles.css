@@ -15,12 +15,13 @@
 }
 
 .editor .editorLineNumber {
-  position: absolute;
   left: 0px;
   color: #707070;
   text-align: right;
   width: 40px;
   font-weight: 100;
+  margin-right: 10px;
+  font-weight: 400;
 }
   
   
