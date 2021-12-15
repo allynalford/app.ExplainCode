@@ -152,7 +152,7 @@ export default class Quick extends Component {
                 <h2 className="text-primary">How Explain Code App works</h2>
                 <h3 className="title mb-4">Let's dive in!</h3>
                 <p className="para-desc mx-auto text mb-0">
-                  Check out some samples
+                  Explain Code app uses GPT-3 (ai) to explain your the code you provide. <br />Check out some samples
                 </p>
               </div>
             </Col>

@@ -139,6 +139,7 @@ export default class index extends Component {
                   <div className="subcribe-form mt-4 pt-2">
                     <InputGroup>
                       <Input
+                        aria-label="Email Address to join waitlist"
                         type="email"
                         name="emailAddress"
                         id="emailAddress"
@@ -156,6 +157,7 @@ export default class index extends Component {
                             <FeatherIcon
                               icon="user-plus"
                               className="fea icon-sm"
+                              alt="Join Waitlist"
                             />
                           </i>
                         </Button>
