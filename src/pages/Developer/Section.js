@@ -70,12 +70,18 @@ export default class index extends Component {
       try{
         const addUser = await endpoint._post(config.getDrip().addSubscriberApiUrl, {email: this.state.email});
         console.log("Add User", addUser);
+        this.SwalToast("You've Joined","Thank You for Joining", 'info');
       }catch(e){
         console.error("Add User", e);
       }
      
       Event("Waitlist", "New Waitlist User", this.state.email);
-      this.updateSlackChannel();
+
+      if (process.env.NODE_ENV === 'production') {
+        this.updateSlackChannel();
+      };
+
+      
       this.setState({inputsstatus: false});
     }
 }
@@ -99,7 +105,6 @@ export default class index extends Component {
 
     if (res.status === 200) {
         //clear state so text boxes clear
-        this.SwalToast("You've Joined","Thank You for Joining", 'info');
         this.setState({ email: ''});
     } else {
         alert("There was an error.  Please try again later.")
