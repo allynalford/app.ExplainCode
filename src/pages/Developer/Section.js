@@ -30,7 +30,7 @@ export default class index extends Component {
     showConfirmButton: false,
     timer: 6500,
     timerProgressBar: true,
-    onOpen: (toast) => {
+    didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
@@ -67,19 +67,25 @@ export default class index extends Component {
       this.SwalToast("Error","Invalid Email Address", 'error');
       this.setState({inputsstatus: false});
     }else{
+
+      if (process.env.REACT_APP_STAGE !== 'production') {
       try{
-        console.log("NODE_ENV", process.env.NODE_ENV);
+        Event("Waitlist", "New Waitlist User Drip", "drip added");
         const addUser = await endpoint._post(config.getDrip().addSubscriberApiUrl, {email: this.state.email});
         console.log("Add User", addUser);
         this.SwalToast("You've Joined","Thank You for Joining", 'info');
       }catch(e){
         console.error("Add User", e);
       }
+      }
+
      
-      Event("Waitlist", "New Waitlist User", this.state.email);
+     
 
       if (process.env.REACT_APP_STAGE === 'production') {
         this.updateSlackChannel();
+        window._dcq = window._dcq || [];
+        window._dcq.push(["track", "Waitlist Signup", { value: 999 }]);
       };
 
       
@@ -91,7 +97,7 @@ export default class index extends Component {
   async updateSlackChannel() {
 
    
-    Event("Waitlist", "New Waitlist User", this.state.email)
+    Event("Waitlist", "New Waitlist User Slack", "Slack Channel")
 
     //process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK
     let res = await axios.post(process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK, JSON.stringify({
@@ -107,6 +113,7 @@ export default class index extends Component {
     if (res.status === 200) {
         //clear state so text boxes clear
         this.setState({ email: ''});
+        this.SwalToast("You've Joined","Thank You for Joining", 'info');
     } else {
         alert("There was an error.  Please try again later.")
     }

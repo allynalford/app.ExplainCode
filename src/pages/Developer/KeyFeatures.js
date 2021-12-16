@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 
 export default class KeyFeatures extends Component {
@@ -9,27 +8,31 @@ export default class KeyFeatures extends Component {
       keyfeatures: [
         {
           id: 1,
-          icon: "uil uil-layer-group d-block rounded h3 mb-0",
-          hoverIcon: "uil uil-layer-group text-primary full-img",
-          title: "Modular",
+          icon: "uil uil-line-spacing d-block rounded h3 mb-0",
+          hoverIcon: "uil uil-line-spacing text-primary full-img",
+          title: "Explained Line By Line",
+          text: "Learn to code by breaking it down into lines and chunks. Explain Code gives you line by line explanation of code. It helps you in learning programming concepts and improves your coding skills."
         },
         {
           id: 2,
-          icon: "uil uil-airplay d-block rounded h3 mb-0",
-          hoverIcon: "uil uil-airplay text-primary full-img",
-          title: "Responsive",
+          icon: "uil uil-document-layout-left d-block rounded h3 mb-0",
+          hoverIcon: "uil uil-document-layout-left text-primary full-img",
+          title: "Code Summarization",
+          text: "Reduce the time to understand code by summarizing it into one containing code and description. Now you don't need to read long code to understand it."
         },
         {
           id: 3,
-          icon: "uil uil-focus-target d-block rounded h3 mb-0",
-          hoverIcon: "uil uil-focus-target text-primary full-img",
-          title: "Customizable",
+          icon: "uil uil-code-branch d-block rounded h3 mb-0",
+          hoverIcon: "uil uil-code-branch text-primary full-img",
+          title: "Class Breakdown",
+          text: "Understanding the purpose of a class can be difficult. But not anymore, Break down classes to help you gain an in depth knowledge of what the class is intended to do, what they call and more."
         },
         {
           id: 4,
-          icon: "uil uil-expand-arrows d-block rounded h3 mb-0",
-          hoverIcon: "uil uil-expand-arrows text-primary full-img",
-          title: "Scalable",
+          icon: "uil  uil-comment-question d-block rounded h3 mb-0",
+          hoverIcon: "uil  uil-comment-question text-primary full-img",
+          title: "Open Questions",
+          text: "Don’t know what a block of code does? Paste your code into the editor and ask an open question about it. It’s that simple!. The built in AI understands code like never before."
         },
       ],
     };
@@ -41,12 +44,9 @@ export default class KeyFeatures extends Component {
           <Row>
             <Col xs={12}>
               <div className="section-title mb-4 pb-2">
-                <h4 className="title mb-4">Key Features</h4>
-                <p className="para-desc text-muted mb-0">
-                  Start working with{" "}
-                  <span className="text-primary fw-bold">Landrick</span>{" "}
-                that can provide everything you need to generate awareness,
-                drive traffic, connect.
+                <h4 className="title mb-4">First Release Features</h4>
+                <p className="para-desc text mb-0">
+                Save time on reading long code by getting the most important parts of it before you even begin understanding it.
               </p>
               </div>
             </Col>
@@ -60,16 +60,15 @@ export default class KeyFeatures extends Component {
                     <i className={keyfeatures.icon}></i>
                   </div>
                   <CardBody className="p-0 mt-4">
-                    <Link to="#" className="title h5 text-dark">
+                    <a href="#emailAddress" alt="add email address to join waitlist" className="title h5 text-dark">
                       {keyfeatures.title}
-                    </Link>
-                    <p className="text-muted mt-2">
-                      Composed in a pseudo-Latin language which more or less
-                      corresponds.
+                    </a>
+                    <p className="text mt-2">
+                    {keyfeatures.text}
                   </p>
-                    <Link to="#" className="text-primary read-more">
-                      Read More <i className="mdi mdi-chevron-right"></i>
-                    </Link>
+                    <a href="#emailAddress" className="text-primary read-more">
+                      Join Waitlist <i className="mdi mdi-chevron-right"></i>
+                    </a>
                     <i className={keyfeatures.hoverIcon}></i>
                   </CardBody>
                 </Card>

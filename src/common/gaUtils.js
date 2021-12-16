@@ -10,11 +10,7 @@ export const initGA = () => {
  * PageView - window.location.hash.replace('#','')
  */
 export const PageView = () => {
-    const path = window.location.hash.replace('#','');
-
-    //Need to start striping UUID's out of the path
-
-    //console.log(path)
+    const path = window.location.pathname;
     ReactGA.pageview(path);
 };
 

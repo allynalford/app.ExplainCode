@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Quick from './Quick';
 import Section from './Section';
+import KeyFeatures from './KeyFeatures';
+import Documention from './Documention';
 import { PageView, initGA } from '../../common/gaUtils.js';
 export default class index extends Component {
   componentDidMount() {
@@ -50,9 +52,9 @@ export default class index extends Component {
             </div>
           </div>
           <section className="section">
-            {/* <KeyFeatures /> */}
+            <KeyFeatures />
             <Quick />
-            {/* <Documention /> */}
+            <Documention />
             {/* <LandrickTeam /> */}
           </section>
         </div>
