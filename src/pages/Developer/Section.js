@@ -68,6 +68,7 @@ export default class index extends Component {
       this.setState({inputsstatus: false});
     }else{
       try{
+        console.log("NODE_ENV", process.env.NODE_ENV);
         const addUser = await endpoint._post(config.getDrip().addSubscriberApiUrl, {email: this.state.email});
         console.log("Add User", addUser);
         this.SwalToast("You've Joined","Thank You for Joining", 'info');
