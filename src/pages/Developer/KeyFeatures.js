@@ -46,8 +46,7 @@ export default class KeyFeatures extends Component {
               <div className="section-title mb-4 pb-2">
                 <h4 className="title mb-4">First Release Features</h4>
                 <p className="para-desc text mb-0">
-                Save time on reading long code by getting the most important parts of it before you even begin understanding it.
-              </p>
+                Explain Code makes code easy to understand. With Explain Code, you can quickly save time on code that's difficult to digest. We empower developers to go from I don't understand the code to this is how it works in under five minutes!</p>
               </div>
             </Col>
           </Row>
