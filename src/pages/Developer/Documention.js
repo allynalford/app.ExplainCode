@@ -28,25 +28,25 @@ export default class Documention extends Component {
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
                     </span>
-                    NodeJS
+                    Easily explain NodeJS code
                   </li>
                   <li className="mb-0">
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
                     </span>
-                    Python
+                    Summarize Python code
                   </li>
                   <li className="mb-0">
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
                     </span>
-                    Go (Golang)
+                    Go (Golang) code line-by-line
                   </li>
                   <li className="mb-0">
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
                     </span>
-                    SQL (Structured Query Language)
+                    Review SQL (Structured Query Language) code
                   </li>
                 </ul>
                 <div className="mt-4">
