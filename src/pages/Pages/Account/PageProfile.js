@@ -80,9 +80,13 @@ function PageProfile({history}) {
 
 
   useEffect(() => {
-    document.body.classList = "";
-    document.getElementById("top-menu").classList.add("nav-light");
-    window.addEventListener("scroll", scrollNavigation, true);
+    try {
+      document.body.classList = '';
+      document.getElementById('top-menu').classList.add('nav-light');
+      window.addEventListener('scroll', scrollNavigation, true);
+    } catch (e) {
+      console.log(e);
+    }
 
 
     return () => {
