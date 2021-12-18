@@ -284,6 +284,19 @@ const ShopMyAccount = React.lazy(() =>
 );
 
 const routes = [
+
+
+
+    //Page Profile
+    { path: "/dashboard", component: PageProfile, protected: true },
+    { path: "/authorize", component: PageProfile, protected: true },
+    { path: "/page-members", component: PageMembers },
+    { path: "/page-works", component: PageWorks },
+    { path: "/page-messages", component: PageMessages },
+    { path: "/page-profile-edit", component: PageProfileEdit },
+    { path: "/page-payments", component: PagePayments },
+    { path: "/page-invoice", component: PageInvoice, isTopbarDark: true },
+
   //routes without Layout
 
   //Contct without layout
@@ -457,14 +470,7 @@ const routes = [
   { path: "/page-work-grid", component: PageWorkGrid, isTopbarDark: true },
   { path: "/page-work-masonry", component: PageWorkMasonry, isTopbarDark: true },
 
-  //Page Profile
-  { path: "/page-profile", component: PageProfile },
-  { path: "/page-members", component: PageMembers },
-  { path: "/page-works", component: PageWorks },
-  { path: "/page-messages", component: PageMessages },
-  { path: "/page-profile-edit", component: PageProfileEdit },
-  { path: "/page-payments", component: PagePayments },
-  { path: "/page-invoice", component: PageInvoice, isTopbarDark: true },
+
 
   //Page Job
   { path: "/page-job", component: PageJob, isTopbarDark: true },

@@ -6,6 +6,7 @@
   "author": "Tenably Labs, Inc.",
   "homepage": "https://privy.explaincode.app/",
   "dependencies": {
+    "@auth0/auth0-react": "^1.8.0",
     "@iconscout/react-unicons": "^1.1.6",
     "aos": "^2.3.4",
     "availity-reactstrap-validation": "^2.7.1",

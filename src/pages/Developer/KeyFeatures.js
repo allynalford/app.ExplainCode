@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
-
 export default class KeyFeatures extends Component {
   constructor(props) {
     super(props);
