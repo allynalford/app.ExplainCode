@@ -360,7 +360,7 @@ const routes = [
     isWithoutLayout: true,
   },
   {
-    path: "/auth-signup-three",
+    path: "/register",
     component: PageSignupThree,
     isWithoutLayout: true,
   },
