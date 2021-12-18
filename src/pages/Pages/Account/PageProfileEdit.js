@@ -60,10 +60,6 @@ function PageProfileEdit({history}) {
     setSuccessMsg(true);
   }
 
-  const handleSubmit2 = (event) =>{
-    event.preventDefault();
-    setSuccessMsg(true);
-  }
 
   const handleSubmit3 = (event) =>{
     event.preventDefault();
@@ -186,7 +182,7 @@ function PageProfileEdit({history}) {
                     className="list-unstyled sidebar-nav mb-0"
                     id="navmenu-nav"
                   >
-                    {getWidgets(window.location.path).map((widget, key) => (
+                    {getWidgets(window.location.pathname).map((widget, key) => (
                       <li className={widget.className} key={key}>
                         {(widget.title === "Logout" ? 
                         <Link
@@ -446,69 +442,6 @@ function PageProfileEdit({history}) {
                     </Form>
 
                     <Row>
-                      <Col md="6" className="mt-4 pt-2">
-                        <h5>Contact Info :</h5>
-                        <Alert
-                          color="info"
-                          isOpen={successMsg}
-                          toggle={() => {
-                            setSuccessMsg(!successMsg);
-                          }}
-                        >
-                          Data sended successfully.
-                        </Alert>
-
-                        <Form onSubmit={handleSubmit2}>
-                          <Row className="mt-4">
-                            <Col lg="12">
-                              <div className="mb-3">
-                                <Label className="form-label">Phone No. :</Label>
-                                <div className="form-icon position-relative">
-                                  <i>
-                                    <FeatherIcon
-                                      icon="phone"
-                                      className="fea icon-sm icons"
-                                    />
-                                  </i>
-                                </div>
-                                <Input
-                                  name="number"
-                                  id="number"
-                                  type="number"
-                                  className="form-control ps-5"
-                                  placeholder="Phone :"
-                                />
-                              </div>
-                            </Col>
-
-                            <Col lg="12">
-                              <div className="mb-3">
-                                <Label className="form-label">Website :</Label>
-                                <div className="form-icon position-relative">
-                                  <i>
-                                    <FeatherIcon
-                                      icon="globe"
-                                      className="fea icon-sm icons"
-                                    />
-                                  </i>
-                                </div>
-                                <Input
-                                  name="url"
-                                  id="url"
-                                  type="url"
-                                  className="form-control ps-5"
-                                  placeholder="Url :"
-                                />
-                              </div>
-                            </Col>
-
-                            <Col lg="12" className="mt-2 mb-0">
-                              <Button color="primary">Add</Button>
-                            </Col>
-                          </Row>
-                        </Form>
-                      </Col>
-
                       <Col md="6" className="mt-4 pt-2">
                         <h5>Change password :</h5>
                         <Alert
