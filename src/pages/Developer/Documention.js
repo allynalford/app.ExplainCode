@@ -23,7 +23,7 @@ export default class Documention extends Component {
                 We have decided to start out supporting Node JS, Python, Go, and SQL. Once we have an established a strong community around our initial languages, we will rapidly grow and support new languages for all developers. 
                 </p>
                 <p className="text"> If you can code using at least 1 of 3 of these languages, then you'll be able to easily build your first database driven web application in just a few minutes.</p>
-                <ul className="list-unstyled text-muted">
+                <ul className="list-unstyled text">
                   <li className="mb-0">
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
