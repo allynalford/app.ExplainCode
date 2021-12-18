@@ -20,7 +20,7 @@ import shop1 from "../../assets/images/shop/product/s-1.jpg";
 import shop2 from "../../assets/images/shop/product/s-2.jpg";
 import shop3 from "../../assets/images/shop/product/s-3.jpg";
 import NavbarButtons from "../Shared/NavbarButtons";
-
+import WaitlistButton from "../waitlist-button";
 class Topbar extends Component {
   constructor(props) {
     super(props);
@@ -983,25 +983,11 @@ class Topbar extends Component {
                 );
               } else if (this.props.location.pathname === "/index-seo-agency") {
                 return (
-                  <div className="buy-button">
-                    <a
-                      href="#emailAddress"
-                      className="btn btn-pills btn-primary"
-                    >
-                      Join Waitlist
-                    </a>
-                  </div>
+                  <WaitlistButton />
                 );
               } else {
                 return (
-                  <div className="buy-button">
-                     <a
-                      href="#emailAddress"
-                      className="btn btn-pills btn-primary"
-                    >
-                      Join Waitlist
-                    </a>
-                  </div>
+                    <WaitlistButton />
                 );
               }
             })()}
@@ -1243,7 +1229,7 @@ class Topbar extends Component {
                       href="#emailAddress"
                       className="btn btn-pills btn-primary"
                     >
-                  Join Waitlist
+                  Join Waitlist 3
                 </a>
               </div>
             </div>
