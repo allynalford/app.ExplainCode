@@ -290,12 +290,12 @@ const routes = [
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },
     { path: "/authorize", component: PageProfile, protected: true },
-    { path: "/page-members", component: PageMembers },
-    { path: "/page-works", component: PageWorks },
-    { path: "/page-messages", component: PageMessages },
-    { path: "/page-profile-edit", component: PageProfileEdit },
-    { path: "/page-payments", component: PagePayments },
-    { path: "/page-invoice", component: PageInvoice, isTopbarDark: true },
+    { path: "/page-members", component: PageMembers, protected: true },
+    { path: "/page-works", component: PageWorks, protected: true },
+    { path: "/page-messages", component: PageMessages, protected: true },
+    { path: "/page-profile-edit", component: PageProfileEdit, protected: true },
+    { path: "/page-payments", component: PagePayments, protected: true },
+    { path: "/page-invoice", component: PageInvoice, isTopbarDark: true, protected: true },
 
   //routes without Layout
 
