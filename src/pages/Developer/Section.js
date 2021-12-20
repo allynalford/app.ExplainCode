@@ -56,6 +56,9 @@ export default class index extends Component {
     }
     return requestPromise(requestOptions);
   }
+
+
+
   async handleSubmit(event) {
     event.preventDefault();
     this.setState({inputsstatus: true});
@@ -67,29 +70,45 @@ export default class index extends Component {
       this.SwalToast("Error","Invalid Email Address", 'error');
       this.setState({inputsstatus: false});
     }else{
-
+      //const check = await endpoint.postIAM("https://dev.apps.explaincode.app", "us-east-1", "https://dev.apps.explaincode.app/drip/subscriber/get", {email: this.state.email});
       if (process.env.REACT_APP_STAGE !== 'production') {
-      try{
-        Event("Waitlist", "New Waitlist User Drip", "drip added");
-        const addUser = await endpoint._post(config.getDrip().addSubscriberApiUrl, {email: this.state.email});
-        console.log("Add User", addUser);
-        this.SwalToast("You've Joined","Thank You for Joining", 'info');
-      }catch(e){
-        console.error("Add User", e);
+        try {
+          const check = await endpoint.postIAM(
+            config.getDrip().getSubscriberApiUrl,
+            { email: this.state.email },
+          );
+          if (check.data.exists === false) {
+            const addUser = await endpoint.postIAM(
+              config.getDrip().addSubscriberApiUrl,
+              { email: this.state.email },
+            );
+            if (addUser.data.success === true) {
+              Event('Waitlist', 'New Waitlist User Drip', 'drip added');
+              this.SwalToast(
+                "You've Joined",
+                'Thank You for Joining for Early Access',
+                'info',
+              );
+              await this.updateSlackChannel();
+              window._dcq = window._dcq || [];
+              window._dcq.push(['track', 'Waitlist Signup', { value: 999 }]);
+              this.setState({ inputsstatus: false });
+            } else {
+              this.SwalToast('Error', "error adding user", 'error');
+              this.setState({inputsstatus: false});
+            }
+          } else {
+            this.SwalToast('Error', 'User already Exists', 'error');
+            this.setState({inputsstatus: false});
+          }
+        } catch (e) {
+          console.error('Add User', e);
+          this.setState({inputsstatus: false});
+        }
       }
-      }
-
-     
-     
-
-      if (process.env.REACT_APP_STAGE === 'production') {
-        this.updateSlackChannel();
-        window._dcq = window._dcq || [];
-        window._dcq.push(["track", "Waitlist Signup", { value: 999 }]);
-      };
 
       
-      this.setState({inputsstatus: false});
+      
     }
 }
 
@@ -113,7 +132,6 @@ export default class index extends Component {
     if (res.status === 200) {
         //clear state so text boxes clear
         this.setState({ email: ''});
-        this.SwalToast("You've Joined","Thank You for Joining", 'info');
     } else {
         alert("There was an error.  Please try again later.")
     }

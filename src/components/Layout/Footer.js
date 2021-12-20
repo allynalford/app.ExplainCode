@@ -79,12 +79,12 @@ class Footer extends Component {
                     </a>
                   </li>
                   {/* <li className="list-inline-item me-1">
-                    <Link to="" className="rounded">
+                    <a href="https://discord.gg/GxnJ4Q9A" title="Explain Code App Discord" className="rounded">
                       <FeatherIcon
                         icon="linkedin"
                         className="fea icon-sm fea-social"
                       />
-                    </Link>
+                    </a>
                   </li> */}
                 </ul>
               </Col>

@@ -5,27 +5,6 @@ const aws4  = require('aws4')
 const parseURL = require("url-parse")
 
 
-// const interceptor = aws4Interceptor({
-//     region: process.env.REACT_APP_REGION
-//     //service: "execute-api"
-// }, {
-//     accessKeyId: process.env.REACT_APP_KEY,
-//     secretAccessKey: process.env.REACT_APP_ACCESS
-// });
-
- //axios.interceptors.request.use(interceptor);
-
-// export const callAws4 = (data) =>{
-//     axios(aws4.sign({
-//         host: process.env.ES_ENDPOINT,
-//         method: "POST",
-//         url: `https://${process.env.ES_ENDPOINT}/foobot/foobot`,
-//         data,
-//         body: JSON.stringify(data),
-//         path: "/foobot/foobot",
-//     }))
-// }
-
 export const generateApiClient = (url, region, path, method) => {
     try {
         var apigClient = apigClientFactory.newClient(
@@ -154,6 +133,26 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
+
+    export const postIAM = async (path, req)  => {
+        try {
+            const resp = generateApiClient(process.env.REACT_APP_BASE_API_URL, process.env.REACT_APP_REGION, path, 'POST');
+            return await resp.apigClient.invokeApi(resp.args.pathParams, resp.args.pathTemplate, resp.args.method, resp.args.additionalParams, req);
+        } catch (e) {
+            console.log(e)
+            return {error: true, message: e.message, e: e};
+        }
+    };
+
+    export const getIAM = async (path) => {
+        try {
+            const resp = generateApiClient(process.env.REACT_APP_BASE_API_URL, process.env.REACT_APP_REGION, path, 'GET');
+            return await resp.apigClient.invokeApi(resp.args.pathParams, resp.args.pathTemplate, resp.args.method, resp.args.additionalParams, resp.args.body);
+        } catch (e) {
+            return {error: true, message: e.message, e: e};
+        }
+    };
+
     export const _postExternal = (path, req) => {
         try {
             return axios.post(path, req);

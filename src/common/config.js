@@ -1,14 +1,14 @@
 const serverVars = {
     drip: {
-      addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/add/subscriber",   
+      addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/add",
+      getSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/get",  
     },
   };
   
   const localVars = {
     drip: {
-      //addSubscriberApiUrl: "http://localhost:3000/dev/drip/add/subscriber",   
-      addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/add/subscriber",
-        
+      addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/add",
+      getSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/get", 
     },
   };
   
