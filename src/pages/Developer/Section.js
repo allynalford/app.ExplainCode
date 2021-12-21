@@ -70,7 +70,6 @@ export default class index extends Component {
       this.SwalToast("Error","Invalid Email Address", 'error');
       this.setState({inputsstatus: false});
     }else{
-      if (process.env.REACT_APP_STAGE !== 'production') {
         try {
           const check = await endpoint.postIAM(
             config.getDrip().getSubscriberApiUrl,
@@ -104,9 +103,6 @@ export default class index extends Component {
           console.error('Add User', e);
           this.setState({inputsstatus: false});
         }
-      }
-
-      
       
     }
 }
