@@ -36,8 +36,8 @@ const PageSignup = React.lazy(() =>
 const PageCoverSignup = React.lazy(() =>
   import("./pages/Pages/AuthPages/PageCoverSignup")
 );
-const PageSignupThree = React.lazy(() =>
-  import("./pages/Pages/AuthPages/PageSignupThree")
+const Register = React.lazy(() =>
+  import("./pages/Pages/AuthPages/register")
 );
 
 const PageCoverRePassword = React.lazy(() =>
@@ -361,7 +361,7 @@ const routes = [
   },
   {
     path: "/register",
-    component: PageSignupThree,
+    component: Register,
     isWithoutLayout: true,
   },
 

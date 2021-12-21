@@ -27,6 +27,7 @@ export default class AuthService extends EventEmitter {
             }
             if (authResult && authResult.idToken && authResult.accessToken) {
                 this.setToken(authResult.accessToken, authResult.idToken)
+                console.log(window.location.origin)
                 window.location = window.location.origin //redirect to main page
             }
         })
@@ -45,9 +46,6 @@ export default class AuthService extends EventEmitter {
             "user_id": user.id,
             "verify_email": true,
             app_metadata: {
-              companyglobaluuid: user.companyglobaluuid,
-              userGlobalUUID: user.id,
-              userglobaluuid: user.id
             },
             user_metadata: {
               audit_level: 'admin',
@@ -55,14 +53,15 @@ export default class AuthService extends EventEmitter {
               role: 'admin',
               root: 'true',
               inviteCode: user.invitecode,
-              companyglobaluuid: user.companyglobaluuid,
-              userGlobalUUID: user.id,
               userglobaluuid: user.id
             }
           }, function (err) {
+              console.log("signuplogin")
             if (err) {
                 console.log(err);
-                alert('Error: ' + err.description)
+                alert('Error: ' + err.description);
+            }else{
+                console.log("logged in");
             }
         })
     }

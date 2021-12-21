@@ -5,6 +5,7 @@ import {
   Switch,
   BrowserRouter as Router,
   withRouter,
+  useHistory
 } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import ProtectedRoute from './auth/protected-route';
@@ -36,6 +37,7 @@ function withLayout(WrappedComponent, hasDarkTopBar) {
 
 function App({ Component }) {
   const { isLoading  } = useAuth0();
+  const history = useHistory();
   //const isLoading   = false;
  
   //console.log(isAuthenticated)
@@ -60,6 +62,14 @@ function App({ Component }) {
 
   if (isLoading) {
     return <Loader />;
+  }
+  if (
+    window.location.hash.substr(1).includes('access_token=') === true &&
+    window.location.hash.substr(1).includes('scope=') === true &&
+    window.location.hash.substr(1).includes('expires_in=') === true
+  ) {
+    history.push('/dashboard');
+    console.log(window.location);
   }
 
 

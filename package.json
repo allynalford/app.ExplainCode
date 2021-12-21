@@ -10,6 +10,7 @@
     "@iconscout/react-unicons": "^1.1.6",
     "ace-builds": "^1.4.13",
     "aos": "^2.3.4",
+    "auth0-js": "^9.18.0",
     "availity-reactstrap-validation": "^2.7.1",
     "aws-api-gateway-client": "^0.3.5",
     "aws4": "^1.11.0",
@@ -20,9 +21,11 @@
     "email-validator": "^2.0.4",
     "feather-icons-react": "^0.4.3",
     "html-react-parser": "^1.4.3",
+    "jwt-decode": "^3.1.2",
     "node-sass": "^6.0.0",
     "npm": "^7.13.0",
     "number-counter": "^1.0.3",
+    "password-validator": "^5.2.1",
     "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-ace": "^9.5.0",
@@ -53,6 +56,7 @@
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.3.0",
     "url-parse": "^1.5.3",
+    "uuid": "^8.3.2",
     "webpack": "4.44.2"
   },
   "scripts": {

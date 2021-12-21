@@ -11,17 +11,16 @@ const Auth0ProviderWithHistory = ({ children, ...initOptions}) => {
   const onRedirectCallback = (appState) => {
 
     if (
-      window.location.search.includes("code=") > 0 &&
-      window.location.search.includes("state=") > 0
+      window.location.search.includes('code=') > 0 &&
+      window.location.search.includes('state=') > 0
     ) {
       var uri = window.location.toString();
-        //remove the parameters from the URL
-      if (uri.indexOf("?") > 0) {
-        history.push(appState?.returnTo || "/dashboard");
+      //remove the parameters from the URL
+      if (uri.indexOf('?') > 0) {
+        history.push(appState?.returnTo || '/dashboard');
       }
-        
+
       history.push(appState?.returnTo || window.location.pathname);
-      
     }
     
     history.push(appState?.returnTo || window.location.pathname);
