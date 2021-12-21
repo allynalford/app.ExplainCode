@@ -88,7 +88,6 @@ export default class index extends Component {
             config.getDrip().getSubscriberApiUrl,
             { email: this.state.email },
           );
-          console.log(check)
           if (check.data.exists === false) {
             const addUser = await endpoint.postIAM(
               config.getDrip().addSubscriberApiUrl,
