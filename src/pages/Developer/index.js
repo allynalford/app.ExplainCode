@@ -4,6 +4,7 @@ import Section from './Section';
 import KeyFeatures from './KeyFeatures';
 import Documention from './Documention';
 import { PageView, initGA } from '../../common/gaUtils.js';
+import { Helmet } from "react-helmet";
 export default class index extends Component {
   componentDidMount() {
     document.body.classList = '';
@@ -30,6 +31,18 @@ export default class index extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+          <title>Explain Code App - Explanations for your code</title>
+          <meta name="description"
+            content="The Explain Code App uses GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
+          <meta name="keywords"
+            content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+          <meta name="twitter:title"
+            content="Explain Code App lets you blast through code with easy-to-understand explanations" />
+          <meta name="twitter:image:alt" content="Explain Code App: a new way to read and understand code" />
+          <meta property="og:title" content="Explain Code App - Explanations for your code" />
+          <meta property="og:description" content="The Explain Code App uses GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
+        </Helmet>
         <div id="maincontent">
           {/* Section */}
           <Section />

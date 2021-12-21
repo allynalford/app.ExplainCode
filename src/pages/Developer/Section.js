@@ -97,7 +97,7 @@ export default class index extends Component {
               Event('Waitlist', 'New Waitlist User Drip', 'drip added');
               this.SwalToast(
                 "You've Joined",
-                'Thank You for Joining for Early Access',
+                'Thank You for Joining Early Access',
                 'info',
               );
               await this.updateSlackChannel();

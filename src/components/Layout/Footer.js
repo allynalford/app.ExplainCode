@@ -11,6 +11,7 @@ class Footer extends Component {
     super(props);
     this.state = {
       grid1: [
+       //    { title: "How Explaining Code Helps Developers", link: "/how-explaining-the-code-helps-developers" },
       //   { title: "About us", link: "/page-aboutus" },
       //   { title: "Services", link: "/page-services" },
       //   { title: "Team", link: "/page-team" },
@@ -21,6 +22,7 @@ class Footer extends Component {
       //   { title: "Login", link: "/page-cover-login" },
       ],
       grid2: [
+         { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
          { title: "Terms of Services", link: "/terms-of-service" },
         // { title: "Privacy Policy", link: "/page-privacy" },
         // { title: "Documentation", link: "/documentation" },

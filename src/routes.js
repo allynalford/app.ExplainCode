@@ -171,7 +171,7 @@ const PageBlogDetail = React.lazy(() =>
   import("./pages/Pages/Blog/PageBlogDetail")
 );
 const PageBlogDetailTwo = React.lazy(() =>
-  import("./pages/Pages/Blog/PageBlogDetailTwo")
+  import("./pages/Pages/Blog/how-explaining-the-code-helps-developers")
 );
 const PageBlogSidebar = React.lazy(() =>
   import("./pages/Pages/Blog/PageBlogSidebar")
@@ -300,6 +300,14 @@ const routes = [
     isWithoutLayout: true,
     isTopbarDark: true
   },
+
+    //Page Blog
+    { path: "/page-blog-grid", component: PageBlog, isTopbarDark: true },
+    { path: "/page-blog-detail", component: PageBlogDetail, isTopbarDark: true },
+    { path: "/how-explaining-the-code-helps-developers", component: PageBlogDetailTwo },
+    { path: "/page-blog-sidebar", component: PageBlogSidebar, isTopbarDark: true },
+    { path: "/page-blog-list", component: PageBlogList, isTopbarDark: true },
+    { path: "/page-blog-list-sidebar", component: PageBlogListSidebar, isTopbarDark: true },
 
   //Email Pages
   { path: "/email-alert", component: EmailAlert, isWithoutLayout: true },
@@ -476,13 +484,7 @@ const routes = [
   { path: "/page-job-company", component: PageJobCompany },
   { path: "/page-job-candidate", component: PageJobCandidate },
 
-  //Page Blog
-  { path: "/page-blog-grid", component: PageBlog, isTopbarDark: true },
-  { path: "/page-blog-detail", component: PageBlogDetail, isTopbarDark: true },
-  { path: "/page-blog-detail-two", component: PageBlogDetailTwo },
-  { path: "/page-blog-sidebar", component: PageBlogSidebar, isTopbarDark: true },
-  { path: "/page-blog-list", component: PageBlogList, isTopbarDark: true },
-  { path: "/page-blog-list-sidebar", component: PageBlogListSidebar, isTopbarDark: true },
+
 
   //Page Case Study
   { path: "/page-all-cases", component: AllCases },
