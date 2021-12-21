@@ -21,7 +21,7 @@ class Footer extends Component {
       //   { title: "Login", link: "/page-cover-login" },
       ],
       grid2: [
-        // { title: "Terms of Services", link: "/page-terms" },
+         { title: "Terms of Services", link: "/terms-of-service" },
         // { title: "Privacy Policy", link: "/page-privacy" },
         // { title: "Documentation", link: "/documentation" },
         // { title: "Changelog", link: "/changelog" },

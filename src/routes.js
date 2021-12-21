@@ -1,11 +1,5 @@
 import React from "react";
 
-// Root Include
-//const Root = React.lazy(() => import("./pages/Home/indexRoot"));
-
-//Main Index
-const Main = React.lazy(() => import("./pages/Home/indexMain"));
-
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -460,7 +454,7 @@ const routes = [
   { path: "/shop-myaccount", component: ShopMyAccount, isTopbarDark: true },
 
   //Utility
-  { path: "/page-terms", component: PageTerms, isTopbarDark: true },
+  { path: "/terms-of-service", component: PageTerms, isTopbarDark: true },
   { path: "/page-privacy", component: PagePrivacy, isTopbarDark: true },
 
   //Page Work
@@ -511,7 +505,7 @@ const routes = [
   { path: "/widget", component: Widget, isTopbarDark: true },
 
   //Index Main
-  { path: "/index", component: Main, isTopbarDark: true },
+  { path: "/index", component: Developer, isWithoutLayout: false, exact: true, isTopbarDark: false },
 
   //Index root
 

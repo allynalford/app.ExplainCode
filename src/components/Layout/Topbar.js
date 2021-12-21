@@ -590,11 +590,13 @@ class Topbar extends Component {
         <header id="topnav" className="defaultscroll sticky">
           <Container>
             <div style={{fontSize: "24px", fontWeight: "800"}}>
-            <img
+             <a href="/" alt="Explain Code App Home page" style={{color: "black"}}>
+             <img
                     src={logoIcon}
                     height="48"
                     alt=""
                   />Explain Code App
+             </a>
               {/* {this.props.hasDarkTopBar ? (
                 <a className="logo" href="index.html" alt="Explain Code App Home">
                   <img src={logodark} height="48" className="logo-light-mode" alt="Explain Code App logo" />

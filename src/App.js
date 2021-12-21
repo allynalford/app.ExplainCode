@@ -69,7 +69,7 @@ function App({ Component }) {
     window.location.hash.substr(1).includes('expires_in=') === true
   ) {
     history.push('/dashboard');
-    console.log(window.location);
+    //console.log(window.location);
   }
 
 
