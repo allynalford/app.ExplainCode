@@ -101,6 +101,7 @@ export const generateApiClient = (url, region, path, method) => {
 
 /**
  * Event - GET request to a AWS auth URL
+ * Base API URL (REACT_APP_BASE_API_URL) and REGION (REACT_APP_REGION) are pulled from environment file settings
  * @param {string} path 
  * @param {Array} req 
  */
@@ -123,6 +124,7 @@ export const generateApiClient = (url, region, path, method) => {
     };
 /**
  * Event - POST a request to a AWS auth URL
+ * Base API URL (REACT_APP_BASE_API_URL) and REGION (REACT_APP_REGION) are pulled from environment file settings
  * @param {string} path 
  * @param {Array} req 
  */
@@ -133,7 +135,12 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+/**
+ * Event - postIAM a request to a AWS auth URL
+ * Base API URL (REACT_APP_BASE_API_URL) and REGION (REACT_APP_REGION) are pulled from environment file settings
+ * @param {string} path 
+ * @param {Array} req 
+ */
     export const postIAM = async (path, req)  => {
         try {
             const resp = generateApiClient(process.env.REACT_APP_BASE_API_URL, process.env.REACT_APP_REGION, path, 'POST');
@@ -143,7 +150,11 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+/**
+ * Event - getIAM a request to a AWS auth URL
+ * Base API URL (REACT_APP_BASE_API_URL) and REGION (REACT_APP_REGION) are pulled from environment file settings
+ * @param {string} path
+ */
     export const getIAM = async (path) => {
         try {
             const resp = generateApiClient(process.env.REACT_APP_BASE_API_URL, process.env.REACT_APP_REGION, path, 'GET');

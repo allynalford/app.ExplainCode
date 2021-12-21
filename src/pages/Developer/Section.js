@@ -70,7 +70,6 @@ export default class index extends Component {
       this.SwalToast("Error","Invalid Email Address", 'error');
       this.setState({inputsstatus: false});
     }else{
-      //const check = await endpoint.postIAM("https://dev.apps.explaincode.app", "us-east-1", "https://dev.apps.explaincode.app/drip/subscriber/get", {email: this.state.email});
       if (process.env.REACT_APP_STAGE !== 'production') {
         try {
           const check = await endpoint.postIAM(
