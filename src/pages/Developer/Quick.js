@@ -28,6 +28,7 @@ import 'prismjs/components/prism-scss';
 import 'prismjs/themes/prism.css';
 import './styles.css';
 
+const config = require("../../common/config.js");
 export default class Quick extends Component {
   constructor(props) {
     super(props);
@@ -593,7 +594,7 @@ export default class Quick extends Component {
               )}
               <div className="buy-button" style={{ marginTop: '15px' }}>
                 <a href="#emailAddress" className="btn btn-pills btn-primary">
-                  Join Waitlist
+                {config.WAITLIST_TEXT}
                 </a>
               </div>
             </Col>

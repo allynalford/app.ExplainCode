@@ -21,6 +21,7 @@ import shop2 from "../../assets/images/shop/product/s-2.jpg";
 import shop3 from "../../assets/images/shop/product/s-3.jpg";
 import NavbarButtons from "../Shared/NavbarButtons";
 import WaitlistButton from "../waitlist-button";
+const config = require("../../common/config.js");
 class Topbar extends Component {
   constructor(props) {
     super(props);
@@ -1231,7 +1232,7 @@ class Topbar extends Component {
                       href="#emailAddress"
                       className="btn btn-pills btn-primary"
                     >
-                  Join Waitlist 3
+                  {config.WAITLIST_TEXT + " "}
                 </a>
               </div>
             </div>

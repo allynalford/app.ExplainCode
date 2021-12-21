@@ -16,12 +16,25 @@ export default class index extends Component {
     super(props);
     this.state = {
       email: '',
-      inputsstatus: false
+      inputsstatus: false,
+      refby: undefined
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSlackChannel = this.updateSlackChannel.bind(this);
     this.Toast = this.Toast.bind(this);
     this.SwalToast = this.SwalToast.bind(this);
+  };
+
+  componentDidMount() {
+
+    const search = window.location.search;
+    const refby = new URLSearchParams(search).get("ref");
+    this.setState({ refby });
+  }
+
+  // Make sure to remove the DOM listener when the component is unmounted.
+  componentWillUnmount() {
+    
   }
 
   Toast = Swal.mixin({
@@ -75,10 +88,11 @@ export default class index extends Component {
             config.getDrip().getSubscriberApiUrl,
             { email: this.state.email },
           );
+          console.log(check)
           if (check.data.exists === false) {
             const addUser = await endpoint.postIAM(
               config.getDrip().addSubscriberApiUrl,
-              { email: this.state.email },
+              { email: this.state.email, refby: this.state.refby },
             );
             if (addUser.data.success === true) {
               Event('Waitlist', 'New Waitlist User Drip', 'drip added');
@@ -166,12 +180,12 @@ export default class index extends Component {
                       />
                       <InputGroupAddon addonType="append">
                         <Button disabled={this.state.inputsstatus} onClick={this.handleSubmit} className="btn btn-primary" type="submit">
-                          Join the Waitlist{" "}
+                        {config.WAITLIST_TEXT + " "}
                           <i>
                             <FeatherIcon
                               icon="user-plus"
                               className="fea icon-sm"
-                              alt="Join Waitlist"
+                              alt={config.WAITLIST_TEXT}
                             />
                           </i>
                         </Button>

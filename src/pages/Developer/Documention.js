@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
-
+const config = require("../../common/config.js");
 //import image
 //import integration from '../../assets/images/integration/1.png';
 
@@ -51,7 +51,7 @@ export default class Documention extends Component {
                 </ul>
                 <div className="mt-4">
                   <a href="#emailAddress" className="btn btn-primary">
-                    Join Waitlist
+                  {config.WAITLIST_TEXT}
                   </a>
                 </div>
               </div>

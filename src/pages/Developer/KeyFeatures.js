@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
+const config = require("../../common/config.js");
 export default class KeyFeatures extends Component {
   constructor(props) {
     super(props);
@@ -58,14 +59,14 @@ export default class KeyFeatures extends Component {
                     <i className={keyfeatures.icon}></i>
                   </div>
                   <CardBody className="p-0 mt-4">
-                    <a href="#emailAddress" alt="add email address to join waitlist" className="title h5 text-dark">
+                    <a href="#emailAddress" alt="add email address for early access" className="title h5 text-dark">
                       {keyfeatures.title}
                     </a>
                     <p className="text mt-2">
                     {keyfeatures.text}
                   </p>
                     <a href="#emailAddress" className="text-primary read-more">
-                      Join Waitlist <i className="mdi mdi-chevron-right"></i>
+                    {config.WAITLIST_TEXT + " "} <i className="mdi mdi-chevron-right"></i>
                     </a>
                     <i className={keyfeatures.hoverIcon}></i>
                   </CardBody>
