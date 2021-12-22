@@ -8,7 +8,7 @@ import {
 import { Helmet } from "react-helmet";
 import blog1 from "../../../assets/images/blog/bg1.jpg";
 import { PageView, initGA} from '../../../common/gaUtils';
-
+import WaitListButton from '../../../components/waitlist-button';
 export default class PageBlogDetailTwo extends Component {
   componentDidMount() {
     document.body.classList = "";
@@ -136,7 +136,9 @@ export default class PageBlogDetailTwo extends Component {
                       from I don't understand the code to this is how it works
                       in under five minutes!
                     </p>
+                    
                     <p className="text">Explain Code is an instrumental tool for developers who need to understand code in a very short amount of time.</p>
+                    <WaitListButton auth={false} />
                     <h2 className="mt-4">Here's how we make code easy to understand</h2>
                     <p className="text">
                       We take all the pain out of looking at others' code!
@@ -198,7 +200,7 @@ export default class PageBlogDetailTwo extends Component {
                       to know more about the project she's working on, she can
                       use Explain Code to get the gist of what everything does.
                     </p>
-
+                    <WaitListButton auth={false} />
                     <ul className="list-unstyled d-flex justify-content-between mt-4">
                       <li className="list-inline-item user me-2">
                         <Link to="/" className="text">

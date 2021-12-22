@@ -2,7 +2,7 @@ import React from 'react';
 import AuthButton from './authentication-button';
 import { useAuth0 } from '@auth0/auth0-react';
 const config = require("../common/config.js");
-const WaitlistButton = () => {
+const WaitlistButton = (props) => {
 const { isAuthenticated } = useAuth0();
 
 if(isAuthenticated){
@@ -18,7 +18,7 @@ if(isAuthenticated){
           {config.WAITLIST_TEXT + " "}
           </a>
           &nbsp;
-          <AuthButton />
+          {props.auth !== false ? <AuthButton /> : ''}
         </div>
       );
 }
