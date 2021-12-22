@@ -129,12 +129,14 @@ export default class PageBlogDetailTwo extends Component {
                       what each part does and, best of all, how those parts work
                       together.
                     </p>
+                    <h3>Imagine having a friend who could explain any code in just 5 minutes. That person would quickly become your best friend.</h3>
                     <p className="text">
                       With Explain Code, you can quickly save time on code
                       that's difficult to digest. We empower developers to go
                       from I don't understand the code to this is how it works
                       in under five minutes!
                     </p>
+                    <p className="text">Explain Code is an instrumental tool for developers who need to understand code in a very short amount of time.</p>
                     <h2 className="mt-4">Here's how we make code easy to understand</h2>
                     <p className="text">
                       We take all the pain out of looking at others' code!
