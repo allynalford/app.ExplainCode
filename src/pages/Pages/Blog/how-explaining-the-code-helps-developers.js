@@ -111,7 +111,7 @@ export default class PageBlogDetailTwo extends Component {
                       the code is hard to understand. That's where Explain Code
                       steps in.
                     </p>
-                    
+                    <p className="text">We are working with a revolutionary AI that we are deploying in the form of an easy to use web tool which understands existing code and makes it easy for you to modify and fix it. Now you can finally be productive!</p>
                     <img
                       src={blog1}
                       className="img-fluid rounded-md shadow"
