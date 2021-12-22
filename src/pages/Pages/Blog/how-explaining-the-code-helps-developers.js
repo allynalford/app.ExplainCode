@@ -55,7 +55,7 @@ export default class PageBlogDetailTwo extends Component {
             <Row className="justify-content-center">
               <Col lg={12} className="text-center">
                 <div className="page-next-level">
-                  <h3 className="title text-white title-dark">
+                  <h3 className="title text-black title-dark">
                     {' '}
                     What is Explain Code, and how does it work?{' '}
                   </h3>
@@ -201,10 +201,10 @@ export default class PageBlogDetailTwo extends Component {
 
                     <ul className="list-unstyled d-flex justify-content-between mt-4">
                       <li className="list-inline-item user me-2">
-                        <Link to="/" className="text-muted">
+                        <Link to="/" className="text">
                           <i className="uil uil-user text-dark"></i> Explain Code App Team</Link>
                       </li>
-                      <li className="list-inline-item date text-muted">
+                      <li className="list-inline-item date text">
                         <i className="uil uil-calendar-alt text-dark"></i> 21st
                         December, 2021
                       </li>

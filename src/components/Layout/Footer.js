@@ -132,7 +132,7 @@ class Footer extends Component {
                 className="mt-4 mt-sm-0 pt-2 pt-sm-0"
                 name="footercolumn"
               >
-                {this.state.grid2.length !== 0 ? <h5
+                {this.state.grid2.length !== 0 ? <h4
                   className={
                     this.props.isLight
                       ? "text-dark footer-head"
@@ -140,7 +140,7 @@ class Footer extends Component {
                   }
                 >
                   Usefull Links
-                </h5>: ""}
+                </h4>: ""}
                 
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid2.map((grid, key) => (
