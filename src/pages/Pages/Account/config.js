@@ -17,7 +17,7 @@ export function getWidgets(path){
     },
     {
       id: 2,
-      icon: "uil uil-dashboard",
+      icon: "uil uil-octagon",
       className: path.pathname === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Logout",
       link: "/logout",
@@ -32,7 +32,7 @@ export function getPrompts(path){
   const widgets = [
     {
       id: 1,
-      icon: "uil uil:list-ul",
+      icon: "uil uil-list-ul",
       className: tool === "Line-By-Line" | tool === null && path.pathname === "/dashboard" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Line by Line",
       link: "/dashboard?tool=Line-By-Line",
@@ -64,7 +64,7 @@ export function getPrompts(path){
     },
     {
       id: 5,
-      icon: "uil uil:brackets-curly",
+      icon: "uil uil-brackets-curly",
       className: tool === "Explain-Function" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Explain Function",
       link: "/dashboard?tool=Explain-Function",
