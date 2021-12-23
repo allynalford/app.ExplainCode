@@ -50,7 +50,6 @@ export default class KeyFeatures extends Component {
               </div>
             </Col>
           </Row>
-
           <Row className=" align-items-center">
             {this.state.keyfeatures.map((keyfeatures, key) => (
               <Col lg={3} md={6} className="mt-4 pt-2" key={key}>

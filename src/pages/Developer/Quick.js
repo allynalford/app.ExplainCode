@@ -202,13 +202,21 @@ export default class Quick extends Component {
       <React.Fragment>
         <Container className="mt-100 mt-60">
           <Row className="row justify-content-center">
+          <Row>
+            <Col xs={12}>
+              <div className="section-title mb-4 pb-2">
+                <h2 className="title mb-4">Your Code, Your Content</h2>
+                <p className="para-desc text mb-0">
+                We aim to never claim copyright over explanations, since the explanations belong to their authors. We do not store or log your code, and we will never use your code as training data.</p>
+              </div>
+            </Col>
+          </Row>
             <Col xs={12}>
               <div className="section-title text-center mb-4 pb-2">
                 <h2 className="text-primary">How Explain Code App Works</h2>
                 <h3 className="title mb-4">Let's dive in!</h3>
                 <p className="para-desc mx-auto text mb-0">
-                  Explain Code app uses GPT-3 (ai) to explain your the code. <br />
-                  Check out some samples
+                Check out some samples of Explain Code app using GPT-3 (ai) to explain your code.
                 </p>
               </div>
             </Col>
