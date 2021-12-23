@@ -46,11 +46,14 @@ function PageProfile({history}) {
   const { name, picture, email } = user;
   const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
+  const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
+  const codeMaxLength = 2000;
   const [theme, setTheme] = useState("terminal");
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
+  const [question, setQuestion] = useState(cachedQuestion);
   const [rating, setRating] = useState(0);
   const [codeLength, setCodeLength] = useState(0);
   const [codeLengthColor, setCodeLengthColor] = useState('black');
@@ -58,21 +61,6 @@ function PageProfile({history}) {
   const [tools] = useState(new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function']));
   const [loading, setLoading] = useState(false);
 
-  const explanationRating = {
-    size: 50,
-    count: 10,
-    color: "black",
-    activeColor: "red",
-    value: 7.5,
-    a11y: true,
-    isHalf: true,
-    emptyIcon: <i className="uil uil:star" />,
-    halfIcon: <i className="uil uil:star" />,
-    filledIcon: <i className="uil uil:star" />,
-    onChange: newValue => {
-      console.log(`Example 2: new value is ${newValue}`);
-    }
-  };
   
 
   const themes = [
@@ -158,6 +146,8 @@ function PageProfile({history}) {
 
     return () => {
       window.removeEventListener("scroll", scrollNavigation, true);
+      localStorage.removeItem('cachedCode');
+      localStorage.removeItem('cachedQuestion');
     };
   }, []);
 
@@ -198,17 +188,26 @@ function PageProfile({history}) {
 
       console.log('reading code', localStorage.getItem('cachedCode'))
       setCodeLength(code.length);
-      if(code.length >= 1000){
+      if(code.length >= codeMaxLength){
         setCodeLengthColor('red');
       }else{
         setCodeLengthColor('black');
       }
     }
     return () => {
-      window.removeEventListener("scroll", scrollNavigation, true);
-      localStorage.removeItem('cachedCode')
     };
   }, [code]);
+
+  useEffect(() => {
+
+    console.log('code', question);
+    if(typeof question !== "undefined" && question !== null){
+     
+      localStorage.setItem('cachedQuestion', question);
+    }
+    return () => {
+    };
+  }, [question]);
 
   const scrollNavigation = () => {
     var doc = document.documentElement;
@@ -247,6 +246,11 @@ function PageProfile({history}) {
         break;
       case 'Explain-Function':
         resp = await endpoint.postIAM(getGTP3().post_ExplainFunction_Prompt, {code, lang: mode, userglobaluuid});
+        console.log(resp.data);
+        text = resp.data.explanation.choices[0].text;
+        break;
+      case 'Open-Questions':
+        resp = await endpoint.postIAM(getGTP3().post_Freeform_Prompt, {code, lang: mode, question, userglobaluuid});
         console.log(resp.data);
         text = resp.data.explanation.choices[0].text;
         break;
@@ -537,7 +541,7 @@ function PageProfile({history}) {
                 >
                   Test
                 </Button> */}
-                <Button
+               {(prompt !== 'Open-Questions' ?  <Button
                   style={{ marginTop: '5px' }}
                   disabled={loading}
                   onClick={onRunPrompt}
@@ -554,12 +558,51 @@ function PageProfile({history}) {
                   ) : (
                     ''
                   )}
-                </Button>
+                </Button>:'')}
                 <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
                   {codeLength} / 1000
                 </p>
               </div>
-
+              {prompt === 'Open-Questions' ? (
+                <div className="border-bottom pb-4">
+                  <div style={{ marginTop: '5px' }}>
+                    <label for="question" style={{ fontWeight: 'bold' }}>
+                      Enter Question:
+                    </label>
+                    <textarea
+                      rows={5}
+                      cols={90}
+                      type="textarea"
+                      name="question"
+                      id="question"
+                      onChange={(e) => {
+                        setQuestion(e.target.value);
+                        localStorage.setItem('cachedQuestion', e.target.value);
+                      }}
+                    />
+                  </div>
+                  <Button
+                  style={{ marginTop: '5px' }}
+                  disabled={loading}
+                  onClick={onRunPrompt}
+                  className="btn btn-pills btn-primary"
+                >
+                  Ask Question
+                  {loading === true ? (
+                    <Ionicon
+                      style={{ marginLeft: '5px' }}
+                      color="#ffffff"
+                      icon="ios-analytics-outline"
+                      beat={loading}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </Button>
+                </div>
+              ) : (
+                ''
+              )}
               <h5 className="mt-4 mb-0">Results:</h5>
               {loading === true ? (
                 <div class="loader">Loading Explanation</div>
@@ -567,21 +610,22 @@ function PageProfile({history}) {
                 ''
               )}
               <p>
-              <ReactStars
-                count={5}
-                value={rating}
-                color = "black"
-                a11y={true}
-                onChange={newValue => {
-                  setRating(newValue);
-                }}
-                size={34}
-                isHalf={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-              />How would you rate the results?
+                <ReactStars
+                  count={5}
+                  value={rating}
+                  color="black"
+                  a11y={true}
+                  onChange={(newValue) => {
+                    setRating(newValue);
+                  }}
+                  size={34}
+                  isHalf={true}
+                  emptyIcon={<i className="far fa-star"></i>}
+                  halfIcon={<i className="fa fa-star-half-alt"></i>}
+                  fullIcon={<i className="fa fa-star"></i>}
+                  activeColor="#ffd700"
+                />
+                How would you rate the results?
               </p>
               <div
                 className="border-bottom pb-4"

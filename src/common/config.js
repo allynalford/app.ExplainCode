@@ -7,6 +7,7 @@ const serverVars = {
       post_ExplainFunction_PromptApiUrl: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
       post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
       post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
+      post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/freeform",
     },
     waitlistText: "Early Access"
   };
@@ -20,6 +21,7 @@ const serverVars = {
       post_ExplainFunction_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
       post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
       post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
+      post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/freeform",
     },
     waitlistText: "Get Early Access"
   };
