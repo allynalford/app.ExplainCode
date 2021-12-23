@@ -50,6 +50,8 @@ function PageProfile({history}) {
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line By Line");
   const [code, setCode] = useState("");
+  const [codeLength, setCodeLength] = useState(0);
+  const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [promptResponse, setPromptResponse] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -122,6 +124,21 @@ function PageProfile({history}) {
       console.log("cleaned up");
     };
   }, [query, tool]);
+
+  useEffect(() => {
+    if(typeof code !== "undefined" && code !== ""){
+      setCodeLength(code.length);
+      if(code.length >= 1000){
+        setCodeLengthColor('red');
+      }else{
+        setCodeLengthColor('black');
+      }
+    }
+    return () => {
+      console.log("cleaned up");
+      window.removeEventListener("scroll", scrollNavigation, true);
+    };
+  }, [code]);
 
   const scrollNavigation = () => {
     var doc = document.documentElement;
@@ -418,7 +435,7 @@ function PageProfile({history}) {
                 <AceEditor
                   readOnly={loading}
                   style={{ width: 'auto' }}
-                  placeholder="Placeholder Text"
+                  placeholder="Enter your code"
                   mode={mode}
                   theme={theme}
                   name="editor"
@@ -453,6 +470,7 @@ function PageProfile({history}) {
                     />
                   ):''}
                 </Button>
+                <p style={{color: codeLengthColor}}>{codeLength} / 1000</p>
               </div>
 
               <h5 className="mt-4 mb-0">Results :</h5>
@@ -460,7 +478,7 @@ function PageProfile({history}) {
               <div className="border-bottom pb-4" style={{position: 'relative'}}>
                 <AceEditor
                   style={{ width: 'auto' }}
-                  placeholder="Placeholder Text"
+                  placeholder="Explanation will appear here"
                   mode="html"
                   theme={theme}
                   name="editor-results"
