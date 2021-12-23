@@ -45,11 +45,12 @@ function PageProfile({history}) {
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
   const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
+  const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const [theme, setTheme] = useState("terminal");
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
-  const [prompt, setPrompt] = useState("Line By Line");
-  const [code, setCode] = useState(undefined);
+  const [prompt, setPrompt] = useState("Line-By-Line");
+  const [code, setCode] = useState(cachedCode);
   const [rating, setRating] = useState(0);
   const [codeLength, setCodeLength] = useState(0);
   const [codeLengthColor, setCodeLengthColor] = useState('black');
@@ -161,8 +162,7 @@ function PageProfile({history}) {
   }, []);
 
   useEffect(() => {
-    console.log('running')
-  
+    
     const toolParam = new URLSearchParams(window.location.search).get("tool");
     
     if(toolParam !== null && toolParam !== tool){
@@ -187,21 +187,16 @@ function PageProfile({history}) {
     };
   },[tool, tools]);
 
+
   useEffect(() => {
 
-    if(typeof code === "undefined"){
-      const cachedCode = localStorage.getItem('cachedCode');
+    console.log('code',code);
+    if(typeof code !== "undefined" && code !== null){
+      console.log('storing code');
 
-      if(cachedCode){
-        setCode(unescape(cachedCode));
-        setCodeLength(cachedCode.length);
-        if(cachedCode.length >= 1000){
-          setCodeLengthColor('red');
-        }else{
-          setCodeLengthColor('black');
-        }
-      }
-    }else if(code !== ""){
+      localStorage.setItem('cachedCode', code);
+
+      console.log('reading code', localStorage.getItem('cachedCode'))
       setCodeLength(code.length);
       if(code.length >= 1000){
         setCodeLengthColor('red');
@@ -575,6 +570,8 @@ function PageProfile({history}) {
               <ReactStars
                 count={5}
                 value={rating}
+                color = "black"
+                a11y={true}
                 onChange={newValue => {
                   setRating(newValue);
                 }}
