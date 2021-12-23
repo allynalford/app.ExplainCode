@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -18,7 +18,7 @@ import imgbg from "../../../assets/images/account/bg.png";
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
 import { getGTP3 } from '../../../common/config';
-
+import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 //import { Icon, InlineIcon  } from '@iconify/react';
 //import onRunPromptIcon from '@iconify/icons-emojione-monotone/confused-face';
@@ -49,11 +49,30 @@ function PageProfile({history}) {
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line By Line");
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(undefined);
+  const [rating, setRating] = useState(0);
   const [codeLength, setCodeLength] = useState(0);
   const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [promptResponse, setPromptResponse] = useState("");
+  const [tools] = useState(new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function']));
   const [loading, setLoading] = useState(false);
+
+  const explanationRating = {
+    size: 50,
+    count: 10,
+    color: "black",
+    activeColor: "red",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="uil uil:star" />,
+    halfIcon: <i className="uil uil:star" />,
+    filledIcon: <i className="uil uil:star" />,
+    onChange: newValue => {
+      console.log(`Example 2: new value is ${newValue}`);
+    }
+  };
+  
 
   const themes = [
     { label: 'Solarized Light', value: 'solarized_light' },
@@ -87,13 +106,44 @@ function PageProfile({history}) {
     fontWeight: 'bold'
   }
 
-  function useQuery() {
-    const { search } = useLocation();
+  // function useQuery() {
+  //   const { search } = useLocation();
 
-    return React.useMemo(() => new URLSearchParams(search), [search]);
+  //   return React.useMemo(() => new URLSearchParams(search), [search]);
+  // }
+
+  function switchTool(toolParam) {
+    
+    console.log(toolParam)
+
+    if(toolParam !== null && toolParam !== tool){
+
+      const isItemInSet = tools.has(toolParam);
+
+      console.log(isItemInSet)
+     
+      if(!isItemInSet){
+        window.history.replaceState(
+          null,
+          null,
+          `/dashboard?tool=Summarize`,
+        );
+        setTool('Summarize');
+        setPrompt('Summarize');
+      }else{
+        console.log(`/dashboard?tool=${toolParam}`)
+        window.history.replaceState(
+          null,
+          null,
+          `/dashboard?tool=${toolParam}`,
+        );
+        setTool(toolParam.replace("-", " "));
+        setPrompt(toolParam);
+      }
+    }
   }
 
-  let query = useQuery();
+  //let query = useQuery();
 
 
   useEffect(() => {
@@ -106,27 +156,52 @@ function PageProfile({history}) {
     }
 
     return () => {
-      console.log("cleaned up");
       window.removeEventListener("scroll", scrollNavigation, true);
     };
   }, []);
 
   useEffect(() => {
+    console.log('running')
   
-    const toolParam = query.get("tool");
+    const toolParam = new URLSearchParams(window.location.search).get("tool");
     
     if(toolParam !== null && toolParam !== tool){
-      setTool(toolParam.replace("-", " "));
-      setPrompt(toolParam);
+
+      const isItemInSet = tools.has(toolParam);
+     
+      if(!isItemInSet){
+        window.history.replaceState(
+          null,
+          null,
+          `/dashboard?tool=Summarize`,
+        );
+        setTool('Summarize');
+        setPrompt('Summarize');
+      }else{
+        setTool(toolParam.replace("-", " "));
+        setPrompt(toolParam);
+      }
     }
 
     return () => {
-      console.log("cleaned up");
     };
-  }, [query, tool]);
+  },[tool, tools]);
 
   useEffect(() => {
-    if(typeof code !== "undefined" && code !== ""){
+
+    if(typeof code === "undefined"){
+      const cachedCode = localStorage.getItem('cachedCode');
+
+      if(cachedCode){
+        setCode(unescape(cachedCode));
+        setCodeLength(cachedCode.length);
+        if(cachedCode.length >= 1000){
+          setCodeLengthColor('red');
+        }else{
+          setCodeLengthColor('black');
+        }
+      }
+    }else if(code !== ""){
       setCodeLength(code.length);
       if(code.length >= 1000){
         setCodeLengthColor('red');
@@ -135,8 +210,8 @@ function PageProfile({history}) {
       }
     }
     return () => {
-      console.log("cleaned up");
       window.removeEventListener("scroll", scrollNavigation, true);
+      localStorage.removeItem('cachedCode')
     };
   }, [code]);
 
@@ -154,6 +229,7 @@ function PageProfile({history}) {
   function onChange(newValue) {
     console.log("change", newValue);
     setCode(newValue);
+    localStorage.setItem('cachedCode', newValue);
   }
 
   function capitalizeFirstLetter(string) {
@@ -161,34 +237,32 @@ function PageProfile({history}) {
   }
 
   const onRunPrompt = async () => {
-    console.log(prompt);
     setLoading(true);
+    let resp, text;
     switch (prompt) {
       case 'Line-By-Line':
-        //getGTP3
-        setLoading(false);
+        resp = await endpoint.postIAM(getGTP3().post_Line_Prompt, {code, lang: mode, userglobaluuid});
+        console.log(resp.data);
+        text = resp.data.explanation.choices[0].text;
         break;
       case 'Summarize':
-        const resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
+        resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
         console.log(resp.data);
-        const text = resp.data.explanation.choices[0].text;
-        setPromptResponse(text);
-        setLoading(false);
+        text = resp.data.explanation.choices[0].text;
         break;
       case 'Explain-Function':
-        console.log('Mangoes and papayas are $2.79 a pound.');
-        // expected output: "Mangoes and papayas are $2.79 a pound."
-        setLoading(false);
+        resp = await endpoint.postIAM(getGTP3().post_ExplainFunction_Prompt, {code, lang: mode, userglobaluuid});
+        console.log(resp.data);
+        text = resp.data.explanation.choices[0].text;
         break;
       case 'Class-Breakdown':
-        console.log('Mangoes and papayas are $2.79 a pound.');
-        // expected output: "Mangoes and papayas are $2.79 a pound."
-        setLoading(false);
         break;
       default:
         console.log(`Sorry, we are out of ${prompt}.`);
-        setLoading(false);
     }
+
+    setPromptResponse(text);
+    setLoading(false);
   }
 
 
@@ -338,7 +412,10 @@ function PageProfile({history}) {
                           </Link>
                         ) : (
                           <Link
+                            id={widget.tool}
+                            name={widget.tool}
                             to={widget.link}
+                            //onClick={e => {switchTool(widget.tool)}}
                             className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
                           >
                             <span className="h4 mb-0">
@@ -454,6 +531,17 @@ function PageProfile({history}) {
                   }}
                 />
                 {/* <Icon style={{marginLeft: '5px'}} color={"#ffffff"} size="lg" icon={spiderIconMon}/> */}
+                {/* <Button
+                  onClick={(e) => {
+                    window.history.replaceState(
+                      null,
+                      null,
+                      `/dashboard?tool=somethingODD`,
+                    );
+                  }}
+                >
+                  Test
+                </Button> */}
                 <Button
                   style={{ marginTop: '5px' }}
                   disabled={loading}
@@ -468,14 +556,40 @@ function PageProfile({history}) {
                       icon="ios-analytics-outline"
                       beat={loading}
                     />
-                  ):''}
+                  ) : (
+                    ''
+                  )}
                 </Button>
-                <p style={{color: codeLengthColor}}>{codeLength} / 1000</p>
+                <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
+                  {codeLength} / 1000
+                </p>
               </div>
 
-              <h5 className="mt-4 mb-0">Results :</h5>
-              {loading === true ? <div class="loader">Loading Explanation</div> : ''}
-              <div className="border-bottom pb-4" style={{position: 'relative'}}>
+              <h5 className="mt-4 mb-0">Results:</h5>
+              {loading === true ? (
+                <div class="loader">Loading Explanation</div>
+              ) : (
+                ''
+              )}
+              <p>
+              <ReactStars
+                count={5}
+                value={rating}
+                onChange={newValue => {
+                  setRating(newValue);
+                }}
+                size={34}
+                isHalf={true}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#ffd700"
+              />How would you rate the results?
+              </p>
+              <div
+                className="border-bottom pb-4"
+                style={{ position: 'relative' }}
+              >
                 <AceEditor
                   style={{ width: 'auto' }}
                   placeholder="Explanation will appear here"

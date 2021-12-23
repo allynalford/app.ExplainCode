@@ -28,15 +28,15 @@ export function getWidgets(path){
 }
 
 export function getPrompts(path){
-  const pathname = path.pathname;
   const tool = new URLSearchParams(path.search).get("tool");
   const widgets = [
     {
       id: 1,
-      icon: "uil uil-line-spacing",
-      className: tool === "Line-By-Line" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      icon: "uil uil:list-ul",
+      className: tool === "Line-By-Line" | tool === null ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Line by Line",
       link: "/dashboard?tool=Line-By-Line",
+      tool: "Line-By-Line"
     },
     {
       id: 2,
@@ -44,6 +44,7 @@ export function getPrompts(path){
       className: tool === "Summarize" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Summary",
       link: "/dashboard?tool=Summarize",
+      tool: "Summarize"
     },
     {
       id: 3,
@@ -51,6 +52,7 @@ export function getPrompts(path){
       className: tool === "Class-Breakdown" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Class Breakdown",
       link: "/dashboard?tool=Class-Breakdown",
+      tool: "Class-Breakdown"
     },
     {
       id: 4,
@@ -58,13 +60,15 @@ export function getPrompts(path){
       className: tool === "Open-Questions" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Open Questions",
       link: "/dashboard?tool=Open-Questions",
+      tool: "Open-Questions"
     },
     {
       id: 5,
-      icon: "uil uil-code-branch",
-      className: path === "/dashboard" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      icon: "uil uil:brackets-curly",
+      className: tool === "Explain-Function" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Explain Function",
       link: "/dashboard?tool=Explain-Function",
+      tool: "Explain-Function"
     },
   ]
 

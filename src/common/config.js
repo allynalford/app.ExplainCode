@@ -6,6 +6,7 @@ const serverVars = {
     gtp3: {
       post_ExplainFunction_PromptApiUrl: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
       post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
+      post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
     },
     waitlistText: "Early Access"
   };
@@ -14,12 +15,11 @@ const serverVars = {
     drip: {
       addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/add",
       getSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/get", 
-      post_ExplainFunction_PromptApiUrl: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
-      post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
     },
     gtp3: {
-      post_ExplainFunction_PromptApiUrl: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
+      post_ExplainFunction_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
       post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
+      post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
     },
     waitlistText: "Get Early Access"
   };
