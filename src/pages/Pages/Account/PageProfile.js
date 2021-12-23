@@ -641,6 +641,7 @@ function PageProfile({history}) {
                   fontSize={14}
                   showPrintMargin={true}
                   showGutter={false}
+                  wrapEnabled={true}
                   highlightActiveLine={true}
                   value={promptResponse}
                   setOptions={{
