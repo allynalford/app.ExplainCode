@@ -11,16 +11,16 @@ export function getWidgets(path){
     {
       id: 1,
       icon: "uil uil-setting",
-      className: path === "/page-profile-edit" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      className: path.pathname === "/settings" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Settings",
-      link: "/page-profile-edit",
+      link: "/settings",
     },
     {
       id: 2,
       icon: "uil uil-dashboard",
-      className: path === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      className: path.pathname === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Logout",
-      link: "/auth-login-three",
+      link: "/logout",
     },
   ]
 
@@ -33,7 +33,7 @@ export function getPrompts(path){
     {
       id: 1,
       icon: "uil uil:list-ul",
-      className: tool === "Line-By-Line" | tool === null ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      className: tool === "Line-By-Line" | tool === null && path.pathname === "/dashboard" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Line by Line",
       link: "/dashboard?tool=Line-By-Line",
       tool: "Line-By-Line"

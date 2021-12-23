@@ -287,7 +287,7 @@ const routes = [
     { path: "/page-members", component: PageMembers, protected: true },
     { path: "/page-works", component: PageWorks, protected: true },
     { path: "/page-messages", component: PageMessages, protected: true },
-    { path: "/page-profile-edit", component: PageProfileEdit, protected: true },
+    { path: "/settings", component: PageProfileEdit, protected: true },
     { path: "/page-payments", component: PagePayments, protected: true },
     { path: "/page-invoice", component: PageInvoice, isTopbarDark: true, protected: true },
 

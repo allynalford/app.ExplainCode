@@ -19,7 +19,7 @@ import FeatherIcon from "feather-icons-react";
 //Import Images
 import imgbg from "../../../assets/images/account/bg.png";
 import { useAuth0 } from '@auth0/auth0-react';
-import { getWidgets } from './config';
+import { getWidgets, getPrompts } from './config';
 
 
 
@@ -176,13 +176,53 @@ function PageProfileEdit({history}) {
                   </Progress> */}
                   </div>
                 </div>
-
+                <div className="widget mt-4">
+                  <h5 className="widget-title">Tools:</h5>
+                  <ul
+                    className="list-unstyled sidebar-nav mb-0"
+                    id="navmenu-nav"
+                  >
+                    {getPrompts(window.location).map((widget, key) => (
+                      <li className={widget.className} key={key}>
+                        {widget.title === 'Logout' ? (
+                          <Link
+                            onClick={() =>
+                              logout({
+                                returnTo: window.location.origin,
+                              })
+                            }
+                            to={'#'}
+                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
+                          >
+                            <span className="h4 mb-0">
+                              <i className={widget.icon}></i>
+                            </span>
+                            <h6 className="mb-0 ms-2">{widget.title}</h6>
+                          </Link>
+                        ) : (
+                          <Link
+                            id={widget.tool}
+                            name={widget.tool}
+                            to={widget.link}
+                            //onClick={e => {switchTool(widget.tool)}}
+                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
+                          >
+                            <span className="h4 mb-0">
+                              <i className={widget.icon}></i>
+                            </span>
+                            <h6 className="mb-0 ms-2">{widget.title}</h6>
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <div className="widget mt-4">
                   <ul
                     className="list-unstyled sidebar-nav mb-0"
                     id="navmenu-nav"
                   >
-                    {getWidgets(window.location.pathname).map((widget, key) => (
+                    {getWidgets(window.location).map((widget, key) => (
                       <li className={widget.className} key={key}>
                         {(widget.title === "Logout" ? 
                         <Link
