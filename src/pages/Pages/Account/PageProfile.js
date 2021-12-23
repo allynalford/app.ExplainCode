@@ -6,6 +6,7 @@ import {
   Col,
   Card,
   CardBody,
+  Button
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
@@ -16,7 +17,12 @@ import imgbg from "../../../assets/images/account/bg.png";
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
+import { getGTP3 } from '../../../common/config';
 
+import Ionicon from 'react-ionicons';
+//import { Icon, InlineIcon  } from '@iconify/react';
+//import onRunPromptIcon from '@iconify/icons-emojione-monotone/confused-face';
+//'@iconify/icons-emojione-monotone/chart-increasing'
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-golang";
 import "ace-builds/src-noconflict/mode-mysql";
@@ -30,13 +36,22 @@ import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-kuroir";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-solarized_light";
+import './loader.css';
+const endpoint = require('../../../common/endpoint');
+
+
 function PageProfile({history}) {
  
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
+  const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
   const [theme, setTheme] = useState("terminal");
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
+  const [prompt, setPrompt] = useState("Line By Line");
+  const [code, setCode] = useState("");
+  const [promptResponse, setPromptResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const themes = [
     { label: 'Solarized Light', value: 'solarized_light' },
@@ -88,7 +103,6 @@ function PageProfile({history}) {
       console.log(e);
     }
 
-
     return () => {
       console.log("cleaned up");
       window.removeEventListener("scroll", scrollNavigation, true);
@@ -101,6 +115,7 @@ function PageProfile({history}) {
     
     if(toolParam !== null && toolParam !== tool){
       setTool(toolParam.replace("-", " "));
+      setPrompt(toolParam);
     }
 
     return () => {
@@ -121,10 +136,42 @@ function PageProfile({history}) {
 
   function onChange(newValue) {
     console.log("change", newValue);
+    setCode(newValue);
   }
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const onRunPrompt = async () => {
+    console.log(prompt);
+    setLoading(true);
+    switch (prompt) {
+      case 'Line-By-Line':
+        //getGTP3
+        setLoading(false);
+        break;
+      case 'Summarize':
+        const resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
+        console.log(resp.data);
+        const text = resp.data.explanation.choices[0].text;
+        setPromptResponse(text);
+        setLoading(false);
+        break;
+      case 'Explain-Function':
+        console.log('Mangoes and papayas are $2.79 a pound.');
+        // expected output: "Mangoes and papayas are $2.79 a pound."
+        setLoading(false);
+        break;
+      case 'Class-Breakdown':
+        console.log('Mangoes and papayas are $2.79 a pound.');
+        // expected output: "Mangoes and papayas are $2.79 a pound."
+        setLoading(false);
+        break;
+      default:
+        console.log(`Sorry, we are out of ${prompt}.`);
+        setLoading(false);
+    }
   }
 
 
@@ -224,7 +271,7 @@ function PageProfile({history}) {
                 <div className="widget mb-4 pb-4 border-bottom">
                   <h5 className="widget-title">Language</h5>
                   <div className="mt-4 mb-0">
-                  <Select
+                    <Select
                       aria-label="Select an Language"
                       className="form-select form-control"
                       theme={(theme) => ({
@@ -238,11 +285,11 @@ function PageProfile({history}) {
                         //     primary25: '#009FD4',
                         //     primary: '#009FD4',
                         // },
-                    })}
+                      })}
                       styles={customStyles}
                       id="modes-select"
                       options={modes}
-                      selectValue={"javascript"}
+                      selectValue={'javascript'}
                       onChange={(opt) => {
                         setMode(opt.value);
                       }}
@@ -304,7 +351,7 @@ function PageProfile({history}) {
                         //     primary25: '#009FD4',
                         //     primary: '#009FD4',
                         // },
-                    })}
+                      })}
                       styles={customStyles}
                       id="themes"
                       options={themes}
@@ -361,13 +408,15 @@ function PageProfile({history}) {
                 <p className="text mb-0">Explain what this process does here</p>
                 <ul>
                   <li>
-                    Language: {mode === "mysql" ? "SQL" : capitalizeFirstLetter(mode)}
+                    Language:{' '}
+                    {mode === 'mysql' ? 'SQL' : capitalizeFirstLetter(mode)}
                   </li>
                 </ul>
               </div>
 
               <div className="border-bottom pb-4">
                 <AceEditor
+                  readOnly={loading}
                   style={{ width: 'auto' }}
                   placeholder="Placeholder Text"
                   mode={mode}
@@ -378,9 +427,7 @@ function PageProfile({history}) {
                   showPrintMargin={true}
                   showGutter={true}
                   highlightActiveLine={true}
-                  value={`function onLoad(editor) {
-  console.log("i've loaded");
-}`}
+                  value={code}
                   setOptions={{
                     enableBasicAutocompletion: false,
                     enableLiveAutocompletion: false,
@@ -389,10 +436,28 @@ function PageProfile({history}) {
                     tabSize: 2,
                   }}
                 />
+                {/* <Icon style={{marginLeft: '5px'}} color={"#ffffff"} size="lg" icon={spiderIconMon}/> */}
+                <Button
+                  style={{ marginTop: '5px' }}
+                  disabled={loading}
+                  onClick={onRunPrompt}
+                  className="btn btn-pills btn-primary"
+                >
+                  Explain
+                  {loading === true ? (
+                    <Ionicon
+                      style={{ marginLeft: '5px' }}
+                      color="#ffffff"
+                      icon="ios-analytics-outline"
+                      beat={loading}
+                    />
+                  ):''}
+                </Button>
               </div>
 
               <h5 className="mt-4 mb-0">Results :</h5>
-              <div className="border-bottom pb-4">
+              {loading === true ? <div class="loader">Loading Explanation</div> : ''}
+              <div className="border-bottom pb-4" style={{position: 'relative'}}>
                 <AceEditor
                   style={{ width: 'auto' }}
                   placeholder="Placeholder Text"
@@ -404,7 +469,7 @@ function PageProfile({history}) {
                   showPrintMargin={true}
                   showGutter={false}
                   highlightActiveLine={true}
-                  value={`1. Test \n2. Test`}
+                  value={promptResponse}
                   setOptions={{
                     enableBasicAutocompletion: false,
                     enableLiveAutocompletion: false,

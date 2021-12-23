@@ -57,6 +57,13 @@ export function getPrompts(path){
       title: "Open Questions",
       link: "/dashboard?tool=Open-Questions",
     },
+    {
+      id: 5,
+      icon: "uil uil-code-branch",
+      className: path === "/dashboard" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Explain Function",
+      link: "/dashboard?tool=Explain-Function",
+    },
   ]
 
   return widgets;
