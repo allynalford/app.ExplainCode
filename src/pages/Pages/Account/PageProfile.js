@@ -319,7 +319,7 @@ function PageProfile({history}) {
                     className="list-unstyled sidebar-nav mb-0"
                     id="navmenu-nav"
                   >
-                    {getPrompts(window.location.path).map((widget, key) => (
+                    {getPrompts(window.location).map((widget, key) => (
                       <li className={widget.className} key={key}>
                         {widget.title === 'Logout' ? (
                           <Link
