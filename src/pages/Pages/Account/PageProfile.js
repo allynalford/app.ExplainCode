@@ -4,16 +4,13 @@ import {
   Container,
   Row,
   Col,
-  Card,
-  CardBody,
   Button
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
+import copy from 'copy-to-clipboard';
 //Import Images
-import imgbg from "../../../assets/images/account/bg.png";
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
@@ -43,7 +40,6 @@ const endpoint = require('../../../common/endpoint');
 function PageProfile({history}) {
  
   const { user, logout } = useAuth0();
-  const { name, picture, email } = user;
   const [userglobaluuid, setUserglobaluuid] = useState("");
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
@@ -477,24 +473,28 @@ function PageProfile({history}) {
                 >
                   Test
                 </Button> */}
-               {(prompt !== 'Open-Questions' ?  <Button
-                  style={{ marginTop: '5px' }}
-                  disabled={loading}
-                  onClick={onRunPrompt}
-                  className="btn btn-pills btn-primary"
-                >
-                  Explain
-                  {loading === true ? (
-                    <Ionicon
-                      style={{ marginLeft: '5px' }}
-                      color="#ffffff"
-                      icon="ios-analytics-outline"
-                      beat={loading}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </Button>:'')}
+                {prompt !== 'Open-Questions' ? (
+                  <Button
+                    style={{ marginTop: '5px' }}
+                    disabled={loading}
+                    onClick={onRunPrompt}
+                    className="btn btn-pills btn-primary"
+                  >
+                    Explain
+                    {loading === true ? (
+                      <Ionicon
+                        style={{ marginLeft: '5px' }}
+                        color="#ffffff"
+                        icon="ios-analytics-outline"
+                        beat={loading}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </Button>
+                ) : (
+                  ''
+                )}
                 <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
                   {codeLength} / 1000
                 </p>
@@ -518,23 +518,23 @@ function PageProfile({history}) {
                     />
                   </div>
                   <Button
-                  style={{ marginTop: '5px' }}
-                  disabled={loading}
-                  onClick={onRunPrompt}
-                  className="btn btn-pills btn-primary"
-                >
-                  Ask Question
-                  {loading === true ? (
-                    <Ionicon
-                      style={{ marginLeft: '5px' }}
-                      color="#ffffff"
-                      icon="ios-analytics-outline"
-                      beat={loading}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </Button>
+                    style={{ marginTop: '5px' }}
+                    disabled={loading}
+                    onClick={onRunPrompt}
+                    className="btn btn-pills btn-primary"
+                  >
+                    Ask Question
+                    {loading === true ? (
+                      <Ionicon
+                        style={{ marginLeft: '5px' }}
+                        color="#ffffff"
+                        icon="ios-analytics-outline"
+                        beat={loading}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </Button>
                 </div>
               ) : (
                 ''
@@ -545,27 +545,41 @@ function PageProfile({history}) {
               ) : (
                 ''
               )}
-              
-                <ReactStars
-                  count={5}
-                  value={rating}
-                  color="black"
-                  a11y={true}
-                  onChange={(newValue) => {
-                    setRating(newValue);
-                  }}
-                  size={34}
-                  isHalf={true}
-                  emptyIcon={<i className="far fa-star"></i>}
-                  halfIcon={<i className="fa fa-star-half-alt"></i>}
-                  fullIcon={<i className="fa fa-star"></i>}
-                  activeColor="#ffd700"
-                />
-                <p>How would you rate the results?</p>
+
+              <ReactStars
+                count={5}
+                value={rating}
+                color="black"
+                a11y={true}
+                onChange={(newValue) => {
+                  setRating(newValue);
+                }}
+                size={34}
+                isHalf={true}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#ffd700"
+              />
+              <p>How would you rate the results?</p>
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}
               >
+                <div>
+                  {' '}
+                  <Button
+                    size="sm"
+                    style={{ marginTop: '5px' }}
+                    disabled={loading}
+                    onClick={(e) => {
+                      copy(promptResponse);
+                    }}
+                    className="btn btn-pills btn-secondary"
+                  >
+                    Copy to clipboard
+                  </Button>
+                </div>
                 <AceEditor
                   style={{ width: 'auto' }}
                   placeholder="Explanation will appear here"
