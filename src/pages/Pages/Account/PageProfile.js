@@ -135,7 +135,6 @@ function PageProfile({history}) {
     try {
       document.getElementById('top-menu').classList.add('nav-light');
       window.addEventListener('scroll', scrollNavigation, true);
-      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
     } catch (e) {
       console.log(e);
     }
@@ -146,6 +145,13 @@ function PageProfile({history}) {
       localStorage.removeItem('cachedQuestion');
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+    return () => {
+
+    };
+  }, [user]);
 
   useEffect(() => {
     
