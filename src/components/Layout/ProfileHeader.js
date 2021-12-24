@@ -89,7 +89,7 @@ function ProfileHeader({history}) {
                           <ul className="list-inline mb-0 mt-3">
                           <li className="list-inline-item me-2">
                                 <a
-                                  href={`https://www.twitter.com/${twitter}`}
+                                  href={`https://www.twitter.com/${(typeof twitter !== "undefined" ? twitter : "")}`}
                                   target={"_new"}
                                   className="text-muted"
                                   title="twitter"
@@ -105,7 +105,7 @@ function ProfileHeader({history}) {
                               </li>
                               <li className="list-inline-item me-2">
                                 <a
-                                  href={`https://www.instagram.com/${instagram}`}
+                                  href={`https://www.instagram.com/${(typeof instagram !== "undefined" ? instagram : "")}`}
                                   target={"_new"}
                                   className="text-muted"
                                   title="instagram"
