@@ -73,7 +73,7 @@ function ProfileHeader({history}) {
                       <img
                         src={picture}
                         className="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                        alt=""
+                        alt={name}
                       />
                     </Col>
 
@@ -100,7 +100,7 @@ function ProfileHeader({history}) {
                                       className="fea icon-sm me-2"
                                     />
                                   </i>
-                                  {user_metadata.twitter}
+                                  {twitter}
                                 </a>
                               </li>
                               <li className="list-inline-item me-2">
@@ -116,7 +116,7 @@ function ProfileHeader({history}) {
                                       className="fea icon-sm me-2"
                                     />
                                   </i>
-                                  {user_metadata.instagram}
+                                  {instagram}
                                 </a>
                               </li>
                               <li className="list-inline-item ms-1">
