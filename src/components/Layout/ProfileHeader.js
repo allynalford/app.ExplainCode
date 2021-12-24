@@ -16,6 +16,10 @@ function ProfileHeader({history}) {
   const { name, picture, email } = user;
   const [userglobaluuid, setUserglobaluuid] = useState("");
   const [user_metadata, setUserMetadata] = useState({});
+  const [occupation, setOccupation] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [linkedin, setLinkedin] = useState("");
 
 
 
@@ -23,13 +27,7 @@ function ProfileHeader({history}) {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    if (typeof user !== 'undefined') {
-      setUserglobaluuid(user_metadata.userglobaluuid);
-    }
 
-    return () => {};
-  }, [user_metadata]);
 
   useEffect(() => {
     // if(typeof user !== "undefined"){
@@ -38,7 +36,18 @@ function ProfileHeader({history}) {
 
     setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
     return () => {};
-  }, [user]);
+  }, [ user ]);
+
+  useEffect(() => {
+    if (typeof user !== 'undefined') {
+      setUserglobaluuid(user_metadata.userglobaluuid);
+      setOccupation(user_metadata.occupation);
+      setTwitter(user_metadata.twitter);
+      setInstagram(user_metadata.instagram);
+      setLinkedin(user_metadata.linkedin);
+    }
+    return () => {};
+  }, [ user_metadata, user ]);
 
   useEffect(() => {
     return () => {};
@@ -75,12 +84,12 @@ function ProfileHeader({history}) {
                           className="text-md-start text-center mt-4 mt-sm-0"
                         >
                           <h3 className="title mb-0">{name}</h3>
-                          <small className="text h6 me-2">{user_metadata.occupation}</small><br />
+                          <small className="text h6 me-2">{occupation}</small><br />
                           <small className="text h6 me-2">{email}</small>
                           <ul className="list-inline mb-0 mt-3">
                           <li className="list-inline-item me-2">
                                 <a
-                                  href={`https://www.twitter.com/${user_metadata.twitter}`}
+                                  href={`https://www.twitter.com/${twitter}`}
                                   target={"_new"}
                                   className="text-muted"
                                   title="twitter"
@@ -96,7 +105,7 @@ function ProfileHeader({history}) {
                               </li>
                               <li className="list-inline-item me-2">
                                 <a
-                                  href={`https://www.instagram.com/${user_metadata.instagram}`}
+                                  href={`https://www.instagram.com/${instagram}`}
                                   target={"_new"}
                                   className="text-muted"
                                   title="instagram"
@@ -123,7 +132,7 @@ function ProfileHeader({history}) {
                                       className="fea icon-sm me-2"
                                     />
                                   </i>
-                                  {user_metadata.linkedin}
+                                  {linkedin}
                                 </a>
                               </li>
                             </ul>
