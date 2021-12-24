@@ -9,6 +9,10 @@ const serverVars = {
       post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
       post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/freeform",
     },
+    auth0:{
+      updateProfile: process.env.REACT_APP_BASE_API_URL + "/profile/update",
+      profileAuth: process.env.REACT_APP_BASE_API_URL + "/profile/auth",
+    },
     waitlistText: "Early Access"
   };
   
@@ -22,6 +26,10 @@ const serverVars = {
       post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
       post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
       post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/freeform",
+    },
+    auth0:{
+      updateProfile: process.env.REACT_APP_BASE_API_URL + "/profile/update",
+      profileAuth: process.env.REACT_APP_BASE_API_URL + "/profile/auth",
     },
     waitlistText: "Get Early Access"
   };
@@ -47,3 +55,11 @@ const serverVars = {
     };
     return localVars.gtp3;
   };
+
+  
+  export function getAuth0() {
+    if (process.env.NODE_ENV === 'production') {
+      return serverVars.auth0;
+    }
+    return localVars.auth0;
+  }

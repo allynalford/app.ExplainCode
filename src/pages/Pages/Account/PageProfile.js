@@ -97,36 +97,36 @@ function PageProfile({history}) {
   //   return React.useMemo(() => new URLSearchParams(search), [search]);
   // }
 
-  function switchTool(toolParam) {
+  // function switchTool(toolParam) {
     
-    console.log(toolParam)
+  //   console.log(toolParam)
 
-    if(toolParam !== null && toolParam !== tool){
+  //   if(toolParam !== null && toolParam !== tool){
 
-      const isItemInSet = tools.has(toolParam);
+  //     const isItemInSet = tools.has(toolParam);
 
-      console.log(isItemInSet)
+  //     console.log(isItemInSet)
      
-      if(!isItemInSet){
-        window.history.replaceState(
-          null,
-          null,
-          `/dashboard?tool=Summarize`,
-        );
-        setTool('Summarize');
-        setPrompt('Summarize');
-      }else{
-        console.log(`/dashboard?tool=${toolParam}`)
-        window.history.replaceState(
-          null,
-          null,
-          `/dashboard?tool=${toolParam}`,
-        );
-        setTool(toolParam.replace("-", " "));
-        setPrompt(toolParam);
-      }
-    }
-  }
+  //     if(!isItemInSet){
+  //       window.history.replaceState(
+  //         null,
+  //         null,
+  //         `/dashboard?tool=Summarize`,
+  //       );
+  //       setTool('Summarize');
+  //       setPrompt('Summarize');
+  //     }else{
+  //       console.log(`/dashboard?tool=${toolParam}`)
+  //       window.history.replaceState(
+  //         null,
+  //         null,
+  //         `/dashboard?tool=${toolParam}`,
+  //       );
+  //       setTool(toolParam.replace("-", " "));
+  //       setPrompt(toolParam);
+  //     }
+  //   }
+  // }
 
   //let query = useQuery();
 

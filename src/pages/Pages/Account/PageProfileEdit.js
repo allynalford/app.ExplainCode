@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -11,84 +11,82 @@ import {
   Label,
   CardBody,
   Card,
-} from "reactstrap";
+} from 'reactstrap';
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from 'feather-icons-react';
 import Ionicon from 'react-ionicons';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
-
-import ProfileHeader from "../../../components/Layout/ProfileHeader";
-
-function PageProfileEdit({history}) {
-  
+import { getAuth0 } from '../../../common/config';
+import ProfileHeader from '../../../components/Layout/ProfileHeader';
+const endpoint = require('../../../common/endpoint');
+function PageProfileEdit({ history }) {
   const { user, logout } = useAuth0();
-  const { name, picture, email } = user;
- 
+  const { name, picture, email, sub, family_name, given_name } = user;
 
-  const [userglobaluuid, setUserglobaluuid] = useState("");
+  //const [userglobaluuid, setUserglobaluuid] = useState('');
   const [user_metadata, setUserMetadata] = useState({});
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
-  const [firstName, setFirstName] = useState((typeof name !== "undefined" ? name.split(' ')[0] : ""));
-  const [lastName, setLastName] = useState((typeof name !== "undefined" ? name.split(' ')[1] : ""));
+  const [firstName, setFirstName] = useState(given_name);
+  const [lastName, setLastName] = useState(family_name);
+  const [blocked] = useState(false);
   const [emailAddress, setEmailAddress] = useState(email);
-  const [occupation, setOccupation] = useState(user_metadata.occupation);
-  const [description, setDescription] = useState(user_metadata.description);
-  const [fieldChanged, setFieldChanged] = useState(false);
+  //const [fieldChanged, setFieldChanged] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertColor, setAlertColor] = useState('primary');
   //const [user, setUser] = useState();
 
-
   useEffect(() => {
-    document.body.classList = "";
-    document.getElementById("top-menu").classList.add("nav-light");
-    window.addEventListener("scroll", scrollNavigation, true);
-
-    setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-
-    if(typeof user !== "undefined"){
-      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid)
-    }
-    
+    document.body.classList = '';
+    document.getElementById('top-menu').classList.add('nav-light');
+    window.addEventListener('scroll', scrollNavigation, true);
 
     return () => {
-      window.removeEventListener("scroll", scrollNavigation, true);
+      window.removeEventListener('scroll', scrollNavigation, true);
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof user !== 'undefined') {
+      setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+      // setUserglobaluuid(
+      //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
+      // );
+    }
+    return () => {};
   }, [user]);
 
   useEffect(() => {
+    // if (typeof user_metadata !== 'undefined') {
+    //   setUserglobaluuid(user_metadata.userglobaluuid);
+    // }
+    return () => {};
+  }, [user_metadata]);
 
-
-    return () => {
-    };
+  useEffect(() => {
+    return () => {};
   }, [name, picture, email]);
 
   const scrollNavigation = () => {
     var doc = document.documentElement;
     var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     if (top > 80) {
-      document.getElementById("topnav").classList.add("nav-sticky");
+      document.getElementById('topnav').classList.add('nav-sticky');
     } else {
-      document.getElementById("topnav").classList.remove("nav-sticky");
+      document.getElementById('topnav').classList.remove('nav-sticky');
     }
   };
 
-  const handleSubmit = (event) =>{
+
+
+  const handleSubmit3 = (event) => {
     event.preventDefault();
     setSuccessMsg(true);
-  }
-
-
-  const handleSubmit3 = (event) =>{
-    event.preventDefault();
-    setSuccessMsg(true);
-  }
-
-
-
+  };
 
   return (
     <React.Fragment>
@@ -223,13 +221,13 @@ function PageProfileEdit({history}) {
 
             <Col lg="9" xs="12">
               <Alert
-                color="primary"
+                color={alertColor}
                 isOpen={profileUpdated}
                 toggle={() => {
                   setProfileUpdated(!profileUpdated);
                 }}
               >
-                Profile successfully updated.
+                {alertMessage}
               </Alert>
               <Card className="border-0 rounded shadow">
                 <CardBody>
@@ -256,7 +254,7 @@ function PageProfileEdit({history}) {
                         </Link>
                       </div> */}
                   </div>
-                  <Form onSubmit={handleSubmit}>
+                  <Form>
                     <Row className="mt-4">
                       <Col md="6">
                         <div className="mb-3">
@@ -276,6 +274,7 @@ function PageProfileEdit({history}) {
                             value={firstName}
                             onChange={(e) => {
                               setFirstName(e.target.value);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="First Name :"
@@ -301,6 +300,7 @@ function PageProfileEdit({history}) {
                             value={lastName}
                             onChange={(e) => {
                               setLastName(e.target.value);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Last Name :"
@@ -327,6 +327,7 @@ function PageProfileEdit({history}) {
                             disabled={true}
                             onClick={(e) => {
                               setEmailAddress(e.target.value);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Your email :"
@@ -348,12 +349,12 @@ function PageProfileEdit({history}) {
                             name="occupation"
                             id="occupation"
                             type="text"
-                            value={occupation}
+                            value={user_metadata.occupation}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
-                              setOccupation(e.target.value);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Occupation :"
@@ -381,6 +382,7 @@ function PageProfileEdit({history}) {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Twitter Handle :"
@@ -408,6 +410,7 @@ function PageProfileEdit({history}) {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Instagram Handle :"
@@ -435,6 +438,7 @@ function PageProfileEdit({history}) {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="LinkedIn Profile Name :"
@@ -457,12 +461,12 @@ function PageProfileEdit({history}) {
                             name="description"
                             id="description"
                             rows="4"
-                            value={description}
+                            value={user_metadata.description}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
-                              setDescription(e.target.value);
+                              //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
                             placeholder="Description :"
@@ -474,19 +478,51 @@ function PageProfileEdit({history}) {
                     <Row>
                       <Col sm="12">
                         <Button
-                          id="submit"
-                          name="send"
+                          id="updateprofile"
+                          name="updateprofile"
                           className="btn btn-primary"
                           value="Save Changes"
                           disabled={loading}
                           onClick={(e) => {
-                            if (fieldChanged === true) {
-                              console.log(fieldChanged);
-                            }
+                            e.preventDefault();
+                            setLoading(true);
+                            //if (fieldChanged === true) {
+                              //console.log(fieldChanged);
+                            //}
+                            //Call the service
+                            endpoint
+                              .postIAM(getAuth0().updateProfile, {
+                                id: sub,
+                                email,
+                                firstname: firstName,
+                                lastname: lastName,
+                                blocked,
+                                user_metadata,
+                              })
+                              .then((res) => {
+                               
+                                if (res.data.success === true) {
+                                  setAlertColor('primary');
+                                  setAlertMessage(
+                                    'Profile Successfully updated.',
+                                  );
+                                } else {
+                                  setAlertColor('primary');
+                                  setAlertMessage(res.data.message);
+                                }
+
+                                setLoading(false);
+                              })
+                              .catch((err) => {
+                                setAlertColor('danger');
+                                setAlertMessage(err.message);
+                                setLoading(false);
+                              });
+
                             setProfileUpdated(true);
                           }}
                         >
-                          Ask Question
+                          Save Changes
                           {loading === true ? (
                             <Ionicon
                               style={{ marginLeft: '5px' }}
@@ -743,7 +779,6 @@ function PageProfileEdit({history}) {
       </section>
     </React.Fragment>
   );
-};
+}
 
 export default PageProfileEdit;
-

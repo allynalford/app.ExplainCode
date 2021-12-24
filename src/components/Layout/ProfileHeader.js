@@ -12,9 +12,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import FeatherIcon from "feather-icons-react";
 function ProfileHeader({history}) {
  
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
   const { name, picture, email } = user;
-  const [userglobaluuid, setUserglobaluuid] = useState("");
+  //const [userglobaluuid, setUserglobaluuid] = useState("");
   const [user_metadata, setUserMetadata] = useState({});
   const [occupation, setOccupation] = useState("");
   const [twitter, setTwitter] = useState("");
@@ -40,7 +40,7 @@ function ProfileHeader({history}) {
 
   useEffect(() => {
     if (typeof user_metadata !== "undefined") {
-      setUserglobaluuid(user_metadata.userglobaluuid);
+      //setUserglobaluuid(user_metadata.userglobaluuid);
       setOccupation(user_metadata.occupation);
       setTwitter(user_metadata.twitter);
       setInstagram(user_metadata.instagram);
