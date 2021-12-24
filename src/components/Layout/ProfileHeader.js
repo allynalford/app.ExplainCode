@@ -20,16 +20,28 @@ function ProfileHeader({history}) {
 
 
   useEffect(() => {
-    setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
-    setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-  return () => {
-  };
-}, []);
+    return () => {};
+  }, []);
 
   useEffect(() => {
+    if (typeof user !== 'undefined') {
+      setUserglobaluuid(user_metadata.userglobaluuid);
+    }
 
-    return () => {
-    };
+    return () => {};
+  }, [user_metadata]);
+
+  useEffect(() => {
+    // if(typeof user !== "undefined"){
+    //   setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+    // }
+
+    setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+    return () => {};
+  }, [user]);
+
+  useEffect(() => {
+    return () => {};
   }, [name, picture, email]);
 
 
