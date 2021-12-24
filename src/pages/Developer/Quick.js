@@ -133,7 +133,7 @@ export default class Quick extends Component {
 
   hightlightWithLineNumbers = (input, language, codeType) => {
     var NodeJsCode = highlight(
-      "var http = require('http');\nhttp.createServer(function (req, res) {\n    res.writeHead(200, {'Content-Type': 'text/plain'});\n    res.end('Hello Node.js World!');\n}).listen(8080);",
+      "const fs = require('fs');\n \nvar jsonData = '{\"persons\":[{\"name\":\"John\",\"city\":\"New York\"},{\"name\":\"Phil\",\"city\":\"Ohio\"}]}';\n \n\nvar jsonObj = JSON.parse(jsonData);\nconsole.log(jsonObj);\n \nvar jsonContent = JSON.stringify(jsonObj);\nconsole.log(jsonContent);\n \nfs.writeFile(\"output.json\", jsonContent, 'utf8', function (err) {\n    if (err) {\n        console.log(\"An error occured while writing JSON Object to File.\");\n        return console.log(err);\n    }\n \n    console.log(\"JSON file has been saved.\");\n});",
       languages.js,
     )
       .split('\n')
@@ -143,7 +143,7 @@ export default class Quick extends Component {
       )
       .join('\n');
     var PythonCode = highlight(
-      "import time\n\ndef countdown(time_sec):\n    while time_sec:\n        mins, secs = divmod(time_sec, 60)\n        timeformat = '{:02d}:{:02d}'.format(mins, secs)\n        print(timeformat, end='\\r')\n        time.sleep(1)\n        time_sec -= 1\n\n    print(\"stop\")\n\ncountdown(5)",
+      "import math\n\n\ndef isPerfectSquare(x):\n\ts = int(math.sqrt(x))\n\treturn s*s == x\n\n\ndef isFibonacci(n):\n\n\t# n is Fibinacci if one of 5*n*n + 4 or 5*n*n - 4 or both\n\t# is a perferct square\n\treturn isPerfectSquare(5*n*n + 4) or isPerfectSquare(5*n*n - 4)\n\t\n\nfor i in range(1,11):\n\tif (isFibonacci(i) == True):\n\t\tprint i,\"is a Fibonacci Number\"\n\telse:\n\t\tprint i,\"is a not Fibonacci Number \"",
       languages.python,
     )
       .split('\n')
@@ -321,7 +321,7 @@ export default class Quick extends Component {
                           className="btn btn-primary"
                           style={{ marginTop: '10px' }}
                         >
-                          Explain NodeJS Code
+                          NodeJS Open Question
                         </Button>
                       </TabPane>
                       <TabPane className="fade show" tabId="2">
@@ -379,58 +379,68 @@ export default class Quick extends Component {
 
               {this.state.NodeJsExplanation === true ? (
                 <div>
-                  <h5>NodeJS Code GPT-3 Explanation</h5>
+                  <h5>NodeJS Code GPT-3 Question: can you explain this code to me please?</h5>
                   <div style={{fontSize: "1.25rem"}}>
-                  <ul className="list-unstyled text mb-0 mt-3">
+                   <ul className="list-unstyled text mb-0 mt-4">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The http module is required.
+                      {`var jsonData = '{"persons":[{"name":"John","city":"New York"},{"name":"Phil","city":"Ohio"}]}';`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The http module is used to create a server.
+                      {`This code assigns the string value '{"persons":[{"name":"John","city":"New York"},{"name":"Phil","city":"Ohio"}]}' to the variable jsonData.`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The server is created and a callback function is passed to
-                      it.
+                      {`var jsonObj = JSON.parse(jsonData);`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The callback function is executed when a request is
-                      received.
+                      {`This code parses the JSON string in jsonData and assigns it to the variable jsonObj.`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The callback function sends a response to the client.
+                      {`console.log(jsonObj);`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The response is sent as a plain text.
+                      {`This line prints the contents of the variable jsonObj to the console. In this case, the object stored in jsonObj contains two key-value pairs, 'name' and 'city', with the values 'John' and 'New York' respectively.`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The server listens on port 8080.
+                      {`var jsonContent = JSON.stringify(jsonObj);`}
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The server is started.
+                      {`This code converts the object in jsonObj to a JSON string and assigns it to the variable jsonContent.`}
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-brackets-curly align-middle"></i>
+                      </span>
+                      {`console.log(jsonContent);`}
+                    </li>
+                    <li className="list-item me-lg-5 me-4">
+                      <span className="text-success h5 me-2">
+                        <i className="uil uil-brackets-curly align-middle"></i>
+                      </span>
+                      {`This line prints the contents of the variable jsonContent to the console. In this case, the string value '{"persons":[{"name":"John","city":"New York"},{"name":"Phil","city":"Ohio"}]}' is printed.`}
                     </li>
                   </ul>
                   </div>
@@ -443,64 +453,30 @@ export default class Quick extends Component {
                 <div>
                   <h5>Python Code GPT-3 Explanation</h5>
                   <div style={{fontSize: "1.25rem"}}>
-                  <ul className="list-unstyled text mb-0 mt-4">
-                    <li className="list-item me-lg-5 me-4">
+                  <ul className="list-unstyled text mb-0 mt-3">
+                    <li className="list-item me-lg-5 me-4" style={{marginTop: '7px'}}>
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      Countdown is a function that takes one argument, time_sec.
+                      The code imports the math library.
                     </li>
-                    <li className="list-item me-lg-5 me-4">
+                    <li className="list-item me-lg-5 me-4" style={{marginTop: '7px'}}>
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      Countdown starts a while loop that will run as long as
-                      time_sec is greater than 0.
+                      The code defines a function called isPerfectSquare. This function takes an input of x, and calculates the square root of x. The function then returns whether or not x*x is equal to x.
                     </li>
-                    <li className="list-item me-lg-5 me-4">
+                    <li className="list-item me-lg-5 me-4" style={{marginTop: '7px'}}>
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The while loop will divide time_sec by 60, store the
-                      quotient in mins and the remainder in secs.
+                      The code defines a function called isFibonacci. This function takes an input of n, and checks to see if one of the two equations 5*n*n + 4 or 5*n*n - 4 is a perfect square. If it is, then the function returns True.
                     </li>
-                    <li className="list-item me-lg-5 me-4">
+                    <li className="list-item me-lg-5 me-4" style={{marginTop: '7px'}}>
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
-                      The timeformat variable is a string that formats mins and
-                      secs so that it displays mins followed by a colon followed
-                      by secs.
-                    </li>
-                    <li className="list-item me-lg-5 me-4">
-                      <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
-                      </span>
-                      The print() function displays the formatted string
-                      followed by \r which will ensure that the same line is
-                      overwritten.
-                    </li>
-                    <li className="list-item me-lg-5 me-4">
-                      <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
-                      </span>
-                      The time.sleep(1) function call will sleep (pause) the
-                      program for 1 second before the next iteration of the
-                      loop.
-                    </li>
-                    <li className="list-item me-lg-5 me-4">
-                      <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
-                      </span>
-                      The time_sec variable is decremented by 1 before the next
-                      iteration of the loop.
-                    </li>
-                    <li className="list-item me-lg-5 me-4">
-                      <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
-                      </span>
-                      When time_sec equals 0, the while loop ends and the
-                      print("stop") function call displays "stop" on the screen.
+                      The code runs a loop from 1 to 11, and checks to see if each number is a Fibonacci number. If it is, the code prints the number out. If it is not, the code prints the number out followed by "is not a Fibonacci number".
                     </li>
                   </ul>
                   </div>
@@ -516,7 +492,7 @@ export default class Quick extends Component {
                   <ul className="list-unstyled text mb-0 mt-4">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       First, we delete all the rows from the STATS table that
                       have a month value of 7 or have an ID within the table
@@ -524,14 +500,14 @@ export default class Quick extends Component {
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Next, we delete all the rows from the STATION table that
                       have a longitude value less than 90.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Finally, we commit the changes to the database.
                     </li>
@@ -548,49 +524,49 @@ export default class Quick extends Component {
                   <ul className="list-unstyled text mb-0 mt-4">
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Get the http.Response object from the http.Get call.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Check if there was an error in the http.Get call.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Defer the closing of the http.Response Body.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Print the response status.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Create a new Scanner for the http.Response Body.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Loop through the scanner and print the first 5 lines.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       Check for errors from the scanner.
                     </li>
                     <li className="list-item me-lg-5 me-4">
                       <span className="text-success h5 me-2">
-                        <i className="uil uil-check-circle align-middle"></i>
+                        <i className="uil uil-brackets-curly align-middle"></i>
                       </span>
                       The http.Response Body is closed.
                     </li>
