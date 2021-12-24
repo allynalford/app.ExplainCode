@@ -23,11 +23,12 @@ import { getWidgets, getPrompts } from './config';
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 
 function PageProfileEdit({history}) {
- 
+  
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
-  const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
+ 
   const user_metadata = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const userglobaluuid = user_metadata.userglobaluuid;
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [firstName, setFirstName] = useState((typeof name !== "undefined" ? name.split(' ')[0] : ""));
@@ -47,10 +48,8 @@ function PageProfileEdit({history}) {
     document.body.classList = "";
     document.getElementById("top-menu").classList.add("nav-light");
     window.addEventListener("scroll", scrollNavigation, true);
-    console.log({ user });
 
     return () => {
-      console.log("cleaned up");
       window.removeEventListener("scroll", scrollNavigation, true);
     };
   }, [name, picture, email, user]);

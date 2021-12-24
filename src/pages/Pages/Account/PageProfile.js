@@ -545,7 +545,7 @@ function PageProfile({history}) {
               ) : (
                 ''
               )}
-              <p>
+              
                 <ReactStars
                   count={5}
                   value={rating}
@@ -561,8 +561,7 @@ function PageProfile({history}) {
                   fullIcon={<i className="fa fa-star"></i>}
                   activeColor="#ffd700"
                 />
-                How would you rate the results?
-              </p>
+                <p>How would you rate the results?</p>
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}
