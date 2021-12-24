@@ -137,7 +137,6 @@ function PageProfile({history}) {
 
   useEffect(() => {
     try {
-      document.body.classList = '';
       document.getElementById('top-menu').classList.add('nav-light');
       window.addEventListener('scroll', scrollNavigation, true);
       setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
@@ -181,13 +180,13 @@ function PageProfile({history}) {
 
   useEffect(() => {
 
-    console.log('code',code);
+    //console.log('code',code);
     if(typeof code !== "undefined" && code !== null){
-      console.log('storing code');
+      //console.log('storing code');
 
       localStorage.setItem('cachedCode', code);
 
-      console.log('reading code', localStorage.getItem('cachedCode'))
+     // console.log('reading code', localStorage.getItem('cachedCode'))
       setCodeLength(code.length);
       if(code.length >= codeMaxLength){
         setCodeLengthColor('red');
@@ -201,7 +200,7 @@ function PageProfile({history}) {
 
   useEffect(() => {
 
-    console.log('code', question);
+    //console.log('code', question);
     if(typeof question !== "undefined" && question !== null){
      
       localStorage.setItem('cachedQuestion', question);
