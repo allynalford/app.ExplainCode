@@ -4,7 +4,8 @@ import {
   Container,
   Row,
   Col,
-  Button
+  Button,
+  Alert
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
@@ -53,6 +54,8 @@ function PageProfile({history}) {
   const [code, setCode] = useState(cachedCode);
   const [question, setQuestion] = useState(cachedQuestion);
   const [rating, setRating] = useState(0);
+  const [ratingMessage, setRatingMessage] = useState("");
+  const [ratingSuccess, setRatingSuccess] = useState(false);
   const [codeLength, setCodeLength] = useState(0);
   const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [promptResponse, setPromptResponse] = useState("");
@@ -60,6 +63,11 @@ function PageProfile({history}) {
   const [loading, setLoading] = useState(false);
   const [completionId, setCompletionId] = useState("");
   const [completionsThisMonth, setCompletionsThisMonth] = useState(0);
+  const [ratingSuccessColor, setRatingSuccessColor] = useState("primary");
+  const [ratingSuccessMsg, setRatingSuccessMsg] = useState("");
+  const [ratingStatus, setRatingStatus]  = useState(false);
+  const [copied, setCopied] = useState(false);
+
 
   
 
@@ -573,44 +581,35 @@ function PageProfile({history}) {
                 ''
               )}
 
-              {(completionId !== "" ? 
-              <div>
-                <ReactStars
-                count={5}
-                value={rating}
-                color="black"
-                a11y={true}
-                onChange={(newValue) => {
-                  setRating(newValue);
-                  //console.log(completionId);
-                  //const url = getCompletions().updateCompletionRating;
-                }}
-                size={34}
-                isHalf={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-              />
-              <p>How would you rate the results?</p>
-              </div>
-               :"")}
+              
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}
               >
                 <div>
-                  {' '}
+                <Alert
+                    color={'info'}
+                    isOpen={copied}
+                    toggle={() => {
+                      setCopied(false);
+                    }}
+                  >
+                    Explanation copied to clipboard.
+                  </Alert>
                   <Button
                     size="sm"
                     style={{ marginTop: '5px' }}
-                    disabled={loading}
+                    disabled={(loading === true | completionId === '' ? true : false)}
                     onClick={(e) => {
                       copy(promptResponse);
+                      setCopied(true);
+                      setInterval(function () {
+                        setCopied(false);
+                    }, 3500);
                     }}
                     className="btn btn-pills btn-secondary"
                   >
-                    Copy to clipboard
+                    Copy Explanation
                   </Button>
                 </div>
                 <AceEditor
@@ -635,6 +634,152 @@ function PageProfile({history}) {
                   }}
                 />
               </div>
+              {completionId !== '' ? (
+                <div>
+                  <Alert
+                    color={ratingSuccessColor}
+                    isOpen={ratingSuccess}
+                    toggle={() => {
+                      setRatingSuccess(!ratingSuccess);
+                    }}
+                  >
+                    {ratingSuccessMsg}
+                  </Alert>
+                  <ReactStars
+                    count={5}
+                    value={rating}
+                    color="black"
+                    a11y={true}
+                    onChange={(rating) => {
+                      setRating(rating);
+                      setRatingStatus(true);
+                      //const url = getCompletions().updateCompletionRating;
+                      endpoint
+                        .postIAM(getCompletions().updateCompletionRating, {
+                          userglobaluuid,
+                          completionid: completionId,
+                          rating,
+                          feedback: ratingMessage,
+                        })
+                        .then((res) => {
+                          if (res.data.success === true) {
+                            setCompletionsThisMonth(res.data.count);
+                            setRatingSuccessColor('success');
+                            setRatingSuccessMsg('Thank you for your rating.');
+                          } else {
+                            setRatingSuccessColor('danger');
+                            setRatingSuccessMsg(
+                              'Error: Could not record your rating',
+                            );
+                          }
+
+                          setRatingSuccess(true);
+                          setRatingStatus(false);
+                          setInterval(function () {
+                            setRatingSuccess(false);
+                        }, 5000);
+                        })
+                        .catch((err) => {
+                          console.error(err);
+                          setRatingSuccessColor('danger');
+                            setRatingSuccessMsg(
+                              'Error: Could not record your rating',
+                            );
+                          setRatingSuccess(true);
+                          setRatingStatus(false);
+                          setInterval(function () {
+                            setRatingSuccess(false);
+                        }, 5000);
+                        });
+                    }}
+                    size={34}
+                    isHalf={true}
+                    emptyIcon={<i className="far fa-star"></i>}
+                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    fullIcon={<i className="fa fa-star"></i>}
+                    activeColor="#ffd700"
+                  />
+                  <p>How would you rate the results?</p>
+                  <div style={{ marginTop: '5px' }}>
+                    <label
+                      htmlFor="ratingfeedback"
+                      style={{ fontWeight: 'bold' }}
+                    >
+                      Any Feedback?
+                    </label>
+                    <textarea
+                      rows={3}
+                      cols={90}
+                      type="textarea"
+                      name="ratingfeedback"
+                      id="ratingfeedback"
+                      onChange={(e) => {
+                        setRatingMessage(e.target.value);
+                      }}
+                    />
+                    <Button
+                      size="sm"
+                      className="btn btn-pills btn-primary"
+                      style={{ marginTop: '5px' }}
+                      disabled={ratingStatus}
+                       onClick={(e) => {
+                        setRatingStatus(true);
+                        endpoint
+                          .postIAM(getCompletions().updateCompletionRating, {
+                            userglobaluuid,
+                            completionid: completionId,
+                            rating,
+                            feedback: ratingMessage,
+                          })
+                          .then((res) => {
+                            if (res.data.success === true) {
+                              setCompletionsThisMonth(res.data.count);
+                              setRatingSuccessColor('success');
+                              setRatingSuccessMsg('Thank you for your feedback.');
+                            } else {
+                              setRatingSuccessColor('danger');
+                              setRatingSuccessMsg(
+                                'Error: Could not record your rating',
+                              );
+                            }
+
+                            setRatingSuccess(true);
+                            setRatingStatus(false);
+                            setInterval(function () {
+                              setRatingSuccess(false);
+                          }, 5000);
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setRatingSuccessColor('danger');
+                            setRatingSuccessMsg(
+                              'Error: Could not record your rating',
+                            );
+                            setRatingStatus(false);
+                            setRatingSuccess(true);
+                            setInterval(function () {
+                              setRatingSuccess(false);
+                          }, 5000);
+                          });
+                      }}
+                    >
+                      {(ratingStatus === true ? "Updating Feedback" : "Save Feedback")}
+                    {ratingStatus === true ? (
+                      <Ionicon
+                        style={{ marginLeft: '5px' }}
+                        color="#ffffff"
+                        icon="ios-analytics-outline"
+                        beat={ratingStatus}
+                      />
+                    ) : (
+                      ''
+                    )}
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
             </Col>
           </Row>
         </Container>
