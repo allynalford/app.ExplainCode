@@ -14,7 +14,7 @@ import FeatherIcon from "feather-icons-react";
 
 //Import Images
 import imgbg from "../../../assets/images/account/bg.png";
-
+import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
 import { getGTP3 } from '../../../common/config';
@@ -266,70 +266,7 @@ function PageProfile({history}) {
 
   return (
     <React.Fragment>
-      <section
-        className="bg-profile d-table w-100 bg-primary"
-        style={{ background: `url(${imgbg}) center center` }}
-      >
-        <Container>
-          <Row>
-            <Col lg="12">
-              <Card
-                className="public-profile border-0 rounded shadow"
-                style={{ zIndex: '1' }}
-              >
-                <CardBody>
-                  <Row className="align-items-center">
-                    <Col lg="2" md="3" className="text-md-start text-center">
-                      <img
-                        src={picture}
-                        className="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                        alt=""
-                      />
-                    </Col>
-
-                    <Col lg="10" md="9">
-                      <Row className="align-items-end">
-                        <Col
-                          md="7"
-                          className="text-md-start text-center mt-4 mt-sm-0"
-                        >
-                          <h3 className="title mb-0">{name}</h3>
-                          <small className="text-muted h6 me-2">{email}</small>
-                        </Col>
-                        <Col md="5" className="text-md-end text-center">
-                          <ul className="list-unstyled social-icon social mb-0 mt-4">
-                            <li className="list-inline-item">
-                              <Link to="#" className="rounded">
-                                <i className="uil uil-user-plus align-middle"></i>
-                              </Link>
-                            </li>
-                            <li className="list-inline-item">
-                              <Link to="#" className="rounded">
-                                <i className="uil uil-comment align-middle"></i>
-                              </Link>
-                            </li>
-                            <li className="list-inline-item">
-                              <Link to="#" className="rounded">
-                                <i className="uil uil-bell align-middle"></i>
-                              </Link>
-                            </li>
-                            <li className="list-inline-item">
-                              <Link to="/page-profile-edit" className="rounded">
-                                <i className="uil uil-cog align-middle"></i>
-                              </Link>
-                            </li>
-                          </ul>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
+      <ProfileHeader />
       <section className="section mt-60">
         <Container className="mt-lg-3">
           <Row>

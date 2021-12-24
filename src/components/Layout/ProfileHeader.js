@@ -14,9 +14,16 @@ function ProfileHeader({history}) {
  
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
-  const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
+  const [userglobaluuid, setUserglobaluuid] = useState("");
   const user_metadata = user[process.env.REACT_APP_AUTH0_USER_METADATA];
 
+
+
+  useEffect(() => {
+    setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+  return () => {
+  };
+}, []);
 
   useEffect(() => {
 
@@ -55,7 +62,7 @@ function ProfileHeader({history}) {
                           className="text-md-start text-center mt-4 mt-sm-0"
                         >
                           <h3 className="title mb-0">{name}</h3>
-                          <small className="text h6 me-2">{user_metadata.occupation}</small>
+                          <small className="text h6 me-2">{user_metadata.occupation}</small><br />
                           <small className="text h6 me-2">{email}</small>
                           <ul className="list-inline mb-0 mt-3">
                           <li className="list-inline-item me-2">
