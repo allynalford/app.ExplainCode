@@ -502,7 +502,7 @@ function PageProfile({history}) {
               {prompt === 'Open-Questions' ? (
                 <div className="border-bottom pb-4">
                   <div style={{ marginTop: '5px' }}>
-                    <label for="question" style={{ fontWeight: 'bold' }}>
+                    <label htmlFor="question" style={{ fontWeight: 'bold' }}>
                       Enter Question:
                     </label>
                     <textarea
