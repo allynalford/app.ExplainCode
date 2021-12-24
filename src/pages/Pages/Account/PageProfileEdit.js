@@ -27,14 +27,14 @@ function PageProfileEdit({history}) {
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
  
-  const user_metadata = user[process.env.REACT_APP_AUTH0_USER_METADATA];
-  const userglobaluuid = user_metadata.userglobaluuid;
+
+  const [userglobaluuid, setUserglobaluuid] = useState("");
+  const [user_metadata, setUserMetadata] = useState({});
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [firstName, setFirstName] = useState((typeof name !== "undefined" ? name.split(' ')[0] : ""));
   const [lastName, setLastName] = useState((typeof name !== "undefined" ? name.split(' ')[1] : ""));
   const [emailAddress, setEmailAddress] = useState(email);
-  const [userMetadata, setUserMetadata] = useState(user_metadata);
   const [occupation, setOccupation] = useState(user_metadata.occupation);
   const [description, setDescription] = useState(user_metadata.description);
   const [fieldChanged, setFieldChanged] = useState(false);
@@ -42,17 +42,29 @@ function PageProfileEdit({history}) {
   //const [user, setUser] = useState();
 
 
-
-
   useEffect(() => {
     document.body.classList = "";
     document.getElementById("top-menu").classList.add("nav-light");
     window.addEventListener("scroll", scrollNavigation, true);
 
+    setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+
+    if(typeof user !== "undefined"){
+      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid)
+    }
+    
+
     return () => {
       window.removeEventListener("scroll", scrollNavigation, true);
     };
-  }, [name, picture, email, user]);
+  }, [user]);
+
+  useEffect(() => {
+
+
+    return () => {
+    };
+  }, [name, picture, email]);
 
   const scrollNavigation = () => {
     var doc = document.documentElement;

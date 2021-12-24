@@ -15,12 +15,13 @@ function ProfileHeader({history}) {
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
   const [userglobaluuid, setUserglobaluuid] = useState("");
-  const user_metadata = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const [user_metadata, setUserMetadata] = useState({});
 
 
 
   useEffect(() => {
     setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+    setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
   return () => {
   };
 }, []);
