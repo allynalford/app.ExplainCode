@@ -44,7 +44,7 @@ function PageProfile({history}) {
  
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
-  const userglobaluuid = (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid === "undefined" ? "" : user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+  const [userglobaluuid, setUserglobaluuid] = useState("");
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
@@ -140,6 +140,7 @@ function PageProfile({history}) {
       document.body.classList = '';
       document.getElementById('top-menu').classList.add('nav-light');
       window.addEventListener('scroll', scrollNavigation, true);
+      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
     } catch (e) {
       console.log(e);
     }
@@ -221,7 +222,6 @@ function PageProfile({history}) {
 
 
   function onChange(newValue) {
-    console.log("change", newValue);
     setCode(newValue);
     localStorage.setItem('cachedCode', newValue);
   }
