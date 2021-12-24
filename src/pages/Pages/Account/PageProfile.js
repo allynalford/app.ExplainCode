@@ -14,7 +14,7 @@ import copy from 'copy-to-clipboard';
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts } from './config';
-import { getGTP3 } from '../../../common/config';
+import { getGTP3, getCompletions } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 //import { Icon, InlineIcon  } from '@iconify/react';
@@ -34,8 +34,9 @@ import "ace-builds/src-noconflict/theme-kuroir";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-solarized_light";
 import './loader.css';
+import dateFormat from 'dateformat';
 const endpoint = require('../../../common/endpoint');
-
+//const dateFormat = require('dateformat');
 
 function PageProfile({history}) {
  
@@ -44,6 +45,7 @@ function PageProfile({history}) {
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
+  const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState("terminal");
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
@@ -56,6 +58,8 @@ function PageProfile({history}) {
   const [promptResponse, setPromptResponse] = useState("");
   const [tools] = useState(new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function']));
   const [loading, setLoading] = useState(false);
+  const [completionId, setCompletionId] = useState("");
+  const [completionsThisMonth, setCompletionsThisMonth] = useState(0);
 
   
 
@@ -133,10 +137,15 @@ function PageProfile({history}) {
 
   useEffect(() => {
     try {
-      document.getElementById('top-menu').classList.add('nav-light');
+      if(document.getElementById('top-menu') !== null){
+        document.getElementById('top-menu').classList.add('nav-light');
+      };
+      
       window.addEventListener('scroll', scrollNavigation, true);
+
+
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     return () => {
@@ -147,11 +156,14 @@ function PageProfile({history}) {
   }, []);
 
   useEffect(() => {
-    if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+    if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
+      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+      getUserCompletionCount(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid)
+    }
     return () => {
 
     };
-  }, [user]);
+  }, [ user ]);
 
   useEffect(() => {
     
@@ -231,36 +243,45 @@ function PageProfile({history}) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+   async function getUserCompletionCount(userglobaluuid){
+    //Grab the count of executions for this month
+    endpoint.postIAM(getCompletions().userCompletionCount, {userglobaluuid, monthStamp}).then((res) => {
+      setCompletionsThisMonth(res.data.count)
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
   const onRunPrompt = async () => {
     setLoading(true);
     let resp, text;
     switch (prompt) {
       case 'Line-By-Line':
         resp = await endpoint.postIAM(getGTP3().post_Line_Prompt, {code, lang: mode, userglobaluuid});
-        console.log(resp.data);
         text = resp.data.explanation.choices[0].text;
+        setCompletionId(resp.data.explanation.id);
         break;
       case 'Summarize':
         resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
-        console.log(resp.data);
         text = resp.data.explanation.choices[0].text;
+        setCompletionId(resp.data.explanation.id);
         break;
       case 'Explain-Function':
         resp = await endpoint.postIAM(getGTP3().post_ExplainFunction_Prompt, {code, lang: mode, userglobaluuid});
-        console.log(resp.data);
         text = resp.data.explanation.choices[0].text;
+        setCompletionId(resp.data.explanation.id);
         break;
       case 'Open-Questions':
         resp = await endpoint.postIAM(getGTP3().post_Freeform_Prompt, {code, lang: mode, question, userglobaluuid});
-        console.log(resp.data);
         text = resp.data.explanation.choices[0].text;
+        setCompletionId(resp.data.explanation.id);
         break;
       case 'Class-Breakdown':
         break;
       default:
         console.log(`Sorry, we are out of ${prompt}.`);
     }
-
+    getUserCompletionCount(userglobaluuid);
     setPromptResponse(text);
     setLoading(false);
   }
@@ -291,7 +312,7 @@ function PageProfile({history}) {
                         icon="activity"
                         className="fea icon-ex-md text-primary mb-1"
                       />
-                      <h5 className="mb-0">10/60</h5>
+                      <h5 className="mb-0">{completionsThisMonth}/100</h5>
                       <p className="text-muted mb-0">Executions</p>
                     </div>
                   </div>
@@ -547,18 +568,22 @@ function PageProfile({history}) {
               )}
               <h5 className="mt-4 mb-0">Results:</h5>
               {loading === true ? (
-                <div class="loader">Loading Explanation</div>
+                <div className="loader">Loading Explanation</div>
               ) : (
                 ''
               )}
 
-              <ReactStars
+              {(completionId !== "" ? 
+              <div>
+                <ReactStars
                 count={5}
                 value={rating}
                 color="black"
                 a11y={true}
                 onChange={(newValue) => {
                   setRating(newValue);
+                  //console.log(completionId);
+                  //const url = getCompletions().updateCompletionRating;
                 }}
                 size={34}
                 isHalf={true}
@@ -568,6 +593,8 @@ function PageProfile({history}) {
                 activeColor="#ffd700"
               />
               <p>How would you rate the results?</p>
+              </div>
+               :"")}
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}

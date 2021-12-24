@@ -13,6 +13,10 @@ const serverVars = {
       updateProfile: process.env.REACT_APP_BASE_API_URL + "/profile/update",
       profileAuth: process.env.REACT_APP_BASE_API_URL + "/profile/auth",
     },
+    completions:{
+      updateCompletionRating: process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
+      userCompletionCount: process.env.REACT_APP_BASE_API_URL + '/completions/user/count'
+    },
     waitlistText: "Early Access"
   };
   
@@ -30,6 +34,10 @@ const serverVars = {
     auth0:{
       updateProfile: process.env.REACT_APP_BASE_API_URL + "/profile/update",
       profileAuth: process.env.REACT_APP_BASE_API_URL + "/profile/auth",
+    },
+    completions:{
+      updateCompletionRating: process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
+      userCompletionCount: process.env.REACT_APP_BASE_API_URL + '/completions/user/count'
     },
     waitlistText: "Get Early Access"
   };
@@ -62,4 +70,11 @@ const serverVars = {
       return serverVars.auth0;
     }
     return localVars.auth0;
+  }
+
+  export function getCompletions() {
+    if (process.env.NODE_ENV === 'production') {
+      return serverVars.completions;
+    }
+    return localVars.completions;
   }
