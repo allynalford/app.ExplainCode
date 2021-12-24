@@ -39,7 +39,7 @@ function ProfileHeader({history}) {
   }, [ user ]);
 
   useEffect(() => {
-    if (typeof user !== 'undefined') {
+    if (typeof user_metadata !== "undefined") {
       setUserglobaluuid(user_metadata.userglobaluuid);
       setOccupation(user_metadata.occupation);
       setTwitter(user_metadata.twitter);
@@ -47,7 +47,7 @@ function ProfileHeader({history}) {
       setLinkedin(user_metadata.linkedin);
     }
     return () => {};
-  }, [ user_metadata, user ]);
+  }, [ user_metadata ]);
 
   useEffect(() => {
     return () => {};
