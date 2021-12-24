@@ -44,7 +44,7 @@ function PageProfile({history}) {
  
   const { user, logout } = useAuth0();
   const { name, picture, email } = user;
-  const userglobaluuid = user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid;
+  const userglobaluuid = (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid === "undefined" ? "" : user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;

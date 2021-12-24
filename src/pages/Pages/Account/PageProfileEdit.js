@@ -53,7 +53,7 @@ function PageProfileEdit({history}) {
       console.log("cleaned up");
       window.removeEventListener("scroll", scrollNavigation, true);
     };
-  }, [name, picture, email]);
+  }, [name, picture, email, user]);
 
   const scrollNavigation = () => {
     var doc = document.documentElement;
@@ -319,7 +319,6 @@ function PageProfileEdit({history}) {
                             }}
                             className="form-control ps-5"
                             placeholder="Your email :"
-                            disabled={loading}
                           />
                         </div>
                       </Col>
