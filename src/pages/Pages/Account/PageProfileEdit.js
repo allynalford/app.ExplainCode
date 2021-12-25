@@ -27,7 +27,7 @@ function PageProfileEdit({ history }) {
   const { name, picture, email, sub, family_name, given_name } = user;
 
   //const [userglobaluuid, setUserglobaluuid] = useState('');
-  const [user_metadata, setUserMetadata] = useState({});
+  const [user_metadata, setUserMetadata] = useState({ocupation: '', twitter: '', instagram: '', linkedin: ''});
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [firstName, setFirstName] = useState(given_name);
