@@ -376,7 +376,7 @@ function PageProfileEdit({ history }) {
                             name="occupation"
                             id="occupation"
                             type="text"
-                            value={user_metadata.occupation}
+                            value={(typeof user_metadata.occupation !== "undefined" ? user_metadata.occupation : "")}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
@@ -481,7 +481,7 @@ function PageProfileEdit({ history }) {
                             name="twitter"
                             id="twitter"
                             type="text"
-                            value={user_metadata.twitter}
+                            value={(typeof user_metadata.twitter !== "undefined" ? user_metadata.twitter : "")}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
@@ -509,7 +509,7 @@ function PageProfileEdit({ history }) {
                             name="instagram"
                             id="instagram"
                             type="text"
-                            value={user_metadata.instagram}
+                            value={(typeof user_metadata.instagram !== "undefined" ? user_metadata.instagram : "")}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
@@ -537,7 +537,7 @@ function PageProfileEdit({ history }) {
                             name="linkedin"
                             id="linkedin"
                             type="text"
-                            value={user_metadata.linkedin}
+                            value={(typeof user_metadata.linkedin !== "undefined" ? user_metadata.linkedin : "")}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
