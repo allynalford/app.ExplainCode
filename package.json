@@ -1,5 +1,5 @@
 {
-  "name": "ExplainCode.App",
+  "name": "explaincodeapp",
   "version": "1.0.0",
   "private": true,
   "description": "Explain Code app by Tenably Labs",
@@ -83,6 +83,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jshintConfig":{
+    "esversion": 9 
   },
   "browserslist": {
     "production": [
