@@ -61,17 +61,22 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     if (typeof user !== 'undefined') {
       setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-
-      const themeOption = _.find(themes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].theme]);
-      setThemeOption(themeOption);
-      const modeOption = _.find(modes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].mode]);
-      setModeOption(modeOption);
       // setUserglobaluuid(
       //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
       // );
     }
     return () => {};
   }, [user]);
+
+  useEffect(() => {
+    if (typeof user_metadata !== 'undefined') {
+      const themeOption = _.find(themes, ['value', user_metadata.theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', user_metadata.mode]);
+      setModeOption(modeOption);
+    }
+    return () => {};
+  }, [user_metadata]);
 
   useEffect(() => {
     // if (typeof user_metadata !== 'undefined') {

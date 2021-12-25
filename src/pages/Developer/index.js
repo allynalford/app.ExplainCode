@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Quick from './Quick';
 import Section from './Section';
 import KeyFeatures from './KeyFeatures';
-import Documention from './Documention';
+import Documentation from './Documentation';
 import { PageView, initGA } from '../../common/gaUtils.js';
 import { Helmet } from "react-helmet";
 export default class index extends Component {
@@ -67,8 +67,7 @@ export default class index extends Component {
           <section className="section">
             <KeyFeatures />
             <Quick />
-            <Documention />
-            {/* <LandrickTeam /> */}
+            <Documentation />
           </section>
         </div>
       </React.Fragment>
