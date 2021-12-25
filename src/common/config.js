@@ -17,6 +17,14 @@ const serverVars = {
       updateCompletionRating: process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
       userCompletionCount: process.env.REACT_APP_BASE_API_URL + '/completions/user/count'
     },
+    snippets:{
+      saveSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/save',
+      getSnippets: process.env.REACT_APP_BASE_API_URL + '/snippets/user/',
+      getSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/',
+      getSnippetsCount: process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
+      updateSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/update',
+      deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
+    },
     waitlistText: "Early Access"
   };
   
@@ -38,6 +46,14 @@ const serverVars = {
     completions:{
       updateCompletionRating: process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
       userCompletionCount: process.env.REACT_APP_BASE_API_URL + '/completions/user/count'
+    },
+    snippets:{
+      saveSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/save',
+      getSnippets: process.env.REACT_APP_BASE_API_URL + '/snippets/user/',
+      getSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/',
+      getSnippetsCount: process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
+      updateSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/update',
+      deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
     },
     waitlistText: "Get Early Access"
   };
@@ -77,4 +93,11 @@ const serverVars = {
       return serverVars.completions;
     }
     return localVars.completions;
+  }
+
+  export function getSnippets() {
+    if (process.env.NODE_ENV === 'production') {
+      return serverVars.snippets;
+    }
+    return localVars.snippets;
   }

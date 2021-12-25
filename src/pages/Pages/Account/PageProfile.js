@@ -17,7 +17,7 @@ import copy from 'copy-to-clipboard';
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
 import { getWidgets, getPrompts , modes, themes} from './config';
-import { getGTP3, getCompletions } from '../../../common/config';
+import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
@@ -74,8 +74,10 @@ function PageProfile({history}) {
   const [ratingSuccessMsg, setRatingSuccessMsg] = useState("");
   const [ratingStatus, setRatingStatus]  = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copiedSnippet, setCopiedSnippet] = useState(false);
   const [themeOption, setThemeOption] = useState({});
   const [modeOption, setModeOption] = useState({});
+  const [snippetuuid, setSnippetuuid] = useState(undefined);
 
 
 
@@ -292,8 +294,14 @@ function PageProfile({history}) {
     <React.Fragment>
       <Helmet>
         <title>Explain Code App - Dashboard</title>
-        <meta name="description" content="Explain Code App dashboard for code explanations." />
-        <meta name="keywords" content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta
+          name="description"
+          content="Explain Code App dashboard for code explanations."
+        />
+        <meta
+          name="keywords"
+          content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code"
+        />
         <meta name="twitter:title" content="Explain Code App dashboard" />
         <meta name="twitter:image:alt" content="Explain Code App: dashboard" />
         <meta property="og:title" content="Explain Code App - Dashboard" />
@@ -323,7 +331,7 @@ function PageProfile({history}) {
                         className="fea icon-ex-md text-primary mb-1"
                       />
                       <h5 className="mb-0">{completionsThisMonth}/100</h5>
-                      <p className="text-muted mb-0">Executions</p>
+                      <h6 className="text mb-0">Executions</h6>
                     </div>
                   </div>
                 </div>
@@ -413,89 +421,95 @@ function PageProfile({history}) {
               <div className="border-bottom pb-4">
                 <Row>
                   <Col md="6">
-                  <div className="mt-4 mb-0">
-                  <h2>{tool}</h2>
-                <p className="text mb-0">Explain what this process does here</p>
-                <ul>
-                  <li>
-                    Language:{' '}
-                    {mode === 'mysql' ? 'SQL' : capitalizeFirstLetter(mode)}
-                  </li>
-                  <li>
-                    Theme: {theme}
-                  </li>
-                </ul>
-                  </div>
+                    <div className="mt-4 mb-0">
+                      <h2>{tool}</h2>
+                      <p className="text mb-0">
+                        Explain what this process does here
+                      </p>
+                      <ul>
+                        <li>
+                          Language:{' '}
+                          {mode === 'mysql'
+                            ? 'SQL'
+                            : capitalizeFirstLetter(mode)}
+                        </li>
+                        <li>Theme: {theme}</li>
+                      </ul>
+                    </div>
                   </Col>
                   <Col md="6">
-                   <Row>
-                     <Col md="12">
-                     <div className="mt-4 mb-0">
-                    <Label>Language</Label>
-                    <Select
-                      aria-label="Select an Language"
-                      className="form-control"
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        // colors: {
-                        //     ...theme.colors,
-                        //     text: 'black',
-                        //     primary25: '#009FD4',
-                        //     primary: '#009FD4',
-                        // },
-                      })}
-                      id="modes-select"
-                      options={modes}
-                      value={modeOption}
-                      selectValue={'javascript'}
-                      onChange={(opt) => {
-                        setMode(opt.value);
-                        setModeOption(opt)
-                      }}
-                    ></Select>
-                  </div>
-                     </Col>
-                     <Col md="12">
-                     <div className="mt-4 mb-0">
-                    <Label>Theme</Label>
-                    <Select
-                      aria-label="Select an Theme"
-                      className="form-control"
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        // colors: {
-                        //     ...theme.colors,
-                        //     text: 'black',
-                        //     primary25: '#009FD4',
-                        //     primary: '#009FD4',
-                        // },
-                      })}
-                      id="themes"
-                      options={themes}
-                      value={themeOption}
-                      onChange={(opt) => {
-                        setTheme(opt.value);
-                        setThemeOption(opt);
-                      }}
-                    ></Select>
-                  </div>
-                     </Col>
-                   </Row>
+                    <Row>
+                      <Col md="12">
+                        <div className="mt-4 mb-0">
+                          <Label>Language</Label>
+                          <Select
+                            aria-label="Select an Language"
+                            className="form-control"
+                            theme={(theme) => ({
+                              ...theme,
+                              borderRadius: 0,
+                              fontSize: '18px',
+                              fontWeight: 'bold',
+                              // colors: {
+                              //     ...theme.colors,
+                              //     text: 'black',
+                              //     primary25: '#009FD4',
+                              //     primary: '#009FD4',
+                              // },
+                            })}
+                            id="modes-select"
+                            options={modes}
+                            value={modeOption}
+                            selectValue={'javascript'}
+                            onChange={(opt) => {
+                              setMode(opt.value);
+                              setModeOption(opt);
+                            }}
+                          ></Select>
+                        </div>
+                      </Col>
+                      <Col md="12">
+                        <div className="mt-4 mb-0">
+                          <Label>Theme</Label>
+                          <Select
+                            aria-label="Select an Theme"
+                            className="form-control"
+                            theme={(theme) => ({
+                              ...theme,
+                              borderRadius: 0,
+                              fontSize: '18px',
+                              fontWeight: 'bold',
+                              // colors: {
+                              //     ...theme.colors,
+                              //     text: 'black',
+                              //     primary25: '#009FD4',
+                              //     primary: '#009FD4',
+                              // },
+                            })}
+                            id="themes"
+                            options={themes}
+                            value={themeOption}
+                            onChange={(opt) => {
+                              setTheme(opt.value);
+                              setThemeOption(opt);
+                            }}
+                          ></Select>
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </div>
 
               <div className="border-bottom pb-4">
+                <label htmlFor="editor">Enter your code snippet</label>
                 <AceEditor
+                  id="editor"
+                  title="Enter your code snippet"
+                  aria-label="YEnter your code snippet"
                   readOnly={loading}
                   style={{ width: 'auto' }}
-                  placeholder="Enter your code"
+                  placeholder="Enter your code snippet"
                   mode={mode}
                   theme={theme}
                   name="editor"
@@ -526,30 +540,94 @@ function PageProfile({history}) {
                   Test
                 </Button> */}
                 {prompt !== 'Open-Questions' ? (
-                  <Button
-                    style={{ marginTop: '5px' }}
-                    disabled={loading}
-                    onClick={onRunPrompt}
-                    className="btn btn-pills btn-primary"
-                  >
-                    Explain
-                    {loading === true ? (
-                      <Ionicon
-                        style={{ marginLeft: '5px' }}
-                        color="#ffffff"
-                        icon="ios-analytics-outline"
-                        beat={loading}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </Button>
+                  <div>
+                    <Button
+                      style={{ marginTop: '5px', backgroundColor: '#008000' }}
+                      disabled={(loading === true | code === "" ? true : false)}
+                      onClick={onRunPrompt}
+                      className="btn btn-pills btn-primary"
+                    >
+                      Explain Snippet
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+
+                    <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | code === "" ? true : false)}
+                      onClick={e =>{
+                        console.log('save:', code);
+
+                        if(typeof snippetuuid !== "undefined"){
+                          //run update
+
+                        }else{
+                          //run save
+
+                        }
+                      }}
+                      className="btn btn-pills btn-info"
+                    >
+                      {(typeof snippetuuid !== "undefined" ? "Update Snippet" : "Save Snippet")}
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+                    <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | code === "" ? true : false)}
+                      onClick={(e) => {
+                        copy(code);
+                        setCopiedSnippet(true);
+                        setInterval(function () {
+                          setCopiedSnippet(false);
+                        }, 3500);
+                      }}
+                      className="btn btn-pills btn-info"
+                    >
+                      Copy Snippet
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+                  </div>
                 ) : (
                   ''
                 )}
                 <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
                   {codeLength} / 1000
                 </p>
+                <Alert
+                    color={'info'}
+                    isOpen={copiedSnippet}
+                    toggle={() => {
+                      setCopiedSnippet(false);
+                    }}
+                  >
+                    Code Snippet copied to clipboard.
+                  </Alert>
               </div>
               {prompt === 'Open-Questions' ? (
                 <div className="border-bottom pb-4">
@@ -558,6 +636,7 @@ function PageProfile({history}) {
                       Enter Question:
                     </label>
                     <textarea
+                      aria-label="Enter Question about code snippet"
                       rows={5}
                       cols={90}
                       type="textarea"
@@ -598,13 +677,12 @@ function PageProfile({history}) {
                 ''
               )}
 
-              
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}
               >
                 <div>
-                <Alert
+                  <Alert
                     color={'info'}
                     isOpen={copied}
                     toggle={() => {
@@ -616,13 +694,15 @@ function PageProfile({history}) {
                   <Button
                     size="sm"
                     style={{ marginTop: '5px' }}
-                    disabled={(loading === true | completionId === '' ? true : false)}
+                    disabled={
+                      (loading === true) | (completionId === '') ? true : false
+                    }
                     onClick={(e) => {
                       copy(promptResponse);
                       setCopied(true);
                       setInterval(function () {
                         setCopied(false);
-                    }, 3500);
+                      }, 3500);
                     }}
                     className="btn btn-pills btn-secondary"
                   >
@@ -630,6 +710,7 @@ function PageProfile({history}) {
                   </Button>
                 </div>
                 <AceEditor
+                  aria-label="Explanation of code"
                   style={{ width: 'auto' }}
                   placeholder="Explanation will appear here"
                   mode="html"
@@ -694,19 +775,19 @@ function PageProfile({history}) {
                           setRatingStatus(false);
                           setInterval(function () {
                             setRatingSuccess(false);
-                        }, 5000);
+                          }, 5000);
                         })
                         .catch((err) => {
                           console.error(err);
                           setRatingSuccessColor('danger');
-                            setRatingSuccessMsg(
-                              'Error: Could not record your rating',
-                            );
+                          setRatingSuccessMsg(
+                            'Error: Could not record your rating',
+                          );
                           setRatingSuccess(true);
                           setRatingStatus(false);
                           setInterval(function () {
                             setRatingSuccess(false);
-                        }, 5000);
+                          }, 5000);
                         });
                     }}
                     size={34}
@@ -725,6 +806,7 @@ function PageProfile({history}) {
                       Any Feedback?
                     </label>
                     <textarea
+                      aria-label="Enter feedback about explanation"
                       rows={3}
                       cols={90}
                       type="textarea"
@@ -739,7 +821,7 @@ function PageProfile({history}) {
                       className="btn btn-pills btn-primary"
                       style={{ marginTop: '5px' }}
                       disabled={ratingStatus}
-                       onClick={(e) => {
+                      onClick={(e) => {
                         setRatingStatus(true);
                         endpoint
                           .postIAM(getCompletions().updateCompletionRating, {
@@ -752,7 +834,9 @@ function PageProfile({history}) {
                             if (res.data.success === true) {
                               setCompletionsThisMonth(res.data.count);
                               setRatingSuccessColor('success');
-                              setRatingSuccessMsg('Thank you for your feedback.');
+                              setRatingSuccessMsg(
+                                'Thank you for your feedback.',
+                              );
                             } else {
                               setRatingSuccessColor('danger');
                               setRatingSuccessMsg(
@@ -764,7 +848,7 @@ function PageProfile({history}) {
                             setRatingStatus(false);
                             setInterval(function () {
                               setRatingSuccess(false);
-                          }, 5000);
+                            }, 5000);
                           })
                           .catch((err) => {
                             console.error(err);
@@ -776,21 +860,23 @@ function PageProfile({history}) {
                             setRatingSuccess(true);
                             setInterval(function () {
                               setRatingSuccess(false);
-                          }, 5000);
+                            }, 5000);
                           });
                       }}
                     >
-                      {(ratingStatus === true ? "Updating Feedback" : "Save Feedback")}
-                    {ratingStatus === true ? (
-                      <Ionicon
-                        style={{ marginLeft: '5px' }}
-                        color="#ffffff"
-                        icon="ios-analytics-outline"
-                        beat={ratingStatus}
-                      />
-                    ) : (
-                      ''
-                    )}
+                      {ratingStatus === true
+                        ? 'Updating Feedback'
+                        : 'Save Feedback'}
+                      {ratingStatus === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={ratingStatus}
+                        />
+                      ) : (
+                        ''
+                      )}
                     </Button>
                   </div>
                 </div>
