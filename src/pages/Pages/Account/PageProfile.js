@@ -5,7 +5,8 @@ import {
   Row,
   Col,
   Button,
-  Alert
+  Alert,
+  Label
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
@@ -27,6 +28,7 @@ import "ace-builds/src-noconflict/mode-mysql";
 import "ace-builds/src-noconflict/mode-markdown";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/mode-html";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-github";
@@ -34,6 +36,7 @@ import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/theme-kuroir";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-solarized_light";
+
 import './loader.css';
 import dateFormat from 'dateformat';
 const endpoint = require('../../../common/endpoint');
@@ -85,7 +88,8 @@ function PageProfile({history}) {
     { label: 'NodeJS (Javascript)', value: 'javascript' },
     { label: 'Python', value: 'python' },
     { label: 'Go (Golang)', value: 'golang' },
-    { label: 'SQL (Structured Query Language)', value: 'mysql' }
+    { label: 'SQL (Structured Query Language)', value: 'mysql' },
+    { label: 'HTML', value: 'html' }
   ];
 
   const customStyles = {
@@ -325,34 +329,6 @@ function PageProfile({history}) {
                     </div>
                   </div>
                 </div>
-                <div className="widget mb-4 pb-4 border-bottom">
-                  <h5 className="widget-title">Language</h5>
-                  <div className="mt-4 mb-0">
-                    <Select
-                      aria-label="Select an Language"
-                      className="form-select form-control"
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        // colors: {
-                        //     ...theme.colors,
-                        //     text: 'black',
-                        //     primary25: '#009FD4',
-                        //     primary: '#009FD4',
-                        // },
-                      })}
-                      styles={customStyles}
-                      id="modes-select"
-                      options={modes}
-                      selectValue={'javascript'}
-                      onChange={(opt) => {
-                        setMode(opt.value);
-                      }}
-                    ></Select>
-                  </div>
-                </div>
                 <div className="widget mt-4">
                   <h5 className="widget-title">Tools:</h5>
                   <ul
@@ -393,33 +369,6 @@ function PageProfile({history}) {
                       </li>
                     ))}
                   </ul>
-                </div>
-                <div className="widget mb-4 pb-4 border-bottom">
-                  <h5 className="widget-title">Theme</h5>
-                  <div className="mt-4 mb-0">
-                    <Select
-                      aria-label="Select an Theme"
-                      className="form-select form-control"
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        fontSize: '18px',
-                        fontWeight: 'bold',
-                        // colors: {
-                        //     ...theme.colors,
-                        //     text: 'black',
-                        //     primary25: '#009FD4',
-                        //     primary: '#009FD4',
-                        // },
-                      })}
-                      styles={customStyles}
-                      id="themes"
-                      options={themes}
-                      onChange={(opt) => {
-                        setTheme(opt.value);
-                      }}
-                    ></Select>
-                  </div>
                 </div>
 
                 <div className="widget mt-4">
@@ -464,14 +413,82 @@ function PageProfile({history}) {
 
             <Col lg="9" md="7" xs="12">
               <div className="border-bottom pb-4">
-                <h2>{tool}</h2>
+                <Row>
+                  <Col md="6">
+                  <div className="mt-4 mb-0">
+                  <h2>{tool}</h2>
                 <p className="text mb-0">Explain what this process does here</p>
                 <ul>
                   <li>
                     Language:{' '}
                     {mode === 'mysql' ? 'SQL' : capitalizeFirstLetter(mode)}
                   </li>
+                  <li>
+                    Theme: {theme}
+                  </li>
                 </ul>
+                  </div>
+                  </Col>
+                  <Col md="6">
+                   <Row>
+                     <Col md="12">
+                     <div className="mt-4 mb-0">
+                    <Label>Language</Label>
+                    <Select
+                      aria-label="Select an Language"
+                      className="form-control"
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        // colors: {
+                        //     ...theme.colors,
+                        //     text: 'black',
+                        //     primary25: '#009FD4',
+                        //     primary: '#009FD4',
+                        // },
+                      })}
+                      styles={customStyles}
+                      id="modes-select"
+                      options={modes}
+                      selectValue={'javascript'}
+                      onChange={(opt) => {
+                        setMode(opt.value);
+                      }}
+                    ></Select>
+                  </div>
+                     </Col>
+                     <Col md="12">
+                     <div className="mt-4 mb-0">
+                    <Label>Theme</Label>
+                    <Select
+                      aria-label="Select an Theme"
+                      className="form-control"
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        // colors: {
+                        //     ...theme.colors,
+                        //     text: 'black',
+                        //     primary25: '#009FD4',
+                        //     primary: '#009FD4',
+                        // },
+                      })}
+                      styles={customStyles}
+                      id="themes"
+                      options={themes}
+                      onChange={(opt) => {
+                        setTheme(opt.value);
+                      }}
+                    ></Select>
+                  </div>
+                     </Col>
+                   </Row>
+                  </Col>
+                </Row>
               </div>
 
               <div className="border-bottom pb-4">
