@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -51,6 +52,7 @@ function PageProfile({history}) {
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
+  const [user_metadata, setUserMetaData] = useState(undefined);
   const [theme, setTheme] = useState("terminal");
   const [mode, setMode] = useState("javascript");
   const [tool, setTool] = useState("Line By Line");
@@ -120,7 +122,7 @@ function PageProfile({history}) {
     try {
       if(document.getElementById('top-menu') !== null){
         document.getElementById('top-menu').classList.add('nav-light');
-      };
+      }
       
       window.addEventListener('scroll', scrollNavigation, true);
 
@@ -138,17 +140,28 @@ function PageProfile({history}) {
 
   useEffect(() => {
     if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
-      setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
-      getUserCompletionCount(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
-      const themeOption = _.find(themes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].theme]);
-      setThemeOption(themeOption);
-      const modeOption = _.find(modes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].mode]);
-      setModeOption(modeOption);
+      setUserMetaData(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
     }
     return () => {
 
     };
   }, [ user ]);
+
+  useEffect(() => {
+    if (typeof user_metadata !== "undefined") {
+      setUserglobaluuid(user_metadata.userglobaluuid);
+      getUserCompletionCount(user_metadata.userglobaluuid);
+      const themeOption = _.find(themes, ['value', user_metadata.theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', user_metadata.mode]);
+      setModeOption(modeOption);
+    }
+    return () => {
+
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ user_metadata]);
+
 
   useEffect(() => {
     
@@ -162,7 +175,7 @@ function PageProfile({history}) {
         window.history.replaceState(
           null,
           null,
-          `/dashboard?tool=Summarize`,
+          `/dashboard?tool=Summarize`
         );
         setTool('Summarize');
         setPrompt('Summarize');
@@ -228,10 +241,11 @@ function PageProfile({history}) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    async function getUserCompletionCount(userglobaluuid){
     //Grab the count of executions for this month
     endpoint.postIAM(getCompletions().userCompletionCount, {userglobaluuid, monthStamp}).then((res) => {
-      setCompletionsThisMonth(res.data.count)
+      setCompletionsThisMonth(res.data.count);
     }).catch((err) => {
       console.error(err);
     });
@@ -269,7 +283,7 @@ function PageProfile({history}) {
     getUserCompletionCount(userglobaluuid);
     setPromptResponse(text);
     setLoading(false);
-  }
+  };
 
 
   return (
