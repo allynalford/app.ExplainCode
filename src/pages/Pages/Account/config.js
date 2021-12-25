@@ -75,3 +75,22 @@ export function getPrompts(path){
   return widgets;
 }
 
+export const modes = [
+  { label: 'All Languages', value: 'markdown' },
+  { label: 'NodeJS (Javascript)', value: 'javascript' },
+  { label: 'Python', value: 'python' },
+  { label: 'Go (Golang)', value: 'golang' },
+  { label: 'SQL (Structured Query Language)', value: 'mysql' },
+  { label: 'HTML', value: 'html' }
+];
+
+export const themes = [
+  { label: 'Solarized Light', value: 'solarized_light' },
+  { label: 'Solarized Dark', value: 'solarized_dark' },
+  { label: 'Terminal', value: 'terminal' },
+  { label: 'Kuroir', value: 'kuroir' },
+  { label: 'GitHub', value: 'github' },
+  { label: 'Monokai', value: 'monokai' }
+];
+
+

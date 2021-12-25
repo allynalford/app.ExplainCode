@@ -12,16 +12,19 @@ import {
   CardBody,
   Card,
 } from 'reactstrap';
-
+import Select from 'react-select';
 //Import Icons
 import FeatherIcon from 'feather-icons-react';
 import Ionicon from 'react-ionicons';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
-import { getWidgets, getPrompts } from './config';
+import { getWidgets, getPrompts, modes, themes } from './config';
 import { getAuth0 } from '../../../common/config';
 import ProfileHeader from '../../../components/Layout/ProfileHeader';
 const endpoint = require('../../../common/endpoint');
+const _ = require('lodash');
+
+
 function PageProfileEdit({ history }) {
   const { user, logout } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
@@ -38,6 +41,8 @@ function PageProfileEdit({ history }) {
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertColor, setAlertColor] = useState('primary');
+  const [themeOption, setThemeOption] = useState({});
+  const [modeOption, setModeOption] = useState({});
   //const [user, setUser] = useState();
 
   useEffect(() => {
@@ -53,6 +58,11 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     if (typeof user !== 'undefined') {
       setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+
+      const themeOption = _.find(themes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].mode]);
+      setModeOption(modeOption);
       // setUserglobaluuid(
       //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
       // );
@@ -364,6 +374,83 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
+                          <Label className="form-label">Language</Label>
+                          <div className="form-icon position-relative">
+                            <i>
+                              <FeatherIcon
+                                icon="linkedin"
+                                className="fea icon-sm icons"
+                              />
+                            </i>
+                          </div>
+                          <Select
+                      aria-label="Select an Language"
+                      className="form-control"
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        // colors: {
+                        //     ...theme.colors,
+                        //     text: 'black',
+                        //     primary25: '#009FD4',
+                        //     primary: '#009FD4',
+                        // },
+                      })}
+                      id="modes-select"
+                      options={modes}
+                      value={modeOption}
+                      selectValue={'javascript'}
+                      onChange={(opt) => {
+                        let meta = user_metadata;
+                        meta['mode'] = opt.value;
+                        setUserMetadata(meta);
+                        setModeOption(opt);
+                      }}
+                    ></Select>
+                        </div>
+                      </Col>
+                      <Col md="6">
+                        <div className="mb-3">
+                          <Label className="form-label">Theme</Label>
+                          <div className="form-icon position-relative">
+                            <i>
+                              <FeatherIcon
+                                icon="linkedin"
+                                className="fea icon-sm icons"
+                              />
+                            </i>
+                          </div>
+                          <Select
+                      aria-label="Select an Theme"
+                      className="form-control"
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        // colors: {
+                        //     ...theme.colors,
+                        //     text: 'black',
+                        //     primary25: '#009FD4',
+                        //     primary: '#009FD4',
+                        // },
+                      })}
+                      id="themes"
+                      options={themes}
+                      value={themeOption}
+                      onChange={(opt) => {
+                        let meta = user_metadata;
+                        meta['theme'] = opt.value;
+                        setUserMetadata(meta);
+                        setThemeOption(opt);
+                      }}
+                    ></Select>
+                        </div>
+                      </Col>
+                      <Col md="6">
+                        <div className="mb-3">
                           <Label className="form-label">Twitter</Label>
                           <div className="form-icon position-relative">
                             <i>
@@ -446,6 +533,8 @@ function PageProfileEdit({ history }) {
                           />
                         </div>
                       </Col>
+                      
+                      
                       <Col md="12">
                         <div className="mb-3">
                           <Label className="form-label">Description</Label>
@@ -627,137 +716,6 @@ function PageProfileEdit({ history }) {
                   </Row>
                 </CardBody>
               </Card>
-              <div className="rounded shadow mt-4">
-                <div className="p-4 border-bottom">
-                  <h5 className="mb-0">Account Notifications :</h5>
-                </div>
-
-                <div className="p-4">
-                  <div className="d-flex justify-content-between pb-4">
-                    <h6 className="mb-0">When someone mentions me</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch1"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">When someone follows me</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch2"
-                        defaultChecked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch2"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">When shares my activity</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch3"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch3"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">When someone messages me</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch4"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch4"
-                      ></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded shadow mt-4">
-                <div className="p-4 border-bottom">
-                  <h5 className="mb-0">Marketing Notifications :</h5>
-                </div>
-
-                <div className="p-4">
-                  <div className="d-flex justify-content-between pb-4">
-                    <h6 className="mb-0">There is a sale or promotion</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch5"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch5"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">Company news</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch6"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch6"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">Weekly jobs</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch7"
-                        defaultChecked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch7"
-                      ></label>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4 border-top">
-                    <h6 className="mb-0">Unsubscribe News</h6>
-                    <div className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="customSwitch8"
-                        defaultChecked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="customSwitch8"
-                      ></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div className="rounded shadow mt-4">
                 <div className="p-4 border-bottom">
                   <h5 className="mb-0 text-danger">Delete Account :</h5>

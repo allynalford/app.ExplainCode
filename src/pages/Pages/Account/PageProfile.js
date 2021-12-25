@@ -15,7 +15,7 @@ import copy from 'copy-to-clipboard';
 //Import Images
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
-import { getWidgets, getPrompts } from './config';
+import { getWidgets, getPrompts , modes, themes} from './config';
 import { getGTP3, getCompletions } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
@@ -40,6 +40,7 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import './loader.css';
 import dateFormat from 'dateformat';
 const endpoint = require('../../../common/endpoint');
+const _ = require('lodash');
 //const dateFormat = require('dateformat');
 
 function PageProfile({history}) {
@@ -70,42 +71,10 @@ function PageProfile({history}) {
   const [ratingSuccessMsg, setRatingSuccessMsg] = useState("");
   const [ratingStatus, setRatingStatus]  = useState(false);
   const [copied, setCopied] = useState(false);
+  const [themeOption, setThemeOption] = useState({});
+  const [modeOption, setModeOption] = useState({});
 
 
-  
-
-  const themes = [
-    { label: 'Solarized Light', value: 'solarized_light' },
-    { label: 'Solarized Dark', value: 'solarized_dark' },
-    { label: 'Terminal', value: 'terminal' },
-    { label: 'Kuroir', value: 'kuroir' },
-    { label: 'GitHub', value: 'github' },
-    { label: 'Monokai', value: 'monokai' }
-  ];
-
-  const modes = [
-    { label: 'All Languages', value: 'markdown' },
-    { label: 'NodeJS (Javascript)', value: 'javascript' },
-    { label: 'Python', value: 'python' },
-    { label: 'Go (Golang)', value: 'golang' },
-    { label: 'SQL (Structured Query Language)', value: 'mysql' },
-    { label: 'HTML', value: 'html' }
-  ];
-
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      borderBottom: '2px dotted green',
-      color: state.isSelected ? 'yellow' : 'black',
-      //backgroundColor: state.isSelected ? 'green' : 'white'
-    }),
-    control: (provided) => ({
-      ...provided,
-      marginTop: "5%",
-    }),
-    width: '100%',
-    fontWeight: 'bold'
-  }
 
   // function useQuery() {
   //   const { search } = useLocation();
@@ -170,7 +139,11 @@ function PageProfile({history}) {
   useEffect(() => {
     if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
       setUserglobaluuid(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
-      getUserCompletionCount(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid)
+      getUserCompletionCount(user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid);
+      const themeOption = _.find(themes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', user[process.env.REACT_APP_AUTH0_USER_METADATA].mode]);
+      setModeOption(modeOption);
     }
     return () => {
 
@@ -449,12 +422,13 @@ function PageProfile({history}) {
                         //     primary: '#009FD4',
                         // },
                       })}
-                      styles={customStyles}
                       id="modes-select"
                       options={modes}
+                      value={modeOption}
                       selectValue={'javascript'}
                       onChange={(opt) => {
                         setMode(opt.value);
+                        setModeOption(opt)
                       }}
                     ></Select>
                   </div>
@@ -477,11 +451,12 @@ function PageProfile({history}) {
                         //     primary: '#009FD4',
                         // },
                       })}
-                      styles={customStyles}
                       id="themes"
                       options={themes}
+                      value={themeOption}
                       onChange={(opt) => {
                         setTheme(opt.value);
+                        setThemeOption(opt);
                       }}
                     ></Select>
                   </div>
