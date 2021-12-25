@@ -69,19 +69,13 @@ function PageProfileEdit({ history }) {
   }, [user]);
 
   useEffect(() => {
+    console.log('user_metadata',user_metadata);
     if (typeof user_metadata !== 'undefined') {
       const themeOption = _.find(themes, ['value', user_metadata.theme]);
       setThemeOption(themeOption);
       const modeOption = _.find(modes, ['value', user_metadata.mode]);
       setModeOption(modeOption);
     }
-    return () => {};
-  }, [user_metadata]);
-
-  useEffect(() => {
-    // if (typeof user_metadata !== 'undefined') {
-    //   setUserglobaluuid(user_metadata.userglobaluuid);
-    // }
     return () => {};
   }, [user_metadata]);
 

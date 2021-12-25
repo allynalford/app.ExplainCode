@@ -565,13 +565,45 @@ function PageProfile({history}) {
                       disabled={(loading === true | code === "" ? true : false)}
                       onClick={e =>{
                         console.log('save:', code);
-
+                        setLoading(true);
                         if(typeof snippetuuid !== "undefined"){
                           //run update
-
+                          endpoint.postIAM(getSnippets().updateSnippet, {
+                            userglobaluuid,
+                            snippetuuid,
+                            fields: [{name: 'snippet', value: code}]
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                             
+                              setLoading(false);
+                            } else {
+                             
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
                         }else{
                           //run save
-
+                          endpoint.postIAM(getSnippets().saveSnippet, {
+                            userglobaluuid,
+                            lang: mode,
+                            snippet: code
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                             
+                              setLoading(false);
+                            } else {
+                             
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
                         }
                       }}
                       className="btn btn-pills btn-info"
