@@ -1,6 +1,5 @@
 /*jshint esversion: 8 */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -11,12 +10,12 @@ import {
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
-import FeatherIcon from "feather-icons-react";
 import copy from 'copy-to-clipboard';
 //Import Images
 import ProfileHeader from "../../../components/Layout/ProfileHeader";
 import { useAuth0 } from '@auth0/auth0-react';
-import { getWidgets, getPrompts , modes, themes} from './config';
+import MainSideBar from '../../../components/Layout/sidebar';
+import { modes, themes} from './config';
 import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
@@ -47,7 +46,7 @@ const _ = require('lodash');
 
 function PageProfile({history}) {
  
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
   const [userglobaluuid, setUserglobaluuid] = useState("");
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
@@ -143,6 +142,13 @@ function PageProfile({history}) {
   }, []);
 
   useEffect(() => {
+  
+    return () => {
+
+    };
+  }, [ completionsThisMonth, userglobaluuid ]);
+
+  useEffect(() => {
     if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
       setUserMetaData(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
     }
@@ -150,6 +156,8 @@ function PageProfile({history}) {
 
     };
   }, [ user ]);
+
+  
 
   useEffect(() => {
     if (typeof user_metadata !== "undefined") {
@@ -312,109 +320,7 @@ function PageProfile({history}) {
         <Container className="mt-lg-3">
           <Row>
             <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
-              <div className="sidebar sticky-bar p-4 rounded shadow">
-                <div className="widget mb-4 pb-4 border-bottom">
-                  <h5 className="widget-title">Stats :</h5>
-                  <div className="row mt-4">
-                    {/* <div className="col-6 text-center">
-                      <FeatherIcon
-                        icon="youtube"
-                        className="fea icon-ex-md text-primary mb-1"
-                      />
-                      <h5 className="mb-0">60</h5>
-                      <p className="text-muted mb-0">Credits</p>
-                    </div> */}
-
-                    <div className="col-6 text-center">
-                      <FeatherIcon
-                        icon="activity"
-                        className="fea icon-ex-md text-primary mb-1"
-                      />
-                      <h5 className="mb-0">{completionsThisMonth}/100</h5>
-                      <h6 className="text mb-0">Executions</h6>
-                    </div>
-                  </div>
-                </div>
-                <div className="widget mt-4">
-                  <h5 className="widget-title">Tools:</h5>
-                  <ul
-                    className="list-unstyled sidebar-nav mb-0"
-                    id="navmenu-nav"
-                  >
-                    {getPrompts(window.location).map((widget, key) => (
-                      <li className={widget.className} key={key}>
-                        {widget.title === 'Logout' ? (
-                          <Link
-                            onClick={() =>
-                              logout({
-                                returnTo: window.location.origin,
-                              })
-                            }
-                            to={'#'}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        ) : (
-                          <Link
-                            id={widget.tool}
-                            name={widget.tool}
-                            to={widget.link}
-                            //onClick={e => {switchTool(widget.tool)}}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="widget mt-4">
-                  <ul
-                    className="list-unstyled sidebar-nav mb-0"
-                    id="navmenu-nav"
-                  >
-                    {getWidgets(window.location).map((widget, key) => (
-                      <li className={widget.className} key={key}>
-                        {widget.title === 'Logout' ? (
-                          <Link
-                            onClick={() =>
-                              logout({
-                                returnTo: window.location.origin,
-                              })
-                            }
-                            to={'#'}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        ) : (
-                          <Link
-                            to={widget.link}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <MainSideBar completionsThisMonth={completionsThisMonth} />
             </Col>
 
             <Col lg="9" md="7" xs="12">

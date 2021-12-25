@@ -10,13 +10,20 @@ export function getWidgets(path){
     // },
     {
       id: 1,
+      icon: "uil uil-bookmark",
+      className: path.pathname === "/snippets" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Saved Snippets",
+      link: "/snippets",
+    },
+    {
+      id: 2,
       icon: "uil uil-setting",
       className: path.pathname === "/settings" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Settings",
       link: "/settings",
     },
     {
-      id: 2,
+      id: 3,
       icon: "uil uil-octagon",
       className: path.pathname === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Logout",

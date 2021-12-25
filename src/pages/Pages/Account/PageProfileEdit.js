@@ -1,6 +1,5 @@
 /*jshint esversion: 6 */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -20,18 +19,19 @@ import Ionicon from 'react-ionicons';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
 import { Helmet } from "react-helmet";
-import { getWidgets, getPrompts, modes, themes } from './config';
+import { modes, themes } from './config';
 import { getAuth0 } from '../../../common/config';
+import MainSideBar from '../../../components/Layout/sidebar';
 import ProfileHeader from '../../../components/Layout/ProfileHeader';
 const endpoint = require('../../../common/endpoint');
 const _ = require('lodash');
 
 
 function PageProfileEdit({ history }) {
-  const { user, logout } = useAuth0();
+  const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
 
-  //const [userglobaluuid, setUserglobaluuid] = useState('');
+  const [userglobaluuid, setUserglobaluuid] = useState('');
   const [user_metadata, setUserMetadata] = useState({occupation: '', twitter: '', instagram: '', linkedin: ''});
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
@@ -61,15 +61,14 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     if (typeof user !== 'undefined') {
       setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-      // setUserglobaluuid(
-      //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
-      // );
+       setUserglobaluuid(
+         user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid
+       );
     }
     return () => {};
   }, [user]);
 
   useEffect(() => {
-    console.log('user_metadata',user_metadata);
     if (typeof user_metadata !== 'undefined') {
       const themeOption = _.find(themes, ['value', user_metadata.theme]);
       setThemeOption(themeOption);
@@ -117,127 +116,7 @@ function PageProfileEdit({ history }) {
         <Container className="mt-lg-3">
           <Row>
             <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
-              <div className="sidebar sticky-bar p-4 rounded shadow">
-                <div className="widget">
-                  <h5 className="widget-title">Section :</h5>
-                  <div className="row mt-4">
-                    <div className="col-6 text-center">
-                      <FeatherIcon
-                        icon="user-plus"
-                        className="fea icon-ex-md text-primary mb-1"
-                      />
-                      <h5 className="mb-0">2588</h5>
-                      <p className="text-muted mb-0">Data</p>
-                    </div>
-
-                    <div className="col-6 text-center">
-                      <FeatherIcon
-                        icon="users"
-                        className="fea icon-ex-md text-primary mb-1"
-                      />
-                      <h5 className="mb-0">454</h5>
-                      <p className="text-muted mb-0">Data</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="widget mt-4 pt-2">
-                  <h5 className="widget-title">Section :</h5>
-                  <div className="progress-box mt-4">
-                    <h6 className="title text-muted">Progress</h6>
-                    {/* <Progress
-                    value={50}
-                    color="primary"
-                    barClassName="position-relative"
-                  >
-                    <div className="progress-value d-block text-muted h6">
-                      24 / 48
-                    </div>
-                  </Progress> */}
-                  </div>
-                </div>
-                <div className="widget mt-4">
-                  <h5 className="widget-title">Tools:</h5>
-                  <ul
-                    className="list-unstyled sidebar-nav mb-0"
-                    id="navmenu-nav"
-                  >
-                    {getPrompts(window.location).map((widget, key) => (
-                      <li className={widget.className} key={key}>
-                        {widget.title === 'Logout' ? (
-                          <Link
-                            onClick={() =>
-                              logout({
-                                returnTo: window.location.origin,
-                              })
-                            }
-                            to={'#'}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        ) : (
-                          <Link
-                            id={widget.tool}
-                            name={widget.tool}
-                            to={widget.link}
-                            //onClick={e => {switchTool(widget.tool)}}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="widget mt-4">
-                  <ul
-                    className="list-unstyled sidebar-nav mb-0"
-                    id="navmenu-nav"
-                  >
-                    {getWidgets(window.location).map((widget, key) => (
-                      <li className={widget.className} key={key}>
-                        {widget.title === 'Logout' ? (
-                          <Link
-                            onClick={() =>
-                              logout({
-                                returnTo: window.location.origin,
-                              })
-                            }
-                            to={'#'}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        ) : (
-                          <Link
-                            to={widget.link}
-                            className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
-                          >
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="widget mt-4 pt-2">
-                  <h5 className="widget-title">Section :</h5>
-                </div>
-              </div>
+             <MainSideBar userglobaluuid={userglobaluuid} />
             </Col>
 
             <Col lg="9" xs="12">
