@@ -19,6 +19,7 @@ import FeatherIcon from 'feather-icons-react';
 import Ionicon from 'react-ionicons';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
+import { Helmet } from "react-helmet";
 import { getWidgets, getPrompts, modes, themes } from './config';
 import { getAuth0 } from '../../../common/config';
 import ProfileHeader from '../../../components/Layout/ProfileHeader';
@@ -47,6 +48,7 @@ function PageProfileEdit({ history }) {
   //const [user, setUser] = useState();
 
   useEffect(() => {
+    document.title = "Explain Code App - Settings";
     document.body.classList = '';
     document.getElementById('top-menu').classList.add('nav-light');
     window.addEventListener('scroll', scrollNavigation, true);
@@ -101,6 +103,15 @@ function PageProfileEdit({ history }) {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Explain Code App - Settings</title>
+        <meta name="description" content="Explain Code App Settings." />
+        <meta name="keywords" content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta name="twitter:title" content="Explain Code App Settings" />
+        <meta name="twitter:image:alt" content="Explain Code App: Settings" />
+        <meta property="og:title" content="Explain Code App - Settings" />
+        <meta property="og:description" content="Explain Code App Settings." />
+      </Helmet>
       <ProfileHeader />
 
       <section className="section mt-60">

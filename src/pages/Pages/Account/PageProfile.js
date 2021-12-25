@@ -20,6 +20,7 @@ import { getWidgets, getPrompts , modes, themes} from './config';
 import { getGTP3, getCompletions } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
+import { Helmet } from "react-helmet";
 //import { Icon, InlineIcon  } from '@iconify/react';
 //import onRunPromptIcon from '@iconify/icons-emojione-monotone/confused-face';
 //'@iconify/icons-emojione-monotone/chart-increasing'
@@ -120,6 +121,7 @@ function PageProfile({history}) {
 
   useEffect(() => {
     try {
+      document.title = "Explain Code App - Dashboard";
       if(document.getElementById('top-menu') !== null){
         document.getElementById('top-menu').classList.add('nav-light');
       }
@@ -288,6 +290,15 @@ function PageProfile({history}) {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Explain Code App - Dashboard</title>
+        <meta name="description" content="Explain Code App dashboard for code explanations." />
+        <meta name="keywords" content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta name="twitter:title" content="Explain Code App dashboard" />
+        <meta name="twitter:image:alt" content="Explain Code App: dashboard" />
+        <meta property="og:title" content="Explain Code App - Dashboard" />
+        <meta property="og:description" content="Explain Code App dashboard." />
+      </Helmet>
       <ProfileHeader />
       <section className="section mt-60">
         <Container className="mt-lg-3">
