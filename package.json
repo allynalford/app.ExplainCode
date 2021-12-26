@@ -7,9 +7,6 @@
   "homepage": "https://privy.explaincode.app/",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
-    "@emotion/core": "^10.3.1",
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
@@ -60,7 +57,6 @@
     "react-paginate": "^8.1.0",
     "react-parallax": "^3.3.0",
     "react-player": "^2.9.0",
-    "react-pure-loaders": "^3.0.1",
     "react-rating": "^2.0.5",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^5.2.0",
