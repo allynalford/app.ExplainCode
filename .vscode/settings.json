@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
+        "autor",
+        "clearfix",
         "completionid",
         "emojione",
         "esversion",
@@ -10,15 +12,20 @@
         "ionicons",
         "kuroir",
         "lastname",
+        "linebyline",
         "maincontent",
         "monokai",
         "navmenu",
         "noconflict",
         "ratingfeedback",
+        "readmore",
         "Snippetuuid",
+        "subcribe",
+        "tagcloud",
         "topnav",
         "unstyled",
         "updateprofile",
-        "Userglobaluuid"
+        "Userglobaluuid",
+        "waitlist"
     ]
 }

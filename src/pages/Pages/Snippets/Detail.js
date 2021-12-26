@@ -158,7 +158,7 @@ function Detail(props, { history }) {
     return () => {
       window.removeEventListener('scroll', scrollNavigation, true);
     };
-  }, []);
+  }, [snippetTitle]);
 
   useEffect(() => {
     if (typeof userglobaluuid !== 'undefined' && typeof code === "undefined") {
@@ -577,7 +577,7 @@ function Detail(props, { history }) {
                             </CardBody>
                             <div className="author">
                               <small className="text-light user d-block">
-                                <i className="uil uil-user"></i> {blog.autor}
+                                <i className="uil uil-user"></i> {blog.author}
                               </small>
                               <small className="text-light date">
                                 <i className="uil uil-calendar-alt"></i>{" "}

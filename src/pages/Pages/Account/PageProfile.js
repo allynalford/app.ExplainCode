@@ -289,7 +289,7 @@ function PageProfile({history}) {
   return (
     <React.Fragment>
       <Helmet>
-        <title>Explain Code App - Dashboard</title>
+        <title>Explain Code App - Dashboard </title>
         <meta
           name="description"
           content="Explain Code App dashboard for code explanations."

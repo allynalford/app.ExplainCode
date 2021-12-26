@@ -60,29 +60,29 @@ const serverVars = {
     waitlistText: "Get Early Access"
   };
 
-  export const WAITLIST_TEXT = (process.env.NODE_ENV === 'production' ? serverVars.waitlistText : localVars.waitlistText)
+  export const WAITLIST_TEXT = (process.env.NODE_ENV === 'production' ? serverVars.waitlistText : localVars.waitlistText);
   export const SAVE_SNIPPET_ENABLED = process.env.REACT_APP_SAVE_SNIPPET_ENABLED;
   export const SAVE_EXPLANATION_ENABLED = process.env.REACT_APP_SAVE_EXPLANATION_ENABLED;
   
   export function getConfiguration() {
     if (process.env.NODE_ENV === 'production') {
       return serverVars;
-    };
+    }
     return localVars;
-  };
+  }
   export function getDrip() {
     if (process.env.NODE_ENV === 'production') {
       return serverVars.drip;
-    };
+    }
     return localVars.drip;
-  };
+  }
 
   export function getGTP3() {
     if (process.env.NODE_ENV === 'production') {
       return serverVars.gtp3;
-    };
+    }
     return localVars.gtp3;
-  };
+  }
 
   
   export function getAuth0() {
