@@ -52,9 +52,8 @@ function PageProfile({history}) {
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
-  const [user_metadata, setUserMetaData] = useState(undefined);
-  const [theme, setTheme] = useState(UserTheme);
-  const [mode, setMode] = useState(UserMode);
+  const [theme, setTheme] = useState(undefined);
+  const [mode, setMode] = useState(undefined);
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -129,6 +128,17 @@ function PageProfile({history}) {
       
       window.addEventListener('scroll', scrollNavigation, true);
 
+      var cachedSettings = localStorage.getItem('cachedSettings');
+
+      if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
+        cachedSettings = JSON.parse(cachedSettings);
+        setMode(cachedSettings.mode);
+        setTheme(cachedSettings.theme);
+      }else{
+        setMode(UserMode);
+        setTheme(UserTheme);
+      }
+     
 
     } catch (e) {
       console.error(e);
@@ -138,6 +148,7 @@ function PageProfile({history}) {
       window.removeEventListener("scroll", scrollNavigation, true);
       localStorage.removeItem('cachedCode');
       localStorage.removeItem('cachedQuestion');
+      //localStorage.removeItem('cachedSettings');
     };
   }, []);
 
@@ -146,32 +157,36 @@ function PageProfile({history}) {
     return () => {
 
     };
-  }, [ completionsThisMonth, userglobaluuid ]);
+  }, [ completionsThisMonth ]);
+
 
   useEffect(() => {
-    if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
-      setUserMetaData(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-    }
-    return () => {
-
-    };
-  }, [ user ]);
-
-  
-
-  useEffect(() => {
-    if (typeof user_metadata !== "undefined") {
-      getUserCompletionCount(user_metadata.userglobaluuid);
-      const themeOption = _.find(themes, ['value', user_metadata.theme]);
-      setThemeOption(themeOption);
-      const modeOption = _.find(modes, ['value', user_metadata.mode]);
-      setModeOption(modeOption);
+    if (typeof userglobaluuid !== "undefined") {
+      getUserCompletionCount(userglobaluuid);
     }
     return () => {
 
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ user_metadata]);
+  }, [ userglobaluuid ]);
+
+  
+
+  useEffect(() => {
+    if (typeof mode !== 'undefined') {
+      const themeOption = _.find(themes, ['value', theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', mode]);
+      setModeOption(modeOption);
+      const cachedSettings = {
+        mode,
+        theme,
+      };
+      localStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
+    }
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, theme]);
 
 
   useEffect(() => {
@@ -194,6 +209,12 @@ function PageProfile({history}) {
         setTool(toolParam.replace("-", " "));
         setPrompt(toolParam);
       }
+    }
+    var cachedSettings = localStorage.getItem('cachedSettings');
+    if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
+      cachedSettings = JSON.parse(cachedSettings);
+      setMode(cachedSettings.mode);
+      setTheme(cachedSettings.theme);
     }
 
     return () => {
@@ -233,12 +254,16 @@ function PageProfile({history}) {
   }, [question]);
 
   const scrollNavigation = () => {
-    var doc = document.documentElement;
-    var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-    if (top > 80) {
-      document.getElementById("topnav").classList.add("nav-sticky");
-    } else {
-      document.getElementById("topnav").classList.remove("nav-sticky");
+    try{
+      var doc = document.documentElement;
+      var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+      if (top > 80) {
+        document.getElementById("topnav").classList.add("nav-sticky");
+      } else {
+        document.getElementById("topnav").classList.remove("nav-sticky");
+      }
+    }catch(e){
+      console.error(e);
     }
   };
 
@@ -249,7 +274,11 @@ function PageProfile({history}) {
   }
 
   function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    try{
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }catch(e){
+      return string;
+    }
   }
 
    // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -369,6 +398,7 @@ function PageProfile({history}) {
                             onChange={(opt) => {
                               setMode(opt.value);
                               setModeOption(opt);
+                              localStorage.setItem('cachedSettings', {mode: opt.value, theme});
                             }}
                           ></Select>
                         </div>
@@ -397,6 +427,7 @@ function PageProfile({history}) {
                             onChange={(opt) => {
                               setTheme(opt.value);
                               setThemeOption(opt);
+                              localStorage.setItem('cachedSettings', {mode, theme: opt.value});
                             }}
                           ></Select>
                         </div>

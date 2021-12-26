@@ -6,6 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
+        # - REACT_APP_BASE_API_HOST=$REACT_APP_BASE_API_HOST
         - npm run build
   artifacts:
     baseDirectory: build
