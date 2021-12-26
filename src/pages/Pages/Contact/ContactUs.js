@@ -45,7 +45,7 @@ class ContactUs extends Component {
      //const send = {success: true};
       console.log(send);
       if(send.success === true){
-        this.setState({Contactvisible: true, successMsg: 'Message sent Successfully.', successMsgColor: 'success'});
+        this.setState({email:'', name:'', subject:'', message:'', Contactvisible: true, successMsg: 'Message sent Successfully.', successMsgColor: 'success'});
       }else{
         this.setState({Contactvisible: true, successMsg: 'Error: Message not sent.', successMsgColor: 'danger'});
       }
@@ -145,6 +145,7 @@ class ContactUs extends Component {
                               name="name"
                               id="name"
                               type="text"
+                              value={this.state.name}
                               className="form-control ps-5"
                               placeholder="First Name :"
                               onChange={ e => {
@@ -172,6 +173,7 @@ class ContactUs extends Component {
                               name="email"
                               id="email"
                               type="email"
+                              value={this.state.email}
                               className="form-control ps-5"
                               placeholder="Your email :"
                               onChange={ e => {
@@ -196,6 +198,7 @@ class ContactUs extends Component {
                               aria-label="Enter subject of your message"
                               name="subject"
                               id="subject"
+                              value={this.state.subject}
                               className="form-control ps-5"
                               placeholder="Your subject :"
                               onChange={ e => {
@@ -221,6 +224,7 @@ class ContactUs extends Component {
                               name="comments"
                               id="comments"
                               rows="4"
+                              value={this.state.message}
                               className="form-control ps-5"
                               placeholder="Your Message :"
                               onChange={ e => {

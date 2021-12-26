@@ -18,6 +18,8 @@
     "@iconify/react": "^3.1.0",
     "@iconscout/react-unicons": "^1.1.6",
     "@notionhq/client": "^0.4.11",
+    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/stripe-js": "^1.22.0",
     "ace-builds": "^1.4.13",
     "aos": "^2.3.4",
     "auth0-js": "^9.18.0",
