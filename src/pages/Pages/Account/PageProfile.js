@@ -18,7 +18,7 @@ import copy from 'copy-to-clipboard';
 import { useAuth0 } from '@auth0/auth0-react';
 import { modes, themes, getPrompts, TOOLS} from './config';
 import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
-import slack from '../../../common/slack';
+import { updateRating } from '../../../common/slack';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
@@ -708,7 +708,7 @@ function PageProfile({history}) {
                             setCompletionsThisMonth(res.data.count);
                             setRatingSuccessColor('success');
                             setRatingSuccessMsg('Thank you for your rating.');
-                            slack.updateRating(email, completionId, rating, ratingMessage);
+                            updateRating(email, completionId, rating, ratingMessage);
                           } else {
                             setRatingSuccessColor('danger');
                             setRatingSuccessMsg(
@@ -782,7 +782,7 @@ function PageProfile({history}) {
                               setRatingSuccessMsg(
                                 'Thank you for your feedback.',
                               );
-                              slack.updateRating(email, completionId, rating, ratingMessage);
+                              updateRating(email, completionId, rating, ratingMessage);
                             } else {
                               setRatingSuccessColor('danger');
                               setRatingSuccessMsg(
