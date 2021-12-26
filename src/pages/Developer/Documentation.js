@@ -49,6 +49,7 @@ export default class Documention extends Component {
                     Review SQL (Structured Query Language) code
                   </li>
                 </ul>
+
                 <div className="mt-4">
                   <a href="#emailAddress" className="btn btn-primary">
                   {config.WAITLIST_TEXT}

@@ -5,6 +5,12 @@ import("./pages/Pages/Snippets/view")
 const SnippetDetail = React.lazy(() =>
 import("./pages/Pages/Snippets/Detail")
 );
+const ThankYou = React.lazy(() =>
+  import("./pages/Developer/ThankYou")
+);
+
+const History = React.lazy(() => import("./pages/Pages/History"));
+
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -120,7 +126,7 @@ const Widget = React.lazy(() => import("./pages/Docs/widget"));
 
 const PageAboutUs = React.lazy(() => import("./pages/Pages/PageAboutUs"));
 const PageAboutusTwo = React.lazy(() => import("./pages/Pages/PageAboutusTwo"));
-const PageHistory = React.lazy(() => import("./pages/Pages/PageHistory"));
+const PageHistory = React.lazy(() => import("./pages/Pages/History"));
 const PageMembers = React.lazy(() =>
   import("./pages/Pages/Account/PageMembers")
 );
@@ -292,6 +298,8 @@ const routes = [
    { path: "/settings", component: PageProfileEdit, protected: true },
    { path: "/register", component: Register, isWithoutLayout: true,},
    { path: "/authorize", component: PageProfile, protected: true },
+   { path: "/thankyou", component: ThankYou, isWithoutLayout: true },
+   { path: "/explain-code-history", component: History, isTopbarDark: true },
 
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },
