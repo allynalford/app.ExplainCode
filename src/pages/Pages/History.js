@@ -112,7 +112,7 @@ export default class PageHistory extends Component {
                       </Col>
                       <Col lg={6} md={6} sm={6}>
                         <Card className="event event-description-right rounded shadow border-0 overflow-hidden float-start">
-                          <img src={blog1} className="img-fluid" alt="" />
+                          <img src={blog1} className="img-fluid" alt="Founding of Explain Code App" />
                           <CardBody>
                             <h5 className="mb-0 text-capitalize">Founding</h5>
                             <p className="mt-3 mb-0 text">
@@ -133,7 +133,7 @@ export default class PageHistory extends Component {
                     <Row>
                       <Col lg={6} md={6} sm={6} className="order-sm-1 order-2">
                         <Card className="event event-description-right rounded shadow border-0 overflow-hidden float-start">
-                          <img src={blog2} className="img-fluid" alt="" />
+                          <img src={blog2} className="img-fluid" alt="Launch of Private Beta" />
                           <CardBody>
                             <h5 className="mb-0 text-capitalize">
                               Launch of Private Beta
@@ -159,29 +159,31 @@ export default class PageHistory extends Component {
                     </Row>
                   </div>
 
-                  {/* <div className="timeline-item mt-4">
+                  <div className="timeline-item mt-4">
                     <Row>
                       <Col lg={6} md={6} sm={6}>
                         <div className="duration date-label-left border rounded p-2 px-4 position-relative shadow">
-                          2012
+                          2022
                         </div>
                       </Col>
                       <Col lg={6} md={6} sm={6}>
                         <Card className="event event-description-right rounded shadow border-0 overflow-hidden float-start">
-                          <img src={blog3} className="img-fluid" alt="" />
+                          <img src={blog1} className="img-fluid" alt="More to come from Explain Code App" />
                           <CardBody>
-                            <h5 className="mb-0 text-capitalize">Secuirty</h5>
-                            <p className="mt-3 mb-0 text-muted">
-                              The generated injected humour, or
-                              non-characteristic words etc. Cum sociis natoque
-                              penatibus et magnis dis parturient montes,
-                              nascetur ridiculus mus. Donec quam felis,
+                            <h5 className="mb-0 text-capitalize">More to Come</h5>
+                            <p className="mt-3 mb-0 text">
+                            We're building something that we believe will make every developer more 
+                            productive and help them understand code better. We're truly excited to release 
+                            it as soon as possible.
+                            </p>
+                            <p className="mt-3 mb-0 text">
+                            It currently supports NodeJS, Python, Golang and SQL. We are adding support for Solidity, and soon other languages as well!
                             </p>
                           </CardBody>
                         </Card>
                       </Col>
                     </Row>
-                  </div> */}
+                  </div>
 
                   {/* <div className="timeline-item mt-4">
                     <Row>
