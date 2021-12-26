@@ -10,6 +10,7 @@ const ThankYou = React.lazy(() =>
 );
 
 const History = React.lazy(() => import("./pages/Pages/History"));
+const ContactUS = React.lazy(() => import("./pages/Pages/Contact/ContactUs"));
 
 //Special
 const PageComingSoon = React.lazy(() =>
@@ -287,6 +288,9 @@ const routes = [
    { path: "/authorize", component: PageProfile, protected: true },
    { path: "/thankyou", component: ThankYou, isWithoutLayout: true },
    { path: "/explain-code-history", component: History, isTopbarDark: true },
+   { path: "/contact-us", component: ContactUS, isTopbarDark: true },
+
+   
 
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },

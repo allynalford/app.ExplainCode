@@ -30,7 +30,9 @@ class Topbar extends Component {
       dropdownOpenShop: false,
       navLinks: [
         //Note : each child and nested child must have unique id
-        // { id: 1, title: "Home", link: "/index" },
+         { id: 1, title: "Home", link: "/" },
+         { id: 2, title: "Contact Us", link: "/contact-us" },
+         { id: 3, title: "History & Roadmap", link: "/explain-code-history" },
         // {
         //   id: 2,
         //   title: "Landing",
