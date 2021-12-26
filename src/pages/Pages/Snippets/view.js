@@ -12,10 +12,6 @@ import {
 import { useAuth0 } from '@auth0/auth0-react';
 import MainSideBar from '../../../components/Layout/sidebar';
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import PureLoader from '../../../components/PureLoader';
->>>>>>> parent of 4769fbc (remove packages)
 import { getSnippets } from '../../../common/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -136,7 +132,7 @@ function View({ history }) {
                 <div className="table-responsive bg-white shadow rounded mt-4">
 <<<<<<< HEAD
                 <div style={{ justifyContent: 'center', display: 'flex' }} className="app-inner-layout__bottom-pane text-center">
-                {(loading === true ? <div style={{ height: '30px', margin: 'auto', width: '50%', verticalAlign: 'middle', marginTop: '44px' }}><PureLoader sync={new Date()} loading={loading} loader="BallPulseRound" /></div> :
+             
                 <div>
                 <ReactPaginate
                     previousLabel={customLabels.previous}
@@ -155,7 +151,7 @@ function View({ history }) {
                     nextLinkClassName="page-link"
                     breakClassName="page-item"
                     breakLinkClassName="page-link"
-                  /></div>)}
+                  /></div>
                   
                   </div>
                   <Table className="mb-0 table-center">
