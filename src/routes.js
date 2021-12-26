@@ -1,8 +1,5 @@
 import React from "react";
 
-
-const SnippetsView = React.lazy(() => import("./pages/Pages/Snippets/view"));
-
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -282,20 +279,15 @@ const ShopMyAccount = React.lazy(() =>
 
 const routes = [
 
-    //Explain Path
-   { path: "/snippets", component: SnippetsView, isTopbarDark: true, protected: true },
-   { path: "/dashboard", component: PageProfile, protected: true },
-   { path: "/settings", component: PageProfileEdit, protected: true },
-   { path: "/register", component: Register, isWithoutLayout: true,},
-   { path: "/authorize", component: PageProfile, protected: true },
+
 
     //Page Profile
-    
-    
+    { path: "/dashboard", component: PageProfile, protected: true },
+    { path: "/authorize", component: PageProfile, protected: true },
     { path: "/page-members", component: PageMembers, protected: true },
     { path: "/page-works", component: PageWorks, protected: true },
     { path: "/page-messages", component: PageMessages, protected: true },
-    
+    { path: "/settings", component: PageProfileEdit, protected: true },
     { path: "/page-payments", component: PagePayments, protected: true },
     { path: "/page-invoice", component: PageInvoice, isTopbarDark: true, protected: true },
 
@@ -369,7 +361,11 @@ const routes = [
     component: PageCoverSignup,
     isWithoutLayout: true,
   },
-
+  {
+    path: "/register",
+    component: Register,
+    isWithoutLayout: true,
+  },
 
   {
     path: "/auth-re-password",
