@@ -228,7 +228,7 @@ const PageContactThree = React.lazy(() =>
   import("./pages/Pages/Contact/PageContactThree")
 );
 const PageContactTwo = React.lazy(() =>
-  import("./pages/Pages/Contact/PageContactTwo")
+  import("./pages/Pages/Contact/ContactUs")
 );
 
 // forums
@@ -505,7 +505,7 @@ const routes = [
   //Page Contact
   { path: "/page-contact-one", component: PageContactOne, isTopbarDark: true },
   { path: "/page-contact-three", component: PageContactThree, isTopbarDark: true },
-  { path: "/page-contact-two", component: PageContactTwo, isTopbarDark: true },
+  { path: "/contact-us", component: PageContactTwo, isTopbarDark: true },
 
   // forums
   { path: "/forums", component: Overview, isTopbarDark: true },

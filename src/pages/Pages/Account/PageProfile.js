@@ -16,8 +16,9 @@ import Select from 'react-select';
 import copy from 'copy-to-clipboard';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
-import { modes, themes} from './config';
+import { modes, themes, getPrompts, TOOLS} from './config';
 import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
+import slack from '../../../common/slack';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
@@ -46,6 +47,7 @@ const _ = require('lodash');
 function PageProfile({history}) {
  
   const { user } = useAuth0();
+  const { email } = user;
   const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
@@ -53,7 +55,6 @@ function PageProfile({history}) {
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
-  const [user_metadata, setUserMetaData] = useState(undefined);
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -64,7 +65,8 @@ function PageProfile({history}) {
   const [codeLength, setCodeLength] = useState(0);
   const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [promptResponse, setPromptResponse] = useState("");
-  const [tools] = useState(new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function']));
+  const [tools] = useState(TOOLS);
+  const [toolObj, setToolObj] = useState({tips:[]});
   const [loading, setLoading] = useState(false);
   const [completionId, setCompletionId] = useState("");
   const [completionsThisMonth, setCompletionsThisMonth] = useState(0);
@@ -154,6 +156,7 @@ function PageProfile({history}) {
     if(toolParam !== null && toolParam !== tool){
 
       const isItemInSet = tools.has(toolParam);
+      const prompts = getPrompts(window.location);
      
       if(!isItemInSet){
         window.history.replaceState(
@@ -163,9 +166,13 @@ function PageProfile({history}) {
         );
         setTool('Summarize');
         setPrompt('Summarize');
+        const toolObj = _.find(prompts, ['tool', 'Summarize']);
+        setToolObj(toolObj);
       }else{
         setTool(toolParam.replace("-", " "));
         setPrompt(toolParam);
+        const toolObj = _.find(prompts, ['tool', toolParam]);
+        setToolObj(toolObj);
       }
     }
     var cachedSettings = sessionStorage.getItem('cachedSettings');
@@ -251,6 +258,9 @@ function PageProfile({history}) {
 
   const onRunPrompt = async () => {
     setLoading(true);
+    setRating(0)
+    setRatingMessage('');
+    setCompletionId("");
     let resp, text;
     switch (prompt) {
       case 'Line-By-Line':
@@ -273,6 +283,15 @@ function PageProfile({history}) {
         text = resp.data.explanation.choices[0].text;
         setCompletionId(resp.data.explanation.id);
         break;
+      case 'Code-Comment':
+        resp = await endpoint.postIAM(getGTP3().post_javadoc_comment_Prompt, {code, lang: mode, userglobaluuid, type: 'code'});
+        text = resp.data.explanation.choices[0].text;
+        const startText = text.indexOf('/**');
+        const stopText = text.lastIndexOf('*/') + 2;
+        const comment = text.substring(startText, stopText);
+        if(comment !== "") text = comment;
+        setCompletionId(resp.data.explanation.id);
+        break;
       case 'Class-Breakdown':
         break;
       default:
@@ -287,10 +306,10 @@ function PageProfile({history}) {
   return (
     <React.Fragment>
       <Helmet>
-        <title>Explain Code App - Dashboard </title>
+        <title>Explain Code App - Tool Dashboard</title>
         <meta
           name="description"
-          content="Explain Code App dashboard for code explanations."
+          content={toolObj.desc}
         />
         <meta
           name="keywords"
@@ -314,9 +333,9 @@ function PageProfile({history}) {
                 <Row>
                   <Col md="6">
                     <div className="mt-4 mb-0">
-                      <h2>{tool}</h2>
+                      <h2>{toolObj.title}</h2>
                       <p className="text mb-0">
-                        Explain what this process does here
+                       {toolObj.desc}
                       </p>
                       <ul>
                         <li>
@@ -326,6 +345,13 @@ function PageProfile({history}) {
                             : capitalizeFirstLetter(mode)}
                         </li>
                         <li>Theme: {theme}</li>
+                        <li>Tips:
+                          <ul>
+                          {toolObj.tips.map((tip, key) => (
+                            <li key={key}>{tip}</li>
+                          ))}
+                          </ul>
+                        </li>
                       </ul>
                     </div>
                   </Col>
@@ -682,6 +708,7 @@ function PageProfile({history}) {
                             setCompletionsThisMonth(res.data.count);
                             setRatingSuccessColor('success');
                             setRatingSuccessMsg('Thank you for your rating.');
+                            slack.updateRating(email, completionId, rating, ratingMessage);
                           } else {
                             setRatingSuccessColor('danger');
                             setRatingSuccessMsg(
@@ -755,6 +782,7 @@ function PageProfile({history}) {
                               setRatingSuccessMsg(
                                 'Thank you for your feedback.',
                               );
+                              slack.updateRating(email, completionId, rating, ratingMessage);
                             } else {
                               setRatingSuccessColor('danger');
                               setRatingSuccessMsg(
@@ -783,8 +811,8 @@ function PageProfile({history}) {
                       }}
                     >
                       {ratingStatus === true
-                        ? 'Updating Feedback'
-                        : 'Save Feedback'}
+                        ? 'Sending Feedback'
+                        : 'Send Feedback'}
                       {ratingStatus === true ? (
                         <Ionicon
                           style={{ marginLeft: '5px' }}

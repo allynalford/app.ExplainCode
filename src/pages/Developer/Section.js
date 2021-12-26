@@ -127,7 +127,7 @@ export default class index extends Component {
     Event("Waitlist", "New Waitlist User Slack", "Slack Channel")
 
     //process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK
-    let res = await axios.post(process.env.REACT_APP_SLACK_CONTACTUS_WEBHOOK, JSON.stringify({
+    let res = await axios.post(process.env.REACT_APP_SLACK_WAITLIST_WEBHOOK, JSON.stringify({
         "text": `Email Address: ${this.state.email}`,
     }), {
         withCredentials: false,

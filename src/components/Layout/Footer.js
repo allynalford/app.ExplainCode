@@ -24,6 +24,7 @@ class Footer extends Component {
       grid2: [
          { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
          { title: "Terms of Services", link: "/terms-of-service" },
+         { title: "Contact Us", link: "/contact-us" },
         // { title: "Privacy Policy", link: "/page-privacy" },
         // { title: "Documentation", link: "/documentation" },
         // { title: "Changelog", link: "/changelog" },
@@ -132,7 +133,7 @@ class Footer extends Component {
                 className="mt-4 mt-sm-0 pt-2 pt-sm-0"
                 name="footercolumn"
               >
-                {this.state.grid2.length !== 0 ? <h4
+                {this.state.grid2.length !== 0 ? <h3
                   className={
                     this.props.isLight
                       ? "text-dark footer-head"
@@ -140,7 +141,7 @@ class Footer extends Component {
                   }
                 >
                   Usefull Links
-                </h4>: ""}
+                </h3>: ""}
                 
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid2.map((grid, key) => (
