@@ -7,7 +7,7 @@
   "homepage": "https://privy.explaincode.app/",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
-    "@emotion/core": "^10.3.1",
+    "@emotion/core": "^10.0.0",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
