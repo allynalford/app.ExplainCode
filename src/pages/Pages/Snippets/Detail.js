@@ -6,13 +6,9 @@ import {
   Row,
   Col,
   Alert,
-  Form,
-  Label,
   Button,
-  Input,
   Card,
   CardBody,
-  CardImg,
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import copy from 'copy-to-clipboard';
@@ -34,12 +30,10 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 //import MainSideBar from '../../../components/Layout/sidebar';
 import { getSnippets } from '../../../common/config';
 //Import Icons
-import FeatherIcon from "feather-icons-react";
 
 //Import components
 import PageBreadcrumb from "../../../components/Shared/PageBreadcrumb";
 import PageSearchSidebar from "../../../components/Shared/PageSearchSidebar";
-import CommentsBox from "../../../components/Shared/CommentsBox";
 
 // import images
 import blog01 from "../../../assets/images/blog/01.jpg";
@@ -62,7 +56,7 @@ const _ = require('lodash');
 function Detail(props, { history }) {
 
   const { user } = useAuth0();
-  const { name } = user;
+  //const { name } = user;
   const { userglobaluuid, mode, theme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const { snippetuuid } = useParams();
   const cachedSnippet = (localStorage.getItem('cachedSnippet') === null ? undefined : localStorage.getItem('cachedSnippet'));

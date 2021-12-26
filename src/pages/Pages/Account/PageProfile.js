@@ -48,8 +48,8 @@ function PageProfile({history}) {
  
   const { user } = useAuth0();
   const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
-  const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
-  const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
+  const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
+  const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
@@ -79,46 +79,6 @@ function PageProfile({history}) {
 
 
 
-  // function useQuery() {
-  //   const { search } = useLocation();
-
-  //   return React.useMemo(() => new URLSearchParams(search), [search]);
-  // }
-
-  // function switchTool(toolParam) {
-    
-  //   console.log(toolParam)
-
-  //   if(toolParam !== null && toolParam !== tool){
-
-  //     const isItemInSet = tools.has(toolParam);
-
-  //     console.log(isItemInSet)
-     
-  //     if(!isItemInSet){
-  //       window.history.replaceState(
-  //         null,
-  //         null,
-  //         `/dashboard?tool=Summarize`,
-  //       );
-  //       setTool('Summarize');
-  //       setPrompt('Summarize');
-  //     }else{
-  //       console.log(`/dashboard?tool=${toolParam}`)
-  //       window.history.replaceState(
-  //         null,
-  //         null,
-  //         `/dashboard?tool=${toolParam}`,
-  //       );
-  //       setTool(toolParam.replace("-", " "));
-  //       setPrompt(toolParam);
-  //     }
-  //   }
-  // }
-
-  //let query = useQuery();
-
-
   useEffect(() => {
     try {
       document.title = "Explain Code App - Dashboard";
@@ -128,7 +88,7 @@ function PageProfile({history}) {
       
       window.addEventListener('scroll', scrollNavigation, true);
 
-      var cachedSettings = localStorage.getItem('cachedSettings');
+      var cachedSettings = sessionStorage.getItem('cachedSettings');
 
       if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
         cachedSettings = JSON.parse(cachedSettings);
@@ -146,11 +106,11 @@ function PageProfile({history}) {
 
     return () => {
       window.removeEventListener("scroll", scrollNavigation, true);
-      localStorage.removeItem('cachedCode');
-      localStorage.removeItem('cachedQuestion');
+      sessionStorage.removeItem('cachedCode');
+      sessionStorage.removeItem('cachedQuestion');
       //localStorage.removeItem('cachedSettings');
     };
-  }, []);
+  }, [UserMode, UserTheme]);
 
   useEffect(() => {
   
@@ -182,7 +142,7 @@ function PageProfile({history}) {
         mode,
         theme,
       };
-      localStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
+      sessionStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
     }
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -210,7 +170,7 @@ function PageProfile({history}) {
         setPrompt(toolParam);
       }
     }
-    var cachedSettings = localStorage.getItem('cachedSettings');
+    var cachedSettings = sessionStorage.getItem('cachedSettings');
     if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
       cachedSettings = JSON.parse(cachedSettings);
       setMode(cachedSettings.mode);
@@ -228,7 +188,7 @@ function PageProfile({history}) {
     if(typeof code !== "undefined" && code !== null){
       //console.log('storing code');
 
-      localStorage.setItem('cachedCode', code);
+      sessionStorage.setItem('cachedCode', code);
 
      // console.log('reading code', localStorage.getItem('cachedCode'))
       setCodeLength(code.length);
@@ -247,7 +207,7 @@ function PageProfile({history}) {
     //console.log('code', question);
     if(typeof question !== "undefined" && question !== null){
      
-      localStorage.setItem('cachedQuestion', question);
+      sessionStorage.setItem('cachedQuestion', question);
     }
     return () => {
     };
@@ -270,7 +230,7 @@ function PageProfile({history}) {
 
   function onChange(newValue) {
     setCode(newValue);
-    localStorage.setItem('cachedCode', newValue);
+    sessionStorage.setItem('cachedCode', newValue);
   }
 
   function capitalizeFirstLetter(string) {
