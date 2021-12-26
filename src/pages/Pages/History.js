@@ -54,7 +54,8 @@ export default class PageHistory extends Component {
             <Row className="justify-content-center">
               <Col lg={12} className="text-center">
                 <div className="page-next-level">
-                  <h4 className="title"> Explain Code App History </h4>
+                  <h1 className="title"> Explain Code App History </h1>
+                  <h2>Review your code and make it more accessible</h2>
                   <div className="page-next">
                     <nav aria-label="breadcrumb" className="d-inline-block">
                       <ul className="breadcrumb bg-white rounded shadow mb-0">
@@ -115,7 +116,7 @@ export default class PageHistory extends Component {
                           <CardBody>
                             <h5 className="mb-0 text-capitalize">Founding</h5>
                             <p className="mt-3 mb-0 text">
-                            While building Tenably, a Web accessibility testing tool, I developed a number of tools to 
+                            While building <a href="https://www.tenably.app" target="_new">Tenably</a>, a Web accessibility testing tool, I developed a number of tools to 
                             streamline testing and development. These utilities might prove useful to other developers as well, 
                             and they demonstrate some of the concepts I learned crafting this app.
                             </p>

@@ -15,7 +15,7 @@ import {
 import { Helmet } from "react-helmet";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-const slack = require('../../../common/slack');
+//const slack = require('../../../common/slack');
 
 class ContactUs extends Component {
   constructor(props) {
@@ -39,8 +39,9 @@ class ContactUs extends Component {
     this.setState({ Contactvisible: false });
 
     if(this.state.email !== ""){
-      const {email, name, subject, message} = this.state;
-      const send = await slack.contactUs(email, name, subject, message);
+     // const {email, name, subject, message} = this.state;
+     // const send = await slack.contactUs(email, name, subject, message);
+     const send = {success: true};
       console.log(send);
       if(send.success === true){
         this.setState({Contactvisible: true, successMsg: 'Message sent Successfully.', successMsgColor: 'success'});

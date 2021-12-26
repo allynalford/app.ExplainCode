@@ -223,19 +223,6 @@ const PagePrivacy = React.lazy(() =>
 );
 const PageTerms = React.lazy(() => import("./pages/Pages/Utility/PageTerms"));
 
-//Contact
-const PageContactDetail = React.lazy(() =>
-  import("./pages/Pages/Contact/PageContactDetail")
-);
-const PageContactOne = React.lazy(() =>
-  import("./pages/Pages/Contact/PageContactOne")
-);
-const PageContactThree = React.lazy(() =>
-  import("./pages/Pages/Contact/PageContactThree")
-);
-const PageContactTwo = React.lazy(() =>
-  import("./pages/Pages/Contact/ContactUs")
-);
 
 // forums
 const Overview = React.lazy(() => import("./pages/Pages/Forums/overview"));
@@ -311,15 +298,7 @@ const routes = [
     { path: "/page-payments", component: PagePayments, protected: true },
     { path: "/page-invoice", component: PageInvoice, isTopbarDark: true, protected: true },
 
-  //routes without Layout
 
-  //Contct without layout
-  {
-    path: "/page-contact-detail",
-    component: PageContactDetail,
-    isWithoutLayout: true,
-    isTopbarDark: true
-  },
 
     //Page Blog
     { path: "/page-blog-grid", component: PageBlog, isTopbarDark: true },
@@ -510,10 +489,6 @@ const routes = [
   { path: "/page-all-cases", component: AllCases },
   { path: "/page-case-detail", component: CaseDetail, isTopbarDark: true },
 
-  //Page Contact
-  { path: "/page-contact-one", component: PageContactOne, isTopbarDark: true },
-  { path: "/page-contact-three", component: PageContactThree, isTopbarDark: true },
-  { path: "/contact-us", component: PageContactTwo, isTopbarDark: true },
 
   // forums
   { path: "/forums", component: Overview, isTopbarDark: true },
