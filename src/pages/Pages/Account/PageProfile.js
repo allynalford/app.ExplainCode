@@ -47,14 +47,14 @@ const _ = require('lodash');
 function PageProfile({history}) {
  
   const { user } = useAuth0();
-  const [userglobaluuid, setUserglobaluuid] = useState("");
+  const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
   const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
   const codeMaxLength = 2000;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [user_metadata, setUserMetaData] = useState(undefined);
-  const [theme, setTheme] = useState("terminal");
-  const [mode, setMode] = useState("javascript");
+  const [theme, setTheme] = useState(UserTheme);
+  const [mode, setMode] = useState(UserMode);
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -161,7 +161,6 @@ function PageProfile({history}) {
 
   useEffect(() => {
     if (typeof user_metadata !== "undefined") {
-      setUserglobaluuid(user_metadata.userglobaluuid);
       getUserCompletionCount(user_metadata.userglobaluuid);
       const themeOption = _.find(themes, ['value', user_metadata.theme]);
       setThemeOption(themeOption);
@@ -449,7 +448,7 @@ function PageProfile({history}) {
                   <div>
                     <Button
                       style={{ marginTop: '5px', backgroundColor: '#008000' }}
-                      disabled={(loading === true | code === "" ? true : false)}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={onRunPrompt}
                       className="btn btn-pills btn-primary"
                     >
@@ -468,7 +467,7 @@ function PageProfile({history}) {
 
                     <Button
                       style={{ marginTop: '5px', marginLeft: '10px' }}
-                      disabled={(loading === true | code === "" ? true : false)}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={e =>{
                         console.log('save:', code);
                         setLoading(true);
@@ -492,6 +491,7 @@ function PageProfile({history}) {
                             setLoading(false);
                           });
                         }else{
+                          console.log("Saving...")
                           //run save
                           endpoint.postIAM(getSnippets().saveSnippet, {
                             userglobaluuid,
@@ -499,10 +499,11 @@ function PageProfile({history}) {
                             snippet: code
                           }).then((res) => {
                             if (res.data.success === true) {
-                             
+                              console.log(res);
+                              setSnippetuuid(res.data.snippetuuid);
                               setLoading(false);
                             } else {
-                             
+                              console.log(res);
                               setLoading(false);
                             }
                           })
@@ -528,7 +529,7 @@ function PageProfile({history}) {
                     </Button>
                     <Button
                       style={{ marginTop: '5px', marginLeft: '10px' }}
-                      disabled={(loading === true | code === "" ? true : false)}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={(e) => {
                         copy(code);
                         setCopiedSnippet(true);
@@ -536,7 +537,7 @@ function PageProfile({history}) {
                           setCopiedSnippet(false);
                         }, 3500);
                       }}
-                      className="btn btn-pills btn-info"
+                      className="btn btn-pills btn-secondary"
                     >
                       Copy Snippet
                       {loading === true ? (

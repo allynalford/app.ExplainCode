@@ -1,8 +1,10 @@
 import React from "react";
 
 
-const SnippetsView = React.lazy(() => import("./pages/Pages/Snippets/view"));
-
+const SnippetsView = React.lazy(() => import("./pages/Pages/Snippets/View"));
+const SnippetDetail = React.lazy(() =>
+  import("./pages/Pages/Snippets/Detail")
+);
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -284,6 +286,7 @@ const routes = [
 
     //Explain Path
    { path: "/snippets", component: SnippetsView, isTopbarDark: true, protected: true },
+   { path: "/snippet/:snippetuuid", component: SnippetDetail, isTopbarDark: true, protected: true, exact: true },
    { path: "/dashboard", component: PageProfile, protected: true },
    { path: "/settings", component: PageProfileEdit, protected: true },
    { path: "/register", component: Register, isWithoutLayout: true,},
