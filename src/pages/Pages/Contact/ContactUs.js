@@ -15,7 +15,7 @@ import {
 import { Helmet } from "react-helmet";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-import slack from '../../../common/slack';
+import { contactUs } from '../../../common/slack';
 class ContactUs extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +39,7 @@ class ContactUs extends Component {
 
     if(this.state.email !== ""){
       const {email, name, subject, message} = this.state;
-      const send = await slack.contactUs(email, name, subject, message);
+      const send = await contactUs(email, name, subject, message);
       console.log(send);
       if(send.success === true){
         this.setState({Contactvisible: true, successMsg: 'Message sent Successfully.', successMsgColor: 'success'});
@@ -276,6 +276,27 @@ class ContactUs extends Component {
                       >
                         ExplainCodeApp@tenablylabs.com
                       </Link>
+                    </div>
+                  </div>
+                  <div className="d-flex contact-detail align-items-center mt-3">
+                    <div className="icon">
+                      <i>
+                        <FeatherIcon
+                          icon="twitter"
+                          className="fea icon-m-md text-dark me-3"
+                        />
+                      </i>
+                    </div>
+                    <div className="flex-1 content">
+                      <h2 className="title fw-bold mb-0">Twitter</h2>
+                      <a
+                        target="_new"
+                        href="https://www.twitter.com/explaincodeapp"
+                        onClick={this.sendMail}
+                        className="text-primary"
+                      >
+                        @ExplainCodeApp
+                      </a>
                     </div>
                   </div>
 
