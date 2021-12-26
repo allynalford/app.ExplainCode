@@ -84,12 +84,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-<<<<<<< HEAD
-=======
-  "jshintConfig":{
-    "esversion": 9 
-  },
->>>>>>> parent of 0e07f17 (updates)
   "browserslist": {
     "production": [
       ">0.2%",
