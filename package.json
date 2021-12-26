@@ -1,5 +1,5 @@
 {
-  "name": "ExplainCode.App",
+  "name": "explaincodeapp",
   "version": "1.0.0",
   "private": true,
   "description": "Explain Code app by Tenably Labs",
@@ -7,7 +7,7 @@
   "homepage": "https://privy.explaincode.app/",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
-    "@emotion/core": "^10.1.1",
+    "@emotion/core": "^10.3.1",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
