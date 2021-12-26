@@ -1,13 +1,13 @@
 
 export function getWidgets(path){
   const widgets = [
-    // {
-    //   id: 1,
-    //   icon: "uil uil-dashboard",
-    //   className: path === "/dashboard" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
-    //   title: "Dashboard",
-    //   link: "/dashboard",
-    // },
+    {
+      id: 1,
+      icon: "uil uil-bookmark",
+      className: path === "/snippets" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Saved Snippets",
+      link: "/snippets",
+    },
     {
       id: 1,
       icon: "uil uil-setting",
