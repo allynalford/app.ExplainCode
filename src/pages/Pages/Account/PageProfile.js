@@ -47,6 +47,7 @@ const _ = require('lodash');
 function PageProfile({history}) {
  
   const { user } = useAuth0();
+<<<<<<< HEAD
   const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
@@ -54,6 +55,16 @@ function PageProfile({history}) {
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
+=======
+  const [userglobaluuid, setUserglobaluuid] = useState("");
+  const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
+  const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
+  const codeMaxLength = 2000;
+  const monthStamp = dateFormat(new Date(), "yyyy-mm");
+  const [user_metadata, setUserMetaData] = useState(undefined);
+  const [theme, setTheme] = useState("terminal");
+  const [mode, setMode] = useState("javascript");
+>>>>>>> parent of 0e07f17 (updates)
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -133,8 +144,15 @@ function PageProfile({history}) {
   
 
   useEffect(() => {
+<<<<<<< HEAD
     if (typeof mode !== 'undefined') {
       const themeOption = _.find(themes, ['value', theme]);
+=======
+    if (typeof user_metadata !== "undefined") {
+      setUserglobaluuid(user_metadata.userglobaluuid);
+      getUserCompletionCount(user_metadata.userglobaluuid);
+      const themeOption = _.find(themes, ['value', user_metadata.theme]);
+>>>>>>> parent of 0e07f17 (updates)
       setThemeOption(themeOption);
       const modeOption = _.find(modes, ['value', mode]);
       setModeOption(modeOption);
@@ -439,7 +457,7 @@ function PageProfile({history}) {
                   <div>
                     <Button
                       style={{ marginTop: '5px', backgroundColor: '#008000' }}
-                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      disabled={(loading === true | code === "" ? true : false)}
                       onClick={onRunPrompt}
                       className="btn btn-pills btn-primary"
                     >
@@ -458,7 +476,7 @@ function PageProfile({history}) {
 
                     <Button
                       style={{ marginTop: '5px', marginLeft: '10px' }}
-                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      disabled={(loading === true | code === "" ? true : false)}
                       onClick={e =>{
                         console.log('save:', code);
                         setLoading(true);
@@ -482,7 +500,6 @@ function PageProfile({history}) {
                             setLoading(false);
                           });
                         }else{
-                          console.log("Saving...")
                           //run save
                           endpoint.postIAM(getSnippets().saveSnippet, {
                             userglobaluuid,
@@ -490,11 +507,10 @@ function PageProfile({history}) {
                             snippet: code
                           }).then((res) => {
                             if (res.data.success === true) {
-                              console.log(res);
-                              setSnippetuuid(res.data.snippetuuid);
+                             
                               setLoading(false);
                             } else {
-                              console.log(res);
+                             
                               setLoading(false);
                             }
                           })
@@ -520,7 +536,7 @@ function PageProfile({history}) {
                     </Button>
                     <Button
                       style={{ marginTop: '5px', marginLeft: '10px' }}
-                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      disabled={(loading === true | code === "" ? true : false)}
                       onClick={(e) => {
                         copy(code);
                         setCopiedSnippet(true);
@@ -528,7 +544,7 @@ function PageProfile({history}) {
                           setCopiedSnippet(false);
                         }, 3500);
                       }}
-                      className="btn btn-pills btn-secondary"
+                      className="btn btn-pills btn-info"
                     >
                       Copy Snippet
                       {loading === true ? (

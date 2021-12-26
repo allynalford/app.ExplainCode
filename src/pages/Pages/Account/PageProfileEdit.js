@@ -30,7 +30,8 @@ const _ = require('lodash');
 function PageProfileEdit({ history }) {
   const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
-  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+
+  const [userglobaluuid, setUserglobaluuid] = useState('');
   const [user_metadata, setUserMetadata] = useState({occupation: '', twitter: '', instagram: '', linkedin: ''});
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
@@ -49,11 +50,7 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     document.title = "Explain Code App - Settings";
     document.body.classList = '';
-    try{
-      document.getElementById('top-menu').classList.add('nav-light');
-    }catch(e){
-      console.error(e);
-    }
+    document.getElementById('top-menu').classList.add('nav-light');
     window.addEventListener('scroll', scrollNavigation, true);
 
     return () => {
@@ -64,6 +61,9 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     if (typeof user !== 'undefined') {
       setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+       setUserglobaluuid(
+         user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid
+       );
     }
     return () => {};
   }, [user]);

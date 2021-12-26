@@ -54,7 +54,6 @@
     "react-image-lightbox": "^5.1.1",
     "react-ionicons": "^2.1.6",
     "react-modal-video": "^1.2.6",
-    "react-paginate": "^8.1.0",
     "react-parallax": "^3.3.0",
     "react-player": "^2.9.0",
     "react-rating": "^2.0.5",
@@ -85,6 +84,12 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+<<<<<<< HEAD
+=======
+  "jshintConfig":{
+    "esversion": 9 
+  },
+>>>>>>> parent of 0e07f17 (updates)
   "browserslist": {
     "production": [
       ">0.2%",

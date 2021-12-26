@@ -10,6 +10,21 @@ class PageSearchSidebar extends Component {
       <React.Fragment>
         <Card className="border-0 sidebar sticky-bar rounded shadow">
           <CardBody>
+
+            <div className="widget">
+              <Form
+                role="search"
+                method="get"
+                id="searchform"
+                className="searchform"
+              >
+                <div className="input-group mb-3 border rounded">
+                  <Input type="text" id="s" name="s" className="form-control border-0" placeholder="Search Keywords..." />
+                  <button type="submit" className="input-group-text bg-transparent border-0" id="searchsubmit"><i className="uil uil-search"></i></button>
+                </div>
+              </Form>
+            </div>
+
             <div className="widget mb-4 pb-2">
               <h5 className="widget-title">Categories</h5>
               <ul className="list-unstyled mt-4 mb-0 blog-categories">
@@ -36,7 +51,7 @@ class PageSearchSidebar extends Component {
               </ul>
             </div>
 
-            {/* <div className="widget mb-4 pb-2">
+            <div className="widget mb-4 pb-2">
               <h5 className="widget-title">Recent Post</h5>
               <div className="mt-4">
                 <div className="clearfix post-recent">
@@ -91,9 +106,9 @@ class PageSearchSidebar extends Component {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
 
-            {/* <div className="widget mb-4 pb-2">
+            <div className="widget mb-4 pb-2">
               <h5 className="widget-title">Tags Cloud</h5>
               <div className="tagcloud mt-4">
                 <Link to="#" className="rounded">
@@ -127,9 +142,9 @@ class PageSearchSidebar extends Component {
                   Audio
                 </Link>
               </div>
-            </div> */}
+            </div>
 
-            {/* <div className="widget">
+            <div className="widget">
               <h5 className="widget-title">Follow us</h5>
               <ul className="list-unstyled social-icon mb-0 mt-4">
                 <li className="list-inline-item ms-1">
@@ -203,7 +218,7 @@ class PageSearchSidebar extends Component {
                   </Link>
                 </li>
               </ul>
-            </div> */}
+            </div>
           </CardBody>
         </Card>
       </React.Fragment>

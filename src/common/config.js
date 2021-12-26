@@ -24,7 +24,6 @@ const serverVars = {
       getSnippetsCount: process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
       updateSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/update',
       deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
-      snippetsPagination: process.env.REACT_APP_BASE_API_URL + '/snippets/user/pagination',
     },
     waitlistText: "Early Access"
   };
@@ -55,14 +54,17 @@ const serverVars = {
       getSnippetsCount: process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
       updateSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/update',
       deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
-      snippetsPagination: process.env.REACT_APP_BASE_API_URL + '/snippets/user/pagination',
     },
     waitlistText: "Get Early Access"
   };
 
+<<<<<<< HEAD
   export const WAITLIST_TEXT = (process.env.NODE_ENV === 'production' ? serverVars.waitlistText : localVars.waitlistText);
   //export const SAVE_SNIPPET_ENABLED = process.env.REACT_APP_SAVE_SNIPPET_ENABLED;
   //export const SAVE_EXPLANATION_ENABLED = process.env.REACT_APP_SAVE_EXPLANATION_ENABLED;
+=======
+  export const WAITLIST_TEXT = (process.env.NODE_ENV === 'production' ? serverVars.waitlistText : localVars.waitlistText)
+>>>>>>> parent of 0e07f17 (updates)
   
   export function getConfiguration() {
     if (process.env.NODE_ENV === 'production') {
