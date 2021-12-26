@@ -48,6 +48,7 @@ const _ = require('lodash');
 function PageProfile({history}) {
  
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { user } = useAuth0();
 <<<<<<< HEAD
   const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
@@ -58,6 +59,9 @@ function PageProfile({history}) {
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
 =======
+=======
+  const { user, logout } = useAuth0();
+>>>>>>> parent of e5110b3 (added snippets route)
 =======
   const { user, logout } = useAuth0();
 >>>>>>> parent of e5110b3 (added snippets route)
@@ -130,6 +134,7 @@ function PageProfile({history}) {
 
   useEffect(() => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   
     return () => {
 
@@ -141,6 +146,8 @@ function PageProfile({history}) {
     if (typeof userglobaluuid !== "undefined") {
       getUserCompletionCount(userglobaluuid);
 =======
+=======
+>>>>>>> parent of e5110b3 (added snippets route)
     if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
       setUserMetaData(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
 >>>>>>> parent of e5110b3 (added snippets route)
@@ -148,8 +155,12 @@ function PageProfile({history}) {
     return () => {
 
     };
+<<<<<<< HEAD
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ userglobaluuid ]);
+=======
+  }, [ user ]);
+>>>>>>> parent of e5110b3 (added snippets route)
 
   useEffect(() => {
 <<<<<<< HEAD
