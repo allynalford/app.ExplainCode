@@ -110,7 +110,7 @@ function PageProfileEdit({ history }) {
         <meta property="og:title" content="Explain Code App - Settings" />
         <meta property="og:description" content="Explain Code App Settings." />
       </Helmet>
-      <ProfileHeader />
+      {/* <ProfileHeader /> */}
 
       <section className="section mt-60">
         <Container className="mt-lg-3">

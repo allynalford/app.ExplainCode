@@ -303,7 +303,7 @@ function PageProfile({history}) {
         <meta property="og:title" content="Explain Code App - Dashboard" />
         <meta property="og:description" content="Explain Code App dashboard." />
       </Helmet>
-      <ProfileHeader />
+      {/* <ProfileHeader /> */}
       <section className="section mt-60">
         <Container className="mt-lg-3">
           <Row>
