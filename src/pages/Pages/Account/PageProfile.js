@@ -609,7 +609,7 @@ function PageProfile({history}) {
               ) : (
                 ''
               )}
-              <h5 className="mt-4 mb-0">Results:</h5>
+              <h5 className="mt-4 mb-0">Explanation:</h5>
               {loading === true ? (
                 <div className="loader">Loading Explanation</div>
               ) : (
@@ -631,8 +631,7 @@ function PageProfile({history}) {
                     Explanation copied to clipboard.
                   </Alert>
                   <Button
-                    size="sm"
-                    style={{ marginTop: '5px' }}
+                    style={{ marginTop: '5px', marginBottom: '5px' }}
                     disabled={
                       (loading === true) | (completionId === '') ? true : false
                     }

@@ -107,8 +107,9 @@ function MainSideBar(props) {
             ))}
           </ul>
         </div>
-
+        
         <div className="widget mt-4">
+        <h5 className="widget-title">Utility:</h5>
           <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
             {getWidgets(window.location).map((widget, key) => (
               <li className={widget.className} key={key}>

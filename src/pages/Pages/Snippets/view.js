@@ -228,7 +228,8 @@ function View({ history }) {
 
                 <div className="table-responsive bg-white shadow rounded mt-4">
                 <div style={{ justifyContent: 'center', display: 'flex' }} className="app-inner-layout__bottom-pane text-center">
-                {(loading === true ? <div style={{ height: '30px', margin: 'auto', width: '50%', verticalAlign: 'middle', marginTop: '44px' }}><PureLoader sync={new Date()} loading={loading} loader="BallBeat" /></div> :
+                {(loading === true ? <div style={{ height: '30px', margin: 'auto', width: '50%', verticalAlign: 'middle', marginTop: '44px' }}><PureLoader sync={new Date()} loading={loading} loader="BallPulseRound" /></div> :
+                <div>
                 <ReactPaginate
                     previousLabel={customLabels.previous}
                     nextLabel={customLabels.next}
@@ -246,7 +247,7 @@ function View({ history }) {
                     nextLinkClassName="page-link"
                     breakClassName="page-item"
                     breakLinkClassName="page-link"
-                  />)}
+                  /></div>)}
                   
                   </div>
                   <Table className="mb-0 table-center">
@@ -257,7 +258,7 @@ function View({ history }) {
                           className="border-bottom"
                           style={{ minWidth: '300px' }}
                         >
-                          Snippets Title
+                         {`Snippets: ${snippetsCount}`}
                         </th>
                         <th
                           scope="col"
@@ -303,7 +304,7 @@ function View({ history }) {
                           </td>
                           <td className="text-center small h6">{snippet.snippet.length}</td>
                           <td className="text-center small">{snippet.lang}</td>
-                          <td className="text-center small">{dateFormat(snippet.creationDateTime, 'mmmm d, yyyy h:MM TT')}</td>
+                          <td className="text-center small">{dateFormat(snippet.creationDateTime, 'mm/dd/yyyy h:MM TT')}</td>
                         </tr>
                       ))}
                     </tbody>

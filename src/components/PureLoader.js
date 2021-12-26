@@ -8,6 +8,7 @@ import {
   BallClipRotateMultiple,
   BallClipRotate,
   BallBeat,
+  BallPulseRound,
 } from 'react-pure-loaders';
 export default function PureLoader(props) {
   const [sync, setSync] = useState(new Date());
@@ -22,6 +23,16 @@ export default function PureLoader(props) {
   }, [props.loading]);
 
   switch (props.loader) {
+    case 'BallPulseRound':
+        return (
+          <Fragment>
+            <div style={{ margin: 'auto', width: '50%' }}>
+              <div style={{ margin: 'auto', width: '50%' }}>
+                <BallPulseRound color={'#1F3A93'} loading={loading} />
+              </div>
+            </div>
+          </Fragment>
+        );
     case 'BallBeat':
       return (
         <Fragment>
