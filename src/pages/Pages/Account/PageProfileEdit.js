@@ -50,7 +50,11 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     document.title = "Explain Code App - Settings";
     document.body.classList = '';
-    document.getElementById('top-menu').classList.add('nav-light');
+    try{
+      document.getElementById('top-menu').classList.add('nav-light');
+    }catch(e){
+      console.error(e);
+    }
     window.addEventListener('scroll', scrollNavigation, true);
 
     return () => {

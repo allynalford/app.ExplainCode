@@ -23,8 +23,19 @@ function MainSideBar(props) {
   }, []);
 
   useEffect(() => {
+
+    return () => {
+
+    };
+  }, [completionsThisMonth]);
+
+  useEffect(() => {
     if(typeof props.userglobaluuid !== "undefined"){
       getUserCompletionCount(props.userglobaluuid);
+    }
+
+    if(typeof props.completionsThisMonth !== "undefined"){
+      setCompletionsThisMonth(props.completionsThisMonth);
     }
    return () => {
 

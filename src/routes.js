@@ -280,6 +280,14 @@ const ShopMyAccount = React.lazy(() =>
 const routes = [
 
 
+    //Explain Path
+   { path: "/snippets", component: SnippetsView, isTopbarDark: true, protected: true },
+   { path: "/snippet/:snippetuuid", component: SnippetDetail, isTopbarDark: true, protected: true, exact: true },
+   { path: "/dashboard", component: PageProfile, protected: true },
+   { path: "/settings", component: PageProfileEdit, protected: true },
+   { path: "/register", component: Register, isWithoutLayout: true,},
+   { path: "/authorize", component: PageProfile, protected: true },
+>>>>>>> parent of 7a3a10e (REVERT 1)
 
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },

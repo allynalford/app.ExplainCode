@@ -10,8 +10,9 @@ import {
   Table,
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
+import dateFormat from 'dateformat';
+import ReactPaginate from 'react-paginate';
 import MainSideBar from '../../../components/Layout/sidebar';
-<<<<<<< HEAD
 import { getSnippets } from '../../../common/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -21,33 +22,124 @@ import {
   faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons';
 const endpoint = require('../../../common/endpoint');
-=======
->>>>>>> parent of 0e07f17 (updates)
 
+const customLabels = {
+  first: <FontAwesomeIcon icon={faAngleDoubleLeft}/>,
+  last: <FontAwesomeIcon icon={faAngleDoubleRight}/>,
+  previous: <FontAwesomeIcon icon={faAngleLeft}/>,
+  next: <FontAwesomeIcon icon={faAngleRight}/>
+}
 function View({ history }) {
 
   const { user } = useAuth0();
-  const [userglobaluuid, setUserglobaluuid] = useState('');
-
+  const pageRangeDisplayed = 1;
+  //const { name } = user;
+  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const [snippets, setSnippets] = useState([]);
+  const [snippetsCount, setSnippetsCount] = useState(0);
+  const [itemsPerPage , setItemsPerPage ] = useState(5);
+  const [LastEvaluatedKey, setLastEvaluatedKey] = useState(undefined);
+  const [filter, setFilter] = useState(undefined);
+  // We start with an empty list of items.
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const itemOffset = 0;
+  const sortByDate = arr => {
+    const sorter = (a, b) => {
+      return new Date(b.creationDateTime).getTime() - new Date(a.creationDateTime).getTime();
+    }
+    arr.sort(sorter);
+  };
   useEffect(() => {
-    document.title = "Explain Code App - Snippets";
-    document.body.classList = '';
-    document.getElementById('top-menu').classList.add('nav-light');
-    window.addEventListener('scroll', scrollNavigation, true);
+    document.title = 'Explain Code App - Snippets';
+    try {
+      document.body.classList = '';
+      document.getElementById('top-menu').classList.add('nav-light');
+    } catch (e) {
+      console.error(e);
+    }
 
+    window.addEventListener('scroll', scrollNavigation, true);
     return () => {
       window.removeEventListener('scroll', scrollNavigation, true);
     };
   }, []);
 
   useEffect(() => {
-    if (typeof user !== 'undefined') {
-       setUserglobaluuid(
-         user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid
-       );
+
+    return () => {
+    };
+  }, [snippets]);
+
+
+
+  useEffect(() => {
+    
+    if(typeof userglobaluuid !== "undefined"){
+      setLoading(true);
+      LoadPaginatedSnippets(filter).then((res) => {
+        
+        var payload = res.data.snippets.Items;
+
+
+        sortByDate(payload);
+
+        setLastEvaluatedKey(res.data.snippets.LastEvaluatedKey);
+        setSnippets(payload);
+        setCurrentItems(payload.slice(itemOffset, (itemOffset + itemsPerPage)));
+        setPageCount(Math.round(res.data.snippetsCount / itemsPerPage));
+        setSnippetsCount(res.data.snippetsCount);
+        setLoading(false);
+      }).catch((err) => {
+           console.error(err);
+           setLoading(false);
+      });
     }
-    return () => {};
-  }, [user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ userglobaluuid, filter]);
+
+
+  const handlePageClick = (event) => {
+    const newOffset = (itemsPerPage * event.selected);
+
+    const endOffset = (newOffset + itemsPerPage);
+   
+    const currentPage = snippets.slice(newOffset, endOffset);
+    setLoading(true);
+    if(currentPage.length === 0){
+      //setItemOffset(newOffset);
+        // eslint-disable-next-line no-loop-func
+        LoadPaginatedSnippets(filter).then((res) => {
+          //res.data.snippets
+          var newSnippets = snippets;
+          newSnippets.push(...res.data.snippets.Items);
+  
+          sortByDate(newSnippets);
+          const currentItems = newSnippets.slice(newOffset, endOffset);
+  
+          if(currentItems.length !== 0){
+            setCurrentItems(currentItems);
+          }
+  
+          setLastEvaluatedKey(res.data.snippets.LastEvaluatedKey);
+          setSnippets(newSnippets);
+          setPageCount(res.data.pageCount);
+          setSnippetsCount(res.data.snippetsCount);
+          setLoading(false);
+        }).catch((err) => {
+             console.error(err);
+             setLoading(false);
+        });
+
+    }else{
+      //We already have these items, use them
+      setCurrentItems(currentPage);
+      setLoading(false);
+    }
+  }
 
   const scrollNavigation = () => {
     var doc = document.documentElement;
@@ -58,6 +150,10 @@ function View({ history }) {
       document.getElementById('topnav').classList.remove('nav-sticky');
     }
   };
+
+  async function LoadPaginatedSnippets() {
+    return await endpoint.postIAM(`${getSnippets().snippetsPagination}`, {userglobaluuid, pagesize: (itemsPerPage * pageRangeDisplayed), LastEvaluatedKey, filter});
+  }
  
     return (
       <React.Fragment>
@@ -105,11 +201,11 @@ function View({ history }) {
           <Container>
             <Row>
               <Col lg="3">
-              <MainSideBar userglobaluuid={userglobaluuid} />
+                <MainSideBar userglobaluuid={userglobaluuid} />
               </Col>
-              <Col lg={9}>              
+              <Col lg={9}>
                 <div className="text-center subcribe-form mb-2">
-                  <Form className="m-0" style={{ maxWidth: "800px" }}>
+                  <Form className="m-0" style={{ maxWidth: '800px' }}>
                     <FormGroup className="mb-0">
                       <input
                         type="text"
@@ -130,7 +226,6 @@ function View({ history }) {
                 </div>
 
                 <div className="table-responsive bg-white shadow rounded mt-4">
-<<<<<<< HEAD
                 <div style={{ justifyContent: 'center', display: 'flex' }} className="app-inner-layout__bottom-pane text-center">
              
                 <div>
@@ -163,263 +258,54 @@ function View({ history }) {
                           style={{ minWidth: '300px' }}
                         >
                          {`Snippets: ${snippetsCount}`}
-=======
-                  <Table className="mb-0 table-center">
-                    <thead className="bg-light">
-                      <tr>
-                        <th scope="col" className="border-bottom" style={{ minWidth: "300px" }}>
-                          Snippets Title
->>>>>>> parent of 0e07f17 (updates)
                         </th>
                         <th
                           scope="col"
                           className="border-bottom text-center"
-                          style={{ maxWidth: "150px" }}
+                          style={{ maxWidth: '150px' }}
                         >
-                          Posted
+                          Length
                         </th>
                         <th
                           scope="col"
                           className="border-bottom text-center"
-                          style={{ width: "100px" }}
+                          style={{ width: '100px' }}
                         >
                           Language
                         </th>
                         <th
                           scope="col"
                           className="border-bottom text-center"
-                          style={{ width: "100px" }}
+                          style={{ width: '100px' }}
                         >
-                          Explanations
+                          Saved
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="flex-1 content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Introductions: Landrick
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
+                      {currentItems.map((snippet, key) => (
+                        <tr key={key}>
+                          <td>
+                            <div className="d-flex">
+                              <i className="uil uil-brackets-curly text h5"></i>
+                              <div className="flex-1 content ms-3">
+                                <Link
+                                  to={`/snippet/${snippet.snippetuuid}`}
+                                  className="forum-title text-primary fw-bold"
+                                >
+                                  {snippet.title}
+                                </Link>
+                                <p className="text-muted small mb-0 mt-2">
+                                  {(typeof snippet.explanation !== "undefined" ? snippet.explanation.substring(0,100) : "")}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Calvin</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="flex-1 content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Web Designing and Developing
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">George</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="flex-1 content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Hosting and providers
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Parthiv</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                SEO starter guide
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">David</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Troubleshooting and managing issues
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-<<<<<<< HEAD
                           </td>
                           <td className="text-center small h6">{snippet.snippet.length}</td>
                           <td className="text-center small">{snippet.lang}</td>
                           <td className="text-center small">{dateFormat(snippet.creationDateTime, 'mm/dd/yyyy h:MM TT')}</td>
                         </tr>
                       ))}
-=======
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Tiger</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Backup and restore
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Cristina</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Errors and how to fix them
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Miriam</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Template features & Services
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Janalia</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <div className="d-flex">
-                            <i className="uil uil-comment text-muted h5"></i>
-                            <div className="content ms-3">
-                              <Link
-                                to="forums-topic"
-                                className="forum-title text-primary fw-bold"
-                              >
-                                Landrick includes the ability to create a better
-                                of sites by using the multisite feature.
-                              </Link>
-                              <p className="text-muted small mb-0 mt-2">
-                                Start working with Landrick that can provide
-                                everything you need to generate awareness, drive
-                                traffic, connect.
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-center small h6">Harry</td>
-                        <td className="text-center small">3</td>
-                        <td className="text-center small">5</td>
-                      </tr>
->>>>>>> parent of 0e07f17 (updates)
                     </tbody>
                   </Table>
                 </div>
