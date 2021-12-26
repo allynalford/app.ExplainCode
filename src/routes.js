@@ -1,5 +1,10 @@
 import React from "react";
-
+const SnippetsView = React.lazy(() =>
+import("./pages/Pages/Snippets/view")
+);
+const SnippetDetail = React.lazy(() =>
+import("./pages/Pages/Snippets/Detail")
+);
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -287,7 +292,6 @@ const routes = [
    { path: "/settings", component: PageProfileEdit, protected: true },
    { path: "/register", component: Register, isWithoutLayout: true,},
    { path: "/authorize", component: PageProfile, protected: true },
->>>>>>> parent of 7a3a10e (REVERT 1)
 
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },

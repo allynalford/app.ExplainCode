@@ -47,9 +47,7 @@ const _ = require('lodash');
 
 function PageProfile({history}) {
  
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
   const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
@@ -57,25 +55,7 @@ function PageProfile({history}) {
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
-<<<<<<< HEAD
-=======
-=======
-  const { user, logout } = useAuth0();
->>>>>>> parent of e5110b3 (added snippets route)
-=======
-  const { user, logout } = useAuth0();
->>>>>>> parent of e5110b3 (added snippets route)
-  const [userglobaluuid, setUserglobaluuid] = useState("");
-  const cachedCode = (localStorage.getItem('cachedCode') === null ? undefined : localStorage.getItem('cachedCode'));
-  const cachedQuestion = (localStorage.getItem('cachedQuestion') === null ? undefined : localStorage.getItem('cachedQuestion'));
-  const codeMaxLength = 2000;
-  const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [user_metadata, setUserMetaData] = useState(undefined);
-  const [theme, setTheme] = useState("terminal");
-  const [mode, setMode] = useState("javascript");
->>>>>>> parent of 0e07f17 (updates)
-=======
->>>>>>> parent of 7a3a10e (REVERT 1)
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -135,8 +115,6 @@ function PageProfile({history}) {
   }, [UserMode, UserTheme]);
 
   useEffect(() => {
-<<<<<<< HEAD
-<<<<<<< HEAD
   
     return () => {
 
@@ -147,22 +125,15 @@ function PageProfile({history}) {
   useEffect(() => {
     if (typeof userglobaluuid !== "undefined") {
       getUserCompletionCount(userglobaluuid);
-=======
-=======
->>>>>>> parent of e5110b3 (added snippets route)
     if (typeof user[process.env.REACT_APP_AUTH0_USER_METADATA] !== "undefined") {
       setUserMetaData(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
->>>>>>> parent of e5110b3 (added snippets route)
     }
     return () => {
 
-    };
-<<<<<<< HEAD
+    }
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ userglobaluuid ]);
-=======
   }, [ user ]);
->>>>>>> parent of e5110b3 (added snippets route)
 
   useEffect(() => {
     if (typeof mode !== 'undefined') {
