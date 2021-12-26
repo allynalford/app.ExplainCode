@@ -7,7 +7,11 @@ import {
   Col,
   Button,
   Alert,
-  Label
+  Label,
+  CardBody,
+  Card,
+  CardHeader,
+  CardFooter
 } from "reactstrap";
 import Select from 'react-select';
 //Import Icons
@@ -21,6 +25,7 @@ import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
+import FormLoader from '../../../components/FormLoader';
 //import { Icon, InlineIcon  } from '@iconify/react';
 //import onRunPromptIcon from '@iconify/icons-emojione-monotone/confused-face';
 //'@iconify/icons-emojione-monotone/chart-increasing'
@@ -504,6 +509,7 @@ function PageProfile({history}) {
 
               <div className="border-bottom pb-4">
                 <label htmlFor="editor">Enter your code snippet</label>
+                    
                 <AceEditor
                   id="editor"
                   title="Enter your code snippet"
@@ -528,18 +534,7 @@ function PageProfile({history}) {
                     tabSize: 2,
                   }}
                 />
-                {/* <Icon style={{marginLeft: '5px'}} color={"#ffffff"} size="lg" icon={spiderIconMon}/> */}
-                {/* <Button
-                  onClick={(e) => {
-                    window.history.replaceState(
-                      null,
-                      null,
-                      `/dashboard?tool=somethingODD`,
-                    );
-                  }}
-                >
-                  Test
-                </Button> */}
+               
                 {prompt !== 'Open-Questions' ? (
                   <div>
                     <Button
@@ -706,17 +701,14 @@ function PageProfile({history}) {
                 ''
               )}
               <h5 className="mt-4 mb-0">Explanation:</h5>
-              {loading === true ? (
-                <div className="loader">Loading Explanation</div>
-              ) : (
-                ''
-              )}
-
               <div
                 className="border-bottom pb-4"
                 style={{ position: 'relative' }}
               >
-                <div>
+                
+                <Card>
+                  <CardHeader>
+                  <div>
                   <Alert
                     color={'info'}
                     isOpen={copied}
@@ -743,7 +735,9 @@ function PageProfile({history}) {
                     Copy Explanation
                   </Button>
                 </div>
-                <AceEditor
+                  </CardHeader>
+                  <CardBody>
+                    {(loading === true ? <FormLoader /> : <AceEditor
                   aria-label="Explanation of code"
                   style={{ width: 'auto' }}
                   placeholder="Explanation will appear here"
@@ -764,9 +758,11 @@ function PageProfile({history}) {
                     showLineNumbers: false,
                     tabSize: 2,
                   }}
-                />
-              </div>
-              {completionId !== '' ? (
+                />)}
+                  
+                  </CardBody>
+                  <CardFooter>
+                  {completionId !== '' ? (
                 <div>
                   <Alert
                     color={ratingSuccessColor}
@@ -838,7 +834,7 @@ function PageProfile({history}) {
                       style={{ fontWeight: 'bold' }}
                     >
                       Any Feedback?
-                    </label>
+                    </label><br />
                     <textarea
                       aria-label="Enter feedback about explanation"
                       rows={3}
@@ -849,7 +845,7 @@ function PageProfile({history}) {
                       onChange={(e) => {
                         setRatingMessage(e.target.value);
                       }}
-                    />
+                    /><br />
                     <Button
                       size="sm"
                       className="btn btn-pills btn-primary"
@@ -917,6 +913,10 @@ function PageProfile({history}) {
               ) : (
                 ''
               )}
+                  </CardFooter>
+                </Card>
+              </div>
+              
             </Col>
           </Row>
         </Container>

@@ -42,6 +42,7 @@
     "react": "^17.0.2",
     "react-ace": "^9.5.0",
     "react-background-slider": "^2.0.0",
+    "react-content-loader": "^6.1.0",
     "react-countdown-now": "^2.1.2",
     "react-countup": "^4.3.3",
     "react-datepicker": "^3.8.0",

@@ -21,7 +21,11 @@ import {
   faAngleDoubleLeft,
   faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons';
+import TableLoader from '../../../components/TableLoader';
+import Threedots from '../../../components/Threedots';
 const endpoint = require('../../../common/endpoint');
+
+
 
 const customLabels = {
   first: <FontAwesomeIcon icon={faAngleDoubleLeft}/>,
@@ -228,7 +232,7 @@ function View({ history }) {
                 <div className="table-responsive bg-white shadow rounded mt-4">
                 <div style={{ justifyContent: 'center', display: 'flex' }} className="app-inner-layout__bottom-pane text-center">
              
-                <div>
+                {(loading === true ? <Threedots />:<div>
                 <ReactPaginate
                     previousLabel={customLabels.previous}
                     nextLabel={customLabels.next}
@@ -246,10 +250,10 @@ function View({ history }) {
                     nextLinkClassName="page-link"
                     breakClassName="page-item"
                     breakLinkClassName="page-link"
-                  /></div>
+                  /></div>)}
                   
                   </div>
-                  <Table className="mb-0 table-center">
+                  {(loading === true ? <TableLoader /> : <Table className="mb-0 table-center">
                     <thead className="bg-light">
                       <tr>
                         <th
@@ -307,7 +311,8 @@ function View({ history }) {
                         </tr>
                       ))}
                     </tbody>
-                  </Table>
+                  </Table>)}
+                  
                 </div>
               </Col>
             </Row>
