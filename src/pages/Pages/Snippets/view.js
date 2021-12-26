@@ -253,7 +253,7 @@ function View({ history }) {
                   /></div>)}
                   
                   </div>
-                  {(loading === true ? <TableLoader /> : <Table className="mb-0 table-center">
+                  {(loading === true ? <TableLoader style={{verticalAlign: 'top'}} /> : <Table className="mb-0 table-center">
                     <thead className="bg-light">
                       <tr>
                         <th
