@@ -51,7 +51,7 @@ export default class PageBlogDetailTwo extends Component {
           // style={{ background: `url(${bgimg}) center center` }}
         >
           <div className="bg-overlay"></div>
-          <Container>
+          <Container id="maincontent">
             <Row className="justify-content-center">
               <Col lg={12} className="text-center">
                 <div className="page-next-level">

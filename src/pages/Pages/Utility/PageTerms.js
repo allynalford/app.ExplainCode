@@ -80,7 +80,7 @@ class PageTerms extends Component {
                         </div>
                     </div>
 
-                <section className="section">
+                <section className="section" id="maincontent">
                     <Container>
                         <Row className="justify-content-center">
                             <Col lg={9}>

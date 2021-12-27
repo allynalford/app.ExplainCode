@@ -97,7 +97,7 @@ class ContactUs extends Component {
         <meta property="og:title" content="Contact Explain Code App" />
         <meta property="og:description" content="Contact Explain Code App Team at Tenably Labs" />
       </Helmet>
-        <section className="section pt-5 mt-4">
+        <section className="section pt-5 mt-4" id="maincontent">
           <Container className="mt-100 mt-60">
             <Row className="align-items-center">
               <Col

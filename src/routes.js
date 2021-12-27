@@ -289,6 +289,7 @@ const routes = [
    { path: "/thankyou", component: ThankYou, isWithoutLayout: true },
    { path: "/explain-code-history", component: History, isTopbarDark: true },
    { path: "/contact-us", component: ContactUS, isTopbarDark: true },
+   { path: "/explain-code-faqs", component: HelpCenterFaqs, isTopbarDark: true },
 
    
 

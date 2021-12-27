@@ -35,16 +35,17 @@ const AuthenticationNav = () => {
  
   return isAuthenticated ? (
     <Fragment>
-      <ul className="buy-button list-inline mb-0">
+      <ul className="buy-button list-inline mb-0" role="menu">
         <li className="list-inline-item mb-0">
           <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle
               direction="right"
               color="none"
               type="button"
+              aria-label="Search Explain Code App"
               className="btn btn-link text-decoration-none p-0 pe-2"
             >
-              <i className="mdi mdi-magnify h4 text-muted"></i>
+              <i className="mdi mdi-magnify h4 text-muted" title="Search Explain Code App"></i>
             </DropdownToggle>
             <DropdownMenu
               right
@@ -56,6 +57,7 @@ const AuthenticationNav = () => {
                   type="text"
                   id="text"
                   name="name"
+                  aria-label="Search Explain Code App"
                   className="form-control border bg-white"
                   placeholder="Search..."
                 />
@@ -63,10 +65,10 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1">
+        <li className="list-inline-item mb-0 pe-1" role="menuitem">
           <Dropdown isOpen={dropdownOpenShop} toggle={toggleDropdownShop}>
-            <DropdownToggle type="button" className="btn btn-icon btn-primary ">
-              <i className="uil uil-archway align-middle icons"></i>
+            <DropdownToggle type="button" aria-label="Explain Code Menu" className="btn btn-icon btn-primary ">
+              <i className="uil uil-archway align-middle icons" title="Explain Code Menu"></i>
             </DropdownToggle>
             <DropdownMenu
               direction="left"
@@ -105,10 +107,10 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1">
+        <li className="list-inline-item mb-0 pe-1" role="menuitem">
           <Dropdown isOpen={dropdownOpenHome} toggle={toggleDropdownHome}>
-            <DropdownToggle type="button" className="btn btn-icon btn-primary ">
-              <i className="uil uil-file-share-alt align-middle icons"></i>
+            <DropdownToggle type="button" aria-label="Tools Menu" className="btn btn-icon btn-primary ">
+              <i className="uil uil-file-share-alt align-middle icons" title="Tools Menu"></i>
             </DropdownToggle>
             <DropdownMenu
               direction="left"
@@ -140,19 +142,20 @@ const AuthenticationNav = () => {
             <i className="uil uil-heart align-middle icons"></i>
           </Link>
         </li> */}
-        <li className="list-inline-item mb-0">
+        <li className="list-inline-item mb-0" role="menuitem">
           <Dropdown
             color="primary"
             isOpen={dropdownIsOpen}
             toggle={toggleDropdownIsOpen}
           >
             <DropdownToggle
+              aria-label="Account Menu"
               type="button"
               title="User Menu"
               // color="primary"
               className="btn btn-icon btn-primary"
             >
-              <i className="uil uil-user align-middle icons"></i>
+              <i className="uil uil-user align-middle icons" title="Account Menu"></i>
             </DropdownToggle>
             <DropdownMenu
               direction="left"
