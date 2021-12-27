@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col , Button, InputGroupAddon, Input, InputGroup} from "reactstrap";
+import { Container, Row, Col , Button, InputGroupAddon, Input, InputGroup, Alert} from "reactstrap";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 //import Images
@@ -17,12 +17,16 @@ export default class index extends Component {
     this.state = {
       email: '',
       inputsstatus: false,
-      refby: undefined
+      refby: undefined,
+      alertOpen: false,
+      alertColor: 'success',
+      alertMessage: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSlackChannel = this.updateSlackChannel.bind(this);
     this.Toast = this.Toast.bind(this);
     this.SwalToast = this.SwalToast.bind(this);
+    this.toggleAlert = this.toggleAlert.bind(this);
   };
 
   componentDidMount() {
@@ -44,10 +48,10 @@ export default class index extends Component {
     timer: 6500,
     timerProgressBar: true,
     didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-});
+  });
 
       SwalToast(title, text, icon) {
         this.Toast.fire({
@@ -71,6 +75,9 @@ export default class index extends Component {
   }
 
 
+  toggleAlert(){
+    this.setState({alertOpen: !this.state.alertOpen});
+  }
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -80,8 +87,11 @@ export default class index extends Component {
 
     if(emailValid !== true){
       console.log("Invalid Email Address");
-      this.SwalToast("Error","Invalid Email Address", 'error');
-      this.setState({inputsstatus: false});
+      //this.SwalToast("Error","Invalid Email Address", 'error');
+      this.setState({inputsstatus: false, alertMessage: "Invalid Email Address", alertOpen: true, alertColor: 'warning'});
+      
+
+      
     }else{
         try {
           const check = await endpoint.postIAM(
@@ -95,26 +105,28 @@ export default class index extends Component {
             );
             if (addUser.data.success === true) {
               Event('Waitlist', 'New Waitlist User Drip', 'drip added');
-              this.SwalToast(
-                "You've Joined",
-                'Thank You for Joining Early Access',
-                'info',
-              );
+              // this.SwalToast(
+              //   "You've Joined",
+              //   'Thank You for Joining Early Access',
+              //   'info',
+              // );
+              
               await this.updateSlackChannel();
               window._dcq = window._dcq || [];
               window._dcq.push(['track', 'Waitlist Signup', { value: 999 }]);
-              this.setState({ inputsstatus: false });
+              this.setState({ inputsstatus: false,  alertMessage: "You've Joined, Thank You for Joining Early Access", alertOpen: true, alertColor: 'success'});
             } else {
-              this.SwalToast('Error', "error adding user", 'error');
-              this.setState({inputsstatus: false});
+              //this.SwalToast('Error', "error adding user", 'error');
+              this.setState({inputsstatus: false, alertMessage: "Error: could not join beta access", alertOpen: true, alertColor: 'danger'});
             }
           } else {
-            this.SwalToast('Error', 'User already Exists', 'error');
-            this.setState({inputsstatus: false});
+            //this.SwalToast('Error', 'User already Exists', 'error');
+            this.setState({inputsstatus: false, alertMessage: "User already Exists", alertOpen: true, alertColor: 'warning'});
+            //this.setState({inputsstatus: false});
           }
         } catch (e) {
           console.error('Add User', e);
-          this.setState({inputsstatus: false});
+          this.setState({inputsstatus: false, alertMessage: e.message, alertOpen: true, alertColor: 'danger'});
         }
       
     }
@@ -164,7 +176,17 @@ export default class index extends Component {
                   Blast through code with easy-to-understand code explanations, code summarization, class breakdowns and more.
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
+                  <Alert
+                        color={this.state.alertColor}
+                        isOpen={this.state.alertOpen}
+                        toggle={() => {
+                          this.setState({alertOpen:!this.state.alertOpen});
+                        }}
+                      >
+                        {this.state.alertMessage}
+                      </Alert>
                     <InputGroup>
+                      
                       <Input
                         aria-label="Email Address to join waitlist"
                         type="email"
