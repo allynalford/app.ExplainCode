@@ -21,6 +21,7 @@ import shop2 from "../../assets/images/shop/product/s-2.jpg";
 import shop3 from "../../assets/images/shop/product/s-3.jpg";
 import NavbarButtons from "../Shared/NavbarButtons";
 import WaitlistButton from "../waitlist-button";
+import AuthenticationNav from '../authentication-topbar';
 const config = require("../../common/config.js");
 class Topbar extends Component {
   constructor(props) {
@@ -615,6 +616,7 @@ class Topbar extends Component {
                 </a>
               } */}
             </div>
+            <AuthenticationNav />
             {(() => {
               if (this.props.location.pathname === "/index-developer") {
                 return <NavbarButtons />;

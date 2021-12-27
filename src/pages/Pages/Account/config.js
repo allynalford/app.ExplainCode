@@ -17,7 +17,7 @@ export function getWidgets(path){
     },
     {
       id: 2,
-      icon: "uil uil-octagon",
+      icon: "uil uil-sign-out-alt",
       className: path.pathname === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Logout",
       link: "/logout",

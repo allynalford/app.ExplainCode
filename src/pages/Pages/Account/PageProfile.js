@@ -100,6 +100,9 @@ function PageProfile({history}) {
         setMode(UserMode);
         setTheme(UserTheme);
       }
+      const prompts = getPrompts(window.location);
+      const toolObj = _.find(prompts, ['tool', prompt]);
+      setToolObj(toolObj);
      
 
     } catch (e) {
