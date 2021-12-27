@@ -35,7 +35,7 @@ const AuthenticationNav = () => {
  
   return isAuthenticated ? (
     <Fragment>
-      <ul className="buy-button list-inline mb-0">
+      <ul className="buy-button list-inline mb-0" role="menu">
         <li className="list-inline-item mb-0" key={"Search"}>
           <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle

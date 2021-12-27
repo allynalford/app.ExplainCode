@@ -331,7 +331,7 @@ function PageProfile({history}) {
             <MainSideBar userglobaluuid={userglobaluuid} />
             </Col>
 
-            <Col lg="9" md="7" xs="12">
+            <Col lg="9" md="7" xs="12" id="maincontent">
               <div className="border-bottom pb-4">
                 <Row>
                   <Col md="6">

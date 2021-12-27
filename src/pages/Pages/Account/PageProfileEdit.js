@@ -116,7 +116,7 @@ function PageProfileEdit({ history }) {
       </Helmet>
       {/* <ProfileHeader /> */}
 
-      <section className="section mt-60">
+      <section className="section mt-60" id="maincontent">
         <Container className="mt-lg-3">
           <Row>
             <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
@@ -162,7 +162,7 @@ function PageProfileEdit({ history }) {
                     <Row className="mt-4">
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">First Name</Label>
+                          <Label for="firstname" className="form-label">First Name</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -188,7 +188,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Last Name</Label>
+                          <Label for="lastname" className="form-label">Last Name</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -214,7 +214,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Your Email</Label>
+                          <Label for="email" className="form-label">Your Email</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -240,7 +240,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Occupation</Label>
+                          <Label for="occupation" className="form-label">Occupation</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -268,7 +268,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Language</Label>
+                          <Label for="modes-select" className="form-label">Language</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -307,7 +307,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Theme</Label>
+                          <Label for="themes" className="form-label">Theme</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -345,7 +345,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Twitter</Label>
+                          <Label id="twitter" className="form-label">Twitter</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -373,7 +373,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">Instagram</Label>
+                          <Label for="instagram" className="form-label">Instagram</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -401,7 +401,7 @@ function PageProfileEdit({ history }) {
                       </Col>
                       <Col md="6">
                         <div className="mb-3">
-                          <Label className="form-label">LinkedIn</Label>
+                          <Label for="linkedin" className="form-label">LinkedIn</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
@@ -431,7 +431,7 @@ function PageProfileEdit({ history }) {
                       
                       <Col md="12">
                         <div className="mb-3">
-                          <Label className="form-label">Description</Label>
+                          <Label for="description" className="form-label">Description</Label>
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon

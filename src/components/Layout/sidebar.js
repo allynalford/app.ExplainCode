@@ -71,6 +71,7 @@ function MainSideBar(props) {
         </div>
         <div className="widget mt-4">
           <h5 className="widget-title">Tools:</h5>
+          <nav id="toolmenu" title="Tool Menu">
           <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
             {getPrompts(window.location).map((widget, key) => (
               <li className={widget.className} key={key}>
@@ -106,10 +107,12 @@ function MainSideBar(props) {
               </li>
             ))}
           </ul>
+          </nav>
         </div>
         
         <div className="widget mt-4">
         <h5 className="widget-title">Utility:</h5>
+        <nav id="toolmenu" title="Utility Menu">
           <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
             {getWidgets(window.location).map((widget, key) => (
               <li className={widget.className} key={key}>
@@ -142,6 +145,7 @@ function MainSideBar(props) {
               </li>
             ))}
           </ul>
+          </nav>
         </div>
       </div>
     </React.Fragment>
