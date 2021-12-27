@@ -13,6 +13,8 @@ const { isAuthenticated } = useAuth0();
         </a>
       </div>
     );
+  }else{
+    return ""
   }
 };
 
