@@ -101,7 +101,7 @@ class PageServices extends Component {
       </Helmet>
                 {/* breadcrumb */}
                 <PageBreadcrumb
-                    title="Explain Code Tools"
+                    title="Code Explanation Tools"
                     pathItems = {this.state.pathItems}
                 />
                 <div className="position-relative">
