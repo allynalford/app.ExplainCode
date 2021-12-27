@@ -136,7 +136,7 @@ const PageMessages = React.lazy(() =>
   import("./pages/Pages/Account/PageMessages")
 );
 const PagePricing = React.lazy(() => import("./pages/Pages/PagePricing"));
-const PageServices = React.lazy(() => import("./pages/Pages/PageServices"));
+const PageServices = React.lazy(() => import("./pages/Pages/Tools"));
 const PageTeam = React.lazy(() => import("./pages/Pages/PageTeam"));
 
 //Account
@@ -290,7 +290,7 @@ const routes = [
    { path: "/explain-code-history", component: History, isTopbarDark: true },
    { path: "/contact-us", component: ContactUS, isTopbarDark: true },
    { path: "/explain-code-faqs", component: HelpCenterFaqs, isTopbarDark: true },
-
+   { path: "/explain-code-tools", component: PageServices, isTopbarDark: true },
    
 
     //Page Profile
@@ -448,7 +448,7 @@ const routes = [
   { path: "/page-aboutus-two", component: PageAboutusTwo },
   { path: "/page-history", component: PageHistory, isTopbarDark: true },
   { path: "/page-pricing", component: PagePricing, isTopbarDark: true },
-  { path: "/page-services", component: PageServices, isTopbarDark: true },
+ 
   { path: "/page-team", component: PageTeam, isTopbarDark: true },
 
   //Help Center

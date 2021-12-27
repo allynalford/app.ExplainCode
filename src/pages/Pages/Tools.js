@@ -1,12 +1,10 @@
 // React Basic and Bootstrap
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, CardBody } from 'reactstrap';
-
+import { Container, Row, Col} from 'reactstrap';
+import { Helmet } from "react-helmet";
 //Import components
 import PageBreadcrumb from "../../components/Shared/PageBreadcrumb";
 import SectionTitle from "../../components/Shared/SectionTitle";
-import ReviewsSlider from "../../components/Shared/ReviewsSlider";
 import Feature from "../../components/Shared/Feature";
 
 //Import Images
@@ -23,6 +21,7 @@ import work2 from "../../assets/images/work/2.jpg";
 import work3 from "../../assets/images/work/3.jpg";
 import work4 from "../../assets/images/work/4.jpg";
 
+import WaitlistButtonSolo from '../../components/waitlist-button-solo';
 
 class PageServices extends Component {
 
@@ -31,9 +30,8 @@ class PageServices extends Component {
         this.state = {
             pathItems : [
                 //id must required
-                { id : 1, name : "Landrick", link : "/index" },
-                { id : 2, name : "Pages", link : "#" },
-                { id : 3, name : "Services" },
+                { id : 1, name : "Explain Code", link : "/" },
+                { id : 2, name : "Tools" },
             ],
             reviews : [
                 { id : 1, img : img1, name : "Thomas Israel", post : "C.E.O", desc : "It seems that only fragments of the original text remain in the Lorem Ipsum texts used today.", rating : 5 },
@@ -44,12 +42,17 @@ class PageServices extends Component {
                 { id : 6, img : img6, name : "ill Webb", post : "Designer", desc : "Thus, Lorem Ipsum has only limited suitability as a visual filler for German texts.", rating : 4 },
             ],
             features : [
-                { id : 1, icon : 'uil uil-edit-alt h1 text-primary', title : "Design & Development", description : "Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam aenean elementum semper." },
-                { id : 2, icon : 'uil uil-vector-square h1 text-primary', title : "Management & Marketing", description : "Allegedly, a Latin scholar established the origin of the text by established compiling unusual word." },
-                { id : 3, icon : 'uil uil-file-search-alt h1 text-primary', title : "Stratagy & Research", description : "It seems that only fragments of the original text remain in the Lorem Ipsum fragments texts used today." },
-                { id : 4, icon : 'uil uil-airplay h1 text-primary', title : "Easy To Use", description : "Nisi aenean vulputate eleifend tellus vitae eleifend enim a Aliquam aenean elementum semper." },
-                { id : 5, icon : 'uil uil-calendar-alt h1 text-primary', title : "Daily Reports", description : "Allegedly, a Latin scholar established the origin of the text by compiling unusual established word." },
-                { id : 6, icon : 'uil uil-clock h1 text-primary', title : "Real Time Zone", description : "It seems that only fragments of the original text remain in the Lorem Ipsum texts used fragments today." },
+                { id : 1, icon : 'uil uil-list-ul h1 text-primary', title : "Line by Line Explanations", description : "Learn to code by breaking it down into lines and chunks. Explain Code gives you line by line explanation of code. It helps you in learning programming concepts and improves your coding skills." },
+                { id : 2, icon : 'uil uil-document-layout-left h1 text-primary', title : "Code Summarization", description : "Reduce the time to understand code by summarizing it into one containing code and description. Now you don't need to read long code to understand it." },
+                { id : 3, icon : 'uil uil-comment-edit h1 text-primary', title : "Code Comments", description : "Understanding the purpose of a class can be difficult. But not anymore, Break down classes to help you gain an in depth knowledge of what the class is intended to do, what they call and more." },
+                { id : 4, icon : 'uil uil-code-branch h1 text-primary', title : "Class Breakdown", description : "Understanding the purpose of a class can be difficult. But not anymore, Break down classes to help you gain an in depth knowledge of what the class is intended to do, what they call and more." },
+                { id : 5, icon : 'uil uil-comment-question h1 text-primary', title : "Open Questions", description : "Don’t know what a block of code does? Paste your code into the editor and ask an open question about it. It’s that simple!. The built in AI understands code like never before." },
+                { id : 6, icon : 'uil uil-brackets-curly h1 text-primary', title : "Explain Function", description : "Our tool provides you an explanation for your function. This will help you to better understand how the code works and what results it produces." },
+            ],
+            languages : [
+                { id : 1, lang: true, dataicon:"logos:javascript", icon : 'uil uil-list-ul h1 text-primary', title : "NodeJS (JavaScript)", description : "JavaScript is everywhere. Some of the world's most visited websites and apps are built with JavaScript, and an increasing number of developers are using JavaScript frameworks to build the web applications of the future. Discover how to build JavaScript web applications with React, JSX and NodeJS." },
+                { id : 2, lang: true, dataicon:"logos:python", icon : 'uil uil-document-layout-left h1 text-primary', title : "Python", description : "Python is a general purpose language, which means that it can be used to create a variety of different programs and isn't specialized for any specific problems. One of Python’s design philosophies is to make code easy to read, which makes Python an ideal choice for small and large-scale projects." },
+                { id : 3, lang: true, dataicon:"grommet-icons:golang", icon : 'uil uil-comment-edit h1 text-primary', title : "GO (Golang)", description : "Go is a general-purpose programming language created by Google engineers, who modeled it after the C programming language. Go is designed to create dependable and efficient software that runs on single and multi-core processors, computer clusters, the cloud, and more." },
             ],
             works : [
                 { imgUrl : work1, title : "Shifting Perspective", subtitle : "Studio", author : "Calvin Carlo", date : "13th August, 2019" },
@@ -87,9 +90,18 @@ class PageServices extends Component {
 
         return (
             <React.Fragment>
+      <Helmet>
+        <title>Code Explanation Tools</title>
+        <meta name="description" content="Code Explanation Tools helps you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
+        <meta name="keywords" content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta name="twitter:title" content="Explain Code App Tools | Code Explanation Tools" />
+        <meta name="twitter:image:alt" content="Explain Code App: Settings" />
+        <meta property="og:title" content="Code Explanation Tools" />
+        <meta property="og:description" content="Code Explanation Tools helps you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
+      </Helmet>
                 {/* breadcrumb */}
                 <PageBreadcrumb
-                    title="Services"
+                    title="Explain Code Tools"
                     pathItems = {this.state.pathItems}
                 />
                 <div className="position-relative">
@@ -104,20 +116,31 @@ class PageServices extends Component {
                     <Container>
                         {/* feature box */}
                         <Feature featureArray={this.state.features}/>
+                        <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                     </Container>
-
+                    
                     <Container className="mt-100 mt-60">
                         {/* Render Section Title */}
-                        <SectionTitle title="Client Reviews" desc="that can provide everything you need to generate awareness, drive traffic, connect." />
+                        <SectionTitle title="What Explain Code App will support" desc="We have decided to start out supporting Node JS, Python, Go, and SQL. Once we have an established a strong community around our initial languages, we will rapidly grow and support new languages for all developers." />
 
-                        {/* clients slider */}
+                        {/* clients slider 
                         <ReviewsSlider reviews={this.state.reviews} colClass="mt-4"/>
+                        */}
+                    </Container>
+                    <Container>
+                        {/* feature box */}
+                        <Feature featureArray={this.state.languages}/>
+                        <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                     </Container>
                 </section>
 
                 <section className="section bg-light">
-                    <Container>
-                    {/* Render Section Title */}
+                    {/* <Container>
+                    
                     <SectionTitle title="Our Latest Projects" desc="that can provide everything you need to generate awareness, drive traffic, connect." />
 
                         <Row>
@@ -142,19 +165,20 @@ class PageServices extends Component {
                                 )
                             }
                         </Row>
-                    </Container>
+                    </Container> */}
 
                     <Container className="mt-100 mt-60">
                         <Row className="justify-content-center">
                             <Col xs="12" className="text-center">
                                 <div className="section-title">
-                                    <h4 className="title mb-4">See everything about your employee at one place.</h4>
-                                    <p className="text-muted para-desc mx-auto">Start working with <span className="text-primary fw-bold">Landrick</span> that can provide everything you need to generate awareness, drive traffic, connect.</p>
-                                    <div className="mt-4">
+                                    <h3 className="title mb-4">Get advance notice before we launch</h3>
+                                    <p className="text para-desc mx-auto">Sign Up to the private beta and receive an early access invite code. Get advance notice before we launch to the general public in early 2022. Our new Explain Code application is a revolutionary way to learn how to write code and make suggestions that will help</p>
+                                    {/* <div className="mt-4">
                                         <Link to="#" className="btn btn-primary mt-2 me-2">Get Started Now</Link>{" "}
                                         <Link to="#" className="btn btn-outline-primary mt-2">Free Trial</Link>
-                                    </div>
+                                    </div> */}
                                 </div>
+                                <WaitlistButtonSolo />
                             </Col>
                         </Row>
                     </Container>

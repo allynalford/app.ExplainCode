@@ -23,8 +23,8 @@ class Feature extends Component {
                   }
                 >
                   <div className="image position-relative d-inline-block">
-                    <i className={feat.icon} >
-                    </i>
+                      {(typeof feat.dataicon !== "undefined" ? <span class="iconify" data-icon={feat.dataicon} data-width="48" data-height="48"></span> : <i className={feat.icon} ></i>)}
+                    
                   </div>
                   <div className="content mt-4">
                     <h5>{feat.title}</h5>
