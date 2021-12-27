@@ -29,6 +29,14 @@ export function getWidgets(path){
 
 export const TOOLS = new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function', 'Code-Comment'])
 
+
+// Crop code to help Denigma focus on the important parts. 
+// Sometimes, less code can lead to a better explanation.
+// Rename misleading variable names or replace them with "foo" or "bar".
+// Remove superfluous comments
+// ['Focus your question on the code','Questions should be related to what the code does, or should do.','Ensure to select the proper language for of your code.', 'Focus on the important parts.',
+//         'Clean up variable names and or Replace variable names with "foo" or "bar"',
+//         'Remove extra comments']
 export function getPrompts(path){
   const tool = new URLSearchParams(path.search).get("tool");
   const widgets = [
@@ -40,7 +48,11 @@ export function getPrompts(path){
       link: "/dashboard?tool=Line-By-Line",
       tool: "Line-By-Line",
       desc: "This tool provides a line by line explanation of your code.",
-      tips: ['Ensure the snippet of code is complete.']
+      tips: [
+            'Ensure the snippet of code is complete.', 
+            'Focus on the important parts.',
+            'Remove extra comments'
+          ]
     },
     {
       id: 2,
@@ -50,7 +62,10 @@ export function getPrompts(path){
       link: "/dashboard?tool=Summarize",
       tool: "Summarize",
       desc: "This tool summarizes your code.",
-      tips: ['Ensure the snippet of code is complete.']
+      tips: [
+        'Ensure the snippet of code is complete.',
+        'Focus on the important parts.',
+        'Remove extra comments']
     },
     {
       id: 3,
@@ -60,7 +75,8 @@ export function getPrompts(path){
       link: "/dashboard?tool=Class-Breakdown",
       tool: "Class-Breakdown",
       desc: "This breaks down your class and provides an overall explanation of the class.",
-      tips: ['Ensure the snippet of code is a class.']
+      tips: ['Ensure the snippet of code is a class.', 'Focus on the important parts.',
+        'Remove extra comments']
     },
     {
       id: 4,
@@ -70,7 +86,8 @@ export function getPrompts(path){
       link: "/dashboard?tool=Open-Questions",
       tool: "Open-Questions",
       desc: "This tool allows you to ask free-form questions about your class, function or code snippet.",
-      tips: ['Ensure to select the proper language for of your code.']
+      tips: ['Focus your question on the code','Questions should be related to what the code does, or should do.','Ensure to select the proper language for of your code.', 'Focus on the important parts.',
+        'Remove extra comments']
     },
     {
       id: 5,
@@ -80,7 +97,8 @@ export function getPrompts(path){
       link: "/dashboard?tool=Explain-Function",
       tool: "Explain-Function",
       desc: "This tool provides an explanation for your function.",
-      tips: ['Ensure the snippet of code is a function']
+      tips: ['Ensure the snippet of code is a function', 'Focus on the important parts.',
+        'Remove extra comments']
     },
     {
       id: 6,
@@ -90,7 +108,8 @@ export function getPrompts(path){
       link: "/dashboard?tool=Code-Comment",
       tool: "Code-Comment",
       desc: "Create a JavaDoc style comment for your code",
-      tips: ['Preserve any existing comments within the code']
+      tips: ['Preserve any existing comments within the code', 'Provide a full function',
+        'Provide a complete snippet']
     },
   ]
 

@@ -477,7 +477,6 @@ function PageProfile({history}) {
                       style={{ marginTop: '5px', marginLeft: '10px' }}
                       disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={e =>{
-                        console.log('save:', code);
                         setLoading(true);
                         if(typeof snippetuuid !== "undefined"){
                           //run update
@@ -499,7 +498,7 @@ function PageProfile({history}) {
                             setLoading(false);
                           });
                         }else{
-                          console.log("Saving...")
+                          
                           //run save
                           endpoint.postIAM(getSnippets().saveSnippet, {
                             userglobaluuid,
@@ -507,7 +506,6 @@ function PageProfile({history}) {
                             snippet: code
                           }).then((res) => {
                             if (res.data.success === true) {
-                              console.log(res);
                               setSnippetuuid(res.data.snippetuuid);
                               setLoading(false);
                             } else {

@@ -35,7 +35,7 @@ const AuthenticationNav = () => {
  
   return isAuthenticated ? (
     <Fragment>
-      <ul className="buy-button list-inline mb-0" role="menu">
+      <ul className="buy-button list-inline mb-0">
         <li className="list-inline-item mb-0" key={"Search"}>
           <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle
@@ -65,7 +65,7 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1" role="menuitem" key={"ExplainCodeMenu"}>
+        <li className="list-inline-item mb-0 pe-1" role="menu" key={"ExplainCodeMenu"}>
           <Dropdown isOpen={dropdownOpenShop} toggle={toggleDropdownShop}>
             <DropdownToggle type="button" aria-label="Explain Code Menu" className="btn btn-icon btn-primary ">
               <i className="uil uil-archway align-middle icons" title="Explain Code Menu"></i>
@@ -75,16 +75,16 @@ const AuthenticationNav = () => {
               className="dd-menu bg-white shadow rounded border-0 mt-3 py-3"
               style={{ width: '200px' }}
             >
-              <Link className="dropdown-item text-dark" to="/" key={'Home'}>
+              <Link className="dropdown-item text-dark" to="/" key={'Home'} role="menuitem">
                 <i className="uil uil-archway align-middle me-1"></i> Home
               </Link>
-              <Link className="dropdown-item text-dark" to="/dashboard" key={'Dashboard'}>
+              <Link className="dropdown-item text-dark" to="/dashboard" key={'Dashboard'} role="menuitem">
                 <i className="uil uil-analysis align-middle me-1"></i> Dashboard
               </Link>
-              <Link className="dropdown-item text-dark" to="/settings" key={'ContactUs'}>
+              <Link className="dropdown-item text-dark" to="/settings" key={'ContactUs'} role="menuitem">
                 <i className="uil uil-mailbox align-middle me-1"></i> Contact Us
               </Link>
-              <Link className="dropdown-item text-dark" to="/settings" key={'History'}>
+              <Link className="dropdown-item text-dark" to="/settings" key={'History'} role="menuitem">
                 <i className="uil uil-book-alt align-middle me-1"></i> History &amp; Roadmap
               </Link>
               {/* <Link className="dropdown-item text-dark" to="#">
@@ -95,6 +95,8 @@ const AuthenticationNav = () => {
               <Link
                 className="dropdown-item text-dark"
                 to="#"
+                role="menuitem"
+                key={"logout-1"}
                 onClick={() =>
                   logout({
                     returnTo: window.location.origin,
@@ -107,7 +109,7 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1" role="menuitem" key={"ToolsMenu"}>
+        <li className="list-inline-item mb-0 pe-1" role="menu" key={"ToolsMenu"}>
           <Dropdown isOpen={dropdownOpenHome} toggle={toggleDropdownHome}>
             <DropdownToggle type="button" aria-label="Tools Menu" className="btn btn-icon btn-primary ">
               <i className="uil uil-file-share-alt align-middle icons" title="Tools Menu"></i>
@@ -118,14 +120,14 @@ const AuthenticationNav = () => {
               style={{ width: '200px' }}
             >
               {getPrompts(window.location).map((widget, key) => (
-                <Link className="dropdown-item text-dark" to={widget.link} key={widget.tool}>
+                <Link className="dropdown-item text-dark" to={widget.link} key={widget.tool} role="menuitem">
                   <i key={key} className={`${widget.icon} align-middle me-1`}></i>
                   {widget.title}
                 </Link>
               ))}
 
               <div className="dropdown-divider my-3 border-top"></div>
-              <Link className="dropdown-item text-dark" to="/snippets" key={'snippets'}>
+              <Link className="dropdown-item text-dark" to="/snippets" key={'snippets'} role="menuitem">
                 <i className="uil uil-bookmark align-middle me-1"></i> Saved
                 Snippets
               </Link>
@@ -142,7 +144,7 @@ const AuthenticationNav = () => {
             <i className="uil uil-heart align-middle icons"></i>
           </Link>
         </li> */}
-        <li className="list-inline-item mb-0" role="menuitem" key={"AccountMenu"}>
+        <li className="list-inline-item mb-0" role="menu" key={"AccountMenu"}>
           <Dropdown
             color="primary"
             isOpen={dropdownIsOpen}
@@ -162,10 +164,10 @@ const AuthenticationNav = () => {
               className="dd-menu bg-white shadow rounded border-0 mt-3 py-3"
               style={{ width: '200px' }}
             >
-              <Link className="dropdown-item text-dark" to="/billing" key={'billing'}>
+              <Link className="dropdown-item text-dark" to="/billing" key={'billing'} role="menuitem">
                 <i className="uil uil-invoice align-middle me-1"></i> Billing
               </Link>
-              <Link className="dropdown-item text-dark" to="/settings" key={'settings'}>
+              <Link className="dropdown-item text-dark" to="/settings" key={'settings'} role="menuitem">
                 <i className="uil uil-setting align-middle me-1"></i> Settings
               </Link>
               {/* <Link className="dropdown-item text-dark" to="#">
@@ -175,6 +177,7 @@ const AuthenticationNav = () => {
               <div className="dropdown-divider my-3 border-top"></div>
               <Link
                 key={'logout'}
+                role="menuitem"
                 className="dropdown-item text-dark"
                 to="#"
                 onClick={() =>
