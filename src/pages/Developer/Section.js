@@ -103,6 +103,11 @@ export default class index extends Component {
               config.getDrip().addSubscriberApiUrl,
               { email: this.state.email, refby: this.state.refby },
             );
+
+            await this.updateSlackChannel();
+              window._dcq = window._dcq || [];
+              window._dcq.push(['track', 'Waitlist Signup', { value: 3650 }]);
+
             if (addUser.data.success === true) {
               Event('Waitlist', 'New Waitlist User Drip', 'drip added');
               // this.SwalToast(
@@ -119,6 +124,7 @@ export default class index extends Component {
               //this.SwalToast('Error', "error adding user", 'error');
               this.setState({inputsstatus: false, alertMessage: "Error: could not join beta access", alertOpen: true, alertColor: 'danger'});
             }
+
           } else {
             //this.SwalToast('Error', 'User already Exists', 'error');
             this.setState({inputsstatus: false, alertMessage: "User already Exists", alertOpen: true, alertColor: 'warning'});

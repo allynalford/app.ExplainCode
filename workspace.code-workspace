@@ -1,0 +1,141 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\architectui-react-pro-master"
+		},
+		{
+			"path": "..\\app.explaincode.api"
+		},
+		{
+			"path": "..\\app.tenably.api.nodejs\\lambdas"
+		}
+	],
+	"settings": {
+		"serverlessConsole.services": [
+			{
+				"type": "cloudformation",
+				"title": "DEV-ExplainCodeApp",
+				"timeOffsetInMs": 0,
+				"awsProfile": "default",
+				"stacks": [
+					{
+						"region": "us-east-1",
+						"stackName": "explaincodeapp-dev",
+						"stage": "dev"
+					}
+				]
+			},
+			{
+				"type": "dynamodb",
+				"title": "webhooks-dev-seed",
+				"tableName": "webhooks-dev-seed",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-dev-seed",
+				"tableName": "explaincodeapp-dev-seed",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-prod-seed",
+				"tableName": "explaincodeapp-prod-seed",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-dev-refby",
+				"tableName": "explaincodeapp-dev-refby",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-prod-refby",
+				"tableName": "explaincodeapp-prod-refby",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "cloudformation",
+				"title": "PROD-ExplainCodeApp",
+				"timeOffsetInMs": 0,
+				"awsProfile": "default",
+				"stacks": [
+					{
+						"region": "us-east-1",
+						"stackName": "explaincodeapp-prod",
+						"stage": "dev"
+					}
+				]
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-dev-completions",
+				"tableName": "explaincodeapp-dev-completions",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-dev-snippets",
+				"tableName": "explaincodeapp-dev-snippets",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "cloudformation",
+				"title": "PROD-REM",
+				"timeOffsetInMs": 0,
+				"awsProfile": "default",
+				"stacks": [
+					{
+						"region": "us-east-1",
+						"stackName": "remediation-prod",
+						"stage": "dev"
+					}
+				]
+			},
+			{
+				"type": "dynamodb",
+				"title": "domains-prod-domain",
+				"tableName": "domains-prod-domain",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "remediation-prod-store",
+				"tableName": "remediation-prod-store",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			}
+		]
+	},
+	"launch": {
+		"configurations": [
+			{
+				"type": "aws-sam",
+				"request": "direct-invoke",
+				"name": "app.ExplainCode:src/pages/Pages/Account/PageProfile.PageProfile (nodejs12.x)",
+				"invokeTarget": {
+					"target": "code",
+					"projectRoot": "c:\\Users\\Allyn Alford\\Documents\\Tenably\\REPOS\\app.ExplainCode",
+					"lambdaHandler": "src/pages/Pages/Account/PageProfile.PageProfile"
+				},
+				"lambda": {
+					"runtime": "nodejs12.x",
+					"payload": {},
+					"environmentVariables": {}
+				}
+			}
+		]
+	}
+}
