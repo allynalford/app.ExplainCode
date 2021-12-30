@@ -104,10 +104,7 @@ export default class index extends Component {
               { email: this.state.email, refby: this.state.refby },
             );
 
-            await this.updateSlackChannel();
-              window._dcq = window._dcq || [];
-              window._dcq.push(['track', 'Waitlist Signup', { value: 3650 }]);
-
+           
             if (addUser.data.success === true) {
               Event('Waitlist', 'New Waitlist User Drip', 'drip added');
               // this.SwalToast(
@@ -118,7 +115,7 @@ export default class index extends Component {
               
               await this.updateSlackChannel();
               window._dcq = window._dcq || [];
-              window._dcq.push(['track', 'Waitlist Signup', { value: 999 }]);
+              window._dcq.push(['track', 'Waitlist Signup', { value: 3650 }]);
               this.setState({ inputsstatus: false,  alertMessage: "You've Joined, Thank You for Joining Early Access", alertOpen: true, alertColor: 'success'});
             } else {
               //this.SwalToast('Error', "error adding user", 'error');
