@@ -14,6 +14,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import copy from 'copy-to-clipboard';
 import Ionicon from 'react-ionicons';
 import AceEditor from "react-ace";
+import 'ace-builds/webpack-resolver';
 import "ace-builds/src-noconflict/mode-golang";
 import "ace-builds/src-noconflict/mode-mysql";
 import "ace-builds/src-noconflict/mode-markdown";
@@ -36,17 +37,12 @@ import PageBreadcrumb from "../../../components/Shared/PageBreadcrumb";
 import PageSearchSidebar from "../../../components/Shared/PageSearchSidebar";
 
 // import images
-import blog01 from "../../../assets/images/blog/01.jpg";
-import blog03 from "../../../assets/images/blog/03.jpg";
-import blog04 from "../../../assets/images/blog/04.jpg";
+import blog01 from "../../../assets/images/blog/01.jpg"; 
 import blog07 from "../../../assets/images/blog/07.jpg";
 import blog08 from "../../../assets/images/blog/08.jpg";
 
 // Client Images
-import client1 from "../../../assets/images/client/01.jpg";
-import client2 from "../../../assets/images/client/02.jpg";
-import client3 from "../../../assets/images/client/03.jpg";
-import client4 from "../../../assets/images/client/04.jpg";
+
 import dateFormat from 'dateformat';
 //import SectionTitle from '../../../components/Shared/SectionTitle';
 const endpoint = require('../../../common/endpoint');
@@ -65,6 +61,7 @@ function Detail(props, { history }) {
   const [loading, setLoading] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState(false);
   const [codeLength, setCodeLength] = useState(0);
+  const [codeLang, setCodeLang] = useState('');
   const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [code, setCode] = useState(cachedSnippet);
   const [snippetUUID, setSnippetUUID] = useState(snippetuuid);
@@ -79,66 +76,6 @@ function Detail(props, { history }) {
       { id: 1, name: "Dashboard", link: "/dashboard" },
       { id: 2, name: "Snippets", link: "/snippets" },
       { id: 3, name: "Snippet Title Here", link: "#" },
-    ],
-    comments: [
-      {
-        id: 1,
-        image: client1,
-        name: "Lorenzo Peterson",
-        date: "15th August, 2019",
-        time: "01:25 pm",
-        desc:
-          "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour",
-      },
-      {
-        id: 2,
-        image: client2,
-        name: "Tammy Camacho",
-        date: "16th August, 2019",
-        time: "02:05 pm",
-        desc:
-          "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour",
-      },
-      {
-        id: 3,
-        image: client3,
-        name: "Tammy Camacho",
-        date: "17th August, 2019",
-        time: "04:03 pm",
-        desc:
-          "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour",
-        replies: [
-          {
-            id: 1,
-            image: client4,
-            name: "Calvin Camacho",
-            date: "18th August, 2019",
-            time: "05:55 pm",
-            desc:
-              "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour",
-          },
-        ],
-      },
-    ],
-    blogs: [
-      {
-        id: 1,
-        image: blog03,
-        title: "Smartest Applications for Business",
-        like: "33",
-        comment: "08",
-        autor: "Calvin Carlo",
-        date: "13th August, 2019",
-      },
-      {
-        id: 2,
-        image: blog04,
-        title: "Design your apps in your own way",
-        like: "33",
-        comment: "08",
-        autor: "Calvin Carlo",
-        date: "13th August, 2019",
-      },
     ],
     successMsg: false,
   };
@@ -190,6 +127,7 @@ function Detail(props, { history }) {
 
   function onChange(newValue) {
     setCode(newValue);
+    setCodeLength(newValue.length);
     localStorage.setItem('cachedSnippet', newValue);
   }
 
@@ -216,6 +154,7 @@ function Detail(props, { history }) {
       setCreationDateTime(dt);
       setCodeLength(length);
       setCodeLengthColor(color);
+      setCodeLang(res.data.snippet.lang);
       setCode(snippet);
     }).catch((err) => {
       console.error(err);
@@ -236,9 +175,6 @@ function Detail(props, { history }) {
   //   });
   // }
 
-
-
-  
 
     return (
       <React.Fragment>
@@ -367,7 +303,7 @@ function Detail(props, { history }) {
                   </Col>
                   <Col md="4">
                   <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
-                  {codeLength} / 1000
+                  Snippet Length: {codeLength}
                    </p>
                   </Col>
                 </Row>
@@ -596,6 +532,8 @@ function Detail(props, { history }) {
               {/* sidebar */}
               <Col lg={4} xs={12} md={6} className="mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <PageSearchSidebar
+                  language={codeLang}
+                  codeLength={codeLength}
                   blog01={blog01}
                   blog07={blog07}
                   blog08={blog08}

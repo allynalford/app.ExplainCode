@@ -10,20 +10,24 @@ import {
   CardBody,
   Card,
   CardHeader,
-  CardFooter
+  CardFooter,
+  InputGroup,
+  InputGroupAddon,
+  Input
 } from "reactstrap";
 import Select from 'react-select';
 import copy from 'copy-to-clipboard';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
 import { modes, themes, getPrompts, TOOLS} from './config';
-import { getGTP3, getCompletions, getSnippets } from '../../../common/config';
+import { getGTP3, getCompletions, getSnippets, getTier } from '../../../common/config';
 import { updateRating } from '../../../common/slack';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
 import FormLoader from '../../../components/FormLoader';
 import MainSideBar from '../../../components/Layout/sidebar';
+import 'ace-builds/webpack-resolver';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-golang";
 import "ace-builds/src-noconflict/mode-mysql";
@@ -48,15 +52,15 @@ function PageProfile({history}) {
  
   const { user } = useAuth0();
   const { email } = user;
-  const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, mode:UserMode, theme:UserTheme, tier} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
-  const codeMaxLength = 2000;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
+  const [codeMaxLength, setCodeMaxLength] = useState(getTier(tier).codelength);
   const [code, setCode] = useState(cachedCode);
   const [question, setQuestion] = useState(cachedQuestion);
   const [rating, setRating] = useState(0);
@@ -78,8 +82,6 @@ function PageProfile({history}) {
   const [themeOption, setThemeOption] = useState({});
   const [modeOption, setModeOption] = useState({});
   const [snippetuuid, setSnippetuuid] = useState(undefined);
-
-
 
   useEffect(() => {
     try {
@@ -201,6 +203,7 @@ function PageProfile({history}) {
      // console.log('reading code', localStorage.getItem('cachedCode'))
       setCodeLength(code.length);
       if(code.length >= codeMaxLength){
+        console.log({length: code.length, codeMaxLength});
         setCodeLengthColor('red');
       }else{
         setCodeLengthColor('black');
@@ -208,7 +211,7 @@ function PageProfile({history}) {
     }
     return () => {
     };
-  }, [code]);
+  }, [ code ]);
 
   useEffect(() => {
 
@@ -360,7 +363,7 @@ function PageProfile({history}) {
                   </Col>
                   <Col md="6">
                     <Row>
-                      <Col md="12">
+                      {/* <Col md="12">
                         <div className="mt-4 mb-0">
                           <Label>Language</Label>
                           <Select
@@ -389,7 +392,7 @@ function PageProfile({history}) {
                             }}
                           ></Select>
                         </div>
-                      </Col>
+                      </Col> */}
                       <Col md="12">
                         <div className="mt-4 mb-0">
                           <Label>Theme</Label>
@@ -454,7 +457,31 @@ function PageProfile({history}) {
                
                 {prompt !== 'Open-Questions' ? (
                   <div>
-                    <Button
+                    <Label for="modes-select">Code Snippet Language</Label>
+                    <InputGroup>
+                      <Input
+                        aria-label={'Select an Language'}
+                        aria-required={'true'}
+                        className="form-control"
+                        id="modes-select"
+                        onChange={(opt) => {
+                          setMode(opt.target.value);
+                          var selectedOption = _.find(modes, ['value', opt.target.value]);
+                          setModeOption(selectedOption);
+                          localStorage.setItem('cachedSettings', {mode: opt.target.value, theme});
+                        }}
+                        type='select'
+                        value={mode}
+                        disabled={loading}
+                      >
+                       
+                        {modes.map(option => (
+                          <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                      </Input>
+                      <InputGroupAddon addonType='prepend'>
+                          <div className='input-group-text'>
+                          <Button
                       style={{ marginTop: '5px', backgroundColor: '#008000' }}
                       disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={onRunPrompt}
@@ -472,7 +499,6 @@ function PageProfile({history}) {
                         ''
                       )}
                     </Button>
-
                     <Button
                       style={{ marginTop: '5px', marginLeft: '10px' }}
                       disabled={(loading === true | typeof code === "undefined" ? true : false)}
@@ -557,12 +583,118 @@ function PageProfile({history}) {
                         ''
                       )}
                     </Button>
+                          </div>
+                        </InputGroupAddon>
+                    </InputGroup>
+                    {/* <Button
+                      style={{ marginTop: '5px', backgroundColor: '#008000' }}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      onClick={onRunPrompt}
+                      className="btn btn-pills btn-primary"
+                    >
+                      Explain Snippet
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button> */}
+
+                    {/* <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      onClick={e =>{
+                        setLoading(true);
+                        if(typeof snippetuuid !== "undefined"){
+                          //run update
+                          endpoint.postIAM(getSnippets().updateSnippet, {
+                            userglobaluuid,
+                            snippetuuid,
+                            fields: [{name: 'snippet', value: code}]
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                             
+                              setLoading(false);
+                            } else {
+                             
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
+                        }else{
+                          
+                          //run save
+                          endpoint.postIAM(getSnippets().saveSnippet, {
+                            userglobaluuid,
+                            lang: mode,
+                            snippet: code
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                              setSnippetuuid(res.data.snippetuuid);
+                              setLoading(false);
+                            } else {
+                              console.log(res);
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
+                        }
+                      }}
+                      className="btn btn-pills btn-info"
+                    >
+                      {(typeof snippetuuid !== "undefined" ? "Update Snippet" : "Save Snippet")}
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+                    <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      onClick={(e) => {
+                        copy(code);
+                        setCopiedSnippet(true);
+                        setInterval(function () {
+                          setCopiedSnippet(false);
+                        }, 3500);
+                      }}
+                      className="btn btn-pills btn-secondary"
+                    >
+                      Copy Snippet
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button> */}
                   </div>
                 ) : (
                   ''
                 )}
                 <p style={{ color: codeLengthColor, fontWeight: 'bold' }}>
-                  {codeLength} / 1000
+                  {codeLength} / {codeMaxLength}
                 </p>
                 <Alert
                     color={'info'}
@@ -659,7 +791,6 @@ function PageProfile({history}) {
                   mode="html"
                   theme={theme}
                   name="editor-results"
-                  onChange={onChange}
                   fontSize={14}
                   showPrintMargin={true}
                   showGutter={false}

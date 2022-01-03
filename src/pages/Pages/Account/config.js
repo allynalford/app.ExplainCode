@@ -118,7 +118,7 @@ export function getPrompts(path){
 
 export const modes = [
   { label: 'All Languages', value: 'markdown' },
-  { label: 'NodeJS (Javascript)', value: 'javascript' },
+  { label: 'Javascript', value: 'javascript' },
   { label: 'Python', value: 'python' },
   { label: 'Go (Golang)', value: 'golang' },
   { label: 'SQL (Structured Query Language)', value: 'mysql' },

@@ -27,39 +27,104 @@ const serverVars = {
       deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
       snippetsPagination: process.env.REACT_APP_BASE_API_URL + '/snippets/user/pagination',
     },
+    tiers: {
+      free: {
+        codelength: 500,
+        snippets: 15,
+        projects: 1,
+        explanations: 35,
+      },
+      trial: {
+        codelength: 1500,
+        snippets: 50,
+        projects: 1,
+        explanations: 35,
+        days: 7
+      },
+      earlyaccess: {
+        codelength: 1500,
+        snippets: 0,
+        projects: 0,
+        explanations: 0,
+        days: 14
+      },
+      pro: {
+        codelength: 1500,
+        snippets: 0,
+        projects: 0,
+        explanations: 0,
+      },
+    },
     waitlistText: "Early Access"
   };
   
   const localVars = {
     drip: {
-      addSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/add",
-      getSubscriberApiUrl: process.env.REACT_APP_BASE_API_URL + "/drip/subscriber/get", 
+      addSubscriberApiUrl:
+        process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/add',
+      getSubscriberApiUrl:
+        process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/get',
     },
     gtp3: {
-      post_ExplainFunction_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/function/explain",
-      post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/summary", 
-      post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/linebyline",
-      post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + "/tool/freeform",
-      post_javadoc_comment_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/javadoc/comment'
+      post_ExplainFunction_Prompt:
+        process.env.REACT_APP_BASE_API_URL + '/tool/function/explain',
+      post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/summary',
+      post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/linebyline',
+      post_Freeform_Prompt:
+        process.env.REACT_APP_BASE_API_URL + '/tool/freeform',
+      post_javadoc_comment_Prompt:
+        process.env.REACT_APP_BASE_API_URL + '/tool/javadoc/comment',
     },
-    auth0:{
-      updateProfile: process.env.REACT_APP_BASE_API_URL + "/profile/update",
-      profileAuth: process.env.REACT_APP_BASE_API_URL + "/profile/auth",
+    auth0: {
+      updateProfile: process.env.REACT_APP_BASE_API_URL + '/profile/update',
+      profileAuth: process.env.REACT_APP_BASE_API_URL + '/profile/auth',
     },
-    completions:{
-      updateCompletionRating: process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
-      userCompletionCount: process.env.REACT_APP_BASE_API_URL + '/completions/user/count'
+    completions: {
+      updateCompletionRating:
+        process.env.REACT_APP_BASE_API_URL + '/completions/rating/update',
+      userCompletionCount:
+        process.env.REACT_APP_BASE_API_URL + '/completions/user/count',
     },
-    snippets:{
+    snippets: {
       saveSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/save',
       getSnippets: process.env.REACT_APP_BASE_API_URL + '/snippets/user/',
       getSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/',
-      getSnippetsCount: process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
+      getSnippetsCount:
+        process.env.REACT_APP_BASE_API_URL + '/snippet/user/count/',
       updateSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/update',
       deleteSnippet: process.env.REACT_APP_BASE_API_URL + '/snippet/delete/',
-      snippetsPagination: process.env.REACT_APP_BASE_API_URL + '/snippets/user/pagination',
+      snippetsPagination:
+        process.env.REACT_APP_BASE_API_URL + '/snippets/user/pagination',
     },
-    waitlistText: "Get Early Access"
+    tiers: {
+      free: {
+        codelength: 500,
+        snippets: 15,
+        projects: 1,
+        explanations: 35,
+      },
+      trial: {
+        codelength: 1500,
+        snippets: 50,
+        projects: 1,
+        explanations: 35,
+        days: 7
+      },
+      earlyaccess: {
+        codelength: 1500,
+        snippets: 0,
+        projects: 0,
+        explanations: 0,
+        days: 14
+      },
+      pro: {
+        codelength: 1500,
+        snippets: 0,
+        projects: 0,
+        explanations: 0,
+      },
+    },
+    waitlistText: 'Get Early Access',
   };
 
   export const WAITLIST_TEXT = (process.env.NODE_ENV === 'production' ? serverVars.waitlistText : localVars.waitlistText);
@@ -106,4 +171,11 @@ const serverVars = {
       return serverVars.snippets;
     }
     return localVars.snippets;
+  }
+
+  export function getTier(tier) {
+    if (process.env.NODE_ENV === 'production') {
+      return serverVars.tiers[tier];
+    }
+    return localVars.tiers[tier];
   }

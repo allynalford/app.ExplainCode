@@ -6,12 +6,16 @@ import { useAuth0 } from '@auth0/auth0-react';
 import FeatherIcon from 'feather-icons-react';
 import { getWidgets, getPrompts} from '../../pages/Pages/Account/config';
 import dateFormat from 'dateformat';
-import { getCompletions } from '../../common/config';
+import { getCompletions, getTier } from '../../common/config';
 
 const endpoint = require('../../common/endpoint');
 function MainSideBar(props) {
 
     const { logout } = useAuth0();
+    const { user } = useAuth0();
+    const { tier } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+    const [completionsMax, setCompletionsMax] = useState(0);
+    const [completionsColor, setCompletionsColor] = useState('black');
     const [completionsThisMonth, setCompletionsThisMonth] = useState(0);
     const monthStamp = dateFormat(new Date(), "yyyy-mm");
 
@@ -22,12 +26,25 @@ function MainSideBar(props) {
     };
   }, []);
 
+
   useEffect(() => {
+
+    const t = getTier(tier);
+
+    if(completionsMax === 0){
+      setCompletionsMax((t.explanations === 0 ? 'Unlimited' : t.explanations));
+    }
+
+    if(t.explanations !== 0 && completionsThisMonth >= t.explanations){
+      setCompletionsColor('red');
+    }else if(completionsColor !== 'black'){
+      setCompletionsColor('black');
+    }
 
     return () => {
 
     };
-  }, [completionsThisMonth]);
+  }, [completionsThisMonth, tier, completionsColor, completionsMax]);
 
   useEffect(() => {
     if(typeof props.userglobaluuid !== "undefined"){
@@ -64,8 +81,8 @@ function MainSideBar(props) {
                 icon="activity"
                 className="fea icon-ex-md text-primary mb-1"
               />
-              <h5 className="mb-0">{completionsThisMonth}/100</h5>
-              <h6 className="text mb-0">Executions</h6>
+              <h5 className="mb-0">{completionsThisMonth}/{completionsMax}</h5>
+              <h6 className="text mb-0">Explanations</h6>
             </div>
           </div>
         </div>
