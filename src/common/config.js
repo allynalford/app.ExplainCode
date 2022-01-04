@@ -66,6 +66,7 @@ const serverVars = {
   pricing: [
     {
       header: 'Starter',
+      active: true,
       price: {
         monthly: '$12.00',
         yearly: '$120.00',
@@ -80,13 +81,39 @@ const serverVars = {
                 ]
     },
     {
-      header: 'Starter',
+      header: 'Pro',
+      active: true,
       price: {
-        monthly: '$12.00',
-        yearly: '$120.00',
+        monthly: '$36.00',
+        yearly: '$360.00',
       },
-      subheader: 'Perfect for getting started.',
+      subheader: 'Best for large code',
+      features: [
+        'Full Access to all Tools', 
+        '1,500 Character Snippets',
+        'Unlimited  Explanations',
+        'Unlimited  Saved Snippets',
+        'Unlimited  Project'
+        ]
     },
+    {
+      header: 'Teams',
+      active: true,
+      price: {
+        monthly: '$0.00',
+        yearly: '$0.00',
+      },
+      subheader: 'Great for Startups, Schools and Enterprise.',
+      features: [
+        'Full Access to all Tools', 
+        '1,500 Character Snippets',
+        'Unlimited  Explanations',
+        'Unlimited  Saved Snippets',
+        'Unlimited  Project',
+        'Multiple Team Members'
+        ]
+    },
+    
   ],
   waitlistText: 'Early Access',
 };

@@ -3,34 +3,20 @@ import { Link } from "react-router-dom";
 import {
   Container,
   Row,
-  Col,
-  Progress,
-  Card,
-  CardBody,
-  Form,
-  FormGroup,
-  InputGroup,
-  Input,
+  Col
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { Helmet } from "react-helmet";
-//Import Icons
-import FeatherIcon from "feather-icons-react";
 import MainSideBar from '../../../components/Layout/sidebar';
 import ProfileHeader from '../../../components/Layout/ProfileHeader';
-//Import Images
-import imgbg from "../../../assets/images/account/bg.png";
-import profile from "../../../assets/images/client/05.jpg";
-import master from "../../../assets/images/payments/payment/master.png";
-import visaa from "../../../assets/images/payments/payment/visaa.png";
-import rupay from "../../../assets/images/payments/payment/rupay.png";
-import paypals from "../../../assets/images/payments/payment/paypals.png";
+import Toggle from 'react-bootstrap-toggle';
 
 function PagePayments({ history }) {
 
   const { user } = useAuth0();
   const { email } = user;
   const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const [toggleActive, setToggleActive] = useState(false);
 
   useEffect(() => {
     try {
@@ -71,23 +57,29 @@ function PagePayments({ history }) {
     <React.Fragment>
       <Helmet>
         <title>Explain Code App - Subscriptions Dashboard</title>
-        <meta
-          name="description"
-          content={'Subscriptions Dashboard'}
-        />
+        <meta name="description" content={'Subscriptions Dashboard'} />
         <meta
           name="keywords"
           content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code"
         />
-        <meta name="twitter:title" content="Explain Code App Subscriptions Dashboard" />
-        <meta name="twitter:image:alt" content="Explain Code App: Subscriptions Dashboard" />
-        <meta property="og:title" content="Explain Code App - Subscriptions Dashboard" />
-        <meta property="og:description" content="Explain Code App Subscriptions Dashboard." />
+        <meta
+          name="twitter:title"
+          content="Explain Code App Subscriptions Dashboard"
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Explain Code App: Subscriptions Dashboard"
+        />
+        <meta
+          property="og:title"
+          content="Explain Code App - Subscriptions Dashboard"
+        />
+        <meta
+          property="og:description"
+          content="Explain Code App Subscriptions Dashboard."
+        />
       </Helmet>
-      <section
-        className="bg-profile d-table w-100 bg-primary"
-        style={{ background: `url(${imgbg}) center center` }}
-      >
+      <section className="bg-profile d-table w-100 bg-primary">
         <Container>
           <Row>
             <Col lg="12">
@@ -104,23 +96,34 @@ function PagePayments({ history }) {
               <MainSideBar userglobaluuid={userglobaluuid} />
             </Col>
             <Col lg="9" xs={12}>
-
               <div className="row justify-content-center">
                 <div className="col-12">
                   <div className="section-title text-center mb-4 pb-2">
-                    <h1 className="title mb-4">
-                      Subscription
-                    </h1>
+                    <h1 className="title mb-4">Subscription</h1>
                     <p className="para-desc mx-auto text mb-0">
-                      You currently have 1 seat in your plan. Add more seats to your plan below.
-                      Please email help@tenablylabs.com if you need more than 20 seats!
+                      You currently have 1 seat in your plan. Add more seats to
+                      your plan below. Please email help@tenablylabs.com if you
+                      need more than 20 seats!
                     </p>
                   </div>
                 </div>
               </div>
-
+             
               <div className="row">
-                <h2>Test</h2>
+                <h2>Upgrade Your Plan
+                  <Toggle
+                  style={{marginLeft: '10px'}}
+                  active={toggleActive}
+                  onClick={(e) => {
+                    setToggleActive(!toggleActive)
+                  }}
+                  on={<h5>Yearly</h5>}
+                  off={<h5>Monthly</h5>}
+                  size="xs"
+                  onstyle='success'
+                  offstyle="info"
+                /></h2>
+                
                 <div className="col-lg-4 col-md-6 mt-4 pt-2">
                   <div className="card pricing-rates business-rate border-0 p-4 rounded-md shadow">
                     <div className="card-body p-0">
@@ -130,9 +133,7 @@ function PagePayments({ history }) {
                       <h2 className="fw-bold mb-0 mt-3">$12.00</h2>
                       <p className="text">Per Month</p>
 
-                      <p className="text">
-                        Perfect for getting started.
-                      </p>
+                      <p className="text">Perfect for getting started.</p>
 
                       <ul className="list-unstyled pt-3 border-top">
                         <li className="h6 text mb-0">
