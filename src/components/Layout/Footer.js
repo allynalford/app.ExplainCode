@@ -23,7 +23,7 @@ class Footer extends Component {
       ],
       grid2: [
          {title: 'Explanation Tools', link: "/explain-code-tools"},
-         { title: "History & Roadmap", link: "/explain-code-history" },
+         { title: "History & Road Map", link: "/explain-code-history" },
          { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
          { title: "Terms of Services", link: "/terms-of-service" },
          { title: "Contact Us", link: "/contact-us" },
@@ -142,7 +142,7 @@ class Footer extends Component {
                       : "text-light footer-head"
                   }
                 >
-                  Usefull Links
+                  Useful Links
                 </h3>: ""}
                 
                 <ul className="list-unstyled footer-list mt-4">
