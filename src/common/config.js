@@ -43,7 +43,7 @@ const serverVars = {
       explanations: 35,
     },
     trial: {
-      codelength: 1500,
+      codelength: 1000,
       snippets: 50,
       projects: 1,
       explanations: 35,

@@ -53,7 +53,8 @@ export default class AuthService extends EventEmitter {
               role: 'admin',
               root: 'true',
               inviteCode: user.invitecode,
-              userglobaluuid: user.id
+              userglobaluuid: user.id,
+              tier: "free"
             }
           }, function (err) {
               console.log("signuplogin")
