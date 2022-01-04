@@ -164,8 +164,8 @@ const AuthenticationNav = () => {
               className="dd-menu bg-white shadow rounded border-0 mt-3 py-3"
               style={{ width: '200px' }}
             >
-              <Link className="dropdown-item text-dark" to="/billing" key={'billing'} role="menuitem">
-                <i className="uil uil-invoice align-middle me-1"></i> Billing
+              <Link className="dropdown-item text-dark" to="/subscriptions" key={'billing'} role="menuitem">
+                <i className="uil uil-invoice align-middle me-1"></i> Subscription
               </Link>
               <Link className="dropdown-item text-dark" to="/settings" key={'settings'} role="menuitem">
                 <i className="uil uil-setting align-middle me-1"></i> Settings

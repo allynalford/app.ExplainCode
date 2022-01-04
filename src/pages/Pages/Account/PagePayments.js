@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -12,10 +12,12 @@ import {
   InputGroup,
   Input,
 } from "reactstrap";
-
+import { useAuth0 } from '@auth0/auth0-react';
+import { Helmet } from "react-helmet";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
+import MainSideBar from '../../../components/Layout/sidebar';
+import ProfileHeader from '../../../components/Layout/ProfileHeader';
 //Import Images
 import imgbg from "../../../assets/images/account/bg.png";
 import profile from "../../../assets/images/client/05.jpg";
@@ -24,484 +26,283 @@ import visaa from "../../../assets/images/payments/payment/visaa.png";
 import rupay from "../../../assets/images/payments/payment/rupay.png";
 import paypals from "../../../assets/images/payments/payment/paypals.png";
 
-class PagePayments extends Component {
-  state = {
-    widgets: [
-      {
-        id: 1,
-        icon: "uil uil-dashboard",
-        className: "navbar-item account-menu px-0",
-        title: "Profile",
-        link: "/page-profile",
-      },
-      {
-        id: 2,
-        icon: "uil uil-users-alt",
-        className: "navbar-item account-menu px-0 mt-2",
-        title: "Members",
-        link: "/page-members",
-      },
-      {
-        id: 3,
-        icon: "uil uil-file",
-        className: "navbar-item account-menu px-0 mt-2",
-        title: "Portfolio",
-        link: "/page-works",
-      },
-      {
-        id: 4,
-        icon: "uil uil-envelope-star",
-        className: "navbar-item account-menu px-0 mt-2",
-        title: "Messages",
-        link: "/page-messages",
-      },
-      {
-        id: 5,
-        icon: "uil uil-transaction",
-        className: "navbar-item account-menu px-0 mt-2 active",
-        title: "Payments",
-        link: "/page-payments",
-      },
-      {
-        id: 6,
-        icon: "uil uil-setting",
-        className: "navbar-item account-menu px-0 mt-2",
-        title: "Settings",
-        link: "/page-profile-edit",
-      },
-      {
-        id: 7,
-        icon: "uil uil-dashboard",
-        className: "navbar-item account-menu px-0 mt-2",
-        title: "Logout",
-        link: "/auth-login-three",
-      },
-    ],
-  };
+function PagePayments({ history }) {
 
-  componentDidMount() {
-    document.body.classList = "";
-    document.getElementById("top-menu").classList.add("nav-light");
-    window.addEventListener("scroll", this.scrollNavigation, true);
-  }
-  // Make sure to remove the DOM listener when the component is unmounted.
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.scrollNavigation, true);
-  }
+  const { user } = useAuth0();
+  const { email } = user;
+  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
 
-  scrollNavigation = () => {
-    var doc = document.documentElement;
-    var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-    if (top > 80) {
-      document.getElementById("topnav").classList.add("nav-sticky");
-    } else {
-      document.getElementById("topnav").classList.remove("nav-sticky");
+  useEffect(() => {
+    try {
+      document.title = "Explain Code App - Dashboard";
+      if (document.getElementById('top-menu') !== null) {
+        document.getElementById('top-menu').classList.add('nav-light');
+      }
+
+      window.addEventListener('scroll', scrollNavigation, true);
+
+
+    } catch (e) {
+      console.error(e);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", scrollNavigation, true);
+    };
+  }, []);
+
+  const scrollNavigation = () => {
+    try {
+      var doc = document.documentElement;
+      var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+      if (top > 80) {
+        document.getElementById("topnav").classList.add("nav-sticky");
+      } else {
+        document.getElementById("topnav").classList.remove("nav-sticky");
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  render() {
-    return (
-      <React.Fragment>
-        <section
-          className="bg-profile d-table w-100 bg-primary"
-          style={{ background: `url(${imgbg}) center center` }}
-        >
-          <Container>
-            <Row>
-              <Col lg="12">
-                <Card
-                  className="public-profile border-0 rounded shadow"
-                  style={{ zIndex: "1" }}
-                >
-                  <CardBody>
-                    <Row className="align-items-center">
-                      <Col lg="2" md="3" className="text-md-start text-center">
-                        <img
-                          src={profile}
-                          className="avatar avatar-large rounded-circle shadow d-block mx-auto"
-                          alt=""
-                        />
-                      </Col>
 
-                      <Col lg="10" md="9">
-                        <Row className="align-items-end">
-                          <Col
-                            md="7"
-                            className="text-md-start text-center mt-4 mt-sm-0"
-                          >
-                            <h3 className="title mb-0">Krista Joseph</h3>
-                            <small className="text-muted h6 me-2">
-                              Web Developer
-                            </small>
-                            <ul className="list-inline mb-0 mt-3">
-                              <li className="list-inline-item me-2">
-                                <Link
-                                  to="#"
-                                  className="text-muted"
-                                  title="Linkedin"
-                                >
-                                  <i>
-                                    <FeatherIcon
-                                      icon="instagram"
-                                      className="fea icon-sm me-2"
-                                    />
-                                  </i>
-                                  krista_joseph
-                                </Link>
-                              </li>
-                              <li className="list-inline-item ms-1">
-                                <Link
-                                  to="#"
-                                  className="text-muted"
-                                  title="Skype"
-                                >
-                                  <i>
-                                    <FeatherIcon
-                                      icon="linkedin"
-                                      className="fea icon-sm me-2"
-                                    />
-                                  </i>
-                                  krista_joseph
-                                </Link>
-                              </li>
-                            </ul>
-                          </Col>
-                          <Col md="5" className="text-md-end text-center">
-                            <ul className="list-unstyled social-icon social mb-0 mt-4">
-                              <li className="list-inline-item me-1">
-                                <Link to="#" className="rounded">
-                                  <i>
-                                    <FeatherIcon
-                                      icon="user-plus"
-                                      className="fea icon-sm fea-social"
-                                    />
-                                  </i>
-                                </Link>
-                              </li>
-                              <li className="list-inline-item me-1">
-                                <Link to="#" className="rounded">
-                                  <i>
-                                    <FeatherIcon
-                                      icon="message-circle"
-                                      className="fea icon-sm fea-social"
-                                    />
-                                  </i>
-                                </Link>
-                              </li>
-                              <li className="list-inline-item me-1">
-                                <Link to="#" className="rounded">
-                                  <i>
-                                    <FeatherIcon
-                                      icon="bell"
-                                      className="fea icon-sm fea-social"
-                                    />
-                                  </i>
-                                </Link>
-                              </li>
-                              <li className="list-inline-item me-1">
-                                <Link
-                                  to="/page-profile-edit"
-                                  className="rounded"
-                                >
-                                  <i>
-                                    <FeatherIcon
-                                      icon="settings"
-                                      className="fea icon-sm fea-social"
-                                    />
-                                  </i>
-                                </Link>
-                              </li>
-                            </ul>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        </section>
 
-        <section className="section mt-60">
-          <Container className="mt-lg-3">
-            <Row>
-              <Col lg="4" md="6" xs="12" className="d-lg-block d-none">
-                <div className="sidebar sticky-bar p-4 rounded shadow">
-                  <div className="widget">
-                    <h5 className="widget-title">Followers :</h5>
-                    <div className="row mt-4">
-                      <div className="col-6 text-center">
-                        <FeatherIcon
-                          icon="user-plus"
-                          className="fea icon-ex-md text-primary mb-1"
-                        />
-                        <h5 className="mb-0">2588</h5>
-                        <p className="text-muted mb-0">Followers</p>
-                      </div>
+  return (
+    <React.Fragment>
+      <Helmet>
+        <title>Explain Code App - Subscriptions Dashboard</title>
+        <meta
+          name="description"
+          content={'Subscriptions Dashboard'}
+        />
+        <meta
+          name="keywords"
+          content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code"
+        />
+        <meta name="twitter:title" content="Explain Code App Subscriptions Dashboard" />
+        <meta name="twitter:image:alt" content="Explain Code App: Subscriptions Dashboard" />
+        <meta property="og:title" content="Explain Code App - Subscriptions Dashboard" />
+        <meta property="og:description" content="Explain Code App Subscriptions Dashboard." />
+      </Helmet>
+      <section
+        className="bg-profile d-table w-100 bg-primary"
+        style={{ background: `url(${imgbg}) center center` }}
+      >
+        <Container>
+          <Row>
+            <Col lg="12">
+              <ProfileHeader />
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
-                      <div className="col-6 text-center">
-                        <FeatherIcon
-                          icon="users"
-                          className="fea icon-ex-md text-primary mb-1"
-                        />
-                        <h5 className="mb-0">454</h5>
-                        <p className="text-muted mb-0">Following</p>
-                      </div>
-                    </div>
+      <section className="section mt-60" id="maincontent">
+        <Container className="mt-lg-3">
+          <Row>
+            <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
+              <MainSideBar userglobaluuid={userglobaluuid} />
+            </Col>
+            <Col lg="9" xs={12}>
+
+              <div className="row justify-content-center">
+                <div className="col-12">
+                  <div className="section-title text-center mb-4 pb-2">
+                    <h1 className="title mb-4">
+                      Subscription
+                    </h1>
+                    <p className="para-desc mx-auto text mb-0">
+                      You currently have 1 seat in your plan. Add more seats to your plan below.
+                      Please email help@tenablylabs.com if you need more than 20 seats!
+                    </p>
                   </div>
-                  <div className="widget mt-4 pt-2">
-                    <h5 className="widget-title">Projects :</h5>
-                    <div className="progress-box mt-4">
-                      <h6 className="title text-muted">Progress</h6>
-                      <Progress
-                        value={50}
-                        color="primary"
-                        barClassName="position-relative"
-                      >
-                        <div className="progress-value d-block text-muted h6">
-                          24 / 48
-                        </div>
-                      </Progress>
-                    </div>
-                  </div>
+                </div>
+              </div>
 
-                  <div className="widget mt-4">
-                    <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
-                      {this.state.widgets.map((widget, key) => (
-                        <li className={widget.className} key={key}>
-                          <Link to={widget.link} className="navbar-link d-flex rounded shadow align-items-center py-2 px-4">
-                            <span className="h4 mb-0">
-                              <i className={widget.icon}></i>
-                            </span>
-                            <h6 className="mb-0 ms-2">{widget.title}</h6>
-                          </Link>
+              <div className="row">
+                <h2>Test</h2>
+                <div className="col-lg-4 col-md-6 mt-4 pt-2">
+                  <div className="card pricing-rates business-rate border-0 p-4 rounded-md shadow">
+                    <div className="card-body p-0">
+                      <span className="py-2 px-4 d-inline-block bg-soft-primary h6 mb-0 text-primary rounded-lg">
+                        Starter
+                      </span>
+                      <h2 className="fw-bold mb-0 mt-3">$12.00</h2>
+                      <p className="text">Per Month</p>
+
+                      <p className="text">
+                        Perfect for getting started.
+                      </p>
+
+                      <ul className="list-unstyled pt-3 border-top">
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Full Access to all Tools
                         </li>
-                      ))}
-                    </ul>
-                  </div>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          500 Character Snippets
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          35 Explanations
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          35 Saved Snippets
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          1 Project
+                        </li>
+                      </ul>
 
-                  <div className="widget mt-4 pt-2">
-                    <h5 className="widget-title">Follow me :</h5>
-                    <ul className="list-unstyled social-icon mb-0 mt-4">
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="facebook"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
+                      <div className="mt-4 d-grid">
+                        <Link to="#" className="btn btn-primary">
+                          Buy Now
                         </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="instagram"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="twitter"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="linkedin"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="github"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="youtube"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item me-1">
-                        <Link to="#" className="rounded">
-                          <i>
-                            <FeatherIcon
-                              icon="gitlab"
-                              className="fea icon-sm fea-social"
-                            />
-                          </i>
-                        </Link>
-                      </li>
-                    </ul>
+                        <p className="text mt-3 mb-0">
+                          *No credit card required
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </Col>
-              <Col lg="8" xs={12}>
-                <div className="rounded shadow p-4">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <h5 className="mb-0">Payment Methods:</h5>
-                    <Link
-                      to="#"
-                      data-toggle="modal"
-                      data-target="#addnewcard"
-                      className="btn btn-primary"
-                    >
-                      <FeatherIcon icon="plus" className="fea icon-sm" />
-                      Add
-                    </Link>
+
+                <div className="col-lg-4 col-md-6 mt-4 pt-2">
+                  <div className="card pricing-rates business-rate border-0 p-4 rounded-md shadow">
+                    <div className="ribbon ribbon-right ribbon-warning overflow-hidden">
+                      <span className="text-center d-block shadow small h6">
+                        Best
+                      </span>
+                    </div>
+                    <div className="card-body p-0">
+                      <span className="py-2 px-4 d-inline-block bg-soft-primary h6 mb-0 text-primary rounded-lg">
+                        Pro
+                      </span>
+                      <h2 className="fw-bold mb-0 mt-3">$26.00</h2>
+                      <p className="text">Per Month</p>
+
+                      <p className="text">
+                        Better for growing large code base.
+                      </p>
+
+                      <ul className="list-unstyled pt-3 border-top">
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Full Access to all Tools
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          1,500 Character Code Snippets
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Unlimited Explanations
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Unlimited Saved Snippets
+                        </li>
+                        <li className="h6 text mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Unlimited Projects
+                        </li>
+                      </ul>
+
+                      <div className="mt-4 d-grid">
+                        <Link to="#" className="btn btn-primary">
+                          Buy Now
+                        </Link>
+                        <p className="text mt-3 mb-0">
+                          *No credit card required
+                        </p>
+                      </div>
+                    </div>
                   </div>
-
-                  <Row>
-                    <Col md={6} className="mt-4 pt-2">
-                      <Link to="#">
-                        <Card className="rounded shadow bg-light border-0">
-                          <CardBody>
-                            <img
-                              src={master}
-                              height="60"
-                              className="text-end"
-                              alt=""
-                            />
-                            <div className="mt-4">
-                              <h5 className="text-dark">•••• •••• •••• 4559</h5>
-                              <div className="d-flex justify-content-between">
-                                <p className="h6 text-muted mb-0">
-                                  Cristino Murfy
-                                </p>
-                                <h6 className="mb-0 text-dark">
-                                  Exp: <span className="text-muted">10/22</span>
-                                </h6>
-                              </div>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Link>
-                    </Col>
-
-                    <Col md={6} className="mt-4 pt-2">
-                      <Link to="#">
-                        <Card className="rounded shadow bg-dark border-0">
-                          <CardBody>
-                            <img
-                              src={visaa}
-                              height="60"
-                              className="text-end"
-                              alt=""
-                            />
-                            <div className="mt-4">
-                              <h5 className="text-light">
-                                •••• •••• •••• 9856
-                              </h5>
-                              <div className="d-flex justify-content-between">
-                                <p className="h6 text-muted mb-0">
-                                  Calvin Carlo
-                                </p>
-                                <h6 className="mb-0 text-muted">
-                                  Exp: <span className="text-muted">01/24</span>
-                                </h6>
-                              </div>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Link>
-                    </Col>
-
-                    <Col md={6} className="mt-4 pt-2">
-                      <Link to="#">
-                        <Card className="rounded shadow bg-info border-0">
-                          <CardBody>
-                            <img
-                              src={rupay}
-                              height="60"
-                              className="text-end"
-                              alt=""
-                            />
-                            <div className="mt-4">
-                              <h5 className="text-white">
-                                •••• •••• •••• 5465
-                              </h5>
-                              <div className="d-flex justify-content-between">
-                                <p className="h6 text-light mb-0">
-                                  Miriam Jockky
-                                </p>
-                                <h6 className="mb-0 text-light">
-                                  Exp: <span className="text-light">03/23</span>
-                                </h6>
-                              </div>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Link>
-                    </Col>
-
-                    <Col md={6} className="mt-4 pt-2">
-                      <Card className="rounded shadow bg-light border-0">
-                        <CardBody>
-                          <img
-                            src={paypals}
-                            height="60"
-                            className="text-end"
-                            alt=""
-                          />
-                          <div className="mt-4">
-                            <Form>
-                              <FormGroup className="mt-4 pt-3 mb-0">
-                                <InputGroup>
-                                  <Input
-                                    name="email"
-                                    id="email"
-                                    type="email"
-                                    className="form-control"
-                                    placeholder="Paypal Email :"
-                                    required=""
-                                  />
-                                  <div className="input-group-append">
-                                    <button
-                                      className="btn btn-primary submitBnt"
-                                      type="submit"
-                                      id="paypalmail"
-                                    >
-                                      Send
-                                    </button>
-                                  </div>
-                                </InputGroup>
-                              </FormGroup>
-                            </Form>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>
                 </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      </React.Fragment>
-    );
-  }
+
+                <div className="col-lg-4 col-md-6 mt-4 pt-2">
+                  <div className="card pricing-rates business-rate border-0 p-4 rounded-md shadow">
+                    <div className="card-body p-0">
+                      <span className="py-2 px-4 d-inline-block bg-soft-primary h6 mb-0 text-primary rounded-lg">
+                        Teams
+                      </span>
+                      <h2 className="fw-bold mb-0 mt-3">Custom</h2>
+                      <p className="text">&nbsp;</p>
+
+                      <p className="text">
+                        Great for Startups, Schools and Enterprise.
+                      </p>
+
+                      <ul className="list-unstyled pt-3 border-top">
+                        <li className="h6 text-muted mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Full Access
+                        </li>
+                        <li className="h6 text-muted mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Enhanced Security
+                        </li>
+                        <li className="h6 text-muted mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Source Files
+                        </li>
+                        <li className="h6 text-muted mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          1 Domain Free
+                        </li>
+                        <li className="h6 text-muted mb-0">
+                          <span className="text-primary h5 me-2">
+                            <i className="uil uil-check-circle align-middle"></i>
+                          </span>
+                          Enhanced Security
+                        </li>
+                      </ul>
+
+                      <div className="mt-4 d-grid">
+                        <Link to="#" className="btn btn-primary">
+                          Upgrade
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+    </React.Fragment>
+  );
 }
 
 export default PagePayments;

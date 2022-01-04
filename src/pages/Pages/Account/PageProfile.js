@@ -27,7 +27,6 @@ import Ionicon from 'react-ionicons';
 import { Helmet } from "react-helmet";
 import FormLoader from '../../../components/FormLoader';
 import MainSideBar from '../../../components/Layout/sidebar';
-import 'ace-builds/webpack-resolver';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-golang";
 import "ace-builds/src-noconflict/mode-mysql";
@@ -55,12 +54,12 @@ function PageProfile({history}) {
   const { userglobaluuid, mode:UserMode, theme:UserTheme, tier} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
+  const codeMaxLength = getTier(tier).codelength;
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
-  const [codeMaxLength, setCodeMaxLength] = useState(getTier(tier).codelength);
   const [code, setCode] = useState(cachedCode);
   const [question, setQuestion] = useState(cachedQuestion);
   const [rating, setRating] = useState(0);
@@ -79,6 +78,8 @@ function PageProfile({history}) {
   const [ratingStatus, setRatingStatus]  = useState(false);
   const [copied, setCopied] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState(false);
+  const [snippetMessage, setSnippetMessage] = useState("");
+  const [snippetMessageColor, setSnippetMessageColor] = useState("info");
   const [themeOption, setThemeOption] = useState({});
   const [modeOption, setModeOption] = useState({});
   const [snippetuuid, setSnippetuuid] = useState(undefined);
@@ -484,7 +485,18 @@ function PageProfile({history}) {
                           <Button
                       style={{ marginTop: '5px', backgroundColor: '#008000' }}
                       disabled={(loading === true | typeof code === "undefined" ? true : false)}
-                      onClick={onRunPrompt}
+                      onClick={ e =>{
+                        if(codeLength > codeMaxLength){
+                          setCopiedSnippet(true);
+                          setSnippetMessage(`Code Snippet length of ${codeLength} is greater than ${codeMaxLength}`);
+                          setSnippetMessageColor('danger')
+                          setInterval(function () {
+                            setCopiedSnippet(false);
+                          }, 15500);
+                        }else{
+                          onRunPrompt();
+                        }
+                      }}
                       className="btn btn-pills btn-primary"
                     >
                       Explain Snippet
@@ -565,6 +577,8 @@ function PageProfile({history}) {
                       onClick={(e) => {
                         copy(code);
                         setCopiedSnippet(true);
+                        setSnippetMessage("Code Snippet copied to clipboard.");
+                        setSnippetMessageColor('info');
                         setInterval(function () {
                           setCopiedSnippet(false);
                         }, 3500);
@@ -697,13 +711,13 @@ function PageProfile({history}) {
                   {codeLength} / {codeMaxLength}
                 </p>
                 <Alert
-                    color={'info'}
+                    color={snippetMessageColor}
                     isOpen={copiedSnippet}
                     toggle={() => {
                       setCopiedSnippet(false);
                     }}
                   >
-                    Code Snippet copied to clipboard.
+                    {snippetMessage}
                   </Alert>
               </div>
               {prompt === 'Open-Questions' ? (

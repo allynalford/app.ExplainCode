@@ -300,7 +300,7 @@ const routes = [
     { path: "/page-works", component: PageWorks, protected: true },
     { path: "/page-messages", component: PageMessages, protected: true },
     { path: "/settings", component: PageProfileEdit, protected: true },
-    { path: "/page-payments", component: PagePayments, protected: true },
+    { path: "/subscriptions", component: PagePayments, protected: true },
     { path: "/page-invoice", component: PageInvoice, isTopbarDark: true, protected: true },
 
 

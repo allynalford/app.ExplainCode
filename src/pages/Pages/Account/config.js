@@ -9,14 +9,21 @@ export function getWidgets(path){
       link: "/snippets",
     },
     {
-      id: 1,
+      id: 2,
       icon: "uil uil-setting",
       className: path.pathname === "/settings" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Settings",
       link: "/settings",
     },
     {
-      id: 2,
+      id: 3,
+      icon: "uil uil-invoice",
+      className: path.pathname === "/subscriptions" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Subscription",
+      link: "/subscriptions",
+    },
+    {
+      id: 4,
       icon: "uil uil-sign-out-alt",
       className: path.pathname === "/auth-login-three" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Logout",

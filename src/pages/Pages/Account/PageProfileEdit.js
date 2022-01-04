@@ -29,9 +29,12 @@ const _ = require('lodash');
 function PageProfileEdit({ history }) {
   const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
-  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, twitter:tweet, instagram:insta, linkedin:lk } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   //const [userglobaluuid, setUserglobaluuid] = useState('');
-  const [user_metadata, setUserMetadata] = useState({occupation: '', twitter: '', instagram: '', linkedin: ''});
+  const [user_metadata, setUserMetadata] = useState(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+  const [twitter, setTwitter] = useState(tweet);
+  const [instagram, setInstagram] = useState(insta);
+  const [linkedin, setLinkedin] = useState(insta);
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [firstName, setFirstName] = useState(given_name);
@@ -61,18 +64,17 @@ function PageProfileEdit({ history }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (typeof user !== 'undefined') {
-      setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
-      // setUserglobaluuid(
-      //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
-      // );
-    }
-    return () => {};
-  }, [user]);
+  // useEffect(() => {
+  //   if (typeof user !== 'undefined') {
+  //     setUserMetadata(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
+  //     // setUserglobaluuid(
+  //     //   user[process.env.REACT_APP_AUTH0_USER_METADATA].userglobaluuid,
+  //     // );
+  //   }
+  //   return () => {};
+  // }, [user]);
 
   useEffect(() => {
-    console.log('user_metadata',user_metadata);
     if (typeof user_metadata !== 'undefined') {
       const themeOption = _.find(themes, ['value', user_metadata.theme]);
       setThemeOption(themeOption);
@@ -358,11 +360,12 @@ function PageProfileEdit({ history }) {
                             name="twitter"
                             id="twitter"
                             type="text"
-                            value={(typeof user_metadata.twitter !== "undefined" ? user_metadata.twitter : "")}
+                            value={twitter}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              setTwitter(e.target.value);
                               //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
@@ -386,11 +389,12 @@ function PageProfileEdit({ history }) {
                             name="instagram"
                             id="instagram"
                             type="text"
-                            value={(typeof user_metadata.instagram !== "undefined" ? user_metadata.instagram : "")}
+                            value={instagram}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              setInstagram(e.target.value);
                               //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
@@ -414,11 +418,12 @@ function PageProfileEdit({ history }) {
                             name="linkedin"
                             id="linkedin"
                             type="text"
-                            value={(typeof user_metadata.linkedin !== "undefined" ? user_metadata.linkedin : "")}
+                            value={linkedin}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              setLinkedin(e.target.value);
                               //setFieldChanged(true);
                             }}
                             className="form-control ps-5"
@@ -481,14 +486,20 @@ function PageProfileEdit({ history }) {
                                 lastname: lastName,
                                 blocked,
                                 user_metadata,
-                              })
-                              .then((res) => {
+                              }).then((res) => {
                                
                                 if (res.data.success === true) {
                                   setAlertColor('primary');
                                   setAlertMessage(
                                     'Profile Successfully updated.',
                                   );
+                                  let cachedSettings = {};
+
+                                  if (typeof user_metadata.mode !== 'undefined') cachedSettings.mode = user_metadata.mode;
+                                  if (typeof user_metadata.theme !== 'undefined') cachedSettings.theme = user_metadata.theme;
+                                  
+
+                                  sessionStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
                                 } else {
                                   setAlertColor('primary');
                                   setAlertMessage(res.data.message);

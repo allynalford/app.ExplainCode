@@ -101,18 +101,24 @@ function Detail(props, { history }) {
     if (typeof userglobaluuid !== 'undefined' && typeof code === "undefined") {
       LoadSnippet();
    }
-    return () => {};
+    return () => {
+      
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userglobaluuid, code]);
 
   useEffect(() => {
 
-    return () => {};
+    return () => {
+
+    };
   }, [snippetUUID]);
 
   useEffect(() => {
 
-    return () => {};
+    return () => {
+
+    };
   }, );
 
   const scrollNavigation = () => {
