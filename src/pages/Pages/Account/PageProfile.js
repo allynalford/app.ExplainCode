@@ -45,6 +45,7 @@ import './loader.css';
 import dateFormat from 'dateformat';
 const endpoint = require('../../../common/endpoint');
 const _ = require('lodash');
+var Swal = require('sweetalert2');
 //const dateFormat = require('dateformat');
 
 function PageProfile({history}) {
@@ -55,7 +56,8 @@ function PageProfile({history}) {
   const [userProfile, setUserProfile] = useState({});
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
-  const codeMaxLength = getTier(tier).codelength;
+  const [codeMaxLength, setCodeMaxLength] = useState(500);
+  const [maxExplanations, setMaxExplanations] = useState(0);
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
@@ -87,6 +89,10 @@ function PageProfile({history}) {
 
   //Subscription
   const [hasPlan, setHasPlan] = useState(false);
+  const [isTrial, setIsTrial] = useState(false);
+  const [systemEnabled, setSystemEnabled] = useState(false);
+
+
 
   useEffect(() => {
     try {
@@ -99,7 +105,41 @@ function PageProfile({history}) {
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
-        console.log(res.data.user)
+        console.log(res.data)
+        console.log(getTier(res.data.user.tier));
+        const user = res.data.user;
+        const tier = getTier(res.data.user.tier);
+
+        //If they are on a free trial
+        if(user.tier === "trial" | user.tier === "earlyaccess"){
+          //Check length remains
+          var diffDays = parseInt((new Date() - new Date(user.creationDateTime)) / (1000 * 60 * 60 * 24));
+
+          console.log(diffDays);
+
+          if(diffDays <= tier.days){
+            setIsTrial(true);
+            setSystemEnabled(true);
+            setMaxExplanations(tier.explanations);
+          }else{
+            setMaxExplanations(0);
+          }
+        }else{
+
+          setMaxExplanations(tier.explanations);
+
+          if(user.subscriptionActive === true){
+            setHasPlan(true);
+            setSystemEnabled(true);
+          }
+        }
+
+
+        
+        setCodeMaxLength(tier.codelength);
+        
+        console.log(user);
+
       }).catch((err) => {
         console.error(err);
       });
@@ -129,14 +169,24 @@ function PageProfile({history}) {
       sessionStorage.removeItem('cachedQuestion');
       //localStorage.removeItem('cachedSettings');
     };
-  }, [UserMode, UserTheme]);
+  }, [email, prompt, userglobaluuid]);
 
   useEffect(() => {
   
     return () => {
 
     };
-  }, [ completionsThisMonth ]);
+  }, [ completionsThisMonth, maxExplanations, codeMaxLength ]);
+
+  useEffect(() => {
+  
+
+    console.log(systemEnabled);
+
+    return () => {
+
+    };
+  }, [ systemEnabled ]);
 
 
   useEffect(() => {
@@ -275,48 +325,72 @@ function PageProfile({history}) {
   }
 
   const onRunPrompt = async () => {
+
     setLoading(true);
-    setRating(0)
-    setRatingMessage('');
-    setCompletionId("");
-    let resp, text;
-    switch (prompt) {
-      case 'Line-By-Line':
-        resp = await endpoint.postIAM(getGTP3().post_Line_Prompt, {code, lang: mode, userglobaluuid});
-        text = resp.data.explanation.choices[0].text;
-        setCompletionId(resp.data.explanation.id);
-        break;
-      case 'Summarize':
-        resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
-        text = resp.data.explanation.choices[0].text;
-        setCompletionId(resp.data.explanation.id);
-        break;
-      case 'Explain-Function':
-        resp = await endpoint.postIAM(getGTP3().post_ExplainFunction_Prompt, {code, lang: mode, userglobaluuid});
-        text = resp.data.explanation.choices[0].text;
-        setCompletionId(resp.data.explanation.id);
-        break;
-      case 'Open-Questions':
-        resp = await endpoint.postIAM(getGTP3().post_Freeform_Prompt, {code, lang: mode, question, userglobaluuid});
-        text = resp.data.explanation.choices[0].text;
-        setCompletionId(resp.data.explanation.id);
-        break;
-      case 'Code-Comment':
-        resp = await endpoint.postIAM(getGTP3().post_javadoc_comment_Prompt, {code, lang: mode, userglobaluuid, type: 'code'});
-        text = resp.data.explanation.choices[0].text;
-        const startText = text.indexOf('/**');
-        const stopText = text.lastIndexOf('*/') + 2;
-        const comment = text.substring(startText, stopText);
-        if(comment !== "") text = comment;
-        setCompletionId(resp.data.explanation.id);
-        break;
-      case 'Class-Breakdown':
-        break;
-      default:
-        console.log(`Sorry, we are out of ${prompt}.`);
-    }
-    getUserCompletionCount(userglobaluuid);
-    setPromptResponse(text);
+    console.log(systemEnabled);
+
+    Swal.fire({
+      title: 'Email already exists!',
+      text: 'Please login or use forgot password to reset your password.',
+      icon: 'error',
+      confirmButtonText: 'Ok',
+    });
+
+    // setCopiedSnippet(true);
+    // setSnippetMessage(`Code Snippet length of ${codeLength} is greater than ${codeMaxLength}`);
+    // setSnippetMessageColor('danger')
+    // setInterval(function () {
+    //   setCopiedSnippet(false);
+    // }, 15500);
+
+    if(systemEnabled === false){
+
+    }else{
+      setRating(0)
+      setRatingMessage('');
+      setCompletionId("");
+      let resp, text;
+      switch (prompt) {
+        case 'Line-By-Line':
+          resp = await endpoint.postIAM(getGTP3().post_Line_Prompt, {code, lang: mode, userglobaluuid});
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
+        case 'Summarize':
+          resp = await endpoint.postIAM(getGTP3().post_Summary_Prompt, {code, lang: mode, userglobaluuid});
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
+        case 'Explain-Function':
+          resp = await endpoint.postIAM(getGTP3().post_ExplainFunction_Prompt, {code, lang: mode, userglobaluuid});
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
+        case 'Open-Questions':
+          resp = await endpoint.postIAM(getGTP3().post_Freeform_Prompt, {code, lang: mode, question, userglobaluuid});
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
+        case 'Code-Comment':
+          resp = await endpoint.postIAM(getGTP3().post_javadoc_comment_Prompt, {code, lang: mode, userglobaluuid, type: 'code'});
+          text = resp.data.explanation.choices[0].text;
+          const startText = text.indexOf('/**');
+          const stopText = text.lastIndexOf('*/') + 2;
+          const comment = text.substring(startText, stopText);
+          if(comment !== "") text = comment;
+          setCompletionId(resp.data.explanation.id);
+          break;
+        case 'Class-Breakdown':
+          break;
+        default:
+          console.log(`Sorry, we are out of ${prompt}.`);
+      }
+      getUserCompletionCount(userglobaluuid);
+      setPromptResponse(text);
+      
+
+    };
+
     setLoading(false);
   };
 
