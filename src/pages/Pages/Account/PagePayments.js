@@ -242,7 +242,7 @@ function PagePayments({ history }) {
                                Custom
                              </h2> : <h2 className="fw-bold mb-0 mt-3">
                                {(tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarly : price.price.monthly) : (toggleActive ? price.price.yearly : price.price.monthly))}
-                               {(tier === "earlyaccess" ? <span style={{textDecoration: 'line-through', fontSize: '18px'}}>{(toggleActive ? price.price.yearly : price.price.monthly)}</span>: "")}
+                               {(tier === "earlyaccess" && toggleActive === true ? <span style={{textDecoration: 'line-through', fontSize: '18px'}}>{(toggleActive ? price.price.yearly : price.price.monthly)}</span>: "")}
                              </h2>)}
                              {(typeof price.custom !== "undefined" ? "" : <p className="text">Per {toggleActive ? 'Year' : 'Month'}</p>)}
                              
