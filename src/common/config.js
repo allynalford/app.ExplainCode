@@ -52,13 +52,13 @@ const serverVars = {
   tiers: {
     free: {
       codelength: 500,
-      snippets: 15,
+      snippets: 10,
       projects: 1,
-      explanations: 35,
+      explanations: 10,
     },
     trial: {
       codelength: 1000,
-      snippets: 50,
+      snippets: 10,
       projects: 1,
       explanations: 35,
       days: 7,
@@ -130,7 +130,7 @@ const serverVars = {
         '1,500 Character Snippets',
         'Unlimited  Explanations',
         'Unlimited  Saved Snippets',
-        'Unlimited  Project'
+        'Unlimited  Projects'
         ]
     },
     {
@@ -151,7 +151,7 @@ const serverVars = {
         '1,500 Character Snippets',
         'Unlimited  Explanations',
         'Unlimited  Saved Snippets',
-        'Unlimited  Project',
+        'Unlimited  Projects',
         'Multiple Team Members'
         ]
     },
@@ -292,7 +292,7 @@ const localVars = {
         '1,500 Character Snippets',
         'Unlimited  Explanations',
         'Unlimited  Saved Snippets',
-        'Unlimited  Project'
+        'Unlimited  Projects'
         ]
     },
     {
@@ -313,7 +313,7 @@ const localVars = {
         '1,500 Character Snippets',
         'Unlimited  Explanations',
         'Unlimited  Saved Snippets',
-        'Unlimited  Project',
+        'Unlimited  Projects',
         'Multiple Team Members'
         ]
     },

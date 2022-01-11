@@ -12,6 +12,8 @@ class Footer extends Component {
     this.state = {
       grid1: [
            { title: "Discord", link: "https://discord.gg/jNAW87Ng", external: true },
+           { title: "Twitter", link: "https://twitter.com/ExplainCodeApp", external: true },
+           { title: "Facebook Group", link: "https://www.facebook.com/groups/explaincodeapp/", external: true },
            { title: "Terms of Services", link: "/terms-of-service", external: false },
            { title: "Contact Us", link: "/contact-us", external: false },
            { title: "Pricing", link: "/pricing", external: false },
@@ -60,14 +62,14 @@ class Footer extends Component {
                  Use GPT-3 to understand unfamiliar code. Accelerate the rate of getting up to speed with new code.
                 </p>
                 <ul className={this.props.isLight ? "list-unstyled social-icon social mb-0 m t-4" : "list-unstyled social-icon foot-social-icon mb-0 mt-4"}>
-                  {/* <li className="list-inline-item me-1">
-                    <Link to="" className="rounded">
+                   <li className="list-inline-item me-1">
+                    <a href="https://www.facebook.com/explaincodeapp" className="rounded" target={"_new"} title="Explain Code App Facebook">
                       <FeatherIcon
                         icon="facebook"
                         className="fea icon-sm fea-social"
                       />
-                    </Link>
-                  </li> */}
+                    </a>
+                  </li> 
                   {/* <li className="list-inline-item me-1">
                     <Link to="" className="rounded">
                       <FeatherIcon
