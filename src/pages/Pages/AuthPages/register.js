@@ -14,7 +14,9 @@ import LoginLink from '../../../components/login-link';
 //Import Icons
 import FeatherIcon from 'feather-icons-react';
 import { PageView, initGA, Event } from '../../../common/gaUtils.js';
+import { getUser } from '../../../common/config';
 import auth from '../../../common/initAuth0';
+const endpoint = require('../../../common/endpoint');
 const uuid = require("uuid");
 var passwordValidator = require('password-validator');
 var validator = require('email-validator');
@@ -134,6 +136,18 @@ class register extends Component {
       Swal.fire({
         title: 'Invalid Email Address!',
         text: 'Please provide a valid email address',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
+    }
+
+    //Check if email exists already
+    const userCheck = await endpoint.postIAM(getUser().checkUserApiUrl, {email: req.email});
+    if (userCheck.data.exists === true) {
+      validated = false;
+      Swal.fire({
+        title: 'Email already exists!',
+        text: 'Please login or use forgot password to reset your password.',
         icon: 'error',
         confirmButtonText: 'Ok',
       });
