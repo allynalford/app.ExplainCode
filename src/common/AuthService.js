@@ -51,7 +51,7 @@ export default class AuthService extends EventEmitter {
             },
             user_metadata: {
               role: 'admin',
-              root: true,
+              root: 'true',
               inviteCode: user.invitecode,
               userglobaluuid: user.id,
               tier: "free"
