@@ -8,6 +8,7 @@ import {
   Label,
   Button,
 } from 'reactstrap';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { AvForm, AvField, AvInput, AvGroup } from 'availity-reactstrap-validation';
 import LoginLink from '../../../components/login-link';
@@ -243,6 +244,15 @@ class register extends Component {
   render() {
     return (
       <React.Fragment>
+      <Helmet>
+        <title>Explain Code App Registration</title>
+        <meta name="description" content="Code Explanation Tools Registration, helping you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
+        <meta name="keywords" content="Registration, Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta name="twitter:title" content="Explain Code App Registration" />
+        <meta name="twitter:image:alt" content="Explain Code App Registration" />
+        <meta property="og:title" content="Explain Code App Registration" />
+        <meta property="og:description" content="Code Explanation Tools Registration, helping you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
+      </Helmet>
         <div className="back-to-home rounded d-none d-sm-block">
           <Link
             to="/"

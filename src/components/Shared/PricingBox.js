@@ -10,7 +10,7 @@ class Pricing extends Component {
         {this.props.pricings.map((pricing, key) => (
           <Col
             name="pricing"
-            lg="3"
+            lg="4"
             md="6"
             xs="12"
             key={key}
@@ -39,15 +39,17 @@ class Pricing extends Component {
                       : "title fw-bold text-uppercase text-primary mb-4"
                   }
                 >
-                  {pricing.title}
+                  {pricing.header}
                 </h6>
-                <div className="d-flex mb-4" name="pricingsection">
-                  <span className="h4 mb-0 mt-2">$</span>
-                  <span className="price h1 mb-0">{pricing.price}</span>
+                {(pricing.custom === true ? <div className="d-flex mb-4" name="pricingsection">
+                  <span className="price h1 mb-0">Custom</span>
+                  
+                </div>: <div className="d-flex mb-4" name="pricingsection">
+                  <span className="price h1 mb-0">{(this.props.yearly === true ? pricing.price.yearly : pricing.price.monthly)}</span>
                   <span className="h4 align-self-end mb-1">
-                    /{pricing.duration}
+                    /{(this.props.yearly === true ? 'yr' : 'mo')}
                   </span>
-                </div>
+                </div>)}
 
                 <ul className="list-unstyled mb-0 ps-0">
                   {pricing.features.map((feature, key) => (
@@ -55,13 +57,13 @@ class Pricing extends Component {
                       <span className="text-primary h5 me-2">
                         <i className="uil uil-check-circle align-middle"></i>
                       </span>
-                      {feature.title}
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <Link to="" className="btn btn-primary mt-4">
-                  {pricing.buttonText}
-                </Link>
+                {(typeof pricing.link !== "undefined" ? <a className="btn btn-primary mt-4" href={pricing.link} alt="Email Sales at Tenably Labs">{pricing.buttonText}</a>:<Link to="/register" className="btn btn-primary mt-4">
+                   Get Started
+                </Link>)}
               </CardBody>
             </Card>
           </Col>

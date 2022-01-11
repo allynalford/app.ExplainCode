@@ -14,6 +14,7 @@ class Footer extends Component {
            { title: "Discord", link: "https://discord.gg/jNAW87Ng", external: true },
            { title: "Terms of Services", link: "/terms-of-service", external: false },
            { title: "Contact Us", link: "/contact-us", external: false },
+           { title: "Pricing", link: "/pricing", external: false },
       //   { title: "About us", link: "/page-aboutus" },
       //   { title: "Services", link: "/page-services" },
       //   { title: "Team", link: "/page-team" },

@@ -11,6 +11,7 @@ const ThankYou = React.lazy(() =>
 
 const History = React.lazy(() => import("./pages/Pages/History"));
 const ContactUS = React.lazy(() => import("./pages/Pages/Contact/ContactUs"));
+const PagePricing = React.lazy(() => import("./pages/Pages/Pricing"));
 
 //Special
 const PageComingSoon = React.lazy(() =>
@@ -135,7 +136,7 @@ const PageWorks = React.lazy(() => import("./pages/Pages/Account/PageWorks"));
 const PageMessages = React.lazy(() =>
   import("./pages/Pages/Account/PageMessages")
 );
-const PagePricing = React.lazy(() => import("./pages/Pages/PagePricing"));
+
 const PageServices = React.lazy(() => import("./pages/Pages/Tools"));
 const PageTeam = React.lazy(() => import("./pages/Pages/PageTeam"));
 
@@ -291,7 +292,7 @@ const routes = [
    { path: "/contact-us", component: ContactUS, isTopbarDark: true },
    { path: "/explain-code-faqs", component: HelpCenterFaqs, isTopbarDark: true },
    { path: "/explain-code-tools", component: PageServices, isTopbarDark: true },
-   
+   { path: "/pricing", component: PagePricing, isTopbarDark: true },
 
     //Page Profile
     { path: "/dashboard", component: PageProfile, protected: true },
@@ -447,7 +448,7 @@ const routes = [
   { path: "/page-aboutus", component: PageAboutUs, isTopbarDark: true },
   { path: "/page-aboutus-two", component: PageAboutusTwo },
   { path: "/page-history", component: PageHistory, isTopbarDark: true },
-  { path: "/page-pricing", component: PagePricing, isTopbarDark: true },
+  
  
   { path: "/page-team", component: PageTeam, isTopbarDark: true },
 
