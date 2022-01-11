@@ -21,10 +21,12 @@ function PagePayments({ history }) {
 
   const { user } = useAuth0();
   const { email } = user;
-  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, tier } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const [toggleActive, setToggleActive] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
+  const [sessionId, setSessionId] = useState('');
+
 
   useEffect(() => {
     try {
@@ -33,6 +35,9 @@ function PagePayments({ history }) {
         document.getElementById('top-menu').classList.add('nav-light');
       }
 
+      const search = window.location.search;
+      const session_id = new URLSearchParams(search).get("session_id");
+      setSessionId(session_id);
       window.addEventListener('scroll', scrollNavigation, true);
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
@@ -169,6 +174,7 @@ function PagePayments({ history }) {
                 <div className="col-12">
                   <div className="section-title text-center mb-4 pb-2">
                     <h1 className="title mb-4">Subscription</h1>
+                    {(sessionId !== '' ? <p>Thanks for your subscription, {user.name}</p>:"")}
                     <p className="para-desc mx-auto text mb-0">
                       Please email sales@tenablylabs.com if you need more seats!
                     </p>
@@ -235,7 +241,8 @@ function PagePayments({ history }) {
                             {(typeof price.custom !== "undefined" ? <h2 className="fw-bold mb-0 mt-3">
                                Custom
                              </h2> : <h2 className="fw-bold mb-0 mt-3">
-                               {(toggleActive ? price.price.yearly : price.price.monthly)}
+                               {(tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarly : price.price.monthly) : (toggleActive ? price.price.yearly : price.price.monthly))}
+                               {(tier === "earlyaccess" ? <span style={{textDecoration: 'line-through', fontSize: '18px'}}>{(toggleActive ? price.price.yearly : price.price.monthly)}</span>: "")}
                              </h2>)}
                              {(typeof price.custom !== "undefined" ? "" : <p className="text">Per {toggleActive ? 'Year' : 'Month'}</p>)}
                              
@@ -257,7 +264,7 @@ function PagePayments({ history }) {
                                {(typeof price.custom === "undefined" ? 
                                
                                <Link onClick={e =>{
-                                 const priceId =  (toggleActive ? price.price.yearId : price.price.monthId);
+                                 const priceId =  (tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarlyId : price.price.monthId) : (toggleActive ? price.price.yearId : price.price.monthId));
                                  setLoading(true);
                                  addSubscription(priceId, email);
                                }}  to="#" className={(userProfile.product === price.product ? `btn btn-success` : `btn btn-primary`)} style={{fontWeight:(userProfile.product === price.product ?  'bold' : 'normal')}}>

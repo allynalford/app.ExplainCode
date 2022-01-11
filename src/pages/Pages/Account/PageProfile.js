@@ -20,7 +20,7 @@ import copy from 'copy-to-clipboard';
 //Import Images
 import { useAuth0 } from '@auth0/auth0-react';
 import { modes, themes, getPrompts, TOOLS} from './config';
-import { getGTP3, getCompletions, getSnippets, getTier } from '../../../common/config';
+import { getGTP3, getCompletions, getSnippets, getTier, getUser } from '../../../common/config';
 import { updateRating } from '../../../common/slack';
 import ReactStars from "react-rating-stars-component";
 import Ionicon from 'react-ionicons';
@@ -52,6 +52,7 @@ function PageProfile({history}) {
   const { user } = useAuth0();
   const { email } = user;
   const { userglobaluuid, mode:UserMode, theme:UserTheme, tier} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const [userProfile, setUserProfile] = useState({});
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
   const codeMaxLength = getTier(tier).codelength;
@@ -84,6 +85,9 @@ function PageProfile({history}) {
   const [modeOption, setModeOption] = useState({});
   const [snippetuuid, setSnippetuuid] = useState(undefined);
 
+  //Subscription
+  const [hasPlan, setHasPlan] = useState(false);
+
   useEffect(() => {
     try {
       document.title = "Explain Code App - Dashboard";
@@ -92,6 +96,13 @@ function PageProfile({history}) {
       }
       
       window.addEventListener('scroll', scrollNavigation, true);
+
+      endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
+        setUserProfile(res.data.user);
+        console.log(res.data.user)
+      }).catch((err) => {
+        console.error(err);
+      });
 
       var cachedSettings = sessionStorage.getItem('cachedSettings');
 

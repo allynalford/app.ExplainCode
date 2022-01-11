@@ -83,6 +83,7 @@ const serverVars = {
   },
   yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
   monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
+  products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro'},
   pricing: [
     {
       header: 'Starter',
@@ -238,6 +239,7 @@ const localVars = {
   },
   yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
   monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
+  products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro'},
   pricing: [
     {
       header: 'Starter',
@@ -309,24 +311,24 @@ const localVars = {
 };
 
 export const WAITLIST_TEXT =
-  process.env.NODE_ENV === 'production'
+  process.env.REACT_APP_STAGE === 'production'
     ? serverVars.waitlistText
     : localVars.waitlistText;
 
     export const MONTHLY_PRICES =
-  process.env.NODE_ENV === 'production'
+  process.env.REACT_APP_STAGE === 'production'
     ? serverVars.monthly
     : localVars.monthly;
 
     export const YEARLY_PRICES =
-    process.env.NODE_ENV === 'production'
+    process.env.REACT_APP_STAGE === 'production'
       ? serverVars.yearly
       : localVars.yearly;
 //export const SAVE_SNIPPET_ENABLED = process.env.REACT_APP_SAVE_SNIPPET_ENABLED;
 //export const SAVE_EXPLANATION_ENABLED = process.env.REACT_APP_SAVE_EXPLANATION_ENABLED;
 
 export function getConfiguration() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars;
   }
   return localVars;
@@ -335,63 +337,63 @@ export function getConfiguration() {
 
 
 export function getUser() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.user;
   }
   return localVars.user;
 }
 
 export function getBilling() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.billing;
   }
   return localVars.billing;
 }
 
 export function getDrip() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.drip;
   }
   return localVars.drip;
 }
 
 export function getGTP3() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.gtp3;
   }
   return localVars.gtp3;
 }
 
 export function getAuth0() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.auth0;
   }
   return localVars.auth0;
 }
 
 export function getCompletions() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.completions;
   }
   return localVars.completions;
 }
 
 export function getSnippets() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.snippets;
   }
   return localVars.snippets;
 }
 
 export function getTier(tier) {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.tiers[tier];
   }
   return localVars.tiers[tier];
 }
 
 export function getPricing() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.REACT_APP_STAGE === 'production') {
     return serverVars.pricing;
   }
   return localVars.pricing;
