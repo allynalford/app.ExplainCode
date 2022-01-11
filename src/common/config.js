@@ -91,8 +91,11 @@ const serverVars = {
       buttonText: 'Upgrade',
       price: {
         monthly: '$12.00',
+        monthId: 'price_1KE0eCCneYX9jOaEZj1FjE6H',
         yearly: '$120.00',
-        yearlyEarly: '$99.00'
+        yearId: 'price_1KGVA2CneYX9jOaELYm5eaW2',
+        yearlyEarly: '$99.00',
+        yearlyEarlyId: 'price_1KGa1BCneYX9jOaEBnzQEGGA'
       },
       subheader: 'Perfect for getting started.',
       features: [
@@ -110,8 +113,11 @@ const serverVars = {
       buttonText: 'Upgrade',
       price: {
         monthly: '$36.00',
+        monthId: 'price_1KGVAeCneYX9jOaESzU0eXiI',
         yearly: '$360.00',
-        yearlyEarly: '$300.00'
+        yearId: 'price_1KGVB4CneYX9jOaEjQbB4TGB',
+        yearlyEarly: '$300.00',
+        yearlyEarlyId: 'price_1KGa0gCneYX9jOaE1zCMqCtd'
       },
       subheader: 'Best for large code',
       features: [

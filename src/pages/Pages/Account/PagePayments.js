@@ -62,6 +62,13 @@ function PagePayments({ history }) {
     };
   }, [userProfile]);
 
+  useEffect(() => {
+  
+    return () => {
+      
+    };
+  }, [loading]);
+
   const addSubscription = (priceId, customer_email) => {
     try {
 
@@ -71,7 +78,7 @@ function PagePayments({ history }) {
         //Manage Subscription
         const returnUrl = window.location.href;
         const customerId = userProfile.stripeCustomerId;
-        endpoint.postIAM(getBilling().manageApiUrl, {customerId, returnUrl}).then((res) => {
+        endpoint.postIAM(getBilling().manageApiUrl, {customerId, returnUrl, priceId}).then((res) => {
          if(res.data.error === false){
           if(typeof res.data.session !== "undefined"){
             window.location = res.data.session.url;
