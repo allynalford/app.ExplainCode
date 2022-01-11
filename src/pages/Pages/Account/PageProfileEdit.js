@@ -29,12 +29,13 @@ const _ = require('lodash');
 function PageProfileEdit({ history }) {
   const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
-  const { userglobaluuid, twitter:tweet, instagram:insta, linkedin:lk } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, twitter:tweet, instagram:insta, linkedin:lk, occupation:occpt } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   //const [userglobaluuid, setUserglobaluuid] = useState('');
   const [user_metadata, setUserMetadata] = useState(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
   const [twitter, setTwitter] = useState(tweet);
   const [instagram, setInstagram] = useState(insta);
   const [linkedin, setLinkedin] = useState(insta);
+  const [occupation, setOccupation] = useState(occpt);
   const [successMsg, setSuccessMsg] = useState(false);
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [firstName, setFirstName] = useState(given_name);
@@ -255,11 +256,12 @@ function PageProfileEdit({ history }) {
                             name="occupation"
                             id="occupation"
                             type="text"
-                            value={(typeof user_metadata.occupation !== "undefined" ? user_metadata.occupation : "")}
+                            value={occupation}
                             onChange={(e) => {
                               let meta = user_metadata;
                               meta[e.target.name] = e.target.value;
                               setUserMetadata(meta);
+                              setOccupation(e.target.value)
                               //setFieldChanged(true);
                             }}
                             className="form-control ps-5"

@@ -738,8 +738,31 @@ function PageProfile({history}) {
                         localStorage.setItem('cachedQuestion', e.target.value);
                       }}
                     />
-                  </div><br />
-                  <Button
+                    <Label for="modes-select">Code Snippet Language</Label>
+                    <InputGroup>
+                      <Input
+                        aria-label={'Select an Language'}
+                        aria-required={'true'}
+                        className="form-control"
+                        id="modes-select"
+                        onChange={(opt) => {
+                          setMode(opt.target.value);
+                          var selectedOption = _.find(modes, ['value', opt.target.value]);
+                          setModeOption(selectedOption);
+                          localStorage.setItem('cachedSettings', {mode: opt.target.value, theme});
+                        }}
+                        type='select'
+                        value={mode}
+                        disabled={loading}
+                      >
+                       
+                        {modes.map(option => (
+                          <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                      </Input>
+                      <InputGroupAddon addonType='prepend'>
+                          <div className='input-group-text'>
+                          <Button
                     style={{ marginTop: '5px' }}
                     disabled={loading}
                     onClick={onRunPrompt}
@@ -757,6 +780,99 @@ function PageProfile({history}) {
                       ''
                     )}
                   </Button>
+                    <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      onClick={e =>{
+                        setLoading(true);
+                        if(typeof snippetuuid !== "undefined"){
+                          //run update
+                          endpoint.postIAM(getSnippets().updateSnippet, {
+                            userglobaluuid,
+                            snippetuuid,
+                            fields: [{name: 'snippet', value: code}]
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                             
+                              setLoading(false);
+                            } else {
+                             
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
+                        }else{
+                          
+                          //run save
+                          endpoint.postIAM(getSnippets().saveSnippet, {
+                            userglobaluuid,
+                            lang: mode,
+                            snippet: code
+                          }).then((res) => {
+                            if (res.data.success === true) {
+                              setSnippetuuid(res.data.snippetuuid);
+                              setLoading(false);
+                            } else {
+                              console.log(res);
+                              setLoading(false);
+                            }
+                          })
+                          .catch((err) => {
+                            console.error(err);
+                            setLoading(false);
+                          });
+                        }
+                      }}
+                      className="btn btn-pills btn-info"
+                    >
+                      {(typeof snippetuuid !== "undefined" ? "Update Snippet" : "Save Snippet")}
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+                    <Button
+                      style={{ marginTop: '5px', marginLeft: '10px' }}
+                      disabled={(loading === true | typeof code === "undefined" ? true : false)}
+                      onClick={(e) => {
+                        copy(code);
+                        setCopiedSnippet(true);
+                        setSnippetMessage("Code Snippet copied to clipboard.");
+                        setSnippetMessageColor('info');
+                        setInterval(function () {
+                          setCopiedSnippet(false);
+                        }, 3500);
+                      }}
+                      className="btn btn-pills btn-secondary"
+                    >
+                      Copy Snippet
+                      {loading === true ? (
+                        <Ionicon
+                          style={{ marginLeft: '5px' }}
+                          color="#ffffff"
+                          icon="ios-analytics-outline"
+                          beat={loading}
+                        />
+                      ) : (
+                        ''
+                      )}
+                    </Button>
+                          </div>
+                        </InputGroupAddon>
+                    </InputGroup>
+
+                  </div>
+
+
                 </div>
               ) : (
                 ''

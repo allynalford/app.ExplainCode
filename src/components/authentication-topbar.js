@@ -81,10 +81,10 @@ const AuthenticationNav = () => {
               <Link className="dropdown-item text-dark" to="/dashboard" key={'Dashboard'} role="menuitem">
                 <i className="uil uil-analysis align-middle me-1"></i> Dashboard
               </Link>
-              <Link className="dropdown-item text-dark" to="/settings" key={'ContactUs'} role="menuitem">
+              <Link className="dropdown-item text-dark" to="/contact-us" key={'ContactUs'} role="menuitem">
                 <i className="uil uil-mailbox align-middle me-1"></i> Contact Us
               </Link>
-              <Link className="dropdown-item text-dark" to="/settings" key={'History'} role="menuitem">
+              <Link className="dropdown-item text-dark" to="/explain-code-history" key={'History'} role="menuitem">
                 <i className="uil uil-book-alt align-middle me-1"></i> History &amp; Roadmap
               </Link>
               {/* <Link className="dropdown-item text-dark" to="#">
