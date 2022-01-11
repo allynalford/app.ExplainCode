@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events'
 import { isTokenExpired } from './jwtHelper'
-import auth0 from 'auth0-js'
+import auth0 from 'auth0-js';
+import { getUser } from './config';
+const endpoint = require('./endpoint');
 export default class AuthService extends EventEmitter {
     constructor(clientId, domain) {
         super()
@@ -44,14 +46,12 @@ export default class AuthService extends EventEmitter {
             "name": user.name,
             "nickname": user.firstname,
             "user_id": user.id,
-            "verify_email": true,
+            "verify_email": false,
             app_metadata: {
             },
             user_metadata: {
-              audit_level: 'admin',
-              domain_level: 'admin',
               role: 'admin',
-              root: 'true',
+              root: true,
               inviteCode: user.invitecode,
               userglobaluuid: user.id,
               tier: "free"
@@ -63,6 +63,10 @@ export default class AuthService extends EventEmitter {
                 alert('Error: ' + err.description);
             }else{
                 console.log("logged in");
+                //Add the user to the database
+                endpoint.postIAM(getUser().addUserApiUrl, {userglobaluuid: user.id, email, refBy: user.invitecode}).then(result => {
+                    console.log('user add:',result);
+                });
             }
         })
     }

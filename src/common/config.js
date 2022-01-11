@@ -1,4 +1,16 @@
 const serverVars = {
+  user: {
+    addUserApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/user/add',
+    getUserApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/user/get/',
+  },
+  billing: {
+    checkoutApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/billing/checkout',
+    manageApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/billing/manage',
+  },
   drip: {
     addSubscriberApiUrl:
       process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/add',
@@ -56,6 +68,12 @@ const serverVars = {
       explanations: 0,
       days: 14,
     },
+    starter: {
+      codelength: 500,
+      snippets: 35,
+      projects: 1,
+      explanations: 35,
+    },
     pro: {
       codelength: 1500,
       snippets: 0,
@@ -63,13 +81,18 @@ const serverVars = {
       explanations: 0,
     },
   },
+  yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
+  monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
   pricing: [
     {
       header: 'Starter',
+      product: 'prod_KtoGID0Sj9MmA4',
       active: true,
+      buttonText: 'Upgrade',
       price: {
         monthly: '$12.00',
         yearly: '$120.00',
+        yearlyEarly: '$99.00'
       },
       subheader: 'Perfect for getting started.',
       features: [
@@ -82,10 +105,13 @@ const serverVars = {
     },
     {
       header: 'Pro',
+      product: 'prod_Ku5hPkvud8Svl0',
       active: true,
+      buttonText: 'Upgrade',
       price: {
         monthly: '$36.00',
         yearly: '$360.00',
+        yearlyEarly: '$300.00'
       },
       subheader: 'Best for large code',
       features: [
@@ -99,6 +125,9 @@ const serverVars = {
     {
       header: 'Teams',
       active: true,
+      custom: true,
+      buttonText: 'Contact Us',
+      link:'mailto:sales@tenablylabs.com?subject=Explain Code App Custom Team Plan',
       price: {
         monthly: '$0.00',
         yearly: '$0.00',
@@ -119,6 +148,18 @@ const serverVars = {
 };
 
 const localVars = {
+  user: {
+    addUserApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/user/add',
+    getUserApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/user/get/',
+  },
+  billing: {
+    checkoutApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/billing/checkout',
+    manageApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/billing/manage',
+  },
   drip: {
     addSubscriberApiUrl:
       process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/add',
@@ -176,6 +217,12 @@ const localVars = {
       explanations: 0,
       days: 14,
     },
+    starter: {
+      codelength: 500,
+      snippets: 35,
+      projects: 1,
+      explanations: 35,
+    },
     pro: {
       codelength: 1500,
       snippets: 0,
@@ -183,6 +230,75 @@ const localVars = {
       explanations: 0,
     },
   },
+  yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
+  monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
+  pricing: [
+    {
+      header: 'Starter',
+      active: true,
+      buttonText: 'Upgrade',
+      product: 'prod_KtoGID0Sj9MmA4',
+      price: {
+        monthly: '$12.00',
+        monthId: 'price_1KE0eCCneYX9jOaEZj1FjE6H',
+        yearly: '$120.00',
+        yearId: 'price_1KGVA2CneYX9jOaELYm5eaW2',
+        yearlyEarly: '$99.00',
+        yearlyEarlyId: 'price_1KGa1BCneYX9jOaEBnzQEGGA'
+      },
+      subheader: 'Perfect for getting started.',
+      features: [
+                'Full Access to all Tools', 
+                '500 Character Snippets',
+                '35 Explanations',
+                '35 Saved Snippets',
+                '1 Project'
+                ]
+    },
+    {
+      header: 'Pro',
+      active: true,
+      buttonText: 'Upgrade',
+      product: 'prod_Ku5hPkvud8Svl0',
+      price: {
+        monthly: '$36.00',
+        monthId: 'price_1KGVAeCneYX9jOaESzU0eXiI',
+        yearly: '$360.00',
+        yearId: 'price_1KGVB4CneYX9jOaEjQbB4TGB',
+        yearlyEarly: '$300.00',
+        yearlyEarlyId: 'price_1KGa0gCneYX9jOaE1zCMqCtd'
+      },
+      subheader: 'Best for large code',
+      features: [
+        'Full Access to all Tools', 
+        '1,500 Character Snippets',
+        'Unlimited  Explanations',
+        'Unlimited  Saved Snippets',
+        'Unlimited  Project'
+        ]
+    },
+    {
+      header: 'Teams',
+      buttonText: 'Contact Us',
+      link:'mailto:sales@tenablylabs.com?subject=Explain Code App Custom Team Plan',
+      active: true,
+      custom: true,
+      price: {
+        monthly: '$0.00',
+        yearly: '$0.00',
+      },
+      subheader: 'Great for Startups, Schools and Enterprise.',
+      features: [
+        'Full Access to all Tools', 
+        '1,500 Character Snippets',
+        'Unlimited  Explanations',
+        'Unlimited  Saved Snippets',
+        'Unlimited  Project',
+        'Multiple Team Members'
+        ]
+    },
+    
+  ],
   waitlistText: 'Get Early Access',
 };
 
@@ -190,6 +306,16 @@ export const WAITLIST_TEXT =
   process.env.NODE_ENV === 'production'
     ? serverVars.waitlistText
     : localVars.waitlistText;
+
+    export const MONTHLY_PRICES =
+  process.env.NODE_ENV === 'production'
+    ? serverVars.monthly
+    : localVars.monthly;
+
+    export const YEARLY_PRICES =
+    process.env.NODE_ENV === 'production'
+      ? serverVars.yearly
+      : localVars.yearly;
 //export const SAVE_SNIPPET_ENABLED = process.env.REACT_APP_SAVE_SNIPPET_ENABLED;
 //export const SAVE_EXPLANATION_ENABLED = process.env.REACT_APP_SAVE_EXPLANATION_ENABLED;
 
@@ -199,6 +325,23 @@ export function getConfiguration() {
   }
   return localVars;
 }
+
+
+
+export function getUser() {
+  if (process.env.NODE_ENV === 'production') {
+    return serverVars.user;
+  }
+  return localVars.user;
+}
+
+export function getBilling() {
+  if (process.env.NODE_ENV === 'production') {
+    return serverVars.billing;
+  }
+  return localVars.billing;
+}
+
 export function getDrip() {
   if (process.env.NODE_ENV === 'production') {
     return serverVars.drip;
@@ -239,4 +382,11 @@ export function getTier(tier) {
     return serverVars.tiers[tier];
   }
   return localVars.tiers[tier];
+}
+
+export function getPricing() {
+  if (process.env.NODE_ENV === 'production') {
+    return serverVars.pricing;
+  }
+  return localVars.pricing;
 }

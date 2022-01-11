@@ -116,6 +116,13 @@
 				"tableName": "remediation-prod-store",
 				"awsProfile": "default",
 				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-dev-user",
+				"tableName": "explaincodeapp-dev-user",
+				"awsProfile": "default",
+				"region": "us-east-1"
 			}
 		]
 	},
