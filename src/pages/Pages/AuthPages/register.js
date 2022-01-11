@@ -53,6 +53,7 @@ class register extends Component {
       submitstatus: false,
       website: '',
       inputsstatus: false,
+      loading: false
     };
     this.Toast = this.Toast.bind(this);
     this.SwalToast = this.SwalToast.bind(this);
@@ -98,6 +99,7 @@ class register extends Component {
   handleSubmit = async (event) => {
     // Form submission logic
     event.preventDefault();
+    this.setState({loading: true});
 
     Event('REGISTER', 'New Registration', 'NEW_REGISTRATION');
 
@@ -353,25 +355,25 @@ class register extends Component {
                         <Col md={12}>
                           <div className="mb-3">
                             <div className="form-check">
-                            <AvGroup check>
-                                                                <Label check>
-                                                                    <AvInput type="checkbox" name="terms" trueValue="false" 
-                                                                    onChange={e => this.setState({terms: e.target.value})}
-                                                                    falseValue="true" /> I Accept <Link to="/terms-of-service" style={{ fontWeight: '500', color: '#1f3a93' }} target="_new">Terms And Condition</Link>
-                                                                </Label>
-                                                            </AvGroup>
+                              <AvGroup check>
+                                <Label check>
+                                  <AvInput type="checkbox" name="terms" trueValue="false"
+                                    onChange={e => this.setState({ terms: e.target.value })}
+                                    falseValue="true" /> I Accept <Link to="/terms-of-service" style={{ fontWeight: '500', color: '#1f3a93' }} target="_new">Terms And Condition</Link>
+                                </Label>
+                              </AvGroup>
                             </div>
                           </div>
                         </Col>
                         <Col lg={12} className="mb-0">
                           <div className="d-grid">
-                            <Button color="primary">Register</Button>
+                            <Button disabled={this.state.loading} color="primary">Register</Button>
                           </div>
                         </Col>
                         <Col xs={12} className="text-center">
                           <p className="mb-0 mt-3">
                             <small className="text-dark me-2">
-                              Don't have an account ?
+                              Already have an account ?
                             </small>{' '}
                             <LoginLink />
                           </p>

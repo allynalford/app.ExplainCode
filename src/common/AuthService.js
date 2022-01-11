@@ -45,7 +45,6 @@ export default class AuthService extends EventEmitter {
         refBy: user.invitecode,
       })
       .then((result) => {
-        console.log('user add:', result);
         this.auth0.redirect.signupAndLogin(
           {
             connection: process.env.REACT_APP_AUTH0_CONNECTION,
@@ -79,7 +78,7 @@ export default class AuthService extends EventEmitter {
             }
           },
         );
-      });
+       });
   }
   loginWithGoogle() {
     this.auth0.authorize({
