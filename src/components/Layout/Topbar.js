@@ -1233,7 +1233,7 @@ class Topbar extends Component {
               </ul>
               <div className="buy-menu-btn d-none">
               <a
-                      href="#emailAddress"
+                      href={window.location.origin + '#emailAddress'}
                       className="btn btn-pills btn-primary"
                     >
                   {config.WAITLIST_TEXT + " "}

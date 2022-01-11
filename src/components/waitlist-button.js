@@ -14,7 +14,7 @@ if(isAuthenticated){
 }else{
     return (
         <div className="buy-button">
-          <a href="#emailAddress" className="btn btn-pills btn-primary">
+          <a href={window.location.origin + '/#emailAddress'} className="btn btn-pills btn-primary">
           {config.WAITLIST_TEXT + " "}
           </a>
           &nbsp;
