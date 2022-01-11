@@ -118,7 +118,7 @@ class Footer extends Component {
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid1.map((grid, key) => (
                     <li key={key}>
-                      {(grid.external === true ? <a href={grid.link} alt={grid.title}><i className="mdi mdi-chevron-right me-1"></i>{" "}
+                      {(grid.external === true ? <a href={grid.link} alt={grid.title} target={'_new'}><i className="mdi mdi-chevron-right me-1"></i>{" "}
                         {grid.title}</a>:<Link
                         to={grid.link}
                         className={
