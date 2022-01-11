@@ -134,6 +134,7 @@ const serverVars = {
       active: true,
       custom: true,
       buttonText: 'Contact Us',
+      product: 'custom',
       link:'mailto:sales@tenablylabs.com?subject=Explain Code App Custom Team Plan',
       price: {
         monthly: '$0.00',
@@ -289,6 +290,7 @@ const localVars = {
       header: 'Teams',
       buttonText: 'Contact Us',
       link:'mailto:sales@tenablylabs.com?subject=Explain Code App Custom Team Plan',
+      product: 'custom',
       active: true,
       custom: true,
       price: {

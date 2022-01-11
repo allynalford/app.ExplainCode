@@ -11,9 +11,8 @@ import {
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { Helmet } from "react-helmet";
-import { getPricing, getUser, getBilling, YEARLY_PRICES } from '../../../common/config';
+import { getPricing, getUser, getBilling, MONTHLY_PRICES } from '../../../common/config';
 import MainSideBar from '../../../components/Layout/sidebar';
-import ProfileHeader from '../../../components/Layout/ProfileHeader';
 import classnames from "classnames";
 import SingleColumn from '../../../components/SingleColumn';
 const endpoint = require('../../../common/endpoint');
@@ -22,7 +21,7 @@ function PagePayments({ history }) {
   const { user } = useAuth0();
   const { email } = user;
   const { userglobaluuid, tier } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
-  const [toggleActive, setToggleActive] = useState(false);
+  const [toggleActive, setToggleActive] = useState(true);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(undefined);
@@ -35,17 +34,17 @@ function PagePayments({ history }) {
         document.getElementById('top-menu').classList.add('nav-light');
       }
 
-      const search = window.location.search;
-      const session_id = new URLSearchParams(search).get("session_id");
-      setSessionId(session_id);
+     const session_id = new URLSearchParams(window.location.search).get("session_id");
+     setSessionId(session_id);
+
       window.addEventListener('scroll', scrollNavigation, true);
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
        
-        if(YEARLY_PRICES.includes(res.data.user.price)){
+        if(MONTHLY_PRICES.includes(res.data.user.price)){
           //If they have a yearly plan, show the yearly plans
-          setToggleActive(true);
+          setToggleActive(false);
         }
       }).catch((err) => {
         console.error(err);
@@ -153,16 +152,6 @@ function PagePayments({ history }) {
           content="Explain Code App Subscriptions Dashboard."
         />
       </Helmet>
-      <section className="bg-profile d-table w-100 bg-primary">
-        <Container>
-          <Row>
-            <Col lg="12">
-              <ProfileHeader />
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
       <section className="section mt-60" id="maincontent">
         <Container className="mt-lg-3">
           <Row>
