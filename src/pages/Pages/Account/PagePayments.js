@@ -25,7 +25,7 @@ function PagePayments({ history }) {
   const [toggleActive, setToggleActive] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
-  const [sessionId, setSessionId] = useState('');
+  const [sessionId, setSessionId] = useState(undefined);
 
 
   useEffect(() => {
@@ -174,7 +174,7 @@ function PagePayments({ history }) {
                 <div className="col-12">
                   <div className="section-title text-center mb-4 pb-2">
                     <h1 className="title mb-4">Subscription</h1>
-                    {(sessionId !== '' ? <p>Thanks for your subscription, {user.name}</p>:"")}
+                    {(typeof sessionId !== "undefined" &&  sessionId !== null ? <p>Thanks for your subscription, {user.name} </p>:"")}
                     <p className="para-desc mx-auto text mb-0">
                       Please email sales@tenablylabs.com if you need more seats!
                     </p>
