@@ -41,7 +41,7 @@ function PagePayments({ history }) {
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
-       
+       console.log(res.data.user)
         if(MONTHLY_PRICES.includes(res.data.user.price)){
           //If they have a yearly plan, show the yearly plans
           setToggleActive(false);

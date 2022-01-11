@@ -11,7 +11,9 @@ class Footer extends Component {
     super(props);
     this.state = {
       grid1: [
-       //    { title: "How Explaining Code Helps Developers", link: "/how-explaining-the-code-helps-developers" },
+           { title: "Discord", link: "https://discord.gg/jNAW87Ng", external: true },
+           { title: "Terms of Services", link: "/terms-of-service", external: false },
+           { title: "Contact Us", link: "/contact-us", external: false },
       //   { title: "About us", link: "/page-aboutus" },
       //   { title: "Services", link: "/page-services" },
       //   { title: "Team", link: "/page-team" },
@@ -25,8 +27,7 @@ class Footer extends Component {
          {title: 'Explanation Tools', link: "/explain-code-tools"},
          { title: "History & Road Map", link: "/explain-code-history" },
          { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
-         { title: "Terms of Services", link: "/terms-of-service" },
-         { title: "Contact Us", link: "/contact-us" },
+
         // { title: "Privacy Policy", link: "/page-privacy" },
         // { title: "Documentation", link: "/documentation" },
         // { title: "Changelog", link: "/changelog" },
@@ -101,7 +102,7 @@ class Footer extends Component {
                 className="mt-4 mt-sm-0 pt-2 pt-sm-0"
                 name="footercolumn"
               >
-                {this.state.grid1.length !== 0 ? <h5
+                {this.state.grid1.length !== 0 ? <h3
                   className={
                     this.props.isLight
                       ? "text-dark footer-head"
@@ -109,12 +110,13 @@ class Footer extends Component {
                   }
                 >
                   Company
-                </h5>: ""}
+                </h3>: ""}
                 
                 <ul className="list-unstyled footer-list mt-4">
                   {this.state.grid1.map((grid, key) => (
                     <li key={key}>
-                      <Link
+                      {(grid.external === true ? <a href={grid.link} alt={grid.title}><i className="mdi mdi-chevron-right me-1"></i>{" "}
+                        {grid.title}</a>:<Link
                         to={grid.link}
                         className={
                           this.props.isLight ? "text-muted" : "text-foot"
@@ -122,7 +124,7 @@ class Footer extends Component {
                       >
                         <i className="mdi mdi-chevron-right me-1"></i>{" "}
                         {grid.title}
-                      </Link>
+                      </Link>)}
                     </li>
                   ))}
                 </ul>
