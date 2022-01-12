@@ -105,8 +105,6 @@ function PageProfile({history}) {
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
-        console.log(res.data)
-        console.log(getTier(res.data.user.tier));
         const user = res.data.user;
         const tier = getTier(res.data.user.tier);
 
@@ -114,8 +112,6 @@ function PageProfile({history}) {
         if(user.tier === "trial" | user.tier === "earlyaccess"){
           //Check length remains
           var diffDays = parseInt((new Date() - new Date(user.creationDateTime)) / (1000 * 60 * 60 * 24));
-
-          console.log(diffDays);
 
           if(diffDays <= tier.days){
             setIsTrial(true);
@@ -133,12 +129,8 @@ function PageProfile({history}) {
             setSystemEnabled(true);
           }
         }
-
-
         
         setCodeMaxLength(tier.codelength);
-        
-        console.log(user);
 
       }).catch((err) => {
         console.error(err);
@@ -180,8 +172,6 @@ function PageProfile({history}) {
 
   useEffect(() => {
   
-
-    console.log(systemEnabled);
 
     return () => {
 
