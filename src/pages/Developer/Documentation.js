@@ -17,7 +17,7 @@ export default class Documention extends Component {
             <div className="col-lg-7 col-md-6 order-2 order-md-1 mt-4 mt-sm-0 pt-2 pt-sm-0">
               <div className="section-title me-lg-5">
                 <h4 className="title mb-4">
-                  What Explain Code App will support
+                  What Explain Code App supports
                 </h4>
                 <p className="text">
                 We have decided to start out supporting Node JS, Python, Go, and SQL. Once we have an established a strong community around our initial languages, we will rapidly grow and support new languages for all developers. 
@@ -28,7 +28,7 @@ export default class Documention extends Component {
                     <span className="text-primary h5 me-2">
                       <i className="uil uil-check-circle align-middle"></i>
                     </span>
-                    Easily explain NodeJS code
+                    Easily explain JavaScript code
                   </li>
                   <li className="mb-0">
                     <span className="text-primary h5 me-2">
