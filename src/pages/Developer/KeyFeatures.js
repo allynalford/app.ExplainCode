@@ -64,9 +64,9 @@ export default class KeyFeatures extends Component {
                     <p className="text mt-2">
                     {keyfeatures.text}
                   </p>
-                    <a href="#emailAddress" className="text-primary read-more">
+                    {/* <a href="#emailAddress" className="text-primary read-more">
                     {config.WAITLIST_TEXT + " "} <i className="mdi mdi-chevron-right"></i>
-                    </a>
+                    </a> */}
                     <i className={keyfeatures.hoverIcon}></i>
                   </CardBody>
                 </Card>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col , InputGroupAddon, Input, InputGroup} from "reactstrap";
-import { Link } from 'react-router-dom';
+import { Container, Row, Col , Button, InputGroupAddon, Input, InputGroup, Alert} from "reactstrap";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 //import Images
@@ -183,27 +182,52 @@ export default class index extends Component {
                   Blast through code with easy-to-understand code explanations, code summarization, class breakdowns and more.
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
-                  <h3 className="fw-bold mt-2 mb-3">
-                    Start your 7 Day free trail.
-                  </h3>
-                    <InputGroup>
-                      
-                      <InputGroupAddon addonType="append">
-                        <Link to="/register" className="btn btn-primary" type="submit">
-                        Join Explain Code App&nbsp;
+                  <Button disabled={this.state.inputsstatus} onClick={this.handleSubmit} className="btn btn-primary" type="submit">
+                        {config.WAITLIST_TEXT + " "}
                           <i>
                             <FeatherIcon
                               icon="user-plus"
                               className="fea icon-sm"
-                              alt={'Join Explain Code App'}
+                              alt={config.WAITLIST_TEXT}
                             />
                           </i>
-                        </Link>
+                        </Button>
+                  {/* <Alert
+                        color={this.state.alertColor}
+                        isOpen={this.state.alertOpen}
+                        toggle={() => {
+                          this.setState({alertOpen:!this.state.alertOpen});
+                        }}
+                      >
+                        {this.state.alertMessage}
+                      </Alert>
+                    <InputGroup>
+                      
+                      <Input
+                        aria-label="Email Address to join waitlist"
+                        type="email"
+                        name="emailAddress"
+                        id="emailAddress"
+                        onChange={e => this.setState({ email: e.target.value })}
+                        value={this.state.email}
+                        disabled={this.state.inputsstatus}
+                        placeholder="Enter your Email Address"
+                        requiredtxt="A Valid Email Address is required"
+                        required
+                      />
+                      <InputGroupAddon addonType="append">
+                        <Button disabled={this.state.inputsstatus} onClick={this.handleSubmit} className="btn btn-primary" type="submit">
+                        {config.WAITLIST_TEXT + " "}
+                          <i>
+                            <FeatherIcon
+                              icon="user-plus"
+                              className="fea icon-sm"
+                              alt={config.WAITLIST_TEXT}
+                            />
+                          </i>
+                        </Button>
                       </InputGroupAddon>
-                    </InputGroup>
-                    <p className="para-desc text">
-                      * No Credit Card Required to get started.
-                     </p>
+                    </InputGroup> */}
                           {/* <Form className="ms-0">
                             <FormGroup>
                               <Input

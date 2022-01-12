@@ -8,6 +8,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Button
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { Helmet } from "react-helmet";
@@ -78,6 +79,14 @@ function PagePayments({ history }) {
     try {
 
       setLoading(true);
+
+
+     //Track in drip
+      window._dcq.push(
+        [
+          "track", "Clicked Subscription", { }
+        ]
+      );
 
       if(userProfile.subscriptionActive){
         //Manage Subscription
@@ -263,7 +272,7 @@ function PagePayments({ history }) {
                                <p className="text mt-3 mb-0">
                                  *No credit card required
                                </p>
-                             </div>
+                             </div> 
                            </div>)}
                          </div>
                        </div>

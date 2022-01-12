@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
-const config = require("../../common/config.js");
-//import image
-//import integration from '../../assets/images/integration/1.png';
+import { Link } from 'react-router-dom';
+import FeatherIcon from "feather-icons-react";
+
 
 export default class Documention extends Component {
   render() {
@@ -51,9 +51,19 @@ export default class Documention extends Component {
                 </ul>
 
                 <div className="mt-4">
-                  <a href="#emailAddress" className="btn btn-primary">
+                  {/* <a href="#emailAddress" className="btn btn-primary">
                   {config.WAITLIST_TEXT}
-                  </a>
+                  </a> */}
+                      <Link to="/register" className="btn btn-primary" type="submit">
+                        Join Explain Code App&nbsp;
+                          <i>
+                            <FeatherIcon
+                              icon="user-plus"
+                              className="fea icon-sm"
+                              alt={'Join Explain Code App'}
+                            />
+                          </i>
+                        </Link>
                 </div>
               </div>
             </div>

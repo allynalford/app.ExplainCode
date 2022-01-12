@@ -94,6 +94,21 @@ function PageProfile(props, {history}) {
   const [daysRemaining, setDaysRemaining] = useState(undefined);
   const [tier, setTier] = useState(undefined);
 
+  const [markers, setMarkers] = useState([]);
+  // {
+  //   startRow: 3,
+  //   type: "text",
+  //   className: "test-marker"
+  // }
+  const [annotations, setAnnotations] = useState([]);
+
+    //{
+    //   row: 3, // must be 0 based
+    //   column: 4, // must be 0 based
+    //   text: "error.message", // text to show in tooltip
+    //   type: "info"
+    // }
+
 
 
   useEffect(() => {
@@ -331,7 +346,7 @@ function PageProfile(props, {history}) {
   const onRunPrompt = async () => {
 
     setLoading(true);
-    console.log({completionsThisMonth, maxExplanations})
+    //console.log({completionsThisMonth, maxExplanations})
    
     if(maxExplanations !== 0 && completionsThisMonth >= maxExplanations){
 
@@ -562,6 +577,8 @@ function PageProfile(props, {history}) {
                   placeholder="Enter your code snippet"
                   mode={mode}
                   theme={theme}
+                  markers={markers}
+                  annotations={annotations}
                   name="editor"
                   onChange={onChange}
                   fontSize={16}

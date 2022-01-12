@@ -10,6 +10,8 @@ import {
   NavLink,
   Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import FeatherIcon from "feather-icons-react";
 import classnames from 'classnames';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import parse from "html-react-parser";
@@ -582,9 +584,19 @@ export default class Quick extends Component {
                 Sign Up to the private beta and receive an early access invite code. Get advance notice before we launch to the general public in early 2022. Our new Explain Code application is a revolutionary way to learn how to write code and make suggestions that will help
                 </p>
               <div className="buy-button" style={{ marginTop: '15px' }}>
-                <a href="#emailAddress" className="btn btn-pills btn-primary">
+                {/* <a href="#emailAddress" className="btn btn-pills btn-primary">
                 {config.WAITLIST_TEXT}
-                </a>
+                </a> */}
+                 <Link to="/register" className="btn btn-primary" type="submit">
+                        Join Explain Code App&nbsp;
+                          <i>
+                            <FeatherIcon
+                              icon="user-plus"
+                              className="fea icon-sm"
+                              alt={'Join Explain Code App'}
+                            />
+                          </i>
+                        </Link>
               </div>
             </Col>
           </Row>

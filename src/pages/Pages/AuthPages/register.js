@@ -204,27 +204,27 @@ class register extends Component {
       });
     }
 
-
+     //We are live so no need for invite code
     //check invite code name
-    if (req.invitecode === null) {
-      validated = false;
-      Swal.fire({
-        title: 'No Invitation Code!',
-        text: 'Please provide an Invite Code',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-    }
+    // if (req.invitecode === null) {
+    //   validated = false;
+    //   Swal.fire({
+    //     title: 'No Invitation Code!',
+    //     text: 'Please provide an Invite Code',
+    //     icon: 'error',
+    //     confirmButtonText: 'Ok',
+    //   });
+    // }
 
-    if (req.invitecode !== null && req.invitecode.length !== 36) {
-      validated = false;
-      Swal.fire({
-        title: 'Invalid Invitation Code!',
-        text: 'Please provide a valid Invite Code',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-    }
+    // if (req.invitecode !== null && req.invitecode.length !== 36) {
+    //   validated = false;
+    //   Swal.fire({
+    //     title: 'Invalid Invitation Code!',
+    //     text: 'Please provide a valid Invite Code',
+    //     icon: 'error',
+    //     confirmButtonText: 'Ok',
+    //   });
+    // }
 
     //If all went well
     if (validated) {

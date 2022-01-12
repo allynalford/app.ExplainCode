@@ -86,12 +86,36 @@ const serverVars = {
   },
   yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
   monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
-  products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro'},
+  products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro', prod_Kx4giZw4VBrsGb: 'free'},
   pricing: [
+    {
+      header: 'Free Plan',
+      active: true,
+      isActive: false,
+      isFree: true,
+      buttonText: 'Free Account',
+      product: 'prod_Kx41kIUpFB85Uf',
+      price: {
+        monthly: '$0',
+        monthId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        yearly: '$0',
+        yearId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        yearlyEarly: '$0',
+        yearlyEarlyId: 'price_1KH9tBCneYX9jOaE64jAuS38'
+      },
+      subheader: 'Start testing',
+      features: [
+                'Full Access to all Tools', 
+                '500 Character Snippets',
+                '10 Explanations',
+                '15 Saved Snippets',
+                '1 Project'
+                ]
+    },
     {
       header: 'Starter',
       product: 'prod_KtoGID0Sj9MmA4',
-      active: true,
+      active: false,
       isActive: false,
       buttonText: 'Upgrade',
       price: {
@@ -252,8 +276,32 @@ const localVars = {
   products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro'},
   pricing: [
     {
-      header: 'Starter',
+      header: 'Free Plan',
       active: true,
+      isActive: false,
+      isFree: true,
+      buttonText: 'Free Account',
+      product: 'prod_Kx41kIUpFB85Uf',
+      price: {
+        monthly: '$0',
+        monthId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        yearly: '$0',
+        yearId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        yearlyEarly: '$0',
+        yearlyEarlyId: 'price_1KH9tBCneYX9jOaE64jAuS38'
+      },
+      subheader: 'Start testing',
+      features: [
+                'Full Access to all Tools', 
+                '500 Character Snippets',
+                '10 Explanations',
+                '15 Saved Snippets',
+                '1 Project'
+                ]
+    },
+    {
+      header: 'Starter',
+      active: false,
       isActive: false,
       buttonText: 'Upgrade',
       product: 'prod_KtoGID0Sj9MmA4',
