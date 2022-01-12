@@ -129,6 +129,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //Check Email
@@ -140,6 +141,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //Check if email exists already
@@ -152,6 +154,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //We are not checking for these values anymore
@@ -165,6 +168,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //check last name
@@ -176,6 +180,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //check passwords
@@ -191,6 +196,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
     //check passwords
@@ -202,6 +208,7 @@ class register extends Component {
         icon: 'error',
         confirmButtonText: 'Ok',
       });
+      this.setState({loading: false});
     }
 
      //We are live so no need for invite code
