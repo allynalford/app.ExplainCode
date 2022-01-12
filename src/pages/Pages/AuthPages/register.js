@@ -187,7 +187,7 @@ class register extends Component {
       validated = false;
       Swal.fire({
         title: 'Invalid Password!',
-        text: 'Please provide a password. Minimum length 8. Must have at least 1 uppercase letter. Must have at lease 1 digit.',
+        text: 'Please provide a password. Minimum length 8. Must have at least 1 uppercase letter. Must have at least 1 digit.',
         icon: 'error',
         confirmButtonText: 'Ok',
       });

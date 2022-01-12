@@ -31,6 +31,7 @@ const serverVars = {
   auth0: {
     updateProfile: process.env.REACT_APP_BASE_API_URL + '/profile/update',
     profileAuth: process.env.REACT_APP_BASE_API_URL + '/profile/auth',
+    changeUserAuth: process.env.REACT_APP_BASE_API_URL + '/profile/auth/cred',
   },
   completions: {
     updateCompletionRating:
@@ -193,6 +194,7 @@ const localVars = {
   auth0: {
     updateProfile: process.env.REACT_APP_BASE_API_URL + '/profile/update',
     profileAuth: process.env.REACT_APP_BASE_API_URL + '/profile/auth',
+    changeUserAuth: process.env.REACT_APP_BASE_API_URL + '/profile/auth/cred',
   },
   completions: {
     updateCompletionRating:

@@ -24,8 +24,8 @@ import { getAuth0 } from '../../../common/config';
 import MainSideBar from '../../../components/Layout/sidebar';
 const endpoint = require('../../../common/endpoint');
 const _ = require('lodash');
-
-
+var Swal = require('sweetalert2');
+var passwordValidator = require('password-validator');
 function PageProfileEdit({ history }) {
   const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
@@ -50,6 +50,30 @@ function PageProfileEdit({ history }) {
   const [themeOption, setThemeOption] = useState({});
   const [modeOption, setModeOption] = useState({});
   //const [user, setUser] = useState();
+
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordCon, setNewPasswordCon] = useState('');
+
+  const schema = new passwordValidator();
+  schema
+    .is()
+    .min(8) // Minimum length 8
+    .is()
+    .max(100) // Maximum length 100
+    .has()
+    .uppercase() // Must have uppercase letters
+    .has()
+    .lowercase() // Must have lowercase letters
+    .has()
+    .digits() // Must have digits
+    .has()
+    .not()
+    .spaces() // Should not have spaces
+    .is()
+    .not()
+    .oneOf(['Passw0rd', 'Password123']);
+
+
 
   useEffect(() => {
     document.title = "Explain Code App - Settings";
@@ -550,7 +574,7 @@ function PageProfileEdit({ history }) {
                       </Alert>
                       <Form onSubmit={handleSubmit3}>
                         <Row className="mt-4">
-                          <Col lg="12">
+                          {/* <Col lg="12">
                             <div className="mb-3">
                               <Label className="form-label">
                                 Old password :
@@ -570,11 +594,11 @@ function PageProfileEdit({ history }) {
                                 required
                               />
                             </div>
-                          </Col>
+                          </Col> */}
 
                           <Col lg="12">
                             <div className="mb-3">
-                              <Label className="form-label">
+                              <Label for="newPassword" className="form-label">
                                 New password :
                               </Label>
                               <div className="form-icon position-relative">
@@ -586,10 +610,15 @@ function PageProfileEdit({ history }) {
                                 </i>
                               </div>
                               <Input
+                                id="newPassword"
+                                name="newPassword"
                                 type="password"
                                 className="form-control ps-5"
                                 placeholder="New password"
                                 required
+                                onChange={e=>{
+                                  setNewPassword(e.target.value);
+                                }}
                               />
                             </div>
                           </Col>
@@ -608,16 +637,69 @@ function PageProfileEdit({ history }) {
                                 </i>
                               </div>
                               <Input
+                                id="newPasswordCon"
+                                name="newPasswordCon"
                                 type="password"
                                 className="form-control ps-5"
                                 placeholder="Re-type New password"
                                 required
+                                onChange={e=>{
+                                  setNewPasswordCon(e.target.value);
+                                }}
                               />
                             </div>
                           </Col>
-
                           <Col lg="12" className="mt-2 mb-0">
-                            <Button color="primary">Save password</Button>
+                            <Button 
+                            disabled={loading}
+                            onClick={e =>{
+                              e.preventDefault();
+
+                              if (
+                                (newPassword.length === 0) |
+                                (newPasswordCon.length === 0) |
+                                (schema.validate(newPassword) === false)
+                              ) {
+                                Swal.fire({
+                                  title: 'Invalid Password!',
+                                  text: 'Minimum length 8. \nMust have at least 1 uppercase letter. \nMust have at least 1 digit.',
+                                  icon: 'error',
+                                  confirmButtonText: 'Ok',
+                                });
+                              }else if(newPassword !== newPasswordCon){
+                                Swal.fire({
+                                  title: "Password's don't match",
+                                  text: 'Please confirm your new password',
+                                  icon: 'error',
+                                  confirmButtonText: 'Ok',
+                                });
+                              }else{
+                                endpoint.postIAM(getAuth0().changeUserAuth, {id: user.sub, value: newPassword}).then((res) => {
+                                  if(res.data.success === true){
+                                    Swal.fire({
+                                      title: 'Password Update Successful',
+                                      text: 'Your password has been successfully updated.',
+                                      icon: 'success',
+                                      confirmButtonText: 'Ok',
+                                    });
+                                  }else{
+                                    Swal.fire({
+                                      title: "Password Error",
+                                      text: res.data.message,
+                                      icon: 'error',
+                                      confirmButtonText: 'Ok',
+                                    });
+                                  }
+
+                              }).catch((err) => {
+                                console.error(err);
+                              });
+                              }
+
+                              
+
+                            }}
+                            color="primary" aria-label='Change your Password'>Change Password</Button>
                           </Col>
                         </Row>
                       </Form>
@@ -625,7 +707,7 @@ function PageProfileEdit({ history }) {
                   </Row>
                 </CardBody>
               </Card>
-              <div className="rounded shadow mt-4">
+              {/* <div className="rounded shadow mt-4">
                 <div className="p-4 border-bottom">
                   <h5 className="mb-0 text-danger">Delete Account :</h5>
                 </div>
@@ -639,7 +721,7 @@ function PageProfileEdit({ history }) {
                     <button className="btn btn-danger">Delete Account</button>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </Col>
           </Row>
         </Container>
