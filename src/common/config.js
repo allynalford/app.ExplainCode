@@ -20,7 +20,7 @@ const serverVars = {
       process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/get',
   },
   gtp3: {
-    post_ExplainFunction_PromptApiUrl:
+    post_ExplainFunction_Prompt:
       process.env.REACT_APP_BASE_API_URL + '/tool/function/explain',
     post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/summary',
     post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/linebyline',
