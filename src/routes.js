@@ -156,6 +156,10 @@ const PagePrivacy = React.lazy(() =>
 );
 const PageTerms = React.lazy(() => import("./pages/Pages/Utility/PageTerms"));
 
+const HelpCenterFaqs = React.lazy(() =>
+  import("./pages/Pages/HelpCenter/HelpCenterFaqs")
+);
+
 // const PageTeam = React.lazy(() => import("./pages/Pages/PageTeam"));
 // const PageInvoice = React.lazy(() =>
 //   import("./pages/Pages/Account/PageInvoice")
@@ -252,9 +256,7 @@ const PageTerms = React.lazy(() => import("./pages/Pages/Utility/PageTerms"));
 // const HelpCenterOverview = React.lazy(() =>
 //   import("./pages/Pages/HelpCenter/HelpCenterOverview")
 // );
-// const HelpCenterFaqs = React.lazy(() =>
-//   import("./pages/Pages/HelpCenter/HelpCenterFaqs")
-// );
+
 // const HelpCenterGuides = React.lazy(() =>
 //   import("./pages/Pages/HelpCenter/HelpCenterGuides")
 // );
