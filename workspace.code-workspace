@@ -130,6 +130,13 @@
 				"tableName": "explaincodeapp-prod-user",
 				"awsProfile": "default",
 				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "explaincodeapp-prod-completions",
+				"tableName": "explaincodeapp-prod-completions",
+				"awsProfile": "default",
+				"region": "us-east-1"
 			}
 		]
 	},

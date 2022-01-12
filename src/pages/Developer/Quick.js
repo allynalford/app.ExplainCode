@@ -579,10 +579,10 @@ export default class Quick extends Component {
                 ''
               )}
               <br />
-              <h4>Get advance notice before we launch</h4>
+              {/* <h4>Get advance notice before we launch</h4>
               <p className="text">
                 Sign Up to the private beta and receive an early access invite code. Get advance notice before we launch to the general public in early 2022. Our new Explain Code application is a revolutionary way to learn how to write code and make suggestions that will help
-                </p>
+                </p> */}
               <div className="buy-button" style={{ marginTop: '15px' }}>
                 {/* <a href="#emailAddress" className="btn btn-pills btn-primary">
                 {config.WAITLIST_TEXT}
