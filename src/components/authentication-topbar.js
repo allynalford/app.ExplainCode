@@ -35,7 +35,7 @@ const AuthenticationNav = () => {
  
   return isAuthenticated ? (
     <Fragment>
-      <ul className="buy-button list-inline mb-0" role="menu">
+      <ul className="buy-button list-inline mb-0">
         <li className="list-inline-item mb-0" key={"Search"}>
           <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
             <DropdownToggle
@@ -65,7 +65,7 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1" role="menu" key={"ExplainCodeMenu"}>
+        <li className="list-inline-item mb-0 pe-1" role="group" key={"ExplainCodeMenu"}>
           <Dropdown isOpen={dropdownOpenShop} toggle={toggleDropdownShop}>
             <DropdownToggle type="button" aria-label="Explain Code Menu" className="btn btn-icon btn-primary ">
               <i className="uil uil-archway align-middle icons" title="Explain Code Menu"></i>
@@ -109,7 +109,7 @@ const AuthenticationNav = () => {
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li className="list-inline-item mb-0 pe-1" role="menu" key={"ToolsMenu"}>
+        <li className="list-inline-item mb-0 pe-1" role="group" key={"ToolsMenu"}>
           <Dropdown isOpen={dropdownOpenHome} toggle={toggleDropdownHome}>
             <DropdownToggle type="button" aria-label="Tools Menu" className="btn btn-icon btn-primary ">
               <i className="uil uil-file-share-alt align-middle icons" title="Tools Menu"></i>
@@ -144,7 +144,7 @@ const AuthenticationNav = () => {
             <i className="uil uil-heart align-middle icons"></i>
           </Link>
         </li> */}
-        <li className="list-inline-item mb-0" role="menu" key={"AccountMenu"}>
+        <li className="list-inline-item mb-0" role="group" key={"AccountMenu"}>
           <Dropdown
             color="primary"
             isOpen={dropdownIsOpen}

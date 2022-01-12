@@ -48,7 +48,7 @@ const _ = require('lodash');
 var Swal = require('sweetalert2');
 //const dateFormat = require('dateformat');
 
-function PageProfile({history}) {
+function PageProfile(props, {history}) {
  
   const { user } = useAuth0();
   const { email } = user;
@@ -90,7 +90,8 @@ function PageProfile({history}) {
   //Subscription
   const [hasPlan, setHasPlan] = useState(false);
   const [isTrial, setIsTrial] = useState(false);
-  const [systemEnabled, setSystemEnabled] = useState(false);
+  const [systemEnabled, setSystemEnabled] = useState(process.env.REACT_APP_SYSTEM_ACCESS_OPEN);
+  const [daysRemaining, setDaysRemaining] = useState(undefined);
 
 
 
@@ -100,7 +101,11 @@ function PageProfile({history}) {
       if(document.getElementById('top-menu') !== null){
         document.getElementById('top-menu').classList.add('nav-light');
       }
-      
+
+      document.querySelector('#editor > textarea').setAttribute('aria-label', 'code snippet');
+      document.querySelector('#editor-results > textarea').setAttribute('aria-label', 'code snippet explanation');
+
+       
       window.addEventListener('scroll', scrollNavigation, true);
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
@@ -112,14 +117,19 @@ function PageProfile({history}) {
         if(user.tier === "trial" | user.tier === "earlyaccess"){
           //Check length remains
           var diffDays = parseInt((new Date() - new Date(user.creationDateTime)) / (1000 * 60 * 60 * 24));
+          const daysLeft = (tier.days - diffDays);
+          
+          setIsTrial(true);
 
           if(diffDays <= tier.days){
-            setIsTrial(true);
             setSystemEnabled(true);
             setMaxExplanations(tier.explanations);
           }else{
             setMaxExplanations(0);
           }
+
+          setDaysRemaining(daysLeft);
+
         }else{
 
           setMaxExplanations(tier.explanations);
@@ -171,8 +181,7 @@ function PageProfile({history}) {
   }, [ completionsThisMonth, maxExplanations, codeMaxLength ]);
 
   useEffect(() => {
-  
-
+   
     return () => {
 
     };
@@ -319,21 +328,51 @@ function PageProfile({history}) {
     setLoading(true);
     console.log(systemEnabled);
 
-    Swal.fire({
-      title: 'Email already exists!',
-      text: 'Please login or use forgot password to reset your password.',
-      icon: 'error',
-      confirmButtonText: 'Ok',
-    });
+    if(maxExplanations !== 0 && completionsThisMonth >= maxExplanations){
 
-    // setCopiedSnippet(true);
-    // setSnippetMessage(`Code Snippet length of ${codeLength} is greater than ${codeMaxLength}`);
-    // setSnippetMessageColor('danger')
-    // setInterval(function () {
-    //   setCopiedSnippet(false);
-    // }, 15500);
+      Swal.fire({
+        title: 'No Explanations Remain',
+        text: "No explanations remaining. Please upgrade your subscription.",
+        icon: 'error',
+        confirmButtonText: 'View Subscriptions',
+        denyButtonText: `Cancel`,
+        confirmButtonAriaLabel: 'View Subscriptions',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        cancelButtonText:'Cancel',
+        cancelButtonAriaLabel: 'Cancel'
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          window.location = '/subscriptions';
+        } 
+      })
+    }else if(systemEnabled === false){
 
-    if(systemEnabled === false){
+      console.log({isTrial, hasPlan})
+
+      Swal.fire({
+        title: 'Subscription Needed',
+        html:
+        `${(isTrial === true ? "Your trial period has come to an end. <br /> Add a subscription to continue using Explain Code App" : "You'll need a plan to generate an explanation.")}<br />` +
+        '<a href="/subscriptions">View Subscriptions</a> ',
+        text: "You'll need a plan to generate an explanation.",
+        icon: 'info',
+        confirmButtonText: 'View Subscriptions',
+        denyButtonText: `Cancel`,
+        confirmButtonAriaLabel: 'View Subscriptions',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        cancelButtonText:'Cancel',
+        cancelButtonAriaLabel: 'Cancel'
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          window.location = '/subscriptions';
+        } 
+      })
 
     }else{
       setRating(0)
@@ -407,7 +446,7 @@ function PageProfile({history}) {
         <Container className="mt-lg-3">
           <Row>
             <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
-            <MainSideBar userglobaluuid={userglobaluuid} />
+            <MainSideBar userglobaluuid={userglobaluuid} daysRemaining={daysRemaining}/>
             </Col>
 
             <Col lg="9" md="7" xs="12" id="maincontent">
@@ -504,7 +543,7 @@ function PageProfile({history}) {
               </div>
 
               <div className="border-bottom pb-4">
-                <label htmlFor="editor">Enter your code snippet</label>
+                <label htmlFor="editor" style={{fontSize: '18px', fontWeight: 'bold'}}>Enter your code snippet</label>
                     
                 <AceEditor
                   id="editor"
@@ -517,8 +556,8 @@ function PageProfile({history}) {
                   theme={theme}
                   name="editor"
                   onChange={onChange}
-                  fontSize={14}
-                  showPrintMargin={true}
+                  fontSize={16}
+                  showPrintMargin={false}
                   showGutter={true}
                   highlightActiveLine={true}
                   value={code}
@@ -591,46 +630,70 @@ function PageProfile({history}) {
                       disabled={(loading === true | typeof code === "undefined" ? true : false)}
                       onClick={e =>{
                         setLoading(true);
-                        if(typeof snippetuuid !== "undefined"){
-                          //run update
-                          endpoint.postIAM(getSnippets().updateSnippet, {
-                            userglobaluuid,
-                            snippetuuid,
-                            fields: [{name: 'snippet', value: code}]
-                          }).then((res) => {
-                            if (res.data.success === true) {
-                             
-                              setLoading(false);
-                            } else {
-                             
-                              setLoading(false);
-                            }
+
+                        if(systemEnabled === false){
+                          Swal.fire({
+                            title: 'Subscription Needed',
+                            text: "You'll need a plan to save a snippet.",
+                            icon: 'info',
+                            confirmButtonText: 'View Subscriptions',
+                            denyButtonText: `Cancel`,
+                            confirmButtonAriaLabel: 'View Subscriptions',
+                            showCloseButton: true,
+                            showCancelButton: true,
+                            focusConfirm: false,
+                            cancelButtonText:'Cancel',
+                            cancelButtonAriaLabel: 'Cancel'
+                          }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                              window.location = '/subscriptions';
+                            } 
                           })
-                          .catch((err) => {
-                            console.error(err);
-                            setLoading(false);
-                          });
                         }else{
-                          
-                          //run save
-                          endpoint.postIAM(getSnippets().saveSnippet, {
-                            userglobaluuid,
-                            lang: mode,
-                            snippet: code
-                          }).then((res) => {
-                            if (res.data.success === true) {
-                              setSnippetuuid(res.data.snippetuuid);
+                          //System is all good
+                          if(typeof snippetuuid !== "undefined"){
+                            //run update
+                            endpoint.postIAM(getSnippets().updateSnippet, {
+                              userglobaluuid,
+                              snippetuuid,
+                              fields: [{name: 'snippet', value: code}]
+                            }).then((res) => {
+                              if (res.data.success === true) {
+                               
+                                setLoading(false);
+                              } else {
+                               
+                                setLoading(false);
+                              }
+                            })
+                            .catch((err) => {
+                              console.error(err);
                               setLoading(false);
-                            } else {
-                              console.log(res);
+                            });
+                          }else{
+                            
+                            //run save
+                            endpoint.postIAM(getSnippets().saveSnippet, {
+                              userglobaluuid,
+                              lang: mode,
+                              snippet: code
+                            }).then((res) => {
+                              if (res.data.success === true) {
+                                setSnippetuuid(res.data.snippetuuid);
+                                setLoading(false);
+                              } else {
+                                console.log(res);
+                                setLoading(false);
+                              }
+                            })
+                            .catch((err) => {
+                              console.error(err);
                               setLoading(false);
-                            }
-                          })
-                          .catch((err) => {
-                            console.error(err);
-                            setLoading(false);
-                          });
+                            });
+                          }
                         }
+
                       }}
                       className="btn btn-pills btn-info"
                     >
@@ -996,8 +1059,8 @@ function PageProfile({history}) {
                   mode="html"
                   theme={theme}
                   name="editor-results"
-                  fontSize={14}
-                  showPrintMargin={true}
+                  fontSize={16}
+                  showPrintMargin={false}
                   showGutter={false}
                   wrapEnabled={true}
                   highlightActiveLine={true}

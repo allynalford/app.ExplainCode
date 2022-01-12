@@ -75,20 +75,31 @@ function MainSideBar(props) {
     <React.Fragment>
       <div className="sidebar sticky-bar p-4 rounded shadow">
         <div className="widget mb-4 pb-4 border-bottom">
-          <h5 className="widget-title">Stats :</h5>
+          <h4 className="widget-title">Details</h4>
           <div className="row mt-4">
+            {(typeof props.daysRemaining !== "undefined" ? <div className="col-6 text-center">
+              
+              <h5 className="mb-0">
+                <FeatherIcon
+                style={{marginRight: '5px'}}
+                icon="calendar"
+                className="fea icon-ex-md text-primary mb-1"
+              /> {(props.daysRemaining < 0 ? 0 : props.daysRemaining)}</h5>
+              <h6 className="text mb-0">Trial Days Remaining</h6>
+            </div> : "")}
             <div className="col-6 text-center">
-              <FeatherIcon
+              <h5 className="mb-0">
+                <FeatherIcon
+                style={{marginRight: '5px'}}
                 icon="activity"
                 className="fea icon-ex-md text-primary mb-1"
-              />
-              <h5 className="mb-0">{completionsThisMonth}/{completionsMax}</h5>
+              />{completionsThisMonth}/{completionsMax}</h5>
               <h6 className="text mb-0">Explanations</h6>
             </div>
           </div>
         </div>
         <div className="widget mt-4">
-          <h5 className="widget-title">Tools:</h5>
+          <h4 className="widget-title">Tools:</h4>
           <nav id="toolmenu" title="Tool Menu">
           <ul className="list-unstyled sidebar-nav mb-0" id="navmenu-nav">
             {getPrompts(window.location).map((widget, key) => (

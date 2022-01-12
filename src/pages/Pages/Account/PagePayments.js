@@ -20,11 +20,12 @@ function PagePayments({ history }) {
 
   const { user } = useAuth0();
   const { email } = user;
-  const { userglobaluuid, tier } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const [toggleActive, setToggleActive] = useState(true);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(undefined);
+  const [tier, setTier] = useState('');
 
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function PagePayments({ history }) {
 
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
-       console.log(res.data.user)
+        setTier(res.data.user.tier);
         if(MONTHLY_PRICES.includes(res.data.user.price)){
           //If they have a yearly plan, show the yearly plans
           setToggleActive(false);

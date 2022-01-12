@@ -14,3 +14,8 @@
     opacity: 0.4;
     filter: alpha(opacity=40);
 }
+
+
+.ace-terminal-theme .ace_comment {
+    color: #D43900;
+}
