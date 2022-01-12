@@ -30,16 +30,18 @@ function MainSideBar(props) {
 
   useEffect(() => {
 
-    const t = getTier(props.tier);
+    if (typeof props.tier !== "undefined") {
+      const t = getTier(props.tier);
 
-    if(completionsMax === 0){
-      setCompletionsMax((t.explanations === 0 ? 'Unlimited' : t.explanations));
-    }
+      if (completionsMax === 0) {
+        setCompletionsMax((t.explanations === 0 ? 'Unlimited' : t.explanations));
+      }
 
-    if(t.explanations !== 0 && completionsThisMonth >= t.explanations){
-      setCompletionsColor('red');
-    }else if(completionsColor !== 'black'){
-      setCompletionsColor('black');
+      if (t.explanations !== 0 && completionsThisMonth >= t.explanations) {
+        setCompletionsColor('red');
+      } else if (completionsColor !== 'black') {
+        setCompletionsColor('black');
+      }
     }
 
     return () => {
