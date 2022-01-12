@@ -52,7 +52,7 @@ function PageProfile(props, {history}) {
  
   const { user } = useAuth0();
   const { email } = user;
-  const { userglobaluuid, mode:UserMode, theme:UserTheme, tier} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, mode:UserMode, theme:UserTheme} = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const [userProfile, setUserProfile] = useState({});
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
@@ -90,8 +90,9 @@ function PageProfile(props, {history}) {
   //Subscription
   const [hasPlan, setHasPlan] = useState(false);
   const [isTrial, setIsTrial] = useState(false);
-  const [systemEnabled, setSystemEnabled] = useState(process.env.REACT_APP_SYSTEM_ACCESS_OPEN);
+  const [systemEnabled, setSystemEnabled] = useState((process.env.REACT_APP_SYSTEM_ACCESS_OPEN === "false" ? false : true));
   const [daysRemaining, setDaysRemaining] = useState(undefined);
+  const [tier, setTier] = useState(undefined);
 
 
 
@@ -111,6 +112,7 @@ function PageProfile(props, {history}) {
       endpoint.postIAM(getUser().getUserApiUrl, {email, userglobaluuid}).then((res) => {
         setUserProfile(res.data.user);
         const user = res.data.user;
+        setTier(res.data.user.tier);
         const tier = getTier(res.data.user.tier);
 
         //If they are on a free trial
@@ -130,6 +132,9 @@ function PageProfile(props, {history}) {
 
           setDaysRemaining(daysLeft);
 
+        }else if(user.tier === "free"){
+          setSystemEnabled(true);
+          setMaxExplanations(tier.explanations);
         }else{
 
           setMaxExplanations(tier.explanations);
@@ -326,13 +331,14 @@ function PageProfile(props, {history}) {
   const onRunPrompt = async () => {
 
     setLoading(true);
-    console.log(systemEnabled);
-
+    console.log({completionsThisMonth, maxExplanations})
+   
     if(maxExplanations !== 0 && completionsThisMonth >= maxExplanations){
 
       Swal.fire({
         title: 'No Explanations Remain',
-        text: "No explanations remaining. Please upgrade your subscription.",
+        html: `No explanations remaining. Please upgrade your subscription to generate more explanations` +
+        '<br /><a href="/subscriptions">View Subscriptions</a> ',
         icon: 'error',
         confirmButtonText: 'View Subscriptions',
         denyButtonText: `Cancel`,
@@ -346,18 +352,18 @@ function PageProfile(props, {history}) {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           window.location = '/subscriptions';
-        } 
+        } else{
+          setLoading(false);
+        }
       })
     }else if(systemEnabled === false){
 
-      console.log({isTrial, hasPlan})
-
+     
       Swal.fire({
         title: 'Subscription Needed',
         html:
         `${(isTrial === true ? "Your trial period has come to an end. <br /> Add a subscription to continue using Explain Code App" : "You'll need a plan to generate an explanation.")}<br />` +
         '<a href="/subscriptions">View Subscriptions</a> ',
-        text: "You'll need a plan to generate an explanation.",
         icon: 'info',
         confirmButtonText: 'View Subscriptions',
         denyButtonText: `Cancel`,
@@ -371,7 +377,9 @@ function PageProfile(props, {history}) {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           window.location = '/subscriptions';
-        } 
+        }else{
+          setLoading(false);
+        }
       })
 
     }else{
@@ -416,11 +424,11 @@ function PageProfile(props, {history}) {
       }
       getUserCompletionCount(userglobaluuid);
       setPromptResponse(text);
-      
+      setLoading(false);
 
     };
 
-    setLoading(false);
+    
   };
 
 
@@ -446,7 +454,7 @@ function PageProfile(props, {history}) {
         <Container className="mt-lg-3">
           <Row>
             <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
-            <MainSideBar userglobaluuid={userglobaluuid} daysRemaining={daysRemaining}/>
+            <MainSideBar userglobaluuid={userglobaluuid} daysRemaining={daysRemaining} tier={tier}/>
             </Col>
 
             <Col lg="9" md="7" xs="12" id="maincontent">

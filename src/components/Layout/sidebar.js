@@ -30,7 +30,7 @@ function MainSideBar(props) {
 
   useEffect(() => {
 
-    const t = getTier(tier);
+    const t = getTier(props.tier);
 
     if(completionsMax === 0){
       setCompletionsMax((t.explanations === 0 ? 'Unlimited' : t.explanations));
@@ -45,7 +45,7 @@ function MainSideBar(props) {
     return () => {
 
     };
-  }, [completionsThisMonth, tier, completionsColor, completionsMax]);
+  }, [completionsThisMonth, props.tier, completionsColor, completionsMax]);
 
   useEffect(() => {
     if(typeof props.userglobaluuid !== "undefined"){

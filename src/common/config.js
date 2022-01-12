@@ -218,7 +218,7 @@ const localVars = {
       codelength: 500,
       snippets: 15,
       projects: 1,
-      explanations: 35,
+      explanations: 10,
     },
     trial: {
       codelength: 1500,
