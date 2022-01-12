@@ -82,7 +82,7 @@ export default class AuthService extends EventEmitter {
           function (err) {
             console.log('signuplogin');
             if (err) {
-              console.log(err);
+              //console.log(err);
               alert('Error: ' + err.description);
             } else {
               console.log('logged in');
