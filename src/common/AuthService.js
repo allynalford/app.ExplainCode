@@ -56,7 +56,8 @@ export default class AuthService extends EventEmitter {
         refBy: user.invitecode,
       })
       .then((result) => {
-        const inviteCode = (user.invitecode === "" ? 'none' : user.invitecode);
+        console.log(user.invitecode);
+        const inviteCode = (typeof user.invitecode === "undefined" ? 'none' : user.invitecode);
         this.auth0.redirect.signupAndLogin(
           {
             connection: process.env.REACT_APP_AUTH0_CONNECTION,
