@@ -115,7 +115,7 @@ const serverVars = {
     {
       header: 'Starter',
       product: 'prod_KtoGID0Sj9MmA4',
-      active: false,
+      active: true,
       isActive: false,
       buttonText: 'Upgrade',
       price: {
@@ -160,7 +160,7 @@ const serverVars = {
     },
     {
       header: 'Teams',
-      active: true,
+      active: false,
       custom: true,
       isActive: false,
       buttonText: 'Contact Us',
@@ -301,7 +301,7 @@ const localVars = {
     },
     {
       header: 'Starter',
-      active: false,
+      active: true,
       isActive: false,
       buttonText: 'Upgrade',
       product: 'prod_KtoGID0Sj9MmA4',
@@ -351,7 +351,7 @@ const localVars = {
       isActive: false,
       link:'mailto:sales@tenablylabs.com?subject=Explain Code App Custom Team Plan',
       product: 'custom',
-      active: true,
+      active: false,
       custom: true,
       price: {
         monthly: '$0.00',
