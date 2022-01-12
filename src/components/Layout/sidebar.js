@@ -7,7 +7,8 @@ import FeatherIcon from 'feather-icons-react';
 import { getWidgets, getPrompts} from '../../pages/Pages/Account/config';
 import dateFormat from 'dateformat';
 import { getCompletions, getTier } from '../../common/config';
-
+import { Event } from '../../common/gaUtils.js';
+var Swal = require('sweetalert2');
 const endpoint = require('../../common/endpoint');
 function MainSideBar(props) {
 
@@ -111,7 +112,28 @@ function MainSideBar(props) {
                   <Link
                     id={widget.tool}
                     name={widget.tool}
-                    to={widget.link}
+                    to={(widget.active === false ? "#" : widget.link)}
+                    onClick={e =>{
+                      if(widget.active === false){
+
+                        e.preventDefault();
+
+                        Swal.fire({
+                          title: `${widget.title} coming soon`,
+                          text: `${widget.title} hasn't released yet. But will be coming soon.`,
+                          icon: 'info',
+                          confirmButtonText: 'Ok',
+                        });
+                      }
+                      Event('Tool', 'Click', widget.tool);
+
+                      window._dcq.push(
+                        [
+                          "track", `Tool Click: ${widget.tool}`,
+                          { key: widget.tool }
+                        ]
+                      );
+                    }}
                     //onClick={e => {switchTool(widget.tool)}}
                     className="navbar-link d-flex rounded shadow align-items-center py-2 px-4"
                   >

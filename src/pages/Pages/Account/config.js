@@ -118,6 +118,17 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code', 'Provide a full function',
         'Provide a complete snippet']
     },
+    {
+      id: 7,
+      icon: "uil uil-comment-alt-verify",
+      className: tool === "Smart-Contracts" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Smart Contracts",
+      active: false,
+      link: "/dashboard?tool=Smart-Contracts",
+      tool: "Smart-Contracts",
+      desc: "Explain a Smart Contract in detail",
+      tips: ['Provide the smart contract address']
+    },
   ]
 
   return widgets;

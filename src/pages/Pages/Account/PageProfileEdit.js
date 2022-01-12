@@ -22,6 +22,7 @@ import { Helmet } from "react-helmet";
 import { modes, themes } from './config';
 import { getAuth0 } from '../../../common/config';
 import MainSideBar from '../../../components/Layout/sidebar';
+import { Event,  initGA, PageView} from '../../../common/gaUtils.js';
 const endpoint = require('../../../common/endpoint');
 const _ = require('lodash');
 var Swal = require('sweetalert2');
@@ -78,6 +79,8 @@ function PageProfileEdit({ history }) {
   useEffect(() => {
     document.title = "Explain Code App - Settings";
     document.body.classList = '';
+    initGA();
+    PageView();
     try{
       document.getElementById('top-menu').classList.add('nav-light');
     }catch(e){
@@ -517,6 +520,7 @@ function PageProfileEdit({ history }) {
                               }).then((res) => {
                                
                                 if (res.data.success === true) {
+                                  Event('Settings', 'Profile Update', 'User Profile');
                                   setAlertColor('primary');
                                   setAlertMessage(
                                     'Profile Successfully updated.',

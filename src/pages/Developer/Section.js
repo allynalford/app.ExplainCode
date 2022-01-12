@@ -4,7 +4,7 @@ import { Container, Row, Col , Button, InputGroupAddon, Input, InputGroup, Alert
 import FeatherIcon from "feather-icons-react";
 //import Images
 import bgimg from "../../assets/images/digital/about.png";
-import { Event } from '../../common/gaUtils.js';
+import { Event,  initGA, PageView} from '../../common/gaUtils.js';
 import axios from "axios";
 const requestPromise = require('request-promise');
 const endpoint = require("../../common/endpoint.js");
@@ -34,6 +34,8 @@ export default class index extends Component {
     const search = window.location.search;
     const refby = new URLSearchParams(search).get("ref");
     this.setState({ refby });
+    initGA();
+    PageView();
   }
 
   // Make sure to remove the DOM listener when the component is unmounted.
@@ -115,7 +117,7 @@ export default class index extends Component {
               
               await this.updateSlackChannel();
               window._dcq = window._dcq || [];
-              window._dcq.push(['track', 'Waitlist Signup', { value: 3650 }]);
+              window._dcq.push(['track', 'Waitlist Signup', { }]);
               this.setState({ inputsstatus: false,  alertMessage: "You've Joined, Thank You for Joining Early Access", alertOpen: true, alertColor: 'success'});
             } else {
               //this.SwalToast('Error', "error adding user", 'error');
