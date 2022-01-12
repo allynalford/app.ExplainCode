@@ -131,10 +131,25 @@
 			{
 				"type": "aws-sam",
 				"request": "direct-invoke",
-				"name": "app.ExplainCode:src/pages/Pages/Account/PageProfile.PageProfile (nodejs12.x)",
+				"name": "app.ExplainCode:src/common/slack.updateWaitlist (nodejs12.x)",
 				"invokeTarget": {
 					"target": "code",
 					"projectRoot": "c:\\Users\\Allyn Alford\\Documents\\Tenably\\REPOS\\app.ExplainCode",
+					"lambdaHandler": "src/common/slack.updateWaitlist"
+				},
+				"lambda": {
+					"runtime": "nodejs12.x",
+					"payload": {},
+					"environmentVariables": {}
+				}
+			},
+			{
+				"type": "aws-sam",
+				"request": "direct-invoke",
+				"name": "app.ExplainCode:src/pages/Pages/Account/PageProfile.PageProfile (nodejs12.x)",
+				"invokeTarget": {
+					"target": "code",
+					"projectRoot": "",
 					"lambdaHandler": "src/pages/Pages/Account/PageProfile.PageProfile"
 				},
 				"lambda": {

@@ -100,7 +100,7 @@ export const generateApiClient = (url, region, path, method) => {
   };
 
 /**
- * Event - GET request to a AWS auth URL
+ * _get - GET request to a AWS auth URL
  * Base API URL (REACT_APP_BASE_API_URL) and REGION (REACT_APP_REGION) are pulled from environment file settings
  * @param {string} path 
  * @param {Array} req 
@@ -113,7 +113,10 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+/**
+ * _getExternal - GET request to an external URL
+ * @param {string} path  
+ */
     export const _getExternal = (path) => {
         try {
             return axios.get(path);
@@ -163,7 +166,11 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+/**
+ * _postExternal - POST request to an external URL
+ * @param {string} path 
+ * @param {Array} req 
+ */
     export const _postExternal = (path, req) => {
         try {
             return axios.post(path, req);
@@ -171,6 +178,12 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
+    /**
+ * _postOptions - POST request to a AWS URL with options
+ * @param {string} path 
+ * @param {Array} req 
+ * @param {Array} options 
+ */
     export const _postOptions = (path, req, options) => {
         try {
             return axios.post(path, req, options);
@@ -178,7 +191,12 @@ export const generateApiClient = (url, region, path, method) => {
             return {error: true, message: e.message, e: e};
         }
     };
-
+    /**
+ * _putOptions - PUT request to a AWS URL with options
+ * @param {string} path 
+ * @param {Array} req 
+ * @param {Array} options 
+ */
     export const _putOptions = (path, req, options) => {
         try {
             return axios.put(path, req, options);

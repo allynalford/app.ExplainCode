@@ -1,5 +1,10 @@
 const Swal = require("sweetalert2");
-
+/**
+ * _fire - open Sweet Alert Modal full screen
+ * @param {string} title
+ * @param {string} text  
+ * @param {string} icon    
+ */
 export const _fire = (title, text, icon) =>{
     try{
         return Swal.fire({

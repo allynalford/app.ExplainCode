@@ -17,6 +17,11 @@ export default class AuthService extends EventEmitter {
     this.signup = this.signup.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
   }
+  /**
+ * login - log user in using Auth0
+ * @param {string} username 
+ * @param {string} password 
+ */
   login(username, password) {
     this.auth0.client.login(
       {
@@ -37,6 +42,12 @@ export default class AuthService extends EventEmitter {
       },
     );
   }
+    /**
+ * signup - register and log user in using Auth0
+ * @param {string} email 
+ * @param {string} password 
+ * @param {string} user 
+ */
   signup(email, password, user) {
     endpoint
       .postIAM(getUser().addUserApiUrl, {

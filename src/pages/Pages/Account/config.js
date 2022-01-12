@@ -112,6 +112,7 @@ export function getPrompts(path){
       icon: "uil uil-comment-edit",
       className: tool === "Code-Comment" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Code Comment",
+      active: false,
       link: "/dashboard?tool=Code-Comment",
       tool: "Code-Comment",
       desc: "Create a JavaDoc style comment for your code",
