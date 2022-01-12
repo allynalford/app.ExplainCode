@@ -56,6 +56,7 @@ export default class AuthService extends EventEmitter {
         refBy: user.invitecode,
       })
       .then((result) => {
+        const inviteCode = (user.invitecode === "" ? 'none' : user.invitecode);
         this.auth0.redirect.signupAndLogin(
           {
             connection: process.env.REACT_APP_AUTH0_CONNECTION,
@@ -73,7 +74,7 @@ export default class AuthService extends EventEmitter {
             user_metadata: {
               role: 'admin',
               root: 'true',
-              inviteCode: user.invitecode,
+              inviteCode,
               userglobaluuid: user.id,
               tier: 'free',
             },

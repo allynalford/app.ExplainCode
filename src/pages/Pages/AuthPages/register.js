@@ -239,6 +239,7 @@ class register extends Component {
       };
 
       auth.signup(req.email, req.wd, user);
+      this.setState({loading: false});
     }
   };
   render() {
