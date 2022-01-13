@@ -8,7 +8,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button
 } from "reactstrap";
 import { useAuth0 } from '@auth0/auth0-react';
 import { Helmet } from "react-helmet";
@@ -17,6 +16,7 @@ import MainSideBar from '../../../components/Layout/sidebar';
 import classnames from "classnames";
 import SingleColumn from '../../../components/SingleColumn';
 const endpoint = require('../../../common/endpoint');
+var Swal = require('sweetalert2');
 function PagePayments({ history }) {
 
   const { user } = useAuth0();
@@ -269,10 +269,25 @@ function PagePayments({ history }) {
                                
                                <Link onClick={e =>{
                                  e.preventDefault();
-                                 const priceId =  (tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarlyId : price.price.monthId) : (toggleActive ? price.price.yearId : price.price.monthId));
-                      
-                                 setLoading(true);
-                                 addSubscription(priceId, email);
+
+
+                                 if(price.header === "Free Tier" && userProfile.subscriptionActive !== true){
+
+                                  Swal.fire({
+                                    title: 'Free Account',
+                                    text: "Your currently using this plan",
+                                    icon: 'info',
+                                    confirmButtonText: 'Ok',
+                                  });
+
+                                 }else{
+
+                                  const priceId =  (tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarlyId : price.price.monthId) : (toggleActive ? price.price.yearId : price.price.monthId));
+
+                                  setLoading(true);
+                                  addSubscription(priceId, email);
+                                 }
+
                                }}  to="#" className={(userProfile.product === price.product ? `btn btn-success` : `btn btn-primary`)} style={{fontWeight:(userProfile.product === price.product ?  'bold' : 'normal')}}>
                                {(userProfile.product === price.product ? <span><span style={{color: '#B50000'}}>*</span>&nbsp;Manage</span> : (userProfile.subscriptionActive === true ? 'Manage' : price.buttonText))}
                                </Link>: <a className="btn btn-primary" href={price.link} alt="Email Tenably Labs">{price.buttonText}</a>)}
