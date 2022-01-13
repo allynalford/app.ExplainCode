@@ -414,7 +414,6 @@ function PageProfile(props, {history}) {
       switch (prompt) {
         case 'Python-Bug-Fixer':
           resp = await endpoint.postIAM(getGTP3().post_Python_Bug_Prompt, {code, userglobaluuid});
-          console.log(resp.data)
           text = resp.data.explanation.choices[0].text;
           setCompletionId(resp.data.explanation.id);
           break;
