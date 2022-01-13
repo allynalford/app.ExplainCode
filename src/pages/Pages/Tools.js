@@ -174,8 +174,8 @@ class PageServices extends Component {
                         <Row className="justify-content-center">
                             <Col xs="12" className="text-center">
                                 <div className="section-title">
-                                    <h3 className="title mb-4">Get advance notice before we launch</h3>
-                                    <p className="text para-desc mx-auto">Sign Up to the private beta and receive an early access invite code. Get advance notice before we launch to the general public in early 2022. Our new Explain Code application is a revolutionary way to learn how to write code and make suggestions that will help</p>
+                                    <h3 className="title mb-4">Get Started Today</h3>
+                                    <p className="text para-desc mx-auto">Start a 7-day free trial today without a credit card. Our new Explain Code application is a revolutionary way to learn how to write code and make suggestions that will help.</p>
                                     {/* <div className="mt-4">
                                         <Link to="#" className="btn btn-primary mt-2 me-2">Get Started Now</Link>{" "}
                                         <Link to="#" className="btn btn-outline-primary mt-2">Free Trial</Link>
