@@ -34,7 +34,7 @@ export function getWidgets(path){
   return widgets;
 }
 
-export const TOOLS = new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function', 'Code-Comment'])
+export const TOOLS = new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function', 'Code-Comment', 'Python-Bug-Fixer'])
 
 
 // Crop code to help Denigma focus on the important parts. 
@@ -109,6 +109,17 @@ export function getPrompts(path){
     },
     {
       id: 6,
+      icon: "uil uil-virus-slash",
+      className: tool === "Python-Bug-Fixer" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Python Bug Fixer",
+      active: true,
+      link: "/dashboard?tool=Python-Bug-Fixer",
+      tool: "Python-Bug-Fixer",
+      desc: "Corrects Python code",
+      tips: ['Preserve any existing comments within the code','Provide a complete snippet']
+    },
+    {
+      id: 7,
       icon: "uil uil-comment-edit",
       className: tool === "Code-Comment" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Code Comment",
@@ -120,7 +131,7 @@ export function getPrompts(path){
         'Provide a complete snippet']
     },
     {
-      id: 7,
+      id: 8,
       icon: "uil uil-comment-alt-verify",
       className: tool === "Smart-Contracts" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Smart Contracts",

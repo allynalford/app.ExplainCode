@@ -61,6 +61,8 @@ function PageProfile(props, {history}) {
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
   const [mode, setMode] = useState(undefined);
+  const [modeEnabled, setModeEnabled] = useState(true);
+  const [explanationMode, setExplanationMode] = useState("html");
   const [tool, setTool] = useState("Line By Line");
   const [prompt, setPrompt] = useState("Line-By-Line");
   const [code, setCode] = useState(cachedCode);
@@ -86,6 +88,7 @@ function PageProfile(props, {history}) {
   const [themeOption, setThemeOption] = useState({});
   const [modeOption, setModeOption] = useState({});
   const [snippetuuid, setSnippetuuid] = useState(undefined);
+  const [explainButton, setExplainButton] = useState('Explain Snippet');
 
   //Subscription
   const [hasPlan, setHasPlan] = useState(false);
@@ -238,10 +241,11 @@ function PageProfile(props, {history}) {
   useEffect(() => {
     
     const toolParam = new URLSearchParams(window.location.search).get("tool");
-    
+    const isItemInSet = tools.has(toolParam);
+
     if(toolParam !== null && toolParam !== tool){
 
-      const isItemInSet = tools.has(toolParam);
+      
       const prompts = getPrompts(window.location);
      
       if(!isItemInSet){
@@ -262,7 +266,12 @@ function PageProfile(props, {history}) {
       }
     }
     var cachedSettings = sessionStorage.getItem('cachedSettings');
-    if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
+    if(isItemInSet && toolParam === "Python-Bug-Fixer"){
+      setMode('python');
+      setExplanationMode('python');
+      setModeEnabled(false);
+      setExplainButton('Fix Bug');
+    }else if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
       cachedSettings = JSON.parse(cachedSettings);
       setMode(cachedSettings.mode);
       setTheme(cachedSettings.theme);
@@ -403,6 +412,12 @@ function PageProfile(props, {history}) {
       setCompletionId("");
       let resp, text;
       switch (prompt) {
+        case 'Python-Bug-Fixer':
+          resp = await endpoint.postIAM(getGTP3().post_Python_Bug_Prompt, {code, userglobaluuid});
+          console.log(resp.data)
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
         case 'Line-By-Line':
           resp = await endpoint.postIAM(getGTP3().post_Line_Prompt, {code, lang: mode, userglobaluuid});
           text = resp.data.explanation.choices[0].text;
@@ -612,9 +627,8 @@ function PageProfile(props, {history}) {
                         }}
                         type='select'
                         value={mode}
-                        disabled={loading}
+                        disabled={(modeEnabled === false ? true : loading)}
                       >
-                       
                         {modes.map(option => (
                           <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
@@ -638,7 +652,7 @@ function PageProfile(props, {history}) {
                       }}
                       className="btn btn-pills btn-primary"
                     >
-                      Explain Snippet
+                      {explainButton}
                       {loading === true ? (
                         <Ionicon
                           style={{ marginLeft: '5px' }}
@@ -1081,7 +1095,7 @@ function PageProfile(props, {history}) {
                   aria-label="Explanation of code"
                   style={{ width: 'auto' }}
                   placeholder="Explanation will appear here"
-                  mode="html"
+                  mode={explanationMode}
                   theme={theme}
                   name="editor-results"
                   fontSize={16}
