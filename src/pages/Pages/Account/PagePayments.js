@@ -80,8 +80,6 @@ function PagePayments({ history }) {
 
       setLoading(true);
 
-      console.log('userProfile.subscriptionActive',userProfile.subscriptionActive);
-
      //Track in drip
       window._dcq.push(
         [
@@ -90,7 +88,6 @@ function PagePayments({ history }) {
       );
 
       if(userProfile.subscriptionActive === true){
-        console.log("subd")
         //Manage Subscription
         const returnUrl = window.location.href;
         const customerId = userProfile.stripeCustomerId;
@@ -98,24 +95,29 @@ function PagePayments({ history }) {
          if(res.data.error === false){
           if(typeof res.data.session !== "undefined"){
             window.location = res.data.session.url;
+          }else{
+            console.error(res.data)
           }
          }else{
           console.error(res.data.message);
          }
         }).catch((err) => {
           console.error(err);
+          setLoading(false);
         });
       }else{
         //Create a new Subscription
-        console.log("create")
         const returnBaseUrl = window.location.origin;
       
         endpoint.postIAM(getBilling().checkoutApiUrl, {customer_email, priceId, returnBaseUrl}).then((res) => {
           if(typeof res.data.session !== "undefined"){
             window.location = res.data.session.url;
+          }else{
+            console.error(res.data)
           }
         }).catch((err) => {
           console.error(err);
+          setLoading(false);
         });
       }
     } catch (e) {
@@ -267,9 +269,8 @@ function PagePayments({ history }) {
                                
                                <Link onClick={e =>{
                                  e.preventDefault();
-                                 console.log('Sub')
                                  const priceId =  (tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarlyId : price.price.monthId) : (toggleActive ? price.price.yearId : price.price.monthId));
-                                 console.log(priceId);
+                      
                                  setLoading(true);
                                  addSubscription(priceId, email);
                                }}  to="#" className={(userProfile.product === price.product ? `btn btn-success` : `btn btn-primary`)} style={{fontWeight:(userProfile.product === price.product ?  'bold' : 'normal')}}>
