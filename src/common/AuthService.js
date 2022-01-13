@@ -48,7 +48,7 @@ export default class AuthService extends EventEmitter {
  * @param {string} password 
  * @param {string} user 
  */
-  signup(email, password, user) {
+  async signup(email, password, user) {
     endpoint
       .postIAM(getUser().addUserApiUrl, {
         userglobaluuid: user.id,
@@ -84,9 +84,11 @@ export default class AuthService extends EventEmitter {
             if (err) {
               //console.log(err);
               alert('Error: ' + err.description);
+              return false;
             } else {
               console.log('logged in');
               //Add the user to the database
+              return true;
             }
           },
         );

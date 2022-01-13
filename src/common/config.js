@@ -86,7 +86,7 @@ const serverVars = {
   },
   yearly:['price_1KGVA2CneYX9jOaELYm5eaW2','price_1KGVB4CneYX9jOaEjQbB4TGB'],
   monthly: ['price_1KE0eCCneYX9jOaEZj1FjE6H', 'price_1KGVAeCneYX9jOaESzU0eXiI'],
-  products: {prod_KtoGID0Sj9MmA4: 'starter', prod_Ku5hPkvud8Svl0: 'pro', prod_Kx4giZw4VBrsGb: 'free'},
+  products: {prod_Kx4fxD4Aiig9ad: 'starter', prod_Kx4g5i2ulYDJcX: 'pro', prod_Kx4giZw4VBrsGb: 'free'},
   pricing: [
     {
       header: 'Free Plan',
@@ -94,14 +94,14 @@ const serverVars = {
       isActive: false,
       isFree: true,
       buttonText: 'Free Account',
-      product: 'prod_Kx41kIUpFB85Uf',
+      product: 'prod_Kx4giZw4VBrsGb',
       price: {
         monthly: '$0',
-        monthId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        monthId: 'price_1KHAWlCneYX9jOaEQr2AzAyw',
         yearly: '$0',
-        yearId: 'price_1KH9tBCneYX9jOaE64jAuS38',
+        yearId: 'price_1KHAWlCneYX9jOaEQr2AzAyw',
         yearlyEarly: '$0',
-        yearlyEarlyId: 'price_1KH9tBCneYX9jOaE64jAuS38'
+        yearlyEarlyId: 'price_1KHAWlCneYX9jOaEQr2AzAyw'
       },
       subheader: 'Start testing',
       features: [
@@ -114,17 +114,17 @@ const serverVars = {
     },
     {
       header: 'Starter',
-      product: 'prod_KtoGID0Sj9MmA4',
+      product: 'prod_Kx4fxD4Aiig9ad',
       active: true,
       isActive: false,
       buttonText: 'Upgrade',
       price: {
         monthly: '$12.00',
-        monthId: 'price_1KE0eCCneYX9jOaEZj1FjE6H',
+        monthId: 'price_1KHAWbCneYX9jOaEmbl0miYX',
         yearly: '$120.00',
-        yearId: 'price_1KGVA2CneYX9jOaELYm5eaW2',
+        yearId: 'price_1KHAWbCneYX9jOaEFJY8plhs',
         yearlyEarly: '$99.00',
-        yearlyEarlyId: 'price_1KGa1BCneYX9jOaEBnzQEGGA'
+        yearlyEarlyId: 'price_1KHAWaCneYX9jOaE2kPPP7O7'
       },
       subheader: 'Perfect for getting started.',
       features: [
@@ -137,17 +137,17 @@ const serverVars = {
     },
     {
       header: 'Pro',
-      product: 'prod_Ku5hPkvud8Svl0',
+      product: 'prod_Kx4g5i2ulYDJcX',
       active: true,
       isActive: true,
       buttonText: 'Upgrade',
       price: {
         monthly: '$36.00',
-        monthId: 'price_1KGVAeCneYX9jOaESzU0eXiI',
+        monthId: 'price_1KHAWhCneYX9jOaE4Ez6Gle2',
         yearly: '$360.00',
-        yearId: 'price_1KGVB4CneYX9jOaEjQbB4TGB',
+        yearId: 'price_1KHAWhCneYX9jOaE7J1APM9g',
         yearlyEarly: '$300.00',
-        yearlyEarlyId: 'price_1KGa0gCneYX9jOaE1zCMqCtd'
+        yearlyEarlyId: 'price_1KHAWhCneYX9jOaEcho4pZ9B'
       },
       subheader: 'Best for large code',
       features: [

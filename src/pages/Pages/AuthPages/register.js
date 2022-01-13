@@ -245,7 +245,7 @@ class register extends Component {
         name: `${req.firstname} ${req.lastname}`,
       };
 
-      auth.signup(req.email, req.wd, user);
+      await auth.signup(req.email, req.wd, user);
       this.setState({loading: false});
     }
   };
