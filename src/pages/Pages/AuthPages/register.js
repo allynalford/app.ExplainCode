@@ -390,7 +390,7 @@ class register extends Component {
                                 <Label check>
                                   <AvInput type="checkbox" name="terms" trueValue="false"
                                     onChange={e => this.setState({ terms: e.target.value })}
-                                    falseValue="true" /> I Accept <Link to="/terms-of-service" style={{ fontWeight: '500', color: '#1f3a93' }} target="_new">Terms And Condition</Link>
+                                    falseValue="true" /> I Accept <Link to="/terms-of-service" style={{ fontWeight: '500', color: '#1f3a93' }} target="_new">Terms And Conditions</Link>
                                 </Label>
                               </AvGroup>
                             </div>
