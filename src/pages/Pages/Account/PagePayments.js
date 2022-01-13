@@ -80,6 +80,7 @@ function PagePayments({ history }) {
 
       setLoading(true);
 
+      console.log('userProfile.subscriptionActive',userProfile.subscriptionActive);
 
      //Track in drip
       window._dcq.push(

@@ -137,6 +137,19 @@
 				"tableName": "explaincodeapp-prod-completions",
 				"awsProfile": "default",
 				"region": "us-east-1"
+			},
+			{
+				"type": "cloudformation",
+				"title": "PROD-ECA",
+				"timeOffsetInMs": 0,
+				"awsProfile": "default",
+				"stacks": [
+					{
+						"region": "us-east-1",
+						"stackName": "explaincodeapp-prod",
+						"stage": "dev"
+					}
+				]
 			}
 		]
 	},
