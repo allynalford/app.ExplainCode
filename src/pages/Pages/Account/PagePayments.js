@@ -89,7 +89,8 @@ function PagePayments({ history }) {
         ]
       );
 
-      if(userProfile.subscriptionActive){
+      if(userProfile.subscriptionActive === true){
+        console.log("subd")
         //Manage Subscription
         const returnUrl = window.location.href;
         const customerId = userProfile.stripeCustomerId;
@@ -106,6 +107,7 @@ function PagePayments({ history }) {
         });
       }else{
         //Create a new Subscription
+        console.log("create")
         const returnBaseUrl = window.location.origin;
       
         endpoint.postIAM(getBilling().checkoutApiUrl, {customer_email, priceId, returnBaseUrl}).then((res) => {
@@ -264,7 +266,10 @@ function PagePayments({ history }) {
                                {(typeof price.custom === "undefined" ? 
                                
                                <Link onClick={e =>{
+                                 e.preventDefault();
+                                 console.log('Sub')
                                  const priceId =  (tier === "earlyaccess" ? (toggleActive ? price.price.yearlyEarlyId : price.price.monthId) : (toggleActive ? price.price.yearId : price.price.monthId));
+                                 console.log(priceId);
                                  setLoading(true);
                                  addSubscription(priceId, email);
                                }}  to="#" className={(userProfile.product === price.product ? `btn btn-success` : `btn btn-primary`)} style={{fontWeight:(userProfile.product === price.product ?  'bold' : 'normal')}}>
