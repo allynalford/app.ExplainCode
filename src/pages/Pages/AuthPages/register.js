@@ -237,16 +237,14 @@ class register extends Component {
     if (validated) {
       this.setState({ submitstatus: true });
 
-      const user = {
+      await auth.signup(req.email, req.wd, {
         firstname: req.firstname,
         lastname: req.lastname,
         id: req.id,
         invitecode: req.invitecode,
         name: `${req.firstname} ${req.lastname}`,
-      };
-
-      await auth.signup(req.email, req.wd, user);
-      this.setState({loading: false});
+      });
+      //this.setState({loading: false});
     }
   };
   render() {
