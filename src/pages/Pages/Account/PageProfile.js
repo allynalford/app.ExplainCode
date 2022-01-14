@@ -276,11 +276,13 @@ function PageProfile(props, {history}) {
       setExplanationMode('python');
       setModeEnabled(false);
       setExplainButton('Fix Bug');
+      setCodeMaxLength(500);
     }else if(isItemInSet && toolParam === "JavaScript-To-Python"){
       setMode('javascript');
       setExplanationMode('python');
       setModeEnabled(false);
       setExplainButton('Convert to Python');
+      setCodeMaxLength(500);
     }else if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
       cachedSettings = JSON.parse(cachedSettings);
       setMode(cachedSettings.mode);
