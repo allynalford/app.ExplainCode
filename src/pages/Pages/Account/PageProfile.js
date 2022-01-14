@@ -199,7 +199,7 @@ function PageProfile(props, {history}) {
       sessionStorage.removeItem('cachedQuestion');
       //localStorage.removeItem('cachedSettings');
     };
-  }, [email, prompt, userglobaluuid]);
+  }, []);
 
   useEffect(() => {
   
