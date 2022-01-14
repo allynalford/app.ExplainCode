@@ -46,6 +46,11 @@ import dateFormat from 'dateformat';
 const endpoint = require('../../../common/endpoint');
 const _ = require('lodash');
 var Swal = require('sweetalert2');
+var ace = require('ace-builds');
+// use ace.require to get internal modules
+ace.config.set("themePath","../static/js");
+ace.config.set("basePath","../static/js");
+ace.config.set("modePath","../static/js");
 //const dateFormat = require('dateformat');
 
 function PageProfile(props, {history}) {
@@ -364,6 +369,13 @@ function PageProfile(props, {history}) {
    
     if(maxExplanations !== 0 && completionsThisMonth >= maxExplanations){
 
+      window._dcq.push(
+        [
+          "track", `No Explanations Remain`,
+          { key: prompt }
+        ]
+      );
+
       Swal.fire({
         title: 'No Explanations Remain',
         html: `No explanations remaining. Please upgrade your subscription to generate more explanations` +
@@ -387,7 +399,13 @@ function PageProfile(props, {history}) {
       })
     }else if(systemEnabled === false){
 
-     
+      window._dcq.push(
+        [
+          "track", `Subscription Needed`,
+          { key: prompt }
+        ]
+      );
+
       Swal.fire({
         title: 'Subscription Needed',
         html:
@@ -415,6 +433,15 @@ function PageProfile(props, {history}) {
       setRating(0)
       setRatingMessage('');
       setCompletionId("");
+
+      window._dcq.push(
+        [
+          "track", `Explanation Request`,
+          { key: prompt }
+        ]
+      );
+
+
       let resp, text;
       switch (prompt) {
         case 'JavaScript-To-Python':
@@ -474,19 +501,19 @@ function PageProfile(props, {history}) {
   return (
     <React.Fragment>
       <Helmet>
-        <title>Explain Code App - Tool Dashboard</title>
+        <title>Explain Code App -  Dashboard</title>
         <meta
           name="description"
           content={toolObj.desc}
         />
         <meta
           name="keywords"
-          content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code"
+          content="Tool Dashboard, Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code"
         />
-        <meta name="twitter:title" content="Explain Code App dashboard" />
-        <meta name="twitter:image:alt" content="Explain Code App: dashboard" />
-        <meta property="og:title" content="Explain Code App - Dashboard" />
-        <meta property="og:description" content="Explain Code App dashboard." />
+        <meta name="twitter:title" content="Explain Code App Tool Dashboard" />
+        <meta name="twitter:image:alt" content="Explain Code App: Tool Dashboard" />
+        <meta property="og:title" content="Explain Code App - Tool Dashboard" />
+        <meta property="og:description" content="Explain Code App Tool Dashboard." />
       </Helmet>
       {/* <ProfileHeader /> */}
       <section className="section mt-60">
@@ -525,36 +552,6 @@ function PageProfile(props, {history}) {
                   </Col>
                   <Col md="6">
                     <Row>
-                      {/* <Col md="12">
-                        <div className="mt-4 mb-0">
-                          <Label>Language</Label>
-                          <Select
-                            aria-label="Select an Language"
-                            className="form-control"
-                            theme={(theme) => ({
-                              ...theme,
-                              borderRadius: 0,
-                              fontSize: '18px',
-                              fontWeight: 'bold',
-                              // colors: {
-                              //     ...theme.colors,
-                              //     text: 'black',
-                              //     primary25: '#009FD4',
-                              //     primary: '#009FD4',
-                              // },
-                            })}
-                            id="modes-select"
-                            options={modes}
-                            value={modeOption}
-                            selectValue={'javascript'}
-                            onChange={(opt) => {
-                              setMode(opt.value);
-                              setModeOption(opt);
-                              localStorage.setItem('cachedSettings', {mode: opt.value, theme});
-                            }}
-                          ></Select>
-                        </div>
-                      </Col> */}
                       <Col md="12">
                         <div className="mt-4 mb-0">
                           <Label>Theme</Label>
@@ -566,12 +563,6 @@ function PageProfile(props, {history}) {
                               borderRadius: 0,
                               fontSize: '18px',
                               fontWeight: 'bold',
-                              // colors: {
-                              //     ...theme.colors,
-                              //     text: 'black',
-                              //     primary25: '#009FD4',
-                              //     primary: '#009FD4',
-                              // },
                             })}
                             id="themes"
                             options={themes}
@@ -611,7 +602,8 @@ function PageProfile(props, {history}) {
                   highlightActiveLine={true}
                   value={code}
                   setOptions={{
-                    enableBasicAutocompletion: false,
+                    useWorker:true,
+                    enableBasicAutocompletion: true,
                     enableLiveAutocompletion: false,
                     enableSnippets: true,
                     showLineNumbers: true,
