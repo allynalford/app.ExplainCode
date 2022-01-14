@@ -34,7 +34,7 @@ export function getWidgets(path){
   return widgets;
 }
 
-export const TOOLS = new Set(['Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function', 'Code-Comment', 'Python-Bug-Fixer'])
+export const TOOLS = new Set(['JavaScript-To-Python','Line-By-Line', 'Summarize', 'Class-Breakdown','Open-Questions','Explain-Function', 'Code-Comment', 'Python-Bug-Fixer'])
 
 
 // Crop code to help Denigma focus on the important parts. 
@@ -76,7 +76,7 @@ export function getPrompts(path){
     },
     {
       id: 3,
-      icon: "uil uil-code-branch",
+      icon: "mdi mdi-code-parentheses",
       className: tool === "Class-Breakdown" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Class Breakdown",
       link: "/dashboard?tool=Class-Breakdown",
@@ -109,7 +109,18 @@ export function getPrompts(path){
     },
     {
       id: 6,
-      icon: "uil uil-virus-slash",
+      icon: "mdi mdi-language-javascript",
+      className: tool === "JavaScript-To-Python" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "JS To Python",
+      active: true,
+      link: "/dashboard?tool=JavaScript-To-Python",
+      tool: "JavaScript-To-Python",
+      desc: "Convert JavaScript to Python",
+      tips: ['Preserve any existing comments within the code','Provide a complete snippet']
+    },
+    {
+      id: 7,
+      icon: "mdi mdi-language-python",
       className: tool === "Python-Bug-Fixer" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Python Bug Fixer",
       active: true,
@@ -119,7 +130,7 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code','Provide a complete snippet']
     },
     {
-      id: 7,
+      id: 8,
       icon: "uil uil-comment-edit",
       className: tool === "Code-Comment" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Code Comment",
@@ -131,8 +142,8 @@ export function getPrompts(path){
         'Provide a complete snippet']
     },
     {
-      id: 8,
-      icon: "uil uil-comment-alt-verify",
+      id: 9,
+      icon: "mdi mdi-ethereum",
       className: tool === "Smart-Contracts" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Smart Contracts",
       active: false,

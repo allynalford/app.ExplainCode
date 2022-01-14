@@ -271,6 +271,11 @@ function PageProfile(props, {history}) {
       setExplanationMode('python');
       setModeEnabled(false);
       setExplainButton('Fix Bug');
+    }else if(isItemInSet && toolParam === "JavaScript-To-Python"){
+      setMode('javascript');
+      setExplanationMode('python');
+      setModeEnabled(false);
+      setExplainButton('Convert to Python');
     }else if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
       cachedSettings = JSON.parse(cachedSettings);
       setMode(cachedSettings.mode);
@@ -412,6 +417,11 @@ function PageProfile(props, {history}) {
       setCompletionId("");
       let resp, text;
       switch (prompt) {
+        case 'JavaScript-To-Python':
+          resp = await endpoint.postIAM(getGTP3().post_JS_To_Python_Prompt, {code, userglobaluuid});
+          text = resp.data.explanation.choices[0].text;
+          setCompletionId(resp.data.explanation.id);
+          break;
         case 'Python-Bug-Fixer':
           resp = await endpoint.postIAM(getGTP3().post_Python_Bug_Prompt, {code, userglobaluuid});
           text = resp.data.explanation.choices[0].text;
