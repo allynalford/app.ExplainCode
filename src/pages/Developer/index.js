@@ -66,7 +66,7 @@ export default class index extends Component {
           </div>
           <section className="section">
             <KeyFeatures />
-            <Quick />
+            {/* <Quick /> */}
             <Documentation />
           </section>
         </div>

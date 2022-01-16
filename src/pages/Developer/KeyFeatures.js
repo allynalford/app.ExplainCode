@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
-const config = require("../../common/config.js");
+import { Link } from 'react-router-dom';
+import FeatherIcon from "feather-icons-react";
 export default class KeyFeatures extends Component {
   constructor(props) {
     super(props);
@@ -58,9 +59,9 @@ export default class KeyFeatures extends Component {
                     <i className={keyfeatures.icon}></i>
                   </div>
                   <CardBody className="p-0 mt-4">
-                    <a href="#emailAddress" alt="add email address for early access" className="title h5 text-dark">
+                    <Link to="/explain-code-tools" alt={keyfeatures.title} className="title h5 text-dark">
                       {keyfeatures.title}
-                    </a>
+                    </Link>
                     <p className="text mt-2">
                     {keyfeatures.text}
                   </p>
@@ -73,6 +74,18 @@ export default class KeyFeatures extends Component {
               </Col>
             ))}
           </Row>
+          <div style={{marginTop: '10px'}}>
+          <Link to="/register" className="btn btn-primary" type="submit">
+                        Join Explain Code App&nbsp;
+                          <i>
+                            <FeatherIcon
+                              icon="user-plus"
+                              className="fea icon-sm"
+                              alt={'Join Explain Code App'}
+                            />
+                          </i>
+                        </Link>
+          </div>
         </Container>
       </React.Fragment>
     );

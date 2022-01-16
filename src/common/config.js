@@ -52,7 +52,7 @@ const serverVars = {
   },
   tiers: {
     free: {
-      codelength: 500,
+      codelength: 200,
       snippets: 10,
       projects: 1,
       explanations: 10,
@@ -106,7 +106,7 @@ const serverVars = {
       subheader: 'Start testing',
       features: [
                 'Full Access to all Tools', 
-                '500 Character Snippets',
+                '200 Character Snippets',
                 '10 Explanations',
                 '15 Saved Snippets',
                 '1 Project'
@@ -241,7 +241,7 @@ const localVars = {
   },
   tiers: {
     free: {
-      codelength: 500,
+      codelength: 200,
       snippets: 15,
       projects: 1,
       explanations: 10,
@@ -295,7 +295,7 @@ const localVars = {
       subheader: 'Start testing',
       features: [
                 'Full Access to all Tools', 
-                '500 Character Snippets',
+                '200 Character Snippets',
                 '10 Explanations',
                 '15 Saved Snippets',
                 '1 Project'

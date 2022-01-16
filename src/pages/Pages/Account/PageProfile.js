@@ -61,7 +61,7 @@ function PageProfile(props, {history}) {
   const [userProfile, setUserProfile] = useState({});
   const cachedCode = (sessionStorage.getItem('cachedCode') === null ? undefined : sessionStorage.getItem('cachedCode'));
   const cachedQuestion = (sessionStorage.getItem('cachedQuestion') === null ? undefined : sessionStorage.getItem('cachedQuestion'));
-  const [codeMaxLength, setCodeMaxLength] = useState(500);
+  const [codeMaxLength, setCodeMaxLength] = useState(200);
   const [maxExplanations, setMaxExplanations] = useState(0);
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
