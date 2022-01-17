@@ -65,7 +65,7 @@ function PageProfile(props, {history}) {
   const [maxExplanations, setMaxExplanations] = useState(0);
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
   const [theme, setTheme] = useState(undefined);
-  const [mode, setMode] = useState(undefined);
+  const [mode, setMode] = useState('javascript');
   const [modeEnabled, setModeEnabled] = useState(true);
   const [explanationMode, setExplanationMode] = useState("html");
   const [tool, setTool] = useState("Line By Line");
@@ -91,7 +91,7 @@ function PageProfile(props, {history}) {
   const [snippetMessage, setSnippetMessage] = useState("");
   const [snippetMessageColor, setSnippetMessageColor] = useState("info");
   const [themeOption, setThemeOption] = useState({});
-  const [modeOption, setModeOption] = useState({});
+  const [modeOption, setModeOption] = useState({ label: 'Javascript', value: 'javascript' });
   const [snippetuuid, setSnippetuuid] = useState(undefined);
   const [explainButton, setExplainButton] = useState('Explain Snippet');
 

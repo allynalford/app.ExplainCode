@@ -8,6 +8,7 @@ import FeatherIcon from "feather-icons-react";
 // import images
 import blog1 from "../../assets/images/coding.png";
 import blog2 from "../../assets/images/hosting/deal-hend.png";
+import programming from "../../assets/images/undraw/undraw_Programming_re_kg9v.png"
 import { Helmet } from "react-helmet";
 
 export default class PageHistory extends Component {
@@ -181,6 +182,35 @@ export default class PageHistory extends Component {
                             </p>
                           </CardBody>
                         </Card>
+                      </Col>
+                    </Row>
+                  </div>
+                  <div className="timeline-item mt-4">
+                    <Row>
+                      <Col lg={6} md={6} sm={6} className="order-sm-1 order-2">
+                        <Card className="event event-description-right rounded shadow border-0 overflow-hidden float-start">
+                          <img src={programming} className="img-fluid" alt="Launch of Explain Code App" />
+                          <CardBody>
+                            <h5 className="mb-0 text-capitalize">
+                              Launch of Explain Code App
+                            </h5>
+                            <p className="mt-3 mb-0 text">
+                            Exciting news! Our new Explain Code application will launch in early 2022. We are doing a private beta for our top early access members. Members can gain priority access by sharing their invite code with friends. 
+                            The private beta will allow us to make any updates before we launch it to the public. 
+                            
+                            </p>
+                            <p className="mt-3 mb-0 text">
+                            This is limited to early access members and those referred by members. 
+                            It will have an initial run, allowing us time to make improvements based on your feedback.
+                             This release will be in major languages such as NodeJS, Python and SQL.
+                            </p>
+                          </CardBody>
+                        </Card>
+                      </Col>
+                      <Col lg={6} md={6} sm={6} className="order-sm-2 order-1">
+                        <div className="duration duration-right rounded border p-2 px-4 position-relative shadow text-start">
+                          January 2022
+                        </div>
                       </Col>
                     </Row>
                   </div>
