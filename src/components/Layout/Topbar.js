@@ -32,7 +32,7 @@ class Topbar extends Component {
       navLinks: [
         //Note : each child and nested child must have unique id
          { id: 1, title: "Home", link: "/" },
-         { id: 2, title: "Contact Us", link: "/contact-us" },
+         { id: 2, title: "English to SQL", link: "/sql" },
          { id: 3, title: "Code Explanation Tools", link: "/explain-code-tools" },
         // {
         //   id: 2,
