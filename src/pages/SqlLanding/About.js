@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
 
 //Import Images
-import app from "../../assets/images/illustrator/app.svg";
+import app from "../../assets/images/EnglishToSql_generated.png";
 
 class About extends Component {
   render() {
@@ -20,22 +20,20 @@ class About extends Component {
               xs={{ size: 12, order: 2 }}
               className="mt-4 mt-sm-0 pt-2 pt-sm-0"
             >
-              <img src={app} alt="Landrick" />
+              <img src={app} className="img-fluid" alt="Simplify your SQL" />
             </Col>
 
             <Col lg={6} md={{ size: 6, order: 2 }} xs={{ size: 12, order: 2 }}>
               <div className="section-title">
                 <h4 className="title mb-4">
-                  A marketing agency that <br /> helps you succeed
+                  English to SQL
                 </h4>
-                <p className="text-muted">
-                  Due to its widespread use as filler text for layouts,
-                  non-readability is of great importance: human perception is
-                  tuned to recognize certain patterns and repetitions in texts.
-                  If the distribution of letters visual impact.
+                <p className="text">
+                Generate SQL from plain English with the Explain Code App. Select, Update or delete 
+                table records all from the plain English description of your SQL statement.
                 </p>
-                <Link to="#" className="btn btn-primary">
-                  Find More{" "}
+                <Link to="/register" className="btn btn-primary">
+                Simplify your SQL{" "}
                   <i>
                     <FeatherIcon icon="arrow-right" className="fea icon-sm" />
                   </i>

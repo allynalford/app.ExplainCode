@@ -504,7 +504,7 @@ function EnglishToSql(props, {history}) {
                   <Col md="12">
                     <Row>
                     <Col md="12">
-                      <p className="text mb-0">List all tables and their columns in the form</p>
+                      <p className="text mb-0" style={{fontWeight: 'bold'}}>List tables and columns in the following format</p>
                       <pre>
                       table1: col1, col2, col3<br />
                       table2: col1, col2, col3
@@ -513,7 +513,7 @@ function EnglishToSql(props, {history}) {
                       <Col md="6">
                         <div className="mt-4 mb-0">
                           <label htmlFor="dataset" style={{ fontWeight: 'bold' }}>
-                            Please enter some info about your dataset:
+                            Tell us about your dataset:
                           </label><br />
                           <textarea
                             aria-label="Enter Question about code snippet"
@@ -534,7 +534,7 @@ function EnglishToSql(props, {history}) {
                       <Col md="6">
                         <div className="mt-4 mb-0">
                           <label htmlFor="description" style={{ fontWeight: 'bold' }}>
-                          Describe what you'd like to do:
+                           Describe what you'd like to do:
                           </label><br />
                           <textarea
                             aria-label="Describe what you'd like to do"

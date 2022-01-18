@@ -27,7 +27,8 @@ class Footer extends Component {
       //   { title: "Login", link: "/page-cover-login" },
       ],
       grid2: [
-         {title: 'Explanation Tools', link: "/explain-code-tools"},
+         { title: 'English to SQL', link: "/sql"},
+         { title: 'Explanation Tools', link: "/explain-code-tools"},
          { title: "History & Road Map", link: "/explain-code-history" },
          { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
 

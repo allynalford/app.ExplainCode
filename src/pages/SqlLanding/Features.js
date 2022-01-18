@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
+import { Icon } from '@iconify/react';
 class Features extends Component {
   render() {
     return (
@@ -12,23 +12,19 @@ class Features extends Component {
         <Container>
           <Row>
             <Col lg={4} md={6} xs={12}>
-              <Card className="border-0 text-center features feature-clean rounded">
+              <Card className="border-0 text features feature-clean rounded">
                 <div className="icons text-primary text-center mx-auto">
-                  <i className="uil uil-flip-v d-block rounded h3 mb-0">
-                  </i>
+                  <Icon icon="ant-design:console-sql-outlined" width={'60px'} height={'55px'} color="black"/>
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <Link to="#" className="title h5 text-dark">
-                    High-End Anaylizing
-                    </Link>
-                  <p className="text-muted">
-                    The most well-known dummy text is the 'Lorem Ipsum', which
-                    is said to have originated
+                  <h4>On-line Access</h4>
+                  <p className="text" style={{fontSize: '18px'}}>
+                  By describing what you want to accomplish, Explain SQL gives you the perfect set of SQL queries to accomplish it.
                   </p>
 
-                  <Link to="#" className="text-primary">
-                    Read More{" "}
+                  <Link to="/register" className="text-primary">
+                    Get Started{" "}
                     <i>
                       <FeatherIcon
                         icon="chevron-right"
@@ -41,23 +37,19 @@ class Features extends Component {
             </Col>
 
             <Col lg={4} md={6} xs={12} className="mt-4 mt-sm-0 pt-4 pt-sm-0">
-              <Card className="border-0 text-center features feature-clean rounded">
+              <Card className="border-0 text features feature-clean rounded">
                 <div className="icons text-primary text-center mx-auto">
-                  <i className="uil uil-layer-group d-block rounded h3 mb-0">
-                  </i>
+                <Icon icon="fluent:draw-text-20-filled" width={'60px'} height={'55px'} color="black"/>
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <Link to="#" className="title h5 text-dark">
-                    Excellence Track Record
-                    </Link>
-                  <p className="text-muted">
-                    The most well-known dummy text is the 'Lorem Ipsum', which
-                    is said to have originated
+                  <h4>Text-to-Code</h4>
+                  <p className="text" style={{fontSize: '18px'}}>
+                  Provide a database schema along with a query and Explain Code App returns SQL code you can use in your project.
                   </p>
 
-                  <Link to="#" className="text-primary">
-                    Read More{" "}
+                  <Link to="/register" className="text-primary">
+                    Get Started{" "}
                     <i>
                       <FeatherIcon
                         icon="chevron-right"
@@ -70,19 +62,15 @@ class Features extends Component {
             </Col>
 
             <Col lg={4} md={6} xs={12} className="mt-4 mt-lg-0 pt-4 pt-lg-0">
-              <Card className="border-0 text-center features feature-clean rounded">
+              <Card className="border-0 text features feature-clean rounded">
                 <div className="icons text-primary text-center mx-auto">
-                  <i className="uil uil-object-group d-block rounded h3 mb-0">
-                  </i>
+                  <Icon icon="subway:write" width={'60px'} height={'55px'} color="black" aria-label="Multiple Types of SQL Statements"/>
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <Link to="#" className="title h5 text-dark">
-                    Our Dedicated Support
-                    </Link>
-                  <p className="text-muted">
-                    The most well-known dummy text is the 'Lorem Ipsum', which
-                    is said to have originated
+                  <h4>Multiple Types</h4>
+                  <p className="text" style={{fontSize: '18px'}}>
+                    Explain Code App creates select statements, update statements and delete statements from plain English text. 
                   </p>
 
                   <Link to="#" className="text-primary">

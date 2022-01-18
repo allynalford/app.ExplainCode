@@ -11,11 +11,12 @@ import Testimonial from "./Testimonial";
 import Pricing from "./Pricing";
 import Faq from "./Faq";
 import AppStore from "./AppStore";
-
+import { Helmet } from "react-helmet";
 class Index extends Component {
   componentDidMount() {
     document.body.classList = "";
     window.addEventListener("scroll", this.scrollNavigation, true);
+    document.title = "Explain Code App SQL | English to SQL"
   }
 
   // Make sure to remove the DOM listener when the component is unmounted.
@@ -36,24 +37,31 @@ class Index extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+        <title>Explain Code App SQL | English to SQL</title>
+        <meta name="description" content="Generate complex SQL queries the easy way. Explain Code App helps you write complex SQL queries with plain English wording." />
+        <meta name="keywords" content="plain language, plain english, explain code app, plain language SQL query, explain code app sql, explain code query" />
+        <meta name="twitter:title" content="Explain Code App Tools | Code Explanation Tools" />
+        <meta name="twitter:image:alt" content="Explain Code App SQL | English to SQL" />
+        <meta property="og:title" content="Explain Code App SQL | English to SQL" />
+        <meta property="og:description" content="Generate complex SQL queries the easy way. Explain Code App helps you write complex SQL queries with plain English wording." />
+      </Helmet>
         <Section />
 
-        <Partners />
+        {/* <Partners /> */}
 
         <section className="section overflow-hidden">
           <Features />
 
           <SmallFeatures />
 
-          <Services />
+          {/* <Services /> */}
 
           <About />
         </section>
 
-        <Testimonial />
-
-        <section className="section">
-          <Pricing />
+       
+        {/* <section className="section">
 
           <Faq />
         </section>
@@ -72,7 +80,7 @@ class Index extends Component {
           </div>
         </div>
 
-        <AppStore />
+        <AppStore /> */}
       </React.Fragment>
     );
   }

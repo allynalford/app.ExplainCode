@@ -100,7 +100,7 @@ const HelpCenterFaqs = React.lazy(() =>
   import("./pages/Pages/HelpCenter/HelpCenterFaqs")
 );
 
-
+const SqlLanding = React.lazy(() => import("./pages/SqlLanding/index"));
 
 const routes = [
 
@@ -117,6 +117,7 @@ const routes = [
    { path: "/contact-us", component: ContactUS, isTopbarDark: true },
    { path: "/explain-code-faqs", component: HelpCenterFaqs, isTopbarDark: true },
    { path: "/explain-code-tools", component: PageServices, isTopbarDark: true },
+   { path: "/sql", component: SqlLanding, isTopbarDark: true },
    { path: "/pricing", component: PagePricing, isTopbarDark: true },
 
     //Page Profile EnglishToSql
