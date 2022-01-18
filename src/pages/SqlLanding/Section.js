@@ -45,7 +45,7 @@ class Section extends Component {
               </Col>
               <Col lg={6} md={6} className="mt-4 pt-2 mt-sm-0 pt-sm-0">
                 <a href="#example">
-                 <img src={seo} className="img-fluid" alt="English to SQL | Text to SQL Code" />
+                 <img src={seo} className="img-fluid" alt="Text to SQL Code" />
                 </a>
               </Col>
             </Row>
