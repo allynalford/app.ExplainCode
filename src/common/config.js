@@ -20,6 +20,7 @@ const serverVars = {
       process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/get',
   },
   gtp3: {
+    post_EnglishToSql_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/englishtosql',
     post_ExplainFunction_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/function/explain',
     post_JS_To_Python_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/javascripttopython',
     post_Python_Bug_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/pythonbugfixer',
@@ -207,15 +208,14 @@ const localVars = {
       process.env.REACT_APP_BASE_API_URL + '/drip/subscriber/get',
   },
   gtp3: {
-    post_ExplainFunction_Prompt:
-      process.env.REACT_APP_BASE_API_URL + '/tool/function/explain',
+    post_EnglishToSql_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/englishtosql',
+    post_ExplainFunction_Prompt:process.env.REACT_APP_BASE_API_URL + '/tool/function/explain',
     post_JS_To_Python_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/javascripttopython',  
     post_Python_Bug_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/pythonbugfixer',  
     post_Summary_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/summary',
     post_Line_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/linebyline',
     post_Freeform_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/freeform',
-    post_javadoc_comment_Prompt:
-      process.env.REACT_APP_BASE_API_URL + '/tool/javadoc/comment',
+    post_javadoc_comment_Prompt: process.env.REACT_APP_BASE_API_URL + '/tool/javadoc/comment',
   },
   auth0: {
     updateProfile: process.env.REACT_APP_BASE_API_URL + '/profile/update',

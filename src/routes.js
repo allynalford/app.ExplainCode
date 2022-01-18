@@ -57,6 +57,10 @@ const PageMessages = React.lazy(() =>
 const PageServices = React.lazy(() => import("./pages/Pages/Tools"));
 
 //Account
+const EnglishToSql = React.lazy(() =>
+import("./pages/Pages/Account/EnglishToSql")
+);
+
 const PageProfile = React.lazy(() =>
   import("./pages/Pages/Account/PageProfile")
 );
@@ -115,8 +119,9 @@ const routes = [
    { path: "/explain-code-tools", component: PageServices, isTopbarDark: true },
    { path: "/pricing", component: PagePricing, isTopbarDark: true },
 
-    //Page Profile
+    //Page Profile EnglishToSql
     { path: "/dashboard", component: PageProfile, protected: true },
+    { path: "/english-to-sql", component: EnglishToSql, protected: true },
     { path: "/authorize", component: PageProfile, protected: true },
     { path: "/page-members", component: PageMembers, protected: true },
     { path: "/page-works", component: PageWorks, protected: true },

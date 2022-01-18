@@ -109,6 +109,17 @@ export function getPrompts(path){
     },
     {
       id: 6,
+      icon: "mdi mdi-database-search",
+      className: path.pathname === "/english-to-sql" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "English to SQL",
+      link: "/english-to-sql",
+      tool: "English-to-SQL",
+      desc: "This tool provides an explanation for your function.",
+      tips: ['Ensure the snippet of code is a function', 'Focus on the important parts.',
+        'Remove extra comments']
+    },
+    {
+      id: 7,
       icon: "mdi mdi-language-javascript",
       className: tool === "JavaScript-To-Python" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "JS To Python",
@@ -119,7 +130,7 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code','Provide a complete snippet']
     },
     {
-      id: 7,
+      id: 8,
       icon: "mdi mdi-language-python",
       className: tool === "Python-Bug-Fixer" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Python Bug Fixer",
@@ -130,7 +141,7 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code','Provide a complete snippet']
     },
     {
-      id: 8,
+      id: 9,
       icon: "uil uil-comment-edit",
       className: tool === "Code-Comment" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Code Comment",
@@ -142,7 +153,7 @@ export function getPrompts(path){
         'Provide a complete snippet']
     },
     {
-      id: 9,
+      id: 10,
       icon: "mdi mdi-ethereum",
       className: tool === "Smart-Contracts" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Smart Contracts",
@@ -173,6 +184,12 @@ export const themes = [
   { label: 'Kuroir', value: 'kuroir' },
   { label: 'GitHub', value: 'github' },
   { label: 'Monokai', value: 'monokai' }
+];
+
+export const sqlTypes = [
+  { label: 'SELECT Query', value: 'SELECT' },
+  { label: 'DELETE Statement', value: 'DELETE' },
+  { label: 'UPDATE Statement', value: 'UPDATE' }
 ];
 
 

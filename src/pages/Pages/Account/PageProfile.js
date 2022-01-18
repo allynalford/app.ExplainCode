@@ -64,8 +64,8 @@ function PageProfile(props, {history}) {
   const [codeMaxLength, setCodeMaxLength] = useState(200);
   const [maxExplanations, setMaxExplanations] = useState(0);
   const monthStamp = dateFormat(new Date(), "yyyy-mm");
-  const [theme, setTheme] = useState(undefined);
-  const [mode, setMode] = useState('javascript');
+  const [theme, setTheme] = useState(UserTheme);
+  const [mode, setMode] = useState(UserMode);
   const [modeEnabled, setModeEnabled] = useState(true);
   const [explanationMode, setExplanationMode] = useState("html");
   const [tool, setTool] = useState("Line By Line");
@@ -162,7 +162,7 @@ function PageProfile(props, {history}) {
 
           setMaxExplanations(tier.explanations);
 
-          if(user.subscriptionActive === true){
+          if(user.subscriptionActive === true | user.subscriptionActive === "active"){
             setHasPlan(true);
             setSystemEnabled(true);
           }
@@ -176,14 +176,26 @@ function PageProfile(props, {history}) {
 
       var cachedSettings = sessionStorage.getItem('cachedSettings');
 
+      //console.log(JSON.parse(cachedSettings))
+     
       if(typeof cachedSettings !== "undefined" && cachedSettings !== null){
         cachedSettings = JSON.parse(cachedSettings);
         setMode(cachedSettings.mode);
+
+        if(typeof cachedSettings.theme === "undefined"){
+          cachedSettings.theme = UserTheme;
+        }
+
+
         setTheme(cachedSettings.theme);
+        const themeOption = _.find(themes, ['value', cachedSettings.theme]);
+        setThemeOption(themeOption);
+
       }else{
-        setMode(UserMode);
-        setTheme(UserTheme);
+        const themeOption = _.find(themes, ['value', UserTheme]);
+        setThemeOption(themeOption);
       }
+
       const prompts = getPrompts(window.location);
       const toolObj = _.find(prompts, ['tool', prompt]);
       setToolObj(toolObj);
@@ -227,7 +239,7 @@ function PageProfile(props, {history}) {
   }, [ userglobaluuid ]);
 
   useEffect(() => {
-    if (typeof mode !== 'undefined') {
+    if (typeof mode !== 'undefined' && typeof theme !== 'undefined') {
       const themeOption = _.find(themes, ['value', theme]);
       setThemeOption(themeOption);
       const modeOption = _.find(modes, ['value', mode]);
@@ -236,6 +248,29 @@ function PageProfile(props, {history}) {
         mode,
         theme,
       };
+      //console.log(cachedSettings)
+      sessionStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
+    }else if (typeof mode !== 'undefined' && typeof theme === 'undefined') {
+      const themeOption = _.find(themes, ['value', UserTheme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', mode]);
+      setModeOption(modeOption);
+      const cachedSettings = {
+        mode,
+        theme: UserTheme,
+      };
+      //console.log(cachedSettings)
+      sessionStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
+    }else if (typeof mode === 'undefined' && typeof theme !== 'undefined') {
+      const themeOption = _.find(themes, ['value', theme]);
+      setThemeOption(themeOption);
+      const modeOption = _.find(modes, ['value', UserMode]);
+      setModeOption(modeOption);
+      const cachedSettings = {
+        mode: UserMode,
+        theme,
+      };
+      //console.log(cachedSettings)
       sessionStorage.setItem('cachedSettings', JSON.stringify(cachedSettings));
     }
     return () => {};
@@ -572,7 +607,7 @@ function PageProfile(props, {history}) {
                             onChange={(opt) => {
                               setTheme(opt.value);
                               setThemeOption(opt);
-                              localStorage.setItem('cachedSettings', {mode, theme: opt.value});
+                              sessionStorage.setItem('cachedSettings', {mode, theme: opt.value});
                             }}
                           ></Select>
                         </div>
