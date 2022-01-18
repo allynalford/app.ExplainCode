@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
-//import { Link } from "react-router-dom";
-
-
-
+import {
+  Container,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from 'reactstrap';
+import { Link } from "react-router-dom";
 
 
 //Import Components
@@ -26,9 +32,12 @@ class SmallFeatures extends Component {
     this.openModal = this.openModal.bind(this);
   }
 
-  openModal() {
-    this.setState({ isOpen: true });
-  }
+
+  openModal = () => {
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen,
+    }));
+  };
 
   render() {
     return (
@@ -36,7 +45,9 @@ class SmallFeatures extends Component {
         <Container className="mt-100 mt-60">
           <Row className="align-items-center">
             <Col md={6}>
+            <Link id="example" to="#" onClick={this.openModal} alt="View Generated SQL">
               <img src={about} className="img" alt="Use Explain Code App to write SQL" />
+             </Link>
             </Col>
 
             {/* <Col md={6} className="mt-4 mt-sm-0 pt-2 pt-sm-0">
@@ -55,6 +66,23 @@ class SmallFeatures extends Component {
               </div>
             </Col> */}
           </Row>
+          <Modal
+            isOpen={this.state.isOpen}
+            role="dialog"
+            autoFocus={true}
+            centered={true}
+            style={{maxWidth: '800px', width: '800px'}}
+          >
+            <ModalHeader toggle={this.openModal}>Tell us about your Dataset</ModalHeader>
+            <ModalBody>
+              <img src={about} alt="Provide a database schema along with a query" />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.openModal}>
+                Close
+              </Button>
+            </ModalFooter>
+          </Modal>
         </Container>
       </React.Fragment>
     );

@@ -24,7 +24,7 @@ class Features extends Component {
                   </p>
 
                   <Link to="/register" className="text-primary">
-                    Get Started{" "}
+                  Prepare SQL queries with ease{" "}
                     <i>
                       <FeatherIcon
                         icon="chevron-right"
@@ -49,7 +49,7 @@ class Features extends Component {
                   </p>
 
                   <Link to="/register" className="text-primary">
-                    Get Started{" "}
+                   Build a database schema{" "}
                     <i>
                       <FeatherIcon
                         icon="chevron-right"
@@ -74,7 +74,7 @@ class Features extends Component {
                   </p>
 
                   <Link to="#" className="text-primary">
-                    Read More{" "}
+                  Get SQL code from plain text{" "}
                     <i>
                       <FeatherIcon
                         icon="chevron-right"
