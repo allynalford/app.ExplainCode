@@ -50,8 +50,8 @@ class About extends Component {
 
             <Col lg={6} md={{ size: 6, order: 2 }} xs={{ size: 12, order: 2 }}>
               <div className="section-title">
-                <h4 className="title mb-4">English to SQL</h4>
-                <p className="text">
+                <h3 className="title mb-4">English to SQL</h3>
+                <p className="text" style={{fontSize: '18px'}}>
                   Generate SQL from plain English with the Explain Code App.
                   Select, Update or delete table records all from the plain
                   English description of your SQL statement.

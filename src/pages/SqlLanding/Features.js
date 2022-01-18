@@ -18,12 +18,12 @@ class Features extends Component {
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <h4>Describe Your SQL</h4>
+                  <h2>Describe Your SQL</h2>
                   <p className="text" style={{fontSize: '18px'}}>
                   By describing what you want to accomplish, Explain Code App gives you the SQL queries to accomplish it.
                   </p>
 
-                  <Link to="/register" className="text-primary">
+                  <Link to="/register" className="text-primary" style={{fontSize: '18px'}}>
                   Prepare SQL queries with ease{" "}
                     <i>
                       <FeatherIcon
@@ -43,12 +43,12 @@ class Features extends Component {
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <h4>Text-to-Code</h4>
+                  <h2>Text-to-Code</h2>
                   <p className="text" style={{fontSize: '18px'}}>
                   Provide a database schema along with a query and Explain Code App returns SQL code you can use in your project.
                   </p>
 
-                  <Link to="/register" className="text-primary">
+                  <Link to="/register" className="text-primary" style={{fontSize: '18px'}}>
                    Build a database schema{" "}
                     <i>
                       <FeatherIcon
@@ -68,12 +68,12 @@ class Features extends Component {
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <h4>Multiple Types</h4>
+                  <h2>Multiple SQL Types</h2>
                   <p className="text" style={{fontSize: '18px'}}>
                     Explain Code App creates select statements, update statements and delete statements from plain English text. 
                   </p>
 
-                  <Link to="#" className="text-primary">
+                  <Link to="#" className="text-primary" style={{fontSize: '18px'}}>
                   Get SQL code from plain text{" "}
                     <i>
                       <FeatherIcon
