@@ -18,9 +18,9 @@ class Features extends Component {
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <h4>On-line Access</h4>
+                  <h4>Describe Your SQL</h4>
                   <p className="text" style={{fontSize: '18px'}}>
-                  By describing what you want to accomplish, Explain SQL gives you the perfect set of SQL queries to accomplish it.
+                  By describing what you want to accomplish, Explain Code App gives you the SQL queries to accomplish it.
                   </p>
 
                   <Link to="/register" className="text-primary">

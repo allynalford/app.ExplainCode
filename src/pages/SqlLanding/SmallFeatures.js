@@ -10,7 +10,7 @@ import { Container, Row, Col } from "reactstrap";
 //import SectionTitleLeft from "../../components/Shared/SectionTitleLeft";
 
 //Import Images
-import about from "../../assets/images/EnglishToSql_DataSet_Desc.PNG";
+import about from "../../assets/images/EnglishToSql_DataSet_Desc.png";
 
 class SmallFeatures extends Component {
   constructor(props) {
