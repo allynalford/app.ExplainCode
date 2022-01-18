@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 //import SectionTitleLeft from "../../components/Shared/SectionTitleLeft";
 
 //Import Images
-import about from "../../assets/images/EnglishToSql_DataSet_Desc.png";
+import about from "../../assets/images/EnglishToSql_DataSet_Desc1.PNG";
 
 class SmallFeatures extends Component {
   constructor(props) {
