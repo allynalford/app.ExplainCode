@@ -521,6 +521,9 @@ function PageProfile(props, {history}) {
           setCompletionId(resp.data.explanation.id);
           break;
         case 'Class-Breakdown':
+          //resp = await endpoint.postIAM(getGTP3().post_Freeform_Prompt, {code, lang: mode, question, userglobaluuid});
+          //text = resp.data.explanation.choices[0].text;
+          //setCompletionId(resp.data.explanation.id);
           break;
         default:
           console.log(`Sorry, we are out of ${prompt}.`);

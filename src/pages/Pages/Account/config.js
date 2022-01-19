@@ -76,17 +76,6 @@ export function getPrompts(path){
     },
     {
       id: 3,
-      icon: "mdi mdi-code-parentheses",
-      className: tool === "Class-Breakdown" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
-      title: "Class Breakdown",
-      link: "/dashboard?tool=Class-Breakdown",
-      tool: "Class-Breakdown",
-      desc: "This breaks down your class and provides an overall explanation of the class.",
-      tips: ['Ensure the snippet of code is a class.', 'Focus on the important parts.',
-        'Remove extra comments']
-    },
-    {
-      id: 4,
       icon: "uil uil-comment-question",
       className: tool === "Open-Questions" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Open Questions",
@@ -97,7 +86,7 @@ export function getPrompts(path){
         'Remove extra comments']
     },
     {
-      id: 5,
+      id: 4,
       icon: "uil uil-brackets-curly",
       className: tool === "Explain-Function" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Explain Function",
@@ -108,7 +97,7 @@ export function getPrompts(path){
         'Remove extra comments']
     },
     {
-      id: 6,
+      id: 5,
       icon: "mdi mdi-database-search",
       className: path.pathname === "/english-to-sql" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "English to SQL",
@@ -119,7 +108,7 @@ export function getPrompts(path){
         'Remove extra comments']
     },
     {
-      id: 7,
+      id: 6,
       icon: "mdi mdi-language-javascript",
       className: tool === "JavaScript-To-Python" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "JS To Python",
@@ -130,7 +119,7 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code','Provide a complete snippet']
     },
     {
-      id: 8,
+      id: 7,
       icon: "mdi mdi-language-python",
       className: tool === "Python-Bug-Fixer" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Python Bug Fixer",
@@ -141,7 +130,7 @@ export function getPrompts(path){
       tips: ['Preserve any existing comments within the code','Provide a complete snippet']
     },
     {
-      id: 9,
+      id: 8,
       icon: "uil uil-comment-edit",
       className: tool === "Code-Comment" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Code Comment",
@@ -153,7 +142,7 @@ export function getPrompts(path){
         'Provide a complete snippet']
     },
     {
-      id: 10,
+      id: 9,
       icon: "mdi mdi-ethereum",
       className: tool === "Smart-Contracts" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
       title: "Smart Contracts",
@@ -162,6 +151,18 @@ export function getPrompts(path){
       tool: "Smart-Contracts",
       desc: "Explain a Smart Contract in detail",
       tips: ['Provide the smart contract address']
+    },
+    {
+      id: 10,
+      icon: "mdi mdi-code-parentheses",
+      className: tool === "Class-Breakdown" ? "navbar-item account-menu px-0 active" : "navbar-item account-menu px-0 mt-2",
+      title: "Class Breakdown",
+      active: false,
+      link: "/dashboard?tool=Class-Breakdown",
+      tool: "Class-Breakdown",
+      desc: "This breaks down your class and provides an overall explanation of the class.",
+      tips: ['Ensure the snippet of code is a class.', 'Focus on the important parts.',
+        'Remove extra comments']
     },
   ]
 

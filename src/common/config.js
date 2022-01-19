@@ -56,13 +56,13 @@ const serverVars = {
       codelength: 200,
       snippets: 10,
       projects: 1,
-      explanations: 10,
+      explanations: 50,
     },
     trial: {
       codelength: 1000,
       snippets: 10,
       projects: 1,
-      explanations: 35,
+      explanations: 500,
       days: 7,
     },
     earlyaccess: {
@@ -76,7 +76,7 @@ const serverVars = {
       codelength: 500,
       snippets: 35,
       projects: 1,
-      explanations: 35,
+      explanations: 500,
     },
     pro: {
       codelength: 1500,
@@ -108,7 +108,7 @@ const serverVars = {
       features: [
                 'Full Access to all Tools', 
                 '200 Character Snippets',
-                '10 Explanations',
+                '50 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
@@ -130,8 +130,8 @@ const serverVars = {
       subheader: 'Perfect for getting started.',
       features: [
                 'Full Access to all Tools', 
-                '500 Character Snippets',
-                '35 Explanations',
+                '500 Character limit',
+                '500 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
                 ]
@@ -153,10 +153,10 @@ const serverVars = {
       subheader: 'Best for large code',
       features: [
         'Full Access to all Tools', 
-        '1,500 Character Snippets',
-        'Unlimited  Explanations',
-        'Unlimited  Saved Snippets',
-        'Unlimited  Projects'
+        '1,500 Character limit',
+        'Unlimited Explanations',
+        'Unlimited Saved Snippets',
+        'Unlimited Projects'
         ]
     },
     {
@@ -174,10 +174,10 @@ const serverVars = {
       subheader: 'Great for Startups, Schools and Enterprise.',
       features: [
         'Full Access to all Tools', 
-        '1,500 Character Snippets',
-        'Unlimited  Explanations',
-        'Unlimited  Saved Snippets',
-        'Unlimited  Projects',
+        '1,500 Character limit',
+        'Unlimited Explanations',
+        'Unlimited Saved Snippets',
+        'Unlimited Projects',
         'Multiple Team Members'
         ]
     },
@@ -244,13 +244,13 @@ const localVars = {
       codelength: 200,
       snippets: 15,
       projects: 1,
-      explanations: 10,
+      explanations: 50,
     },
     trial: {
       codelength: 1500,
       snippets: 50,
       projects: 1,
-      explanations: 35,
+      explanations: 500,
       days: 7,
     },
     earlyaccess: {
@@ -264,7 +264,7 @@ const localVars = {
       codelength: 500,
       snippets: 35,
       projects: 1,
-      explanations: 35,
+      explanations: 500,
     },
     pro: {
       codelength: 1500,
@@ -295,8 +295,8 @@ const localVars = {
       subheader: 'Start testing',
       features: [
                 'Full Access to all Tools', 
-                '200 Character Snippets',
-                '10 Explanations',
+                '200 Character limit',
+                '50 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
@@ -318,8 +318,8 @@ const localVars = {
       subheader: 'Perfect for getting started.',
       features: [
                 'Full Access to all Tools', 
-                '500 Character Snippets',
-                '35 Explanations',
+                '500 Character limit',
+                '500 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
                 ]
@@ -341,10 +341,10 @@ const localVars = {
       subheader: 'Best for large code',
       features: [
         'Full Access to all Tools', 
-        '1,500 Character Snippets',
-        'Unlimited  Explanations',
-        'Unlimited  Saved Snippets',
-        'Unlimited  Projects'
+        '1,500 Character limit',
+        'Unlimited Explanations',
+        'Unlimited Saved Snippets',
+        'Unlimited Projects'
         ]
     },
     {
@@ -362,10 +362,10 @@ const localVars = {
       subheader: 'Great for Startups, Schools and Enterprise.',
       features: [
         'Full Access to all Tools', 
-        '1,500 Character Snippets',
-        'Unlimited  Explanations',
-        'Unlimited  Saved Snippets',
-        'Unlimited  Projects',
+        '1,500 Character limit',
+        'Unlimited Explanations',
+        'Unlimited Saved Snippets',
+        'Unlimited Projects',
         'Multiple Team Members'
         ]
     },
