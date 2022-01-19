@@ -150,6 +150,54 @@
 						"stage": "dev"
 					}
 				]
+			},
+			{
+				"type": "cloudformation",
+				"title": "PROD-hosted",
+				"timeOffsetInMs": 0,
+				"awsProfile": "default",
+				"stacks": [
+					{
+						"region": "us-east-1",
+						"stackName": "hosted-prod",
+						"stage": "dev"
+					}
+				]
+			},
+			{
+				"type": "dynamodb",
+				"title": "hosted-prod-custom-domain",
+				"tableName": "hosted-prod-custom-domain",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "hosted-prod-custom-domain-cert",
+				"tableName": "hosted-prod-custom-domain-cert",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "a11y-prod-company-domain",
+				"tableName": "a11y-prod-company-domain",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "hosted-prod-custom-domain-dist",
+				"tableName": "hosted-prod-custom-domain-dist",
+				"awsProfile": "default",
+				"region": "us-east-1"
+			},
+			{
+				"type": "dynamodb",
+				"title": "hosted-prod-custom-domain-dist-req",
+				"tableName": "hosted-prod-custom-domain-dist-req",
+				"awsProfile": "default",
+				"region": "us-east-1"
 			}
 		]
 	},

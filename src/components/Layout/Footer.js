@@ -15,6 +15,7 @@ class Footer extends Component {
            { title: "Twitter", link: "https://twitter.com/ExplainCodeApp", external: true },
            { title: "Facebook Group", link: "https://www.facebook.com/groups/explaincodeapp/", external: true },
            { title: "Terms of Services", link: "/terms-of-service", external: false },
+           { title: "Accessibility Statement", link: "https://a11y.explaincode.app", external: true},
            { title: "Contact Us", link: "/contact-us", external: false },
            { title: "Pricing", link: "/pricing", external: false },
       //   { title: "About us", link: "/page-aboutus" },
