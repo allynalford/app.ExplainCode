@@ -236,6 +236,7 @@ class register extends Component {
     //If all went well
     if (validated) {
       this.setState({ submitstatus: true });
+      
 
       await auth.signup(req.email, req.wd, {
         firstname: req.firstname,
@@ -244,6 +245,14 @@ class register extends Component {
         invitecode: req.invitecode,
         name: `${req.firstname} ${req.lastname}`,
       });
+
+      window._dcq.push(
+        [
+          "track", `New Registration`,
+          { key: req.email }
+        ]
+      );
+      
       //this.setState({loading: false});
     }
   };

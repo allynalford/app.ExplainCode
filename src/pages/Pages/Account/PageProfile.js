@@ -466,6 +466,26 @@ function PageProfile(props, {history}) {
         }
       })
 
+    }else if(code === ""){
+
+      window._dcq.push(
+        [
+          "track", `Empty Code`,
+          { key: prompt }
+        ]
+      );
+
+      Swal.fire({
+        title: 'Empty Code',
+        html:'<p>Please include a Code Snippet</p>',
+        icon: 'warn',
+        showCloseButton: true,
+        focusClose: false,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        setLoading(false);
+      })
+
     }else{
       setRating(0)
       setRatingMessage('');
