@@ -11,7 +11,7 @@ class Footer extends Component {
     super(props);
     this.state = {
       grid1: [
-           { title: "Discord", link: "https://discord.gg/jNAW87Ng", external: true },
+           { title: "Discord", link: "https://discord.gg/X5efxPzJp4", external: true },
            { title: "Twitter", link: "https://twitter.com/ExplainCodeApp", external: true },
            { title: "Facebook Group", link: "https://www.facebook.com/groups/explaincodeapp/", external: true },
            { title: "Terms of Services", link: "/terms-of-service", external: false },
