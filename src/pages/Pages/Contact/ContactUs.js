@@ -299,7 +299,6 @@ class ContactUs extends Component {
                       <a
                         target="_new"
                         href="https://www.twitter.com/explaincodeapp"
-                        onClick={this.sendMail}
                         className="text-primary"
                       >
                         @ExplainCodeApp
