@@ -56,13 +56,13 @@ const serverVars = {
       codelength: 200,
       snippets: 10,
       projects: 1,
-      explanations: 50,
+      explanations: 30,
     },
     trial: {
       codelength: 1000,
       snippets: 10,
       projects: 1,
-      explanations: 500,
+      explanations: 50,
       days: 7,
     },
     earlyaccess: {
@@ -76,7 +76,7 @@ const serverVars = {
       codelength: 500,
       snippets: 35,
       projects: 1,
-      explanations: 500,
+      explanations: 200,
     },
     pro: {
       codelength: 1500,
@@ -108,7 +108,7 @@ const serverVars = {
       features: [
                 'Full Access to all Tools', 
                 '200 Character Snippets',
-                '50 Explanations/Month',
+                '30 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
@@ -131,7 +131,7 @@ const serverVars = {
       features: [
                 'Full Access to all Tools', 
                 '500 Character limit',
-                '500 Explanations/Month',
+                '200 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
                 ]
@@ -244,13 +244,13 @@ const localVars = {
       codelength: 200,
       snippets: 15,
       projects: 1,
-      explanations: 50,
+      explanations: 30,
     },
     trial: {
       codelength: 1500,
       snippets: 50,
       projects: 1,
-      explanations: 500,
+      explanations: 50,
       days: 7,
     },
     earlyaccess: {
@@ -264,7 +264,7 @@ const localVars = {
       codelength: 500,
       snippets: 35,
       projects: 1,
-      explanations: 500,
+      explanations: 200,
     },
     pro: {
       codelength: 1500,
@@ -296,7 +296,7 @@ const localVars = {
       features: [
                 'Full Access to all Tools', 
                 '200 Character limit',
-                '50 Explanations/Month',
+                '30 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
@@ -319,7 +319,7 @@ const localVars = {
       features: [
                 'Full Access to all Tools', 
                 '500 Character limit',
-                '500 Explanations/Month',
+                '200 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
                 ]
