@@ -56,13 +56,13 @@ const serverVars = {
       codelength: 200,
       snippets: 10,
       projects: 1,
-      explanations: 30,
+      explanations: 10,
     },
     trial: {
       codelength: 1000,
       snippets: 10,
       projects: 1,
-      explanations: 50,
+      explanations: 20,
       days: 7,
     },
     earlyaccess: {
@@ -108,7 +108,7 @@ const serverVars = {
       features: [
                 'Full Access to all Tools', 
                 '200 Character Snippets',
-                '30 Explanations/Month',
+                '10 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
@@ -244,13 +244,13 @@ const localVars = {
       codelength: 200,
       snippets: 15,
       projects: 1,
-      explanations: 30,
+      explanations: 10,
     },
     trial: {
       codelength: 1500,
       snippets: 50,
       projects: 1,
-      explanations: 50,
+      explanations: 20,
       days: 7,
     },
     earlyaccess: {
@@ -296,7 +296,7 @@ const localVars = {
       features: [
                 'Full Access to all Tools', 
                 '200 Character limit',
-                '30 Explanations/Month',
+                '10 Explanations/Month',
                 '15 Saved Snippets',
                 '1 Project'
                 ]
