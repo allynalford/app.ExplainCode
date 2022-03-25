@@ -91,7 +91,7 @@ const serverVars = {
   pricing: [
     {
       header: 'Free Plan',
-      active: true,
+      active: false,
       isActive: false,
       isFree: true,
       buttonText: 'Free Account',
@@ -139,8 +139,8 @@ const serverVars = {
     {
       header: 'Pro',
       product: 'prod_Kx4g5i2ulYDJcX',
-      active: true,
-      isActive: true,
+      active: false,
+      isActive: false,
       buttonText: 'Upgrade',
       price: {
         monthly: '$19.00',
