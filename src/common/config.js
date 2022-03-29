@@ -59,18 +59,18 @@ const serverVars = {
       explanations: 10,
     },
     trial: {
-      codelength: 1000,
+      codelength: 500,
       snippets: 10,
       projects: 1,
-      explanations: 20,
-      days: 7,
+      explanations: 10,
+      days: 3,
     },
     earlyaccess: {
-      codelength: 1500,
+      codelength: 1000,
       snippets: 0,
       projects: 0,
       explanations: 0,
-      days: 14,
+      days: 7,
     },
     starter: {
       codelength: 500,

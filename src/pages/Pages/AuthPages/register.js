@@ -28,9 +28,9 @@ class register extends Component {
     this.schema = new passwordValidator();
     this.schema
       .is()
-      .min(8) // Minimum length 8
+      .min(6) // Minimum length 6
       .is()
-      .max(100) // Maximum length 100
+      .max(16) // Maximum length 16
       .has()
       .uppercase() // Must have uppercase letters
       .has()
@@ -249,7 +249,7 @@ class register extends Component {
       window._dcq.push(
         [
           "track", `New Registration`,
-          { key: req.email }
+          { key: req.invitecode }
         ]
       );
       
