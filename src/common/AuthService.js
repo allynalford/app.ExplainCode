@@ -69,7 +69,7 @@ export default class AuthService extends EventEmitter {
             name: user.name,
             nickname: user.firstname,
             user_id: user.id,
-            verify_email: false,
+            verify_email: true,
             app_metadata: {},
             user_metadata: {
               role: 'admin',
