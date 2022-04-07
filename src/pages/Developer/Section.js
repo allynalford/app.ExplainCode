@@ -184,7 +184,7 @@ export default class index extends Component {
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
                   <h3 className="fw-bold mt-2 mb-3">
-                    Start your 7 Day free trial.
+                    Start your 3 Day free trial.
                   </h3>
                     <InputGroup>
                       
