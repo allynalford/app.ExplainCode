@@ -130,7 +130,7 @@ const serverVars = {
       subheader: 'Perfect for getting started.',
       features: [
                 'Full Access to all Tools', 
-                '500 Character limit',
+                '750 Character limit',
                 '200 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
