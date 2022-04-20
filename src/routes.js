@@ -14,11 +14,8 @@ const ContactUS = React.lazy(() => import("./pages/Pages/Contact/ContactUs"));
 const PagePricing = React.lazy(() => import("./pages/Pages/Pricing"));
 
 //Blog
-const PageBlog = React.lazy(() => import('./pages/Pages/Blog/PageBlog'));
-const PageBlogDetail = React.lazy(() => import('./pages/Pages/Blog/PageBlogDetail'));
-const PageBlogSidebar = React.lazy(() => import('./pages/Pages/Blog/PageBlogSidebar'));
+const PageBlog = React.lazy(() => import('./pages/Pages/Blog/PageBlogDetail'));
 const PageBlogList = React.lazy(() => import('./pages/Pages/Blog/PageBlogList'));
-const PageBlogListSidebar = React.lazy(() => import('./pages/Pages/Blog/PageBlogListSidebar'));
 
 //Special
 const PageComingSoon = React.lazy(() =>

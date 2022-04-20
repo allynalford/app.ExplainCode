@@ -12,7 +12,7 @@ import { initGA, PageView} from '../../../common/gaUtils.js';
 import FormLoader from "../../../components/FormLoader";
 //Import components
 import PageBreadcrumb from "../../../components/Shared/PageBreadcrumb";
-import PageSearchSidebar from "../../../components/Shared/PageSearchSidebar";
+import PageSearchSidebar from "../../../components/Shared/BlogPageSearchSidebar";
 
 import blog01 from '../../../assets/images/blog/01.jpg';
 import blog07 from '../../../assets/images/blog/07.jpg';

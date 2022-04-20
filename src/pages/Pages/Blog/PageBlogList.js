@@ -170,7 +170,7 @@ class PageBlogList extends Component {
                                   </h2>
                                   <p className="text mb-0">{blog.desc}</p>
                                   <div className="post-meta d-flex justify-content-between mt-3">
-                                    <ul className="list-unstyled mb-0">
+                                    {/* <ul className="list-unstyled mb-0">
                                       <li className="list-inline-item mr-2 mb-0">
                                         <Link
                                           to="#"
@@ -189,7 +189,7 @@ class PageBlogList extends Component {
                                           {blog.comment}
                                         </Link>
                                       </li>
-                                    </ul>
+                                    </ul> */}
                                     <a
                                       href={(typeof blog.URL !== "undefined" ? `/blog/page/${blog.URL}` : `/blog/page/${blog.id}`)}
                                       className="text readmore"
@@ -220,7 +220,7 @@ class PageBlogList extends Component {
                                   </h2>
                                   <p className="text mb-0">{blog.desc}</p>
                                   <div className="post-meta d-flex justify-content-between mt-3">
-                                    <ul className="list-unstyled mb-0">
+                                    {/* <ul className="list-unstyled mb-0">
                                       <li className="list-inline-item mr-2 mb-0">
                                         <Link to="#" className="text like">
                                           <i className="mdi mdi-heart-outline mr-1"></i>
@@ -233,7 +233,7 @@ class PageBlogList extends Component {
                                           {blog.comment}
                                         </Link>
                                       </li>
-                                    </ul>
+                                    </ul> */}
                                     <a
                                       href={(typeof blog.URL !== "undefined" ? `/blog/page/${blog.URL}` : `/blog/page/${blog.id}`)}
                                       className="text readmore"
