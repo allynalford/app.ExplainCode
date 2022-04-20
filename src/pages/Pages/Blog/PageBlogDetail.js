@@ -71,6 +71,7 @@ class PageBlogDetail extends Component {
                 this.state.loading = false;
                 this.state.description = (typeof resp.data[id].value.properties["idY\\"] !== "undefined" ? resp.data[id].value.properties["idY\\"][0][0].toString() : "");
                 this.state.title = resp.data[id].value.properties["title"][0].toString();
+                document.title = resp.data[id].value.properties["title"][0].toString();
                 this.state.tags = (typeof resp.data[id].value.properties["NsLy"] !== "undefined" ? resp.data[id].value.properties["NsLy"].toString().split(',') : []);
                 //Force an update since we are updating the state directly
                 this.forceUpdate();
