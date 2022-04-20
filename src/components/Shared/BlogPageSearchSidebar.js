@@ -36,7 +36,7 @@ class PageSearchSidebar extends Component {
                                     </ul>
                                 </div> */}
                                
-                                <div className="widget mb-4 pb-2">
+                                {/* <div className="widget mb-4 pb-2">
                                     <h3 className="widget-title">Recent Post</h3>
                                     <div className="mt-4">
                                         <div className="clearfix post-recent">
@@ -52,7 +52,7 @@ class PageSearchSidebar extends Component {
                                             <div className="post-recent-content float-left"><Link to="#">Research Financial.</Link> <span className="text-muted mt-2">15th June, 2019</span></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                               
                                 {(this.props.tags.length !== 0 ? <div className="widget mb-4 pb-2">
                                     <h3 className="widget-title">Tags Cloud</h3>
