@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Pagination, PaginationItem, PaginationLink, Card, CardBody } from 'reactstrap';
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Card, CardBody } from 'reactstrap';
 import Helmet from "react-helmet";
 import { initGA, PageView} from '../../../common/gaUtils.js';
 //Import components
@@ -76,20 +75,18 @@ class PageBlogList extends Component {
             return (
               <React.Fragment>
                 <Helmet>
-                <meta property="og:url" content="https://www.tenably.app/blog" />
+                <meta property="og:url" content="https://www.explaincode.app/blog" />
                 <meta property="og:title" content="Explain Code Blog" />
-                  <meta
-                    name="description"
-                    content={'Explain Code Blog.'}
-                  />
-                 
-                
-                  <meta
-                    property="og:description"
-                    content={'Explain Code Blog.'}
-                  />
-                    <meta name="keywords" 
-                    content="Explain Code Blog" />
+                <meta name="description"
+            content="Explain Code Blog. Use GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
+          <meta name="keywords"
+            content="Explain Code Blog, Blog, Explain Code, Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+          <meta name="twitter:title"
+            content="Explain Code Blog, blast through code with easy-to-understand explanations" />
+          <meta name="twitter:image:alt" content="Explain Code Blog: a new way to read and understand code" />
+          <meta property="og:title" content="Explain Code Blog - Explanations for your code" />
+          <meta property="og:description" content="Explain Code Blog, use GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
+
        
                 </Helmet>
               </React.Fragment>

@@ -1,7 +1,6 @@
 // React Basic and Bootstrap
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Alert, Form, FormGroup, Label, Button, Input, Card, CardBody} from 'reactstrap';
+import { Container, Row, Col, Card, CardBody} from 'reactstrap';
 import Helmet from "react-helmet";
 import _ from 'lodash';
 //Import components
@@ -35,7 +34,7 @@ class PageBlogDetail extends Component {
             tags: "",
             pathItems : [
                 //id must required
-                { id : 1, name : "Tenably", link : "/" },
+                { id : 1, name : "Explain Code", link : "/" },
                 { id : 2, name : "Blog", link : "/blog" },
                 { id : 3, name : "Page", link : `/blog/page/${params.id}` }
             ],
@@ -93,7 +92,7 @@ class PageBlogDetail extends Component {
         document.body.classList = "";
         initGA();
         PageView();
-        document.title = "Tenably - Web Accessibility Blog";
+        document.title = "Explain Code Blog";
         window.addEventListener("scroll", this.scrollNavigation, true);
 
 
@@ -130,7 +129,7 @@ class PageBlogDetail extends Component {
             return (
               <React.Fragment>
                 <Helmet>
-                <meta property="og:url" content="https://www.tenably.app/blog" />
+                <meta property="og:url" content="https://www.explaincode.app/blog" />
                 <meta property="og:title" content={this.state.title} />
                   <meta
                     name="description"
@@ -152,7 +151,7 @@ class PageBlogDetail extends Component {
         return (
           <React.Fragment>
               <Helmet>
-                <meta property="og:url" content={`https://www.tenably.app/blog/${this.state.pageId}`} />
+                <meta property="og:url" content={`https://www.explaincode.app/blog/${this.state.pageId}`} />
                 <meta property="og:title" content={this.state.title} />
                   <meta
                     name="description"
