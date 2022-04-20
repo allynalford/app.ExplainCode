@@ -13,6 +13,13 @@ const History = React.lazy(() => import("./pages/Pages/History"));
 const ContactUS = React.lazy(() => import("./pages/Pages/Contact/ContactUs"));
 const PagePricing = React.lazy(() => import("./pages/Pages/Pricing"));
 
+//Blog
+const PageBlog = React.lazy(() => import('./pages/Pages/Blog/PageBlog'));
+const PageBlogDetail = React.lazy(() => import('./pages/Pages/Blog/PageBlogDetail'));
+const PageBlogSidebar = React.lazy(() => import('./pages/Pages/Blog/PageBlogSidebar'));
+const PageBlogList = React.lazy(() => import('./pages/Pages/Blog/PageBlogList'));
+const PageBlogListSidebar = React.lazy(() => import('./pages/Pages/Blog/PageBlogListSidebar'));
+
 //Special
 const PageComingSoon = React.lazy(() =>
   import("./pages/Pages/Special/PageComingSoon")
@@ -188,7 +195,8 @@ const routes = [
   { path: "/page-privacy", component: PagePrivacy, isTopbarDark: true },
 
 
-
+  { path: '/blog', component: PageBlogList },
+  {path: '/blog/page/:id', component: PageBlog},
 
 
 
