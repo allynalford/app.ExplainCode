@@ -34,7 +34,7 @@ class PageBlogList extends Component {
 
         const loadBlog = async() => {
             const resp = await endpoint._getExternal(`${process.env.REACT_APP_NOTION_API}/table/${process.env.REACT_APP_NOTION_TABLE_ID}`);
-            //console.log(data);
+            console.log(resp);
 
             if(typeof resp.data !== "undefined"){
                 let data = resp.data;
