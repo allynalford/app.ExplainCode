@@ -28,6 +28,7 @@ class Footer extends Component {
       //   { title: "Login", link: "/page-cover-login" },
       ],
       grid2: [
+         { title: 'Explain Code Blog', link: "/blog"},
          { title: 'English to SQL', link: "/sql"},
          { title: 'Explanation Tools', link: "/explain-code-tools"},
          { title: "History & Road Map", link: "/explain-code-history" },
