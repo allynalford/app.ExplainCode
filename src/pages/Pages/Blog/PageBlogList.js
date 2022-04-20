@@ -140,6 +140,8 @@ class PageBlogList extends Component {
                                   src={blog.Image}
                                   className="img-fluid"
                                   alt={blog.Name}
+                                  height="600"
+                                  width={"800"}
                                 />
                                 <div className="overlay bg-dark"></div>
                                 <div className="author">
@@ -248,6 +250,8 @@ class PageBlogList extends Component {
                                   src={blog.Image}
                                   className="img-fluid"
                                   alt={blog.Name}
+                                  height="600"
+                                  width={"800"}
                                 />
                                 <div className="overlay bg-dark"></div>
                                 <div className="author">
