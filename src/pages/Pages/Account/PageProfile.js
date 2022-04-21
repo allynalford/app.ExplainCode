@@ -402,7 +402,7 @@ function PageProfile(props, {history}) {
   const onRunPrompt = async () => {
 
     setLoading(true);
-    //console.log({completionsThisMonth, maxExplanations})
+    console.log({completionsThisMonth, maxExplanations})
    
     if(maxExplanations !== 0 && completionsThisMonth >= maxExplanations){
 
