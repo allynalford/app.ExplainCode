@@ -62,14 +62,14 @@ const serverVars = {
       codelength: 500,
       snippets: 10,
       projects: 1,
-      explanations: 10,
+      explanations: 15,
       days: 3,
     },
     earlyaccess: {
       codelength: 1000,
       snippets: 0,
       projects: 0,
-      explanations: 15,
+      explanations: 20,
       days: 3,
     },
     starter: {
