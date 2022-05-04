@@ -27,8 +27,8 @@ class Feature extends Component {
                     
                   </div>
                   <div className="content mt-4">
-                    <h5>{feat.title}</h5>
-                    <p className="text-muted mb-0">{feat.description}</p>
+                    <h3>{feat.title}</h3>
+                    <p className="text mb-0">{feat.description}</p>
                   </div>
                 </div>
               </Col>

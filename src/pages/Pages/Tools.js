@@ -49,7 +49,7 @@ class PageServices extends Component {
                 { id : 5, icon : 'uil uil-comment-question h1 text-primary', title : "Open Questions", description : "Don’t know what a block of code does? Paste your code into the editor and ask an open question about it. It’s that simple!. The built in AI understands code like never before. You can learn how to code an app with this code tool that teaches you how to code with the right questions." },
                 { id : 6, icon : 'uil uil-brackets-curly h1 text-primary', title : "Explain Function", description : "Our tool provides you an explanation for your function. This will help you to better understand how the code works and what results it produces." },
                 { id : 7, icon : 'uil uil-arrow h1 text-primary', title : "English to SQL", description : "The Explain Code App allows you to convert text-to-sql by describing your query in plain English. You can select, update or delete table records all from the plain English description of your SQL statement. You'll get an SQL statement for what you describe." },
-                { id : 8, icon : 'uil uil-angle-double-right h1 text-primary', title : "JavaScript to Python Converter", description : "Explain Code App translates JavaScript to Python code. This tool allows you to convert your python source code into JavaScript code. Use it on your own JavaScript to learn Python or use it on existing Python code to compare it against the JavaScript. Explain Code App's JS to Python converter is able to translate virtually any JavaScript code  to Python." },
+                { id : 8, icon : 'uil uil-angle-double-right h1 text-primary', title : "JavaScript to Python", description : "Explain Code App translates JavaScript to Python code. This tool allows you to convert your python source code into JavaScript code. Use it on your own JavaScript to learn Python or use it on existing Python code to compare it against the JavaScript. Explain Code App's JS to Python converter is able to translate virtually any JavaScript code  to Python." },
                 { id : 9, icon : 'uil uil-bug h1 text-primary', title : "Python Bug Fixer", description : " Fixing bugs in your Python code can be difficult and time consuming. Rapidly understand where your code contains bugs with our Python Bug Fixer. Let us help you quickly discover bugs, identify the root cause, and fix them all before they become a real problem." },
             ],
             languages : [
@@ -119,6 +119,14 @@ class PageServices extends Component {
                 </div>
 
                 <section className="section">
+                <Container className="mt-100 mt-60">
+                        {/* Render Section Title */}
+                        <SectionTitle title="Improve Your Coding Skills" desc="These code explanation tools is all you need to learn programming concepts, understand code and master functionalities. It shows you line by line explanation of code as an overlay to the lines in your editor and help you to understand any piece of code. It makes learning JavaScript, SQL and other coding concepts fun, easy and quick!" />
+
+                        {/* clients slider 
+                        <ReviewsSlider reviews={this.state.reviews} colClass="mt-4"/>
+                        */}
+                    </Container>
                     <Container>
                         {/* feature box */}
                         <Feature featureArray={this.state.features}/>
