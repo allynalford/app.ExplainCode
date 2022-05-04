@@ -12,10 +12,10 @@ class Footer extends Component {
     this.state = {
       grid1: [
            { title: "Discord", link: "https://discord.gg/X5efxPzJp4", external: true },
-           { title: "Twitter", link: "https://twitter.com/ExplainCodeApp", external: true },
+      //     { title: "Twitter", link: "https://twitter.com/ExplainCodeApp", external: true },
            { title: "Facebook Group", link: "https://www.facebook.com/groups/explaincodeapp/", external: true },
            { title: "Terms of Services", link: "/terms-of-service", external: false },
-           { title: "Accessibility Statement", link: "https://a11y.explaincode.app", external: true},
+           { title: "A11Y Statement", link: "https://a11y.explaincode.app", external: true},
            { title: "Contact Us", link: "/contact-us", external: false },
            { title: "Pricing", link: "/pricing", external: false },
       //   { title: "About us", link: "/page-aboutus" },
@@ -29,7 +29,6 @@ class Footer extends Component {
       ],
       grid2: [
          { title: 'Explain Code Blog', link: "/blog"},
-         { title: 'English to SQL', link: "/sql"},
          { title: 'Explanation Tools', link: "/explain-code-tools"},
          { title: "History & Road Map", link: "/explain-code-history" },
          { title: "Explaining Code Helps", link: "/how-explaining-the-code-helps-developers" },
@@ -39,6 +38,22 @@ class Footer extends Component {
         // { title: "Changelog", link: "/changelog" },
         // { title: "Components", link: "/components" },
       ],
+      grid3: [
+        { title: 'Line by Line Explanations', link: "/explain-code-tools#line-by-line-explanations"},
+        { title: 'Code Summarization', link: "/explain-code-tools#code-summarization"},
+        { title: 'Code Comments', link: "/explain-code-tools#code-comments"},
+        { title: "Class Breakdown", link: "/explain-code-history#class-breakdown" },
+        { title: "Open Code Questions", link: "/explain-code-history#open-code-questions" },
+        { title: "Explain Function Code", link: "/explain-code-history#explain-function-code" },
+        { title: "English to SQL", link: "/sql#text-to-sql" },
+        { title: "JavaScript to Python Converter", link: "/explain-code-history#js-to-sql" },
+        { title: "Python Bug Fixer", link: "/explain-code-history#python-bug-fixer" },
+
+       // { title: "Privacy Policy", link: "/page-privacy" },
+       // { title: "Documentation", link: "/documentation" },
+       // { title: "Changelog", link: "/changelog" },
+       // { title: "Components", link: "/components" },
+     ],
     };
   }
 
@@ -125,7 +140,7 @@ class Footer extends Component {
                         {grid.title}</a>:<Link
                         to={grid.link}
                         className={
-                          this.props.isLight ? "text-muted" : "text-foot"
+                          this.props.isLight ? "text" : "text-foot"
                         }
                       >
                         <i className="mdi mdi-chevron-right me-1"></i>{" "}
@@ -159,7 +174,7 @@ class Footer extends Component {
                       <Link
                         to={grid.link}
                         className={
-                          this.props.isLight ? "text-muted" : "text-foot"
+                          this.props.isLight ? "text" : "text-foot"
                         }
                       >
                         <i className="mdi mdi-chevron-right me-1"></i>
@@ -168,6 +183,42 @@ class Footer extends Component {
                     </li>
                   ))}
                 </ul>
+                
+              </Col>
+
+              <Col
+                lg="3"
+                md="4"
+                xs="12"
+                className="mt-4 mt-sm-0 pt-2 pt-sm-0"
+                name="footercolumn"
+              >
+                {this.state.grid2.length !== 0 ? <h3
+                  className={
+                    this.props.isLight
+                      ? "text-dark footer-head"
+                      : "text-light footer-head"
+                  }
+                >
+                  Explanation Tools
+                </h3>: ""}
+                
+                <ul className="list-unstyled footer-list mt-4">
+                  {this.state.grid3.map((grid, key) => (
+                    <li key={key}>
+                      <Link
+                        to={grid.link}
+                        className={
+                          this.props.isLight ? "text" : "text-foot"
+                        }
+                      >
+                        <i className="mdi mdi-chevron-right me-1"></i>
+                        {grid.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                
               </Col>
 
               {/* <Col
