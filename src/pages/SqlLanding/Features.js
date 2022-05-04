@@ -43,7 +43,7 @@ class Features extends Component {
                 </div>
 
                 <CardBody className="p-0 content mt-4">
-                  <h2>Text-to-Code</h2>
+                  <h2>Text-to-SQL</h2>
                   <p className="text" style={{fontSize: '18px'}}>
                   Provide a database schema along with a query and Explain Code App returns SQL code you can use in your project.
                   </p>
