@@ -48,6 +48,9 @@ class PageServices extends Component {
                 { id : 4, icon : 'uil uil-code-branch h1 text-primary', title : "Class Breakdown", description : "Understanding the purpose of a class can be difficult. But not anymore, Break down classes to help you gain an in depth knowledge of what the class is intended to do, what they call and more." },
                 { id : 5, icon : 'uil uil-comment-question h1 text-primary', title : "Open Questions", description : "Don’t know what a block of code does? Paste your code into the editor and ask an open question about it. It’s that simple!. The built in AI understands code like never before." },
                 { id : 6, icon : 'uil uil-brackets-curly h1 text-primary', title : "Explain Function", description : "Our tool provides you an explanation for your function. This will help you to better understand how the code works and what results it produces." },
+                { id : 7, icon : 'uil uil-arrow h1 text-primary', title : "English to SQL", description : "Generate SQL from plain English with the Explain Code App. Select, Update or delete table records all from the plain English description of your SQL statement." },
+                { id : 8, icon : 'uil uil-angle-double-right h1 text-primary', title : "JavaScript to Python", description : "Explain Code App translates JavaScript to Python. Use it on your own JavaScript to learn Python or use it on existing Python code to compare it against the JavaScript." },
+                { id : 8, icon : 'uil uil-bug h1 text-primary', title : "Python Bug Fixer", description : " Fixing bugs in your Python code can be difficult and time consuming. Rapidly understand where your code contains bugs with our Python Bug Fixer. Let us help you quickly discover bugs, identify the root cause, and fix them all before they become a real problem." },
             ],
             languages : [
                 { id : 1, lang: true, dataicon:"logos:javascript", icon : 'uil uil-list-ul h1 text-primary', title : "NodeJS (JavaScript)", description : "JavaScript is everywhere. Some of the world's most visited websites and apps are built with JavaScript, and an increasing number of developers are using JavaScript frameworks to build the web applications of the future. Discover how to build JavaScript web applications with React, JSX and NodeJS." },
@@ -94,12 +97,12 @@ class PageServices extends Component {
         return (
             <React.Fragment>
       <Helmet>
-        <title>Code Explanation Tools</title>
+        <title>Code Explanation Tools | Python | JavaScript to Python | English to SQL</title>
         <meta name="description" content="Code Explanation Tools helps you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
-        <meta name="keywords" content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+        <meta name="keywords" content="explain code, explain source code, line by line explanation of code, python debugger, python bug solver, python root cause analysis, sql editor, line by line sql explanation, save sql code, explain code app, plain English to SQL code generator, sql code from plain English" />
         <meta name="twitter:title" content="Explain Code App Tools | Code Explanation Tools" />
-        <meta name="twitter:image:alt" content="Explain Code App: Settings" />
-        <meta property="og:title" content="Code Explanation Tools" />
+        <meta name="twitter:image:alt" content="Code Explanation Tools" />
+        <meta property="og:title" content="Code Explanation Tools | Python | JavaScript to Python | English to SQL" />
         <meta property="og:description" content="Code Explanation Tools helps you to learn programming concepts and improve your coding skills by making it easy to understand code by breaking it down into lines and chunks. It helps you in understanding code concept and functionalities as it shows you line by line explanation of code" />
       </Helmet>
                 {/* breadcrumb */}
