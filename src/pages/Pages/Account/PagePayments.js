@@ -22,7 +22,7 @@ function PagePayments({ history }) {
   const { user } = useAuth0();
   const { email } = user;
   const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
-  const [toggleActive, setToggleActive] = useState(true);
+  const [toggleActive, setToggleActive] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(undefined);
