@@ -35,6 +35,7 @@ class Topbar extends Component {
          { id: 2, title: "English to SQL", link: "/sql" },
          { id: 3, title: "Code Explanation", link: "/explain-code-tools" },
          { id: 3, title: "Python Code", link: "/python-code-explainer" },
+         { id: 3, title: "JS Code", link: "/javascript-code-explainer" },
         // {
         //   id: 2,
         //   title: "Landing",
