@@ -100,7 +100,7 @@ export default class CaseDetail extends Component {
             content="This tool will analyze your Python code and provide you with a list of potential bugs. It will also provide you with suggestions on how to fix those bugs. So if you're struggling to track down and fix a bug in your Python code, give our Python Bug Fixer a try."
           />
         </Helmet>
-        <section className="bg-half">
+        <main className="bg-half" id="maincontent">
           <Container>
             <Row className="justify-content-center">
               <Col lg={8} md={10}>
@@ -257,7 +257,7 @@ export default class CaseDetail extends Component {
               </Col>
             </Row>
           </Container>
-        </section>
+        </main>
       </React.Fragment>
     );
   }
