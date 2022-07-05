@@ -5,6 +5,8 @@ import jsToPython from "../../../assets/images/js_to_python.png";
 import WaitlistButtonSolo from '../../../components/waitlist-button-solo';
 import jsToPythonExp1 from "../../../assets/images/js_to_python_exp1.jpg";
 import jsToPythonExp2 from "../../../assets/images/js_to_python_exp2.jpg";
+import jsToPythonExp2_1 from "../../../assets/images/js_to_python_exp2_1.jpg";
+import jsToPythonExp2_2 from "../../../assets/images/js_to_python_exp2_2.jpg";
 
 export default class JavascriptToPython extends Component {
   constructor(props) {
@@ -151,6 +153,32 @@ export default class JavascriptToPython extends Component {
                   </p>
                   <p className="text mt-4">
                   Overall, the syntax of JavaScript is more flexible and forgiving than the syntax of Python. However, the syntax of Python is more consistent.
+                  </p>
+                  <div className="text-center">
+                    <h3 className="title">
+                    Javascript Fetch request to covert to Python
+                    </h3>
+                    <img
+                      src={jsToPythonExp2_1}
+                      className="img-fluid rounded-md shadow-md"
+                      alt="Javascript Fetch request Snippet to covert to Python"
+                    />
+                  </div>
+                  <p>
+                  This is an example of a JavaScript HTTP POST request using fetch. This JavaScript code snippet will be converted to Python.
+                  </p>
+                  <div className="text-center">
+                    <h3 className="title">
+                    Javascript Fetch request converted to Python
+                    </h3>
+                    <img
+                      src={jsToPythonExp2_2}
+                      className="img-fluid rounded-md shadow-md"
+                      alt="Javascript Fetch request to covert to Python"
+                    />
+                  </div>
+                  <p>
+                  The above Python code has been converted from the JavaScript code snippet. It imports the requests library to make an HTTP POST request.
                   </p>
                   <div style={{marginTop: '15px'}}>
                           <WaitlistButtonSolo />
