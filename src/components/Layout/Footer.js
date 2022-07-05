@@ -46,7 +46,7 @@ class Footer extends Component {
         { title: "Open Code Questions", link: "/explain-code-history#open-code-questions" },
         { title: "Explain Function Code", link: "/explain-code-history#explain-function-code" },
         { title: "English to SQL", link: "/sql#text-to-sql" },
-        { title: "JavaScript to Python Converter", link: "/explain-code-history#js-to-sql" },
+        { title: "JavaScript to Python Converter", link: "/convert-javascript-to-python" },
         { title: "Python Bug Fixer", link: "/explain-code-history#python-bug-fixer" },
         { title: "Python Code", link: "/python-code-explainer" },
         { title: "Javascript Code", link: "/javascript-code-explainer" },

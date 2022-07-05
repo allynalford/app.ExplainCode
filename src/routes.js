@@ -114,6 +114,10 @@ const JavascriptExplainer = React.lazy(() =>
   import("./pages/Pages/CaseStudy/JavascriptExplainer")
 );
 
+const JavascriptToPython = React.lazy(() =>
+  import("./pages/Pages/CaseStudy/JavascriptToPython")
+);
+
 const routes = [
 
 
@@ -133,6 +137,7 @@ const routes = [
    { path: "/pricing", component: PagePricing, isTopbarDark: true },
    { path: "/python-code-explainer", component: CaseDetail, isTopbarDark: true },
    { path: "/javascript-code-explainer", component: JavascriptExplainer, isTopbarDark: true },
+   { path: "/convert-javascript-to-python", component: JavascriptToPython, isTopbarDark: true },
 
     //Page Profile EnglishToSql
     { path: "/dashboard", component: PageProfile, protected: true },

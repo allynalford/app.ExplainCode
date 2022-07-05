@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Helmet } from 'react-helmet';
 import Feature from '../../../components/Shared/Feature';
+import WaitlistButtonSolo from '../../../components/waitlist-button-solo';
 export default class CaseDetail extends Component {
   constructor(props) {
     super(props);
@@ -121,6 +122,9 @@ export default class CaseDetail extends Component {
                     step-by-step instructions. Explain Code App tools can be
                     used by beginners to Python and advanced users alike.
                   </p>
+                  <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                   <h2 className="my-4">Python Coding Challenges</h2>
                   <p className="text">
                     Python is a widely used high-level interpreted language that
@@ -239,10 +243,16 @@ export default class CaseDetail extends Component {
                   Python is a great language for building all sorts of applications, but like any language, it is not perfect. Sometimes, your code will have bugs that can be difficult to track down and fix. That's where our Python Bug Fixer comes in. 
                   </p>
                 </div>
+                <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
               </Col>
               <Col md={12}>
                 <Container>
                   <Feature featureArray={this.state.features} />
+                  <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                 </Container>
               </Col>
             </Row>

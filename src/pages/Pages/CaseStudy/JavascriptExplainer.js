@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Helmet } from 'react-helmet';
 import Feature from '../../../components/Shared/Feature';
+import WaitlistButtonSolo from '../../../components/waitlist-button-solo';
 export default class JavascriptExplainer extends Component {
   constructor(props) {
     super(props);
@@ -132,6 +133,9 @@ export default class JavascriptExplainer extends Component {
                     game development and desktop applications are written in
                     JavaScript.
                   </p>
+                  <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                   <h2 className="my-4">Javascript Coding Challenges</h2>
                   <p className="text">
                   One of the challenges of programming in JavaScript is that it is not always easy to find good code examples. This is because most code examples on the internet are written in "technical" language that is not always easy to understand. Another challenge is that there are many different ways to write code in JavaScript, so it can be difficult to know which way is the "right" way.
@@ -173,10 +177,16 @@ Object-oriented programming is a powerful tool for organizing and manipulating d
                     Explain Code is an app that can provide explanations for JavaScript code using a combination of static analysis and natural language processing to generate explanations.
                   </p>
                 </div>
+                <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
               </Col>
               <Col md={12}>
                 <Container>
                   <Feature featureArray={this.state.features} />
+                  <div style={{marginTop: '15px'}}>
+                          <WaitlistButtonSolo />
+                        </div>
                 </Container>
               </Col>
             </Row>
