@@ -46,7 +46,6 @@ import blog08 from "../../../assets/images/blog/08.jpg";
 import dateFormat from 'dateformat';
 //import SectionTitle from '../../../components/Shared/SectionTitle';
 const endpoint = require('../../../common/endpoint');
-const _ = require('lodash');
 
 
 function Detail(props, { history }) {
@@ -64,7 +63,7 @@ function Detail(props, { history }) {
   const [codeLang, setCodeLang] = useState('');
   const [codeLengthColor, setCodeLengthColor] = useState('black');
   const [code, setCode] = useState(cachedSnippet);
-  const [snippetUUID, setSnippetUUID] = useState(snippetuuid);
+  const [snippetUUID] = useState(snippetuuid);
   const [snippetTitle, setSnippetTitle] = useState("");
   const [snippetExplanation, setSnippetExplanation] = useState("");
   const [creationDateTime, setCreationDateTime] = useState(new Date());

@@ -126,29 +126,6 @@ class PageBlogDetail extends Component {
     }
 
     render() {
-        function renderHeaderFragment(state) {
-            return (
-              <React.Fragment>
-                <Helmet>
-                <meta property="og:url" content="https://www.explaincode.app/blog" />
-                <meta property="og:title" content={this.state.title} />
-                  <meta
-                    name="description"
-                    content={this.state.description}
-                  />
-                 
-                
-                  <meta
-                    property="og:description"
-                    content={this.state.description}
-                  />
-                    <meta name="keywords" 
-                    content={state.keywords} />
-       
-                </Helmet>
-              </React.Fragment>
-            );
-          }
         return (
           <React.Fragment>
               <Helmet>

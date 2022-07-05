@@ -41,9 +41,9 @@ function View({ history }) {
   const { userglobaluuid } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   const [snippets, setSnippets] = useState([]);
   const [snippetsCount, setSnippetsCount] = useState(0);
-  const [itemsPerPage , setItemsPerPage ] = useState(5);
+  const [itemsPerPage ] = useState(5);
   const [LastEvaluatedKey, setLastEvaluatedKey] = useState(undefined);
-  const [filter, setFilter] = useState(undefined);
+  const [filter] = useState(undefined);
   // We start with an empty list of items.
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);

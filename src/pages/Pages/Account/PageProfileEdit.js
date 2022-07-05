@@ -30,7 +30,7 @@ var passwordValidator = require('password-validator');
 function PageProfileEdit({ history }) {
   const { user } = useAuth0();
   const { name, picture, email, sub, family_name, given_name } = user;
-  const { userglobaluuid, twitter:tweet, instagram:insta, linkedin:lk, occupation:occpt, description:desc } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
+  const { userglobaluuid, twitter:tweet, instagram:insta, occupation:occpt, description:desc } = user[process.env.REACT_APP_AUTH0_USER_METADATA];
   //const [userglobaluuid, setUserglobaluuid] = useState('');
   const [user_metadata, setUserMetadata] = useState(user[process.env.REACT_APP_AUTH0_USER_METADATA]);
   const [twitter, setTwitter] = useState(tweet);

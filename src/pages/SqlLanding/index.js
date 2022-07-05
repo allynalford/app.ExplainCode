@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-
 //Import Components
 import Section from "./Section";
-import Partners from "../../components/Shared/Partners1";
 import Features from "./Features";
 import SmallFeatures from "./SmallFeatures";
-import Services from "./Services";
 import About from "./About";
-import Testimonial from "./Testimonial";
-import Pricing from "./Pricing";
-import Faq from "./Faq";
-import AppStore from "./AppStore";
 import { Helmet } from "react-helmet";
 class Index extends Component {
   componentDidMount() {
