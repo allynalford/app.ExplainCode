@@ -38,7 +38,7 @@ export default class CaseDetail extends Component {
         {
           id: 5,
           icon: 'uil uil-angle-double-right h1 text-primary',
-          title: 'JavaScript to Python',
+          title: 'JS to Python',
           description:
             "If you're looking to convert some JavaScript to Python, you can use the Code App JS to Python converter. This tool allows you to take your Python code and convert it into JavaScript. This can be a great way to learn Python by example, or to convert legacy code to Python for use with a Python interpreter. You can also use it to compare Python and JavaScript code side-by-side.",
         },
