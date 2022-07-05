@@ -174,7 +174,7 @@ export default class JavascriptToPython extends Component {
                     <img
                       src={jsToPythonExp2_2}
                       className="img-fluid rounded-md shadow-md"
-                      alt="Javascript Fetch request to covert to Python"
+                      alt="Javascript Fetch request to converted to Python"
                     />
                   </div>
                   <p>

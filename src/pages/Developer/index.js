@@ -32,15 +32,15 @@ export default class index extends Component {
     return (
       <React.Fragment>
         <Helmet>
-          <title>Explain Code App - Explanations for your code</title>
+          <title>Explain Code App: Online Code Explainer</title>
           <meta name="description"
             content="The Explain Code App uses GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
           <meta name="keywords"
-            content="Nodejs, Go, golang, SQL, Python, liquid, code, programming code, code translator, explain code, understand code, programming, javascript, java, GPT-3, code explainer, code review, code examples, code documentation, bad code examples, software examples, example code" />
+            content="code explainer online, code explainer tool, explain code line by line, python code explainer,explanation tool app, code explanation, code explainer, explain code, explanation tool, code understanding tools, explain javascript, python code bug tools" />
           <meta name="twitter:title"
             content="Explain Code App lets you blast through code with easy-to-understand explanations" />
           <meta name="twitter:image:alt" content="Explain Code App: a new way to read and understand code" />
-          <meta property="og:title" content="Explain Code App - Explanations for your code" />
+          <meta property="og:title" content="Explain Code App: Online Code Explainer" />
           <meta property="og:description" content="The Explain Code App uses GPT-3 to automatically learn from open source code repositories, understand unfamiliar programming constructs and explain difficult code in plain english." />
         </Helmet>
         <div id="maincontent">
