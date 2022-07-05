@@ -48,6 +48,7 @@ class Footer extends Component {
         { title: "English to SQL", link: "/sql#text-to-sql" },
         { title: "JavaScript to Python Converter", link: "/explain-code-history#js-to-sql" },
         { title: "Python Bug Fixer", link: "/explain-code-history#python-bug-fixer" },
+        { title: "Python Code", link: "/python-code-explainer" },
 
        // { title: "Privacy Policy", link: "/page-privacy" },
        // { title: "Documentation", link: "/documentation" },

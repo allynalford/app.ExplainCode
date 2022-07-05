@@ -33,7 +33,8 @@ class Topbar extends Component {
         //Note : each child and nested child must have unique id
          { id: 1, title: "Home", link: "/" },
          { id: 2, title: "English to SQL", link: "/sql" },
-         { id: 3, title: "Code Explanation Tools", link: "/explain-code-tools" },
+         { id: 3, title: "Code Explanation", link: "/explain-code-tools" },
+         { id: 3, title: "Python Code", link: "/python-code-explainer" },
         // {
         //   id: 2,
         //   title: "Landing",
