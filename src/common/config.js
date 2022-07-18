@@ -59,7 +59,7 @@ const serverVars = {
       explanations: 10,
     },
     trial: {
-      codelength: 500,
+      codelength: 750,
       snippets: 10,
       projects: 1,
       explanations: 15,
@@ -73,7 +73,7 @@ const serverVars = {
       days: 3,
     },
     starter: {
-      codelength: 750,
+      codelength: 1000,
       snippets: 35,
       projects: 1,
       explanations: 200,
@@ -130,7 +130,7 @@ const serverVars = {
       subheader: 'Perfect for getting started.',
       features: [
                 'Full Access to all Tools', 
-                '750 Character limit',
+                '1,000 Character limit',
                 '200 Explanations/Month',
                 '35 Saved Snippets',
                 '1 Project'
@@ -247,21 +247,21 @@ const localVars = {
       explanations: 10,
     },
     trial: {
-      codelength: 1500,
+      codelength: 750,
       snippets: 50,
       projects: 1,
       explanations: 20,
       days: 7,
     },
     earlyaccess: {
-      codelength: 1500,
+      codelength: 1000,
       snippets: 0,
       projects: 0,
       explanations: 0,
       days: 14,
     },
     starter: {
-      codelength: 500,
+      codelength: 1000,
       snippets: 35,
       projects: 1,
       explanations: 200,
