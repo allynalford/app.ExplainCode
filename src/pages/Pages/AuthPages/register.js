@@ -157,17 +157,19 @@ class register extends Component {
       this.setState({ loading: false });
     }
 
-    //Check if email exists already
-    const userCheck = await endpoint._post(getUser().checkUserApiUrl, {email: req.email});
-    if (typeof userCheck.data !== "undefined" && userCheck.data.exists === true) {
-      validated = false;
-      Swal.fire({
-        title: 'Email already exists!',
-        text: 'Please login or use forgot password to reset your password.',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-      this.setState({loading: false});
+    if (validated) {
+      //Check if email exists already
+      const userCheck = await endpoint._post(getUser().checkUserApiUrl, { email: req.email });
+      if (typeof userCheck.data !== "undefined" && userCheck.data.exists === true) {
+        validated = false;
+        Swal.fire({
+          title: 'Email already exists!',
+          text: 'Please login or use forgot password to reset your password.',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+        this.setState({ loading: false });
+      }
     }
 
     //We are not checking for these values anymore
