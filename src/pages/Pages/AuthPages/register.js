@@ -145,9 +145,9 @@ class register extends Component {
     }
 
     //Check Email against validation service
-    const userEmailCheck = await endpoint.postIAM(getUser().checkUserEmailApiUrl + `/${req.email}`);
+    const userEmailCheck = await endpoint._get(getUser().checkUserEmailApiUrl + `/${encodeURIComponent(req.email)}`);
     console.log(userEmailCheck);
-    if (typeof userEmailCheck.isValidEmail !== "undefined" && userEmailCheck.isValidEmail === false) {
+    if (typeof userEmailCheck.isValidEmail === "undefined" || userEmailCheck.isValidEmail === false) {
       validated = false;
       Swal.fire({
         title: 'Invalid Email Address!',
@@ -159,7 +159,7 @@ class register extends Component {
     }
 
     //Check if email exists already
-    const userCheck = await endpoint.postIAM(getUser().checkUserApiUrl, {email: req.email});
+    const userCheck = await endpoint._post(getUser().checkUserApiUrl, {email: req.email});
     if (typeof userCheck.data !== "undefined" && userCheck.data.exists === true) {
       validated = false;
       Swal.fire({
