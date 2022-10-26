@@ -136,7 +136,7 @@ class register extends Component {
     if (validator.validate(req.email) === false) {
       validated = false;
       Swal.fire({
-        title: 'Invalid Email Address!',
+        title: 'Email Invalid!',
         text: 'Please provide a valid email address',
         icon: 'error',
         confirmButtonText: 'Ok',
@@ -146,11 +146,10 @@ class register extends Component {
 
     //Check Email against validation service
     const userEmailCheck = await endpoint._get(getUser().checkUserEmailApiUrl + `/${encodeURIComponent(req.email)}`);
-    console.log(userEmailCheck);
     if (typeof userEmailCheck.isValidEmail === "undefined" || userEmailCheck.isValidEmail === false) {
       validated = false;
       Swal.fire({
-        title: 'Invalid Email Address!',
+        title: 'Undeliverable Email Address!',
         text: 'Please provide a valid email address',
         icon: 'error',
         confirmButtonText: 'Ok',
