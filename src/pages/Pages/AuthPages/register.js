@@ -144,9 +144,23 @@ class register extends Component {
       this.setState({loading: false});
     }
 
+    //Check Email against validation service
+    const userEmailCheck = await endpoint.postIAM(getUser().checkUserEmailApiUrl + `/${req.email}`);
+    console.log(userEmailCheck);
+    if (typeof userEmailCheck.isValidEmail !== "undefined" && userEmailCheck.isValidEmail === false) {
+      validated = false;
+      Swal.fire({
+        title: 'Invalid Email Address!',
+        text: 'Please provide a valid email address',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
+      this.setState({ loading: false });
+    }
+
     //Check if email exists already
     const userCheck = await endpoint.postIAM(getUser().checkUserApiUrl, {email: req.email});
-    if (userCheck.data.exists === true) {
+    if (typeof userCheck.data !== "undefined" && userCheck.data.exists === true) {
       validated = false;
       Swal.fire({
         title: 'Email already exists!',
@@ -306,17 +320,17 @@ class register extends Component {
                                 this.setState({ email: e.target.value })
                               }
                               errorMessage=""
-                              validate={{
-                                required: {
-                                  value: true,
-                                  errorMessage: 'Please enter your email',
-                                },
-                                pattern: {
-                                  value:
-                                    '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-                                  errorMessage: 'E-Mail is not valid!',
-                                },
-                              }}
+                              // validate={{
+                              //   required: {
+                              //     value: true,
+                              //     errorMessage: 'Please enter your email',
+                              //   },
+                              //   pattern: {
+                              //     value:
+                              //       '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
+                              //     errorMessage: 'E-Mail is not valid!',
+                              //   },
+                              // }}
                             />
                           </div>
                         </Col>

@@ -6,6 +6,8 @@ const serverVars = {
       process.env.REACT_APP_BASE_API_URL + '/user/get/',
     checkUserApiUrl:
       process.env.REACT_APP_BASE_API_URL + '/user/check',
+    checkUserEmailApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/check',
   },
   billing: {
     checkoutApiUrl:
@@ -194,6 +196,8 @@ const localVars = {
       process.env.REACT_APP_BASE_API_URL + '/user/get/',
     checkUserApiUrl:
       process.env.REACT_APP_BASE_API_URL + '/user/check',
+    checkUserEmailApiUrl:
+      process.env.REACT_APP_BASE_API_URL + '/check',
   },
   billing: {
     checkoutApiUrl:
