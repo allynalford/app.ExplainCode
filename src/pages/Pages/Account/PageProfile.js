@@ -646,11 +646,11 @@ function PageProfile(props, {history}) {
                 <AceEditor
                   id="editor"
                   title="Enter your code snippet"
-                  aria-label="YEnter your code snippet"
+                  aria-label="Enter your code snippet"
                   readOnly={loading}
                   style={{ width: 'auto' }}
                   placeholder="Enter your code snippet"
-                  mode={mode}
+                  mode={(mode === "lua" ? "javascript" : mode)}
                   theme={theme}
                   markers={markers}
                   annotations={annotations}
