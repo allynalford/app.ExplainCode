@@ -55,16 +55,16 @@ const serverVars = {
   },
   tiers: {
     free: {
-      codelength: 200,
+      codelength: 100,
       snippets: 10,
       projects: 1,
-      explanations: 10,
+      explanations: 5,
     },
     trial: {
       codelength: 750,
       snippets: 10,
       projects: 1,
-      explanations: 15,
+      explanations: 7,
       days: 3,
     },
     earlyaccess: {
