@@ -55,7 +55,7 @@ const serverVars = {
   },
   tiers: {
     free: {
-      codelength: 100,
+      codelength: 150,
       snippets: 10,
       projects: 1,
       explanations: 5,
@@ -75,7 +75,7 @@ const serverVars = {
       days: 3,
     },
     starter: {
-      codelength: 1000,
+      codelength: 1200,
       snippets: 35,
       projects: 1,
       explanations: 200,
