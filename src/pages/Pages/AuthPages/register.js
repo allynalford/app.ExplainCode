@@ -144,6 +144,7 @@ class register extends Component {
       this.setState({loading: false});
     }
 
+    if (validated) {
     //Check Email against validation service
     const userEmailCheck = await endpoint._get(getUser().checkUserEmailApiUrl + `/${encodeURIComponent(req.email)}`);
     if (typeof userEmailCheck.isValidEmail === "undefined" || userEmailCheck.isValidEmail === false) {
@@ -156,6 +157,7 @@ class register extends Component {
       });
       this.setState({ loading: false });
     }
+  }
 
     if (validated) {
       //Check if email exists already
@@ -172,31 +174,7 @@ class register extends Component {
       }
     }
 
-    //We are not checking for these values anymore
-
-    //check first name
-    if (req.firstname.length === 0) {
-      validated = false;
-      Swal.fire({
-        title: 'Invalid First Name!',
-        text: 'Please provide a First Name',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-      this.setState({loading: false});
-    }
-
-    //check last name
-    if (req.lastname.length === 0) {
-      validated = false;
-      Swal.fire({
-        title: 'Invalid Last Name!',
-        text: 'Please provide a Last Name',
-        icon: 'error',
-        confirmButtonText: 'Ok',
-      });
-      this.setState({loading: false});
-    }
+    
 
     //check passwords
     if (
