@@ -58,7 +58,7 @@ const serverVars = {
       codelength: 250,
       snippets: 10,
       projects: 1,
-      explanations: 5,
+      explanations: 10,
     },
     trial: {
       codelength: 750,
