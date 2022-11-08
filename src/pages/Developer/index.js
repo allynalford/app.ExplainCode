@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
-import Quick from './Quick';
+import { Container } from 'reactstrap';
 import Section from './Section';
 import KeyFeatures from './KeyFeatures';
 import Documentation from './Documentation';
 import { PageView, initGA } from '../../common/gaUtils.js';
 import { Helmet } from "react-helmet";
+import Feature from "../../components/Shared/Feature";
+
 export default class index extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        languages : [
+            { id : 1, lang: true, dataicon:"logos:javascript", icon : 'uil uil-list-ul h1 text-primary', title : "NodeJS (JavaScript)", description : "JavaScript is everywhere. Some of the world's most visited websites and apps are built with JavaScript, and an increasing number of developers are using JavaScript frameworks to build the web applications of the future. Discover how to build JavaScript web applications with React, JSX and NodeJS." },
+            { id : 2, lang: true, dataicon:"logos:python", icon : 'uil uil-document-layout-left h1 text-primary', title : "Python", description : "Python is a general purpose language, which means that it can be used to create a variety of different programs and isn't specialized for any specific problems. One of Python’s design philosophies is to make code easy to read, which makes Python an ideal choice for small and large-scale projects." },
+            { id : 3, lang: true, dataicon:"grommet-icons:golang", icon : 'uil uil-comment-edit h1 text-primary', title : "GO (Golang)", description : "Go is a general-purpose programming language created by Google engineers, who modeled it after the C programming language. Go is designed to create dependable and efficient software that runs on single and multi-core processors, computer clusters, the cloud, and more." },
+            { id : 4, lang: true, dataicon:"vscode-icons:file-type-sql", icon : 'uil uil-list-ul h1 text-primary', title : "SQL (Structured Query Language)", description : "It is the language used by databases in a universal way. It is widely used because it's easy to learn. Most programming languages incorporate modules that allow interaction with SQL databases, which enormously expands their capabilities and usages." },
+            { id : 5, lang: true, dataicon:"logos:lua", icon : 'uil uil-comment-edit h1 text-primary', title : "Lua", description : "Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports procedural programming, object-oriented programming, functional programming, data-driven programming, and data description. Lua combines simple procedural syntax with powerful data description constructs based on associative arrays and extensible semantics." },
+            { id : 6, lang: true, dataicon:"vscode-icons:file-type-light-solidity", icon : 'uil uil-document-layout-left h1 text-primary', title : "Solidity - Coming soon", description : "Web3, NFT's and blockchain are the future. The Solidity programming language was influenced by C++ as well as JavaScript and its syntax is similar to the latter. It's a high level programming language designed to be written directly on the Ethereum Virtual Machine." },
+        ],
+    }
+}
+
   componentDidMount() {
     document.body.classList = '';
     window.addEventListener('scroll', this.scrollNavigation, true);
@@ -68,6 +85,13 @@ export default class index extends Component {
             <KeyFeatures />
             {/* <Quick /> */}
             <Documentation />
+          </section>
+          <section className="section">
+            <Container>
+              {/* feature box */}
+              <Feature featureArray={this.state.languages} />
+
+            </Container>
           </section>
         </div>
       </React.Fragment>
