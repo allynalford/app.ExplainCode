@@ -76,6 +76,7 @@ function App({ Component }) {
   return (
     <React.Fragment>
       <Router>
+      <Suspense fallback={this.Loader()}>
           <Switch>
             {routes.map((route, idx) =>
               route.isWithoutLayout ? (
@@ -95,6 +96,7 @@ function App({ Component }) {
               )
             )}
           </Switch>
+          </Suspense>
       </Router>
     </React.Fragment>
   );
