@@ -76,7 +76,7 @@ function App({ Component }) {
   return (
     <React.Fragment>
       <Router>
-      <Suspense fallback={this.Loader()}>
+      <Suspense fallback={Loader}>
           <Switch>
             {routes.map((route, idx) =>
               route.isWithoutLayout ? (
