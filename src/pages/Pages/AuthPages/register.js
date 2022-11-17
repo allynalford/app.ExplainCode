@@ -147,8 +147,9 @@ class register extends Component {
     if (validated) {
     //Check Email against validation service
     const userEmailCheck = await endpoint._get(getUser().checkUserEmailApiUrl + `/${encodeURIComponent(req.email)}`);
-    console.log('valid Email:',userEmailCheck);
-    if (typeof userEmailCheck.isValidEmail === "undefined" || userEmailCheck.isValidEmail === false) {
+    //console.log('valid Email:',userEmailCheck);
+
+    if (typeof userEmailCheck.data.isValidEmail === "undefined" || userEmailCheck.data.isValidEmail === false) {
       validated = false;
       Swal.fire({
         title: 'Undeliverable Email Address!',
