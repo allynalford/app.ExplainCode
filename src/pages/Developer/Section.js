@@ -204,6 +204,9 @@ export default class index extends Component {
                     <p className="para-desc text">
                       * No Credit Card Required to get started.
                      </p>
+                     <div>
+                     <a href="https://www.producthunt.com/posts/explain-code-app?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-explain&#0045;code&#0045;app" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=369229&theme=light" alt="Explain&#0032;Code&#0032;App - Make&#0032;any&#0032;code&#0032;easy&#0032;to&#0032;understand&#0044;&#0032;instantly&#0046; | Product Hunt" style={{width: "250px", height: "54px"}} width="250" height="54" /></a>
+                     </div>
                           {/* <Form className="ms-0">
                             <FormGroup>
                               <Input
