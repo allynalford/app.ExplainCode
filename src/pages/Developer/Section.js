@@ -180,17 +180,21 @@ export default class index extends Component {
                     Understand code <br /> like never before.
                   </h1>
                   <p className="para-desc text">
-                  Blast through code with easy-to-understand code explanations, code summarization, class breakdowns and more.
+                    Blast through code with easy-to-understand code
+                    explanations, code summarization, class breakdowns and more.
                   </p>
                   <div className="subcribe-form mt-4 pt-2">
-                  <h3 className="fw-bold mt-2 mb-3">
-                    Start your 3 Day free trial.
-                  </h3>
+                    <h3 className="fw-bold mt-2 mb-3">
+                      Start your 3 Day free trial.
+                    </h3>
                     <InputGroup>
-                      
                       <InputGroupAddon addonType="append">
-                        <Link to="/register" className="btn btn-primary" type="submit">
-                        Join Explain Code App&nbsp;
+                        <Link
+                          to="/register"
+                          className="btn btn-primary"
+                          type="submit"
+                        >
+                          Join Explain Code App&nbsp;
                           <i>
                             <FeatherIcon
                               icon="user-plus"
@@ -203,11 +207,22 @@ export default class index extends Component {
                     </InputGroup>
                     <p className="para-desc text">
                       * No Credit Card Required to get started.
-                     </p>
-                     <div>
-                     <a href="https://www.producthunt.com/posts/explain-code-app?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-explain&#0045;code&#0045;app" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=369229&theme=dark&period=daily" alt="Explain&#0032;Code&#0032;App - Make&#0032;any&#0032;code&#0032;easy&#0032;to&#0032;understand&#0044;&#0032;instantly | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-                     </div>
-                          {/* <Form className="ms-0">
+                    </p>
+                    <div>
+                      <a
+                        href="https://www.producthunt.com/posts/explain-code-app?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-explain&#0045;code&#0045;app"
+                        target="_blank" rel="noreferrer"
+                      >
+                        <img
+                          src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=369229&theme=dark&period=daily"
+                          alt="Explain&#0032;Code&#0032;App - Make&#0032;any&#0032;code&#0032;easy&#0032;to&#0032;understand&#0044;&#0032;instantly | Product Hunt"
+                          style={{width: "250px", height: "54px"}}
+                          width="250"
+                          height="54"
+                        />
+                      </a>
+                    </div>
+                    {/* <Form className="ms-0">
                             <FormGroup>
                               <Input
                                 type="text"
@@ -228,7 +243,7 @@ export default class index extends Component {
                               </Button>
                             </FormGroup>
                           </Form> */}
-                        </div>
+                  </div>
                   {/* <div className="mt-4 pt-2">
                     <Link
                       to="#"
@@ -242,7 +257,11 @@ export default class index extends Component {
               </Col>
 
               <div className="col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                <img src={bgimg} className="img-fluid d-block mx-auto" alt="Let Explain Code App teach you how to create code with ease and excitement!" />
+                <img
+                  src={bgimg}
+                  className="img-fluid d-block mx-auto"
+                  alt="Let Explain Code App teach you how to create code with ease and excitement!"
+                />
               </div>
             </Row>
           </Container>
